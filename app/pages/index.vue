@@ -4,17 +4,13 @@ const { defaultUnity, fetchUnidades, hasUnidades } = useUnidades()
 const error = ref<string | null>(null)
 
 try {
-  // Garante que as unidades sejam carregadas antes de redirecionar
   await fetchUnidades()
 
-  // Aguarda o computed ser atualizado
   await nextTick()
 
-  // Verifica se há unidades disponíveis
   if (!hasUnidades.value) {
     error.value = 'Nenhuma unidade disponível no momento'
   } else if (defaultUnity.value) {
-    // Redireciona para a unidade padrão
     await navigateTo(`/${defaultUnity.value}`, { replace: true })
   } else {
     error.value = 'Não foi possível determinar a unidade padrão'

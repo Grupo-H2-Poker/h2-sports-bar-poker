@@ -1,6 +1,4 @@
-# H2 Club - Sistema de Login
-
-Sistema de login completo com Nuxt 3, usando useFetch para requisições e gerenciamento de estado reativo.
+# H2 Club - Site Poker Live
 
 ## 🚀 Funcionalidades
 
