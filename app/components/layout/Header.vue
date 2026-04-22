@@ -3,6 +3,10 @@ import { Button } from '~/components/ui/button'
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink } from '~/components/ui/navigation-menu'
 import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from '~/components/ui/drawer'
 import { Moon, Sun, ChevronDown, Menu, X } from 'lucide-vue-next'
+import Logo from '~/components/layout/Logo.vue'
+import Login from '~/components/auth/Login.vue'
+import LoginModal from '~/components/auth/LoginModal.vue'
+import UserAvatar from '~/components/auth/UserAvatar.vue'
 
 const route = useRoute()
 const router = useRouter()

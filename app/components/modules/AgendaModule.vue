@@ -1,28 +1,37 @@
 <template>
-  <section class="agenda-module py-8">
+  <section class="py-8">
     <div class="container mx-auto px-4">
-      <h2 v-if="modulo.metadados?.titulo" class="text-3xl font-bold mb-6">
-        {{ modulo.metadados.titulo }}
-      </h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <CardAgenda
-          v-for="component in sortedComponents"
-          :key="component.id"
-          :dados="component.data as any"
-        />
-      </div>
-      
-      <div v-if="sortedComponents.length === 0" class="text-center py-12 text-gray-500">
-        Nenhum evento agendado no momento
+      <div class="flex gap-6 items-start">
+        <div class="flex-shrink-0 flex flex-col gap-4 max-w-[220px]">
+          <h2 class="text-xl font-bold leading-snug">
+            {{ modulo.metadados?.titulo || 'Confira os próximos torneios de hoje:' }}
+          </h2>
+          <Button v-if="modulo.metadados?.cta_link" variant="default" size="sm" class="w-fit" @click="navigateTo(modulo.metadados.cta_link)">
+            {{ modulo.metadados?.cta || 'Veja a agenda completa' }}
+          </Button>
+          <Button v-else variant="default" size="sm" class="w-fit">
+            {{ modulo.metadados?.cta || 'Veja a agenda completa' }}
+          </Button>
+        </div>
+
+        <div class="flex-1 overflow-x-auto">
+          <div class="flex gap-3 pb-2">
+            <CardAgenda
+              v-for="component in sortedComponents"
+              :key="component.id"
+              :dados="component.data as any"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
+import { Button } from '~/components/ui/button'
 import type { Modulo, ComponentData } from '~/types/modules'
-import CardAgenda from '../cards/CardAgenda.vue'
+import CardAgenda from '~/components/cards/CardAgenda.vue'
 
 interface Props {
   modulo: Modulo

@@ -1,48 +1,39 @@
 <template>
-  <div 
-    class="card-agenda relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer group"
+  <div
+    class="rounded-xl bg-muted p-4 min-w-[180px] cursor-pointer hover:bg-muted/80 transition-colors"
     @click="handleClick"
   >
-    <!-- Background Image -->
-    <div class="relative h-64 overflow-hidden">
-      <img 
-        :src="dados.imagem" 
-        :alt="dados.titulo"
-        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-      />
-      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-    </div>
-    
-    <!-- Content -->
-    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-      <div v-if="dados.data" class="text-sm font-semibold mb-2 opacity-90">
-        {{ formatarData(dados.data) }}
+    <div v-if="dados.garantido" class="text-xs font-bold mb-1">{{ dados.garantido }}</div>
+    <h3 class="text-base font-bold leading-snug mb-2">{{ dados.titulo }}</h3>
+    <div class="flex gap-3 text-xs text-muted-foreground">
+      <div v-if="dados.inicio">
+        <span class="font-medium text-foreground">Início {{ dados.inicio }}</span>
       </div>
-      <h3 class="text-xl font-bold mb-2">{{ dados.titulo }}</h3>
-      <p class="text-sm opacity-90 line-clamp-2">{{ dados.descricao }}</p>
+      <div v-if="dados.late">
+        <span class="font-medium text-foreground">Late {{ dados.late }}</span>
+      </div>
+      <div v-if="dados.inscricoes">
+        <span>Inscrições até {{ dados.inscricoes }}</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { CardAgendaData } from '~/types/modules'
+interface AgendaCardData {
+  titulo: string
+  garantido?: string
+  inicio?: string
+  late?: string
+  inscricoes?: string
+  link?: string
+}
 
 interface Props {
-  dados: CardAgendaData
+  dados: AgendaCardData
 }
 
 const props = defineProps<Props>()
-
-const formatarData = (data: string) => {
-  const date = new Date(data)
-  return date.toLocaleDateString('pt-BR', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-  })
-}
 
 const handleClick = () => {
   if (props.dados.link) {

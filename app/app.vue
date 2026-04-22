@@ -1,5 +1,6 @@
 <script setup>
-import Header from '~/components/Header.vue'
+import Header from '~/components/layout/Header.vue'
+import Footer from '~/components/layout/Footer.vue'
 import { Skeleton } from '@/components/ui/skeleton'
 
 import { Toaster } from '@/components/ui/sonner'
@@ -43,7 +44,7 @@ const { isLoading } = useAuth()
     <template v-else>
       <Header />
       <NuxtPage />
-      
+      <Footer />
       <Toaster />
     </template>
   </div>
