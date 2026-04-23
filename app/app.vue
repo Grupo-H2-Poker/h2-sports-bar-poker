@@ -14,7 +14,7 @@ const { isLoading } = useAuth()
     <template v-if="isLoading">
       <div class="min-h-screen bg-background">
         <!-- Header Skeleton -->
-        <div class="border-b" style="height: 94px;">
+        <div class="border-b h-[94px]">
           <div class="container flex h-full items-center">
             <Skeleton class="h-6 w-32 mr-4" />
             <div class="flex-1 flex items-center justify-end space-x-2">

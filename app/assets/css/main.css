@@ -6,6 +6,8 @@
 
 :root {
   --radius: 0.625rem;
+  --brand-green: #24CFA4;
+  --brand-purple: #77158E;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -163,6 +165,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-brand-green: var(--brand-green);
+  --color-brand-purple: var(--brand-purple);
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
   @keyframes accordion-down {
@@ -189,5 +193,32 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  button,
+  [role="button"],
+  [role="menuitem"],
+  [role="option"],
+  [role="tab"],
+  [role="checkbox"],
+  [role="radio"],
+  [role="switch"],
+  [role="combobox"],
+  [role="listbox"],
+  a,
+  label[for],
+  select,
+  summary,
+  [data-slot="trigger"],
+  [data-slot="item"],
+  [data-slot="checkbox"],
+  [data-slot="radio"],
+  [data-slot="switch"],
+  [data-slot="tab"],
+  [data-slot="accordion-trigger"],
+  [data-slot="dropdown-menu-item"],
+  [data-slot="select-trigger"],
+  [data-slot="dialog-close"],
+  [data-slot="drawer-close"] {
+    cursor: pointer;
   }
 }

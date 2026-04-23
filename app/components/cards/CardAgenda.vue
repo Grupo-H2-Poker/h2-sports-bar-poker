@@ -1,20 +1,25 @@
 <template>
   <div
-    class="rounded-xl bg-muted p-4 min-w-[180px] cursor-pointer hover:bg-muted/80 transition-colors"
+    :class="[
+      'p-6 cursor-pointer transition-colors flex-shrink-0 flex flex-col justify-between text-white rounded-lg',
+      width,
+      height,
+      active ? activeColor : inactiveColor,
+    ]"
     @click="handleClick"
   >
-    <div v-if="dados.garantido" class="text-xs font-bold mb-1">{{ dados.garantido }}</div>
-    <h3 class="text-base font-bold leading-snug mb-2">{{ dados.titulo }}</h3>
-    <div class="flex gap-3 text-xs text-muted-foreground">
-      <div v-if="dados.inicio">
-        <span class="font-medium text-foreground">Início {{ dados.inicio }}</span>
+    <div class="text-sm font-medium opacity-80">
+      {{ dados.garantido ?? '' }}
+    </div>
+
+    <h3 class="text-2xl font-bold leading-tight">{{ dados.titulo }}</h3>
+
+    <div class="flex flex-col gap-1 text-sm">
+      <div class="flex gap-5">
+        <span v-if="dados.inicio">Início {{ dados.inicio }}</span>
+        <span v-if="dados.late">Late {{ dados.late }}</span>
       </div>
-      <div v-if="dados.late">
-        <span class="font-medium text-foreground">Late {{ dados.late }}</span>
-      </div>
-      <div v-if="dados.inscricoes">
-        <span>Inscrições até {{ dados.inscricoes }}</span>
-      </div>
+      <span v-if="dados.inscricoes" class="opacity-70">Inscrições até {{ dados.inscricoes }}</span>
     </div>
   </div>
 </template>
@@ -31,9 +36,20 @@ interface AgendaCardData {
 
 interface Props {
   dados: AgendaCardData
+  active?: boolean
+  width?: string
+  height?: string
+  activeColor?: string
+  inactiveColor?: string
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  active: false,
+  width: 'w-[265px]',
+  height: 'h-[250px]',
+  activeColor: 'bg-brand-purple',
+  inactiveColor: 'bg-brand-purple/30',
+})
 
 const handleClick = () => {
   if (props.dados.link) {

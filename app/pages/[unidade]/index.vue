@@ -17,10 +17,9 @@
             Erro ao carregar conteúdo
           </h2>
           <p class="text-red-600 dark:text-red-300 mb-4">{{ error.message }}</p>
-          <button @click="refresh()"
-            class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors">
+          <Button variant="destructive" @click="refresh()">
             Tentar novamente
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -43,6 +42,7 @@
 <script setup lang="ts">
 import type { UnidadeModulos } from '~/types/modules'
 import ModuleRenderer from '~/components/modules/ModuleRenderer.vue'
+import { Button } from '@/components/ui/button'
 
 const route = useRoute()
 const api = useH2Api()

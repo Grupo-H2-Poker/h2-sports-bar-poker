@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Button } from '@/components/ui/button'
+
 const { defaultUnity, fetchUnidades, hasUnidades } = useUnidades()
 
 const error = ref<string | null>(null)
@@ -29,12 +31,9 @@ try {
           Erro
         </h2>
         <p class="text-red-600 dark:text-red-300 mb-4">{{ error }}</p>
-        <button 
-          @click="() => { error = null; fetchUnidades(true) }"
-          class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors"
-        >
+        <Button variant="destructive" @click="() => { error = null; fetchUnidades(true) }">
           Tentar novamente
-        </button>
+        </Button>
       </div>
     </div>
     

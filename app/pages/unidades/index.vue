@@ -30,7 +30,7 @@
           </div>
           <div class="p-6">
             <h2
-              class="text-2xl font-bold mb-2 group-hover:text-[#77158E] dark:group-hover:text-[#77158E] transition-colors">
+              class="text-2xl font-bold mb-2 group-hover:text-brand-purple transition-colors">
               {{ unidade.nome }}
             </h2>
             <p class="text-gray-600 dark:text-gray-400">

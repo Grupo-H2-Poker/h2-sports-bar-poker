@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { Button } from '~/components/ui/button'
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink } from '~/components/ui/navigation-menu'
-import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from '~/components/ui/drawer'
-import { Moon, Sun, ChevronDown, Menu, X } from 'lucide-vue-next'
+import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from '~/components/ui/drawer'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '~/components/ui/dropdown-menu'
+import { ChevronDown, Menu } from 'lucide-vue-next'
+import { useLanguage } from '~/composables/useLanguage'
 import Logo from '~/components/layout/Logo.vue'
 import Login from '~/components/auth/Login.vue'
 import LoginModal from '~/components/auth/LoginModal.vue'
@@ -10,12 +12,11 @@ import UserAvatar from '~/components/auth/UserAvatar.vue'
 
 const route = useRoute()
 const router = useRouter()
-const colorMode = useColorMode()
+const { language, setLanguage } = useLanguage()
 
 const { isAuthenticated } = useAuth()
 const { unidades, defaultUnityName, selectedUnityName, getSlugFromName, getNameFromSlug, fetchUnidades } = useUnidades()
 
-// Busca as unidades ao montar o componente
 onMounted(async () => {
     await fetchUnidades()
     document.addEventListener('click', handleClickOutside)
@@ -57,7 +58,6 @@ const toggleDropdown = (event: Event) => {
 const selectUnity = (unity: string) => {
     selectedUnityName.value = unity
     isUnityDropdownOpen.value = false
-
     const slug = getSlugFromName(unity)
     if (slug) {
         router.push(`/${slug}`)
@@ -88,8 +88,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <header class="sticky top-0 z-9997 w-full bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60"
-        style="height: 94px; align-items: center; display: flex; border-bottom: none;">
+    <header class="sticky top-0 z-9997 w-full bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 flex items-center h-[94px] border-b-0">
         <div class="container flex h-full items-center">
             <div class="mr-4 flex">
                 <Logo class="h-6 w-auto" />
@@ -110,6 +109,7 @@ onUnmounted(() => {
                 </NavigationMenuList>
             </NavigationMenu>
 
+            <!-- Desktop Actions -->
             <div class="hidden md:flex flex-1 items-center justify-end space-x-2">
                 <div class="relative" ref="dropdownRef">
                     <Button variant="ghost" class="h-9 px-3 text-sm font-medium" @click="toggleDropdown">
@@ -139,36 +139,60 @@ onUnmounted(() => {
                 <UserAvatar v-else />
                 <LoginModal />
 
-                <ClientOnly>
-                    <Button variant="ghost" size="sm" class="h-9 w-9 px-0"
-                        @click="colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'"
-                        aria-label="Trocar tema">
-                        <Sun v-if="colorMode.value === 'dark'" class="h-4 w-4" />
-                        <Moon v-else class="h-4 w-4" />
-                    </Button>
-                    <template #fallback>
-                        <Button variant="ghost" size="sm" class="h-9 w-9 px-0" aria-label="Trocar tema">
-                            <Moon class="h-4 w-4" />
+                <!-- Language Switcher -->
+                <DropdownMenu>
+                    <DropdownMenuTrigger as-child>
+                        <Button variant="ghost" class="h-9 px-3 text-sm font-medium ml-4">
+                            {{ language.toUpperCase() }}
+                            <ChevronDown class="ml-2 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                         </Button>
-                    </template>
-                </ClientOnly>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" class="w-28">
+                        <DropdownMenuItem
+                            class="cursor-pointer"
+                            :class="{ 'bg-accent text-accent-foreground': language === 'pt' }"
+                            @click="setLanguage('pt')"
+                        >
+                            PT
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                            class="cursor-pointer"
+                            :class="{ 'bg-accent text-accent-foreground': language === 'en' }"
+                            @click="setLanguage('en')"
+                        >
+                            EN
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
 
             <!-- Mobile Actions -->
             <div class="flex md:hidden flex-1 items-center justify-end space-x-2">
-                <ClientOnly>
-                    <Button variant="ghost" size="sm" class="h-9 w-9 px-0"
-                        @click="colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'"
-                        aria-label="Trocar tema">
-                        <Sun v-if="colorMode.value === 'dark'" class="h-4 w-4" />
-                        <Moon v-else class="h-4 w-4" />
-                    </Button>
-                    <template #fallback>
-                        <Button variant="ghost" size="sm" class="h-9 w-9 px-0" aria-label="Trocar tema">
-                            <Moon class="h-4 w-4" />
+                <!-- Language Switcher Mobile -->
+                <DropdownMenu>
+                    <DropdownMenuTrigger as-child>
+                        <Button variant="ghost" class="h-9 px-3 text-sm font-medium">
+                            {{ language.toUpperCase() }}
+                            <ChevronDown class="ml-2 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                         </Button>
-                    </template>
-                </ClientOnly>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" class="w-28">
+                        <DropdownMenuItem
+                            class="cursor-pointer"
+                            :class="{ 'bg-accent text-accent-foreground': language === 'pt' }"
+                            @click="setLanguage('pt')"
+                        >
+                            PT
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                            class="cursor-pointer"
+                            :class="{ 'bg-accent text-accent-foreground': language === 'en' }"
+                            @click="setLanguage('en')"
+                        >
+                            EN
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
 
                 <Drawer v-model:open="isMobileDrawerOpen">
                     <DrawerTrigger as-child>
@@ -224,6 +248,5 @@ onUnmounted(() => {
                 </Drawer>
             </div>
         </div>
-
     </header>
 </template>

@@ -17,11 +17,10 @@
       <Card>
         <CardHeader>
           <div class="flex items-center space-x-4">
-            <UserAvatar 
-              size="h-20 w-20" 
-              bg-color="#77158E" 
-              text-size="text-lg" 
-              :with-dropdown="false" 
+            <UserAvatar
+              size="h-20 w-20"
+              text-size="text-lg"
+              :with-dropdown="false"
             />
             <div>
               <CardTitle>{{ user.nome }}</CardTitle>
@@ -70,7 +69,7 @@
           <!-- Endereço -->
           <div v-if="user.cep || user.numero || user.complemento">
             <h3 class="text-lg font-semibold mb-3">Endereço</h3>
-            <div class="p-4 rounded-lg" style="border: 1px solid #77158E;">
+            <div class="p-4 rounded-lg border border-brand-purple">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div v-if="user.cep">
                   <Label class="text-sm font-medium text-muted-foreground">CEP</Label>
@@ -157,6 +156,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Label } from '@/components/ui/label'
 import { Spinner } from '@/components/ui/spinner'
 import Switch from '@/components/ui/switch/Switch.vue'
+import UserAvatar from '~/components/auth/UserAvatar.vue'
+import Login from '~/components/auth/Login.vue'
 
 const { user, isAuthenticated, isLoading } = useAuth()
 

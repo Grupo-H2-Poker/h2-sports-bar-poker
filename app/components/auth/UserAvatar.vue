@@ -17,7 +17,7 @@
           <div class="flex items-center space-x-3">
             <Avatar class="h-12 w-12">
               <AvatarImage :src="user?.avatar || ''" :alt="user?.nome || 'Usuário'" />
-              <AvatarFallback class="text-lg text-white" style="background-color: #77158E;">
+              <AvatarFallback class="text-lg text-white bg-brand-purple">
                 {{ getInitials(user?.nome || 'U') }}
               </AvatarFallback>
             </Avatar>
@@ -136,7 +136,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   size: 'h-9 w-9',
-  bgColor: '#77158E',
+  bgColor: 'var(--brand-purple)',
   textSize: 'text-sm',
   withDropdown: true,
   onClick: undefined

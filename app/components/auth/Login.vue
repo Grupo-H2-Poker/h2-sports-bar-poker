@@ -1,5 +1,5 @@
 <template>
-    <Button @click="open" variant="default" size="sm">
+    <Button @click="open" variant="brand" size="sm">
         Login
     </Button>
 </template>

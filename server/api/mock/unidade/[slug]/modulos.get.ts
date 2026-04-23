@@ -17,28 +17,28 @@ export default defineEventHandler((event) => {
       modulos: [
         
         // Banner
-        {
-          id: 1,
-          tipo: 'banner',
-          ordem: 1,
-          status: 'publicado',
-          metadados: {},
-          components: [
-            {
-              id: 1,
-              type: 'banner',
-              ordem: 1,
-              status: 'publicado',
-              data: {
-                titulo: 'Bem-vindo à Unidade São Paulo',
-                subtitulo: 'O melhor clube da cidade',
-                imagem: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8',
-                cta: 'Saiba Mais',
-                link: '/sobre'
-              }
-            }
-          ]
-        },
+        // {
+        //   id: 1,
+        //   tipo: 'banner',
+        //   ordem: 1,
+        //   status: 'publicado',
+        //   metadados: {},
+        //   components: [
+        //     {
+        //       id: 1,
+        //       type: 'banner',
+        //       ordem: 1,
+        //       status: 'publicado',
+        //       data: {
+        //         titulo: 'Bem-vindo à Unidade São Paulo',
+        //         subtitulo: 'O melhor clube da cidade',
+        //         imagem: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8',
+        //         cta: 'Saiba Mais',
+        //         link: '/sobre'
+        //       }
+        //     }
+        //   ]
+        // },
 
 
         // Agenda
@@ -48,7 +48,9 @@ export default defineEventHandler((event) => {
           ordem: 2,
           status: 'publicado',
           metadados: {
-            titulo: 'Próximos Eventos'
+            titulo: 'Torneios de hoje',
+            cta: 'Veja a agenda completa',
+            cta_link: '/agenda'
           },
           components: [
             {
@@ -57,11 +59,12 @@ export default defineEventHandler((event) => {
               ordem: 1,
               status: 'publicado',
               data: {
-                titulo: 'Torneio de Tênis',
-                descricao: 'Campeonato interno de tênis. Inscrições abertas!',
-                imagem: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8',
-                data: '2025-12-15T10:00:00',
-                link: '/eventos/torneio-tenis'
+                titulo: '5K Super 5 Mega Monster',
+                garantido: '5K Garantido',
+                inicio: '15:00',
+                late: '17:00',
+                inscricoes: '16:50',
+                link: '/torneios/sunday-million'
               }
             },
             {
@@ -70,11 +73,25 @@ export default defineEventHandler((event) => {
               ordem: 2,
               status: 'publicado',
               data: {
-                titulo: 'Aula de Natação',
-                descricao: 'Aulas especiais para iniciantes',
-                imagem: 'https://images.unsplash.com/photo-1519315901367-f34ff9154487',
-                data: '2025-12-20T14:00:00',
-                link: '/eventos/natacao'
+                titulo: 'Freezeout Noturno',
+                garantido: '50K Garantido',
+                inicio: '20:00',
+                late: '22:00',
+                inscricoes: '21:50',
+                link: '/torneios/freezeout-noturno'
+              }
+            },
+            {
+              id: 4,
+              type: 'card',
+              ordem: 3,
+              status: 'publicado',
+              data: {
+                titulo: 'Turbo Semanal',
+                garantido: '10K Garantido',
+                inicio: '22:30',
+                late: '23:30',
+                link: '/torneios/turbo-semanal'
               }
             }
           ]
@@ -162,7 +179,9 @@ export default defineEventHandler((event) => {
           ordem: 3,
           status: 'publicado',
           metadados: {
-            titulo: 'Próximos Eventos'
+            titulo: 'Confira os próximos torneios de hoje',
+            cta: 'Veja a agenda completa',
+            cta_link: '/agenda'
           },
           components: [
             {
@@ -171,11 +190,12 @@ export default defineEventHandler((event) => {
               ordem: 1,
               status: 'publicado',
               data: {
-                titulo: 'Torneio de Tênis',
-                descricao: 'Campeonato interno de tênis. Inscrições abertas!',
-                imagem: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8',
-                data: '2025-12-15T10:00:00',
-                link: '/eventos/torneio-tenis'
+                titulo: 'Main Event Campinas',
+                garantido: 'R$ 20.000 GTD',
+                inicio: '14:00',
+                late: '16:00',
+                inscricoes: '15:50',
+                link: '/torneios/main-event-campinas'
               }
             },
             {
@@ -184,11 +204,24 @@ export default defineEventHandler((event) => {
               ordem: 2,
               status: 'publicado',
               data: {
-                titulo: 'Aula de Natação',
-                descricao: 'Aulas especiais para iniciantes',
-                imagem: 'https://images.unsplash.com/photo-1519315901367-f34ff9154487',
-                data: '2025-12-20T14:00:00',
-                link: '/eventos/natacao'
+                titulo: 'Satélite Main Event',
+                garantido: 'R$ 2.000 GTD',
+                inicio: '19:00',
+                late: '20:30',
+                inscricoes: '20:20',
+                link: '/torneios/satelite-main'
+              }
+            },
+            {
+              id: 5,
+              type: 'card',
+              ordem: 3,
+              status: 'publicado',
+              data: {
+                titulo: 'Bounty Noturno',
+                inicio: '21:00',
+                late: '22:30',
+                link: '/torneios/bounty-noturno'
               }
             }
           ]
