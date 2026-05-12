@@ -21,10 +21,19 @@
       </div>
       <span v-if="dados.inscricoes" class="opacity-70">Inscrições até {{ dados.inscricoes }}</span>
     </div>
+
+    <div>
+      <Button v-if="dados.link" @click.stop="purchaseBuyIn" variant="brand" size="sm" class="rounded-full">
+        Comprar buy-in
+      </Button>
+    </div>
+    
   </div>
 </template>
 
 <script setup lang="ts">
+import { Button } from '@/components/ui/button'
+
 interface AgendaCardData {
   titulo: string
   garantido?: string
@@ -55,5 +64,9 @@ const handleClick = () => {
   if (props.dados.link) {
     navigateTo(props.dados.link)
   }
+}
+
+const purchaseBuyIn = () => {
+  console.log('purchaseBuyIn')
 }
 </script>

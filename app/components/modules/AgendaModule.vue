@@ -3,15 +3,18 @@
     <div class="container mx-auto px-4">
       <div class="flex gap-18 items-center">
         <div class="flex-shrink-0 flex flex-col gap-10 w-[220px]">
-          <h2 class="text-2xl font-bold leading-snug">
-            {{ modulo.metadados?.titulo || 'Torneios de hoje' }}
-          </h2>
+          <div>
+            <h2 class="text-2xl font-bold leading-snug">
+              {{ modulo.metadados?.titulo }}
+            </h2>
+            <span v-if="modulo.metadados?.descricao" class="opacity-70">{{ modulo.metadados?.descricao }}</span>
+          </div>
+        
           <Button
             variant="brand"
-            size="sm"
+            size="lg"
             class="rounded-full"
-            @click="modulo.metadados?.cta_link ? navigateTo(modulo.metadados.cta_link) : undefined"
-          >
+            @click="modulo.metadados?.cta_link ? navigateTo(modulo.metadados.cta_link) : undefined" >
             {{ modulo.metadados?.cta || 'Veja a agenda completa' }}
           </Button>
         </div>

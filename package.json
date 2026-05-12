@@ -8,7 +8,9 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "test-api": "node test-api.cjs"
+    "test-api": "node test-api.cjs",
+    "storybook": "nuxt storybook",
+    "build-storybook": "nuxt build-storybook"
   },
   "dependencies": {
     "@nuxt/ui": "^4.1.0",

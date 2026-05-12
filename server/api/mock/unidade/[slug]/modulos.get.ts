@@ -49,6 +49,7 @@ export default defineEventHandler((event) => {
           status: 'publicado',
           metadados: {
             titulo: 'Torneios de hoje',
+            descricao: 'Confira a agenda completa de torneios de hoje !!!!!',
             cta: 'Veja a agenda completa',
             cta_link: '/agenda'
           },
@@ -93,7 +94,20 @@ export default defineEventHandler((event) => {
                 late: '23:30',
                 link: '/torneios/turbo-semanal'
               }
-            }
+            },
+            {
+              id: 5,
+              type: 'card',
+              ordem: 4,
+              status: 'publicado',
+              data: {
+                titulo: 'Turbo Semanal',
+                garantido: '10K Garantido',
+                inicio: '22:30',
+                late: '23:30',
+                link: '/torneios/turbo-semanal'
+              }
+            },
           ]
         }
       ]
