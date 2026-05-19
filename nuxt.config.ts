@@ -9,8 +9,25 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     'shadcn-nuxt',
     '@pinia/nuxt',
-    '@nuxtjs/storybook',
   ],
+
+  vite: {
+    optimizeDeps: {
+      include: [
+        '@vee-validate/zod',
+        '@vueuse/core',
+        'class-variance-authority',
+        'clsx',
+        'embla-carousel-vue',
+        'lucide-vue-next',
+        'tailwind-merge',
+        'vaul-vue',
+        'vee-validate',
+        'vue-sonner',
+        'zod',
+      ]
+    }
+  },
 
   css: ['~/assets/css/main.css'],
 

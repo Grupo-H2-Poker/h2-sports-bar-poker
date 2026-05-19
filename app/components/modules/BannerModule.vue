@@ -11,18 +11,15 @@
 </template>
 
 <script setup lang="ts">
-import type { Modulo, ComponentData } from '~/types/modules'
+import type { Modulo, ComponentData, BannerData } from '~/types/modules'
 import CardBanner from '~/components/cards/CardBanner.vue'
 
-interface Props {
-  modulo: Modulo
-  data: ComponentData[]
-}
-
-const props = defineProps<Props>()
+const props = defineProps<{
+  modulo: Modulo<BannerData>
+}>()
 
 const sortedComponents = computed(() => {
-  return [...props.data]
+  return [...props.modulo.components]
     .filter(c => c.status === 'publicado')
     .sort((a, b) => a.ordem - b.ordem)
 })

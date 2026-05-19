@@ -9,21 +9,21 @@ export interface Unidade {
   status: 'ativo' | 'inativo'
 }
 
-export interface ComponentData {
+export interface ComponentData<T = Record<string, any>> {
   id: number
   type: string
   ordem: number
   status: 'publicado' | 'rascunho'
-  data: Record<string, any>
+  data: T
 }
 
-export interface Modulo {
+export interface Modulo<T = Record<string, any>> {
   id: number
   tipo: string
   ordem: number
   status: 'publicado' | 'rascunho'
   metadados?: Record<string, any>
-  components: ComponentData[]
+  components: ComponentData<T>[]
 }
 
 export interface UnidadeModulos {
@@ -34,9 +34,10 @@ export interface UnidadeModulos {
 // Types específicos para módulos conhecidos
 export interface CardAgendaData {
   titulo: string
-  descricao: string
-  imagem: string
-  data: string
+  garantido?: string
+  inicio: string
+  late?: string
+  inscricoes?: string
   link?: string
 }
 

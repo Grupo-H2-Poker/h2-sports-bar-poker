@@ -2,7 +2,7 @@ export default defineEventHandler((event) => {
   const slug = getRouterParam(event, 'slug')
 
   const mockData: Record<string, any> = {
-    
+
     // UNIDADE
     'sp-pinheiros': {
       unidade: {
@@ -13,34 +13,63 @@ export default defineEventHandler((event) => {
         status: 'inativo'
       },
 
-
       modulos: [
-        
-        // Banner
-        // {
-        //   id: 1,
-        //   tipo: 'banner',
-        //   ordem: 1,
-        //   status: 'publicado',
-        //   metadados: {},
-        //   components: [
-        //     {
-        //       id: 1,
-        //       type: 'banner',
-        //       ordem: 1,
-        //       status: 'publicado',
-        //       data: {
-        //         titulo: 'Bem-vindo à Unidade São Paulo',
-        //         subtitulo: 'O melhor clube da cidade',
-        //         imagem: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8',
-        //         cta: 'Saiba Mais',
-        //         link: '/sobre'
-        //       }
-        //     }
-        //   ]
-        // },
-
-
+        // Eventos
+        {
+          id: 1,
+          tipo: 'eventos',
+          ordem: 1,
+          status: 'publicado',
+          metadados: {
+            titulo: 'Torneios de hoje',
+            descricao: '',
+            cta: '',
+            cta_link: '',
+            align: 'left',
+            size: 'md'
+          },
+          components: [
+            {
+              id: 1,
+              type: 'evento',
+              ordem: 1,
+              status: 'publicado',
+              data: {
+                titulo: 'H2 Millions São Paulo',
+                descricao: 'O maior circuito de poker do Brasil.',
+                imagem: 'https://images.unsplash.com/photo-1511512578047-dfb367046420',
+                cta: 'Saiba mais',
+                link: '/eventos/h2-millions'
+              }
+            },
+            {
+              id: 2,
+              type: 'evento',
+              ordem: 2,
+              status: 'publicado',
+              data: {
+                titulo: 'High Roller Experience',
+                descricao: 'Estrutura premium para jogadores profissionais.',
+                imagem: 'https://images.unsplash.com/photo-1541278107931-e006523892df',
+                cta: 'Ver evento',
+                link: '/eventos/high-roller'
+              }
+            },
+            {
+              id: 3,
+              type: 'evento',
+              ordem: 3,
+              status: 'publicado',
+              data: {
+                titulo: 'Mystery Bounty Week',
+                descricao: 'Premiações surpresa e grandes garantidos.',
+                imagem: 'https://images.unsplash.com/photo-1511882150382-421056c89033',
+                cta: 'Participar',
+                link: '/eventos/mystery-bounty'
+              }
+            }
+          ]
+        },
         // Agenda
         {
           id: 2,
@@ -51,11 +80,13 @@ export default defineEventHandler((event) => {
             titulo: 'Torneios de hoje',
             descricao: 'Confira a agenda completa de torneios de hoje !!!!!',
             cta: 'Veja a agenda completa',
-            cta_link: '/agenda'
+            cta_link: '/agenda',
+            align: 'left',
+            size: 'md'
           },
           components: [
             {
-              id: 2,
+              id: 1,
               type: 'card',
               ordem: 1,
               status: 'publicado',
@@ -69,7 +100,7 @@ export default defineEventHandler((event) => {
               }
             },
             {
-              id: 3,
+              id: 2,
               type: 'card',
               ordem: 2,
               status: 'publicado',
@@ -83,7 +114,7 @@ export default defineEventHandler((event) => {
               }
             },
             {
-              id: 4,
+              id: 3,
               type: 'card',
               ordem: 3,
               status: 'publicado',
@@ -96,7 +127,33 @@ export default defineEventHandler((event) => {
               }
             },
             {
-              id: 5,
+              id: 4,
+              type: 'card',
+              ordem: 4,
+              status: 'publicado',
+              data: {
+                titulo: 'Turbo Semanal',
+                garantido: '10K Garantido',
+                inicio: '22:30',
+                late: '23:30',
+                link: '/torneios/turbo-semanal'
+              }
+            },
+            {
+              id: 4,
+              type: 'card',
+              ordem: 4,
+              status: 'publicado',
+              data: {
+                titulo: 'Turbo Semanal',
+                garantido: '10K Garantido',
+                inicio: '22:30',
+                late: '23:30',
+                link: '/torneios/turbo-semanal'
+              }
+            },
+            {
+              id: 4,
               type: 'card',
               ordem: 4,
               status: 'publicado',
@@ -109,7 +166,7 @@ export default defineEventHandler((event) => {
               }
             },
           ]
-        }
+        },
       ]
     },
 
@@ -127,10 +184,10 @@ export default defineEventHandler((event) => {
 
       modulos: [
         // Banner
-         {
+        {
           id: 1,
           tipo: 'banner',
-          ordem: 1,
+          ordem: 2,
           status: 'publicado',
           metadados: {},
           components: [
@@ -154,7 +211,7 @@ export default defineEventHandler((event) => {
         {
           id: 3,
           tipo: "galeria",
-          ordem: 2,
+          ordem: 1,
           status: "publicado",
           metadados: {
             titulo: "Nossas Instalações"
@@ -185,7 +242,7 @@ export default defineEventHandler((event) => {
           ]
         },
 
-       
+
         // Agenda
         {
           id: 2,
@@ -195,7 +252,8 @@ export default defineEventHandler((event) => {
           metadados: {
             titulo: 'Confira os próximos torneios de hoje',
             cta: 'Veja a agenda completa',
-            cta_link: '/agenda'
+            cta_link: '/agenda',
+            size: 'md'
           },
           components: [
             {

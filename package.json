@@ -7,10 +7,7 @@
     "dev": "NODE_OPTIONS='--localstorage-file=/tmp/nuxt-localstorage.json' nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "test-api": "node test-api.cjs",
-    "storybook": "nuxt storybook",
-    "build-storybook": "nuxt build-storybook"
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
     "@nuxt/ui": "^4.1.0",
