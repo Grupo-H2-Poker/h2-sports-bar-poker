@@ -1,9 +1,16 @@
 <template>
   <section class="py-8">
     <div class="container mx-auto px-4">
-      <h2 v-if="modulo.metadados?.titulo" class="text-2xl font-bold mb-6">
-        {{ modulo.metadados.titulo }}
-      </h2>
+      <SectionCTA
+          :align="modulo.metadados?.align"
+          :size="modulo.metadados?.size"
+          :title="modulo.metadados?.titulo"
+          :description="modulo.metadados?.descricao"
+          :cta="modulo.metadados?.cta"
+          :cta-link="modulo.metadados?.cta_link"
+        />
+
+      <br>
 
       <Carousel :opts="{ align: 'start', loop: false }" class="w-full">
         <CarouselContent class="-ml-4">
@@ -42,18 +49,12 @@
 
 <script setup lang="ts">
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '~/components/ui/carousel'
-import type { Modulo, ComponentData } from '~/types/modules'
+import SectionCTA from '~/components/modules/SectionCTA.vue'
+import type { ModuloOf } from '~/types/modules'
 
-interface Props {
-  modulo: Modulo
-  data: ComponentData[]
-}
+const props = defineProps<{
+  modulo: ModuloOf<'galeria'>
+}>()
 
-const props = defineProps<Props>()
-
-const sortedComponents = computed(() => {
-  return [...props.data]
-    .filter(c => c.status === 'publicado')
-    .sort((a, b) => a.ordem - b.ordem)
-})
+const sortedComponents = useSortedComponents(() => props.modulo)
 </script>

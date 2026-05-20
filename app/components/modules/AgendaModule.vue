@@ -26,21 +26,17 @@
 </template>
 
 <script setup lang="ts">
-import type { Modulo, ComponentData, CardAgendaData } from '~/types/modules'
+import type { ModuloOf } from '~/types/modules'
 
 import DragCarousel from '~/components/modules/DragCarousel.vue'
 import SectionCTA from '~/components/modules/SectionCTA.vue'
 import CardAgenda from '~/components/cards/CardAgenda.vue'
 
 const props = defineProps<{
-  modulo: Modulo<CardAgendaData>
+  modulo: ModuloOf<'agenda'>
 }>()
 
-const sortedComponents = computed(() => {
-  return [...props.modulo.components]
-    .filter(c => c.status === 'publicado')
-    .sort((a, b) => a.ordem - b.ordem)
-})
+const sortedComponents = useSortedComponents(() => props.modulo)
 
 const activeId = computed(() => {
   const now = new Date()
@@ -52,7 +48,7 @@ const activeId = computed(() => {
   let bestFutureId: number | null = null
 
   for (const component of sortedComponents.value) {
-    const inicio = (component.data as any)?.inicio as string | undefined
+    const inicio = component.data.inicio
 
     if (!inicio) continue
 

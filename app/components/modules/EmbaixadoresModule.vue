@@ -22,18 +22,11 @@
 </template>
 
 <script setup lang="ts">
-import type { Modulo, ComponentData } from '~/types/modules'
+import type { ModuloOf } from '~/types/modules'
 
-interface Props {
-  modulo: Modulo
-  data: ComponentData[]
-}
+const props = defineProps<{
+  modulo: ModuloOf<'embaixadores'>
+}>()
 
-const props = defineProps<Props>()
-
-const sortedComponents = computed(() => {
-  return [...props.data]
-    .filter(c => c.status === 'publicado')
-    .sort((a, b) => a.ordem - b.ordem)
-})
+const sortedComponents = useSortedComponents(() => props.modulo)
 </script>

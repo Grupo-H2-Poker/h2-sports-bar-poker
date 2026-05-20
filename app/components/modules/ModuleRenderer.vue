@@ -5,13 +5,12 @@
       :key="modulo.id"
       :is="getModuleComponent(modulo.tipo)"
       :modulo="modulo"
-      :data="modulo.components"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Modulo } from '~/types/modules'
+import type { Modulo, ModuloTipo } from '~/types/modules'
 import AgendaModule from '~/components/modules/AgendaModule.vue'
 import BannerModule from '~/components/modules/BannerModule.vue'
 import GaleriaModule from '~/components/modules/GaleriaModule.vue'
@@ -28,7 +27,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const moduloMapa: Record<string, any> = {
+const moduloMapa: Partial<Record<ModuloTipo, Component>> = {
   agenda: AgendaModule,
   banner: BannerModule,
   galeria: GaleriaModule,
@@ -46,9 +45,9 @@ const sortedModulos = computed(() => {
     .sort((a, b) => a.ordem - b.ordem)
 })
 
-const getModuleComponent = (tipo: string) => {
-  return moduloMapa[tipo] ?? {
-    props: ['modulo', 'data'],
+const getModuleComponent = (tipo: ModuloTipo | string) => {
+  return moduloMapa[tipo as ModuloTipo] ?? {
+    props: ['modulo'],
     template: `<div class="p-4 border border-yellow-500 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg text-sm text-yellow-800 dark:text-yellow-200">⚠️ Módulo tipo "{{ modulo.tipo }}" não implementado</div>`
   }
 }

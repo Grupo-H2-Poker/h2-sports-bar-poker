@@ -54,18 +54,11 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '~/components/ui/carousel'
 import { Button } from '~/components/ui/button'
 import SectionCTA from '~/components/modules/SectionCTA.vue'
-import type { Modulo, ComponentData } from '~/types/modules'
+import type { ModuloOf } from '~/types/modules'
 
-interface Props {
-  modulo: Modulo
-  data: ComponentData[]
-}
+const props = defineProps<{
+  modulo: ModuloOf<'eventos'>
+}>()
 
-const props = defineProps<Props>()
-
-const sortedComponents = computed(() => {
-  return [...props.data]
-    .filter(c => c.status === 'publicado')
-    .sort((a, b) => a.ordem - b.ordem)
-})
+const sortedComponents = useSortedComponents(() => props.modulo)
 </script>

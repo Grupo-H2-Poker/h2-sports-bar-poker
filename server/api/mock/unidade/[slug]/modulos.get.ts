@@ -22,10 +22,10 @@ export default defineEventHandler((event) => {
           status: 'publicado',
           metadados: {
             titulo: 'Torneios de hoje',
-            descricao: '',
-            cta: '',
-            cta_link: '',
-            align: 'left',
+            descricao: 'ulalalal',
+            cta: 'Ir para eventos',
+            cta_link: '/eventos',
+            align: 'center',
             size: 'md'
           },
           components: [
@@ -183,29 +183,6 @@ export default defineEventHandler((event) => {
       },
 
       modulos: [
-        // Banner
-        {
-          id: 1,
-          tipo: 'banner',
-          ordem: 2,
-          status: 'publicado',
-          metadados: {},
-          components: [
-            {
-              id: 1,
-              type: 'banner',
-              ordem: 1,
-              status: 'publicado',
-              data: {
-                titulo: 'Bem-vindo à Unidade Campinas',
-                subtitulo: 'O melhor clube da cidade',
-                imagem: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8',
-                cta: 'Saiba Mais',
-                link: '/sobre'
-              }
-            }
-          ]
-        },
 
         // Galeria
         {
@@ -214,7 +191,12 @@ export default defineEventHandler((event) => {
           ordem: 1,
           status: "publicado",
           metadados: {
-            titulo: "Nossas Instalações"
+            titulo: 'Galeria de fotos',
+            descricao: '',
+            cta: '',
+            cta_link: '',
+            align: 'center',
+            size: 'md'
           },
           components: [
             {
