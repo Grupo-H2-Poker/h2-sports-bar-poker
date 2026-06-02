@@ -1,0 +1,39 @@
+---
+alwaysApply: true
+---
+# Sistema de módulos
+
+## Props dos módulos
+
+Todo `*Module.vue` recebe **apenas** `modulo`, tipado com `ModuloOf<'tipo'>`:
+
+```ts
+const props = defineProps<{
+  modulo: ModuloOf<'agenda'>
+}>()
+
+const sortedComponents = useSortedComponents(() => props.modulo)
+```
+
+Nunca usar prop `data` separada — os itens vêm de `modulo.components`.
+
+## Onde definir tipos
+
+- **Component data** (`CardAgendaData`, `EventoData`, …): forma de `components[].data`
+- **Metadados** (`ModuloMetadadosSection`, …): forma de `modulo.metadados`
+- **Registry**: ao criar módulo novo, atualizar em `app/types/modules.ts`:
+  - `ModuloTipo`
+  - `ModuloDataMap` / `ModuloMetadadosMap`
+  - `MODULO_COMPONENT_TYPE`
+  - entrada em `ModuleRenderer` (`moduloMapa`)
+
+## JSON da API / mock
+
+Cada módulo no JSON deve ter `tipo` igual a uma chave de `ModuloTipo`. Cada item em `components` deve ter `type` igual a `MODULO_COMPONENT_TYPE[tipo]`.
+
+## Novo módulo (checklist)
+
+1. Interfaces em `modules.ts` + maps
+2. Componente `XxxModule.vue` com `ModuloOf<'xxx'>`
+3. Registrar em `ModuleRenderer.vue`
+4. Exemplo no mock `modulos.get.ts`

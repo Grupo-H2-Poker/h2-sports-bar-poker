@@ -13,6 +13,23 @@ export default defineEventHandler((event) => {
         status: 'inativo'
       },
 
+      menu: [
+        { id: 'h2bet', kind: 'link', label: 'H2Bet', to: 'https://www.h2.bet.br/', external: true },
+        { id: 'agenda', kind: 'link', label: 'Agenda', to: '/agenda' },
+        {
+          id: 'conteudo',
+          kind: 'dropdown',
+          label: 'Conteúdo',
+          items: [
+            { id: 'series', kind: 'link', label: 'Series', to: '/series' },
+            { id: 'unique', kind: 'link', label: 'H2unique', to: '/unique' },
+            { id: 'eventos', kind: 'link', label: 'Eventos', to: '/eventos' },
+            { id: 'unidades', kind: 'link', label: 'Unidades', to: '/unidades' },
+            { id: 'h2news', kind: 'link', label: 'H2news', to: '/blognews' },
+          ]
+        },
+      ],
+
       modulos: [
         // Eventos
         {
@@ -22,10 +39,10 @@ export default defineEventHandler((event) => {
           status: 'publicado',
           metadados: {
             titulo: 'Torneios de hoje',
-            descricao: 'ulalalal',
-            cta: 'Ir para eventos',
+            descricao: '',
+            cta: '',
             cta_link: '/eventos',
-            align: 'center',
+            align: 'left',
             size: 'md'
           },
           components: [
@@ -181,6 +198,23 @@ export default defineEventHandler((event) => {
         logo: '/images/logo-campinas.png',
         status: 'ativo'
       },
+
+      menu: [
+        { id: 'h2bet', kind: 'link', label: 'H2Bet', to: 'https://www.h2.bet.br/', external: true },
+        { id: 'agenda', kind: 'link', label: 'Agenda', to: '/agenda' },
+        { id: 'series', kind: 'link', label: 'Series', to: '/series' },
+        {
+          id: 'mais',
+          kind: 'dropdown',
+          label: 'Mais',
+          items: [
+            { id: 'unique', kind: 'link', label: 'H2unique', to: '/unique' },
+            { id: 'eventos', kind: 'link', label: 'Eventos', to: '/eventos' },
+            { id: 'unidades', kind: 'link', label: 'Unidades', to: '/unidades' },
+            { id: 'h2news', kind: 'link', label: 'H2news', to: '/blognews' },
+          ]
+        },
+      ],
 
       modulos: [
 

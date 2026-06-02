@@ -31,8 +31,27 @@ export interface Modulo<
 
 export interface UnidadeModulos {
   unidade: Unidade
+  menu?: HeaderMenuItem[]
   modulos: Modulo[]
 }
+
+export interface HeaderMenuBaseItem {
+  id: string
+  label: string
+}
+
+export interface HeaderMenuLinkItem extends HeaderMenuBaseItem {
+  kind: 'link'
+  to: string
+  external?: boolean
+}
+
+export interface HeaderMenuDropdownItem extends HeaderMenuBaseItem {
+  kind: 'dropdown'
+  items: HeaderMenuLinkItem[]
+}
+
+export type HeaderMenuItem = HeaderMenuLinkItem | HeaderMenuDropdownItem
 
 // --- Metadados (cabeçalho / config da seção) ---
 

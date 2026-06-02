@@ -40,17 +40,13 @@ export const useAuthStore = defineStore('auth', () => {
 
     // Inicializar do localStorage
     const initAuth = async () => {
-        if (import.meta.client) {
-            isLoading.value = true
-            const savedToken = localStorage.getItem('auth_token')
-            if (savedToken) {
-                token.value = savedToken
-                await fetchUserData()
-            } else {
-                // Se não tem token, para o loading
-                isLoading.value = false
-            }
-        }
+        if (!import.meta.client) return
+
+        const savedToken = localStorage.getItem('auth_token')
+        if (!savedToken) return
+
+        token.value = savedToken
+        await fetchUserData()
     }
 
     // Buscar dados do usuário

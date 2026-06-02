@@ -24,10 +24,12 @@ onMounted(async () => {
 
 const menuItems = [
     { label: 'H2Bet', to: 'https://www.h2.bet.br/' },
-    { label: 'Séries', to: '/series' },
+    { label: 'Agenda', to: '/agenda' },
+    { label: 'Series', to: '/series' },
     { label: 'H2unique', to: '/unique' },
     { label: 'Eventos', to: '/eventos' },
     { label: 'Unidades', to: '/unidades' },
+    { label: 'H2news', to: '/blognews' },
 ]
 
 const itemsUnity = unidades

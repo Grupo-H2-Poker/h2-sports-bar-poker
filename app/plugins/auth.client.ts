@@ -1,5 +1,8 @@
 export default defineNuxtPlugin(() => {
   const { initAuth } = useAuth()
 
-  initAuth()
+  // Run after hydration so Pinia state does not diverge from SSR markup
+  onNuxtReady(() => {
+    initAuth()
+  })
 })

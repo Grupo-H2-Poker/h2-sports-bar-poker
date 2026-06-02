@@ -1,26 +1,24 @@
 <script setup lang="ts">
 import { Button } from '@/components/ui/button'
 
-const { defaultUnity, fetchUnidades, hasUnidades } = useUnidades()
+const { fetchUnidades, hasUnidades, defaultUnity } = useUnidades()
 
 const error = ref<string | null>(null)
 
-try {
-  await fetchUnidades()
+onMounted(async () => {
+  try {
+    await fetchUnidades()
 
-  await nextTick()
-
-  if (!hasUnidades.value) {
-    error.value = 'Nenhuma unidade disponível no momento'
-  } else if (defaultUnity.value) {
-    await navigateTo(`/${defaultUnity.value}`, { replace: true })
-  } else {
-    error.value = 'Não foi possível determinar a unidade padrão'
+    if (!hasUnidades.value) {
+      error.value = 'Nenhuma unidade disponível no momento'
+    } else if (!defaultUnity.value) {
+      error.value = 'Não foi possível determinar a unidade padrão'
+    }
+  } catch (err) {
+    console.error('Erro ao carregar unidades:', err)
+    error.value = 'Erro ao carregar as unidades. Tente novamente.'
   }
-} catch (err) {
-  console.error('Erro ao carregar unidades:', err)
-  error.value = 'Erro ao carregar as unidades. Tente novamente.'
-}
+})
 </script>
 
 <template>
