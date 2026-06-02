@@ -9,6 +9,7 @@ import Logo from '~/components/layout/Logo.vue'
 import Login from '~/components/auth/Login.vue'
 import LoginModal from '~/components/auth/LoginModal.vue'
 import UserAvatar from '~/components/auth/UserAvatar.vue'
+import type { HeaderMenuItem } from '~/types/modules'
 
 const route = useRoute()
 const router = useRouter()
@@ -16,26 +17,32 @@ const { language, setLanguage } = useLanguage()
 
 const { isAuthenticated } = useAuth()
 const { unidades, defaultUnityName, selectedUnityName, getSlugFromName, getNameFromSlug, fetchUnidades } = useUnidades()
+const api = useH2Api()
 
 onMounted(async () => {
     await fetchUnidades()
-    document.addEventListener('click', handleClickOutside)
 })
 
-const menuItems = [
-    { label: 'H2Bet', to: 'https://www.h2.bet.br/' },
-    { label: 'Agenda', to: '/agenda' },
-    { label: 'Series', to: '/series' },
-    { label: 'H2unique', to: '/unique' },
-    { label: 'Eventos', to: '/eventos' },
-    { label: 'Unidades', to: '/unidades' },
-    { label: 'H2news', to: '/blognews' },
-]
+const unidadeSlug = computed(() => {
+    const p = route.params.unidade
+    return typeof p === 'string' ? p : ''
+})
+
+const { data: unidadeModulosData } = await useAsyncData(
+    () => `header-unidade-modulos-${unidadeSlug.value}`,
+    async () => {
+        if (!unidadeSlug.value) return null
+        return await api.getUnidadeModulos(unidadeSlug.value)
+    },
+    { server: true }
+)
+
+const menuItems = computed<HeaderMenuItem[]>(() => {
+    return unidadeModulosData.value?.menu ?? []
+})
 
 const itemsUnity = unidades
-const isUnityDropdownOpen = ref(false)
 const isMobileDrawerOpen = ref(false)
-const dropdownRef = ref<HTMLElement>()
 
 watch(defaultUnityName, (newDefault) => {
     if (newDefault && !selectedUnityName.value) {
@@ -52,14 +59,8 @@ watch(() => route.params.unidade, (newUnidade) => {
     }
 }, { immediate: true })
 
-const toggleDropdown = (event: Event) => {
-    event.stopPropagation()
-    isUnityDropdownOpen.value = !isUnityDropdownOpen.value
-}
-
 const selectUnity = (unity: string) => {
     selectedUnityName.value = unity
-    isUnityDropdownOpen.value = false
     const slug = getSlugFromName(unity)
     if (slug) {
         router.push(`/${slug}`)
@@ -77,16 +78,6 @@ const openLoginAndCloseDrawer = () => {
         open()
     }, 200)
 }
-
-const handleClickOutside = (event: Event) => {
-    if (dropdownRef.value && !dropdownRef.value.contains(event.target as Node)) {
-        isUnityDropdownOpen.value = false
-    }
-}
-
-onUnmounted(() => {
-    document.removeEventListener('click', handleClickOutside)
-})
 </script>
 
 <template>
@@ -98,44 +89,72 @@ onUnmounted(() => {
 
             <NavigationMenu class="hidden md:flex">
                 <NavigationMenuList>
-                    <NavigationMenuItem v-for="item in menuItems" :key="item.to">
-                        <NavigationMenuLink as-child>
-                            <NuxtLink :to="item.to" :class="[
-                                'group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50',
-                                route.path === item.to ? 'bg-accent text-accent-foreground' : ''
-                            ]">
-                                {{ item.label }}
-                            </NuxtLink>
-                        </NavigationMenuLink>
+                    <NavigationMenuItem v-for="item in menuItems" :key="item.id">
+                        <template v-if="item.kind === 'link'">
+                            <NavigationMenuLink as-child>
+                                <NuxtLink
+                                    :to="item.to"
+                                    :external="item.external"
+                                    :target="item.external ? '_blank' : undefined"
+                                    :rel="item.external ? 'noopener noreferrer' : undefined"
+                                    :class="[
+                                        'group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50',
+                                        route.path === item.to ? 'bg-accent text-accent-foreground' : ''
+                                    ]"
+                                >
+                                    {{ item.label }}
+                                </NuxtLink>
+                            </NavigationMenuLink>
+                        </template>
+
+                        <template v-else>
+                            <DropdownMenu>
+                                <DropdownMenuTrigger as-child>
+                                    <button
+                                        type="button"
+                                        class="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                                    >
+                                        {{ item.label }}
+                                        <ChevronDown class="ml-2 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                                    </button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="start" class="w-56">
+                                    <DropdownMenuItem
+                                        v-for="sub in item.items"
+                                        :key="sub.id"
+                                        class="cursor-pointer"
+                                        @click="router.push(sub.to)"
+                                    >
+                                        {{ sub.label }}
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        </template>
                     </NavigationMenuItem>
                 </NavigationMenuList>
             </NavigationMenu>
 
             <!-- Desktop Actions -->
             <div class="hidden md:flex flex-1 items-center justify-end space-x-2">
-                <div class="relative" ref="dropdownRef">
-                    <Button variant="ghost" class="h-9 px-3 text-sm font-medium" @click="toggleDropdown">
-                        {{ selectedUnityName }}
-                        <ChevronDown class="ml-2 h-4 w-4 transition-transform duration-200"
-                            :class="{ 'rotate-180': isUnityDropdownOpen }" />
-                    </Button>
-
-                    <Transition enter-active-class="transition ease-out duration-100"
-                        enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
-                        leave-active-class="transition ease-in duration-75"
-                        leave-from-class="transform opacity-100 scale-100"
-                        leave-to-class="transform opacity-0 scale-95">
-                        <div v-if="isUnityDropdownOpen"
-                            class="absolute right-0 top-full mt-1 w-48 rounded-md border border-border bg-popover p-1 shadow-lg z-50">
-                            <div v-for="unity in itemsUnity" :key="unity"
-                                class="mb-1 cursor-pointer rounded-sm px-2 py-1.5 text-sm hover:bg-accent hover:text-accent-foreground transition-colors"
-                                :class="{ 'bg-accent text-accent-foreground': unity === selectedUnityName }"
-                                @click="selectUnity(unity)">
-                                {{ unity }}
-                            </div>
-                        </div>
-                    </Transition>
-                </div>
+                <DropdownMenu>
+                    <DropdownMenuTrigger as-child>
+                        <Button variant="ghost" class="h-9 px-3 text-sm font-medium">
+                            {{ selectedUnityName }}
+                            <ChevronDown class="ml-2 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" class="w-56">
+                        <DropdownMenuItem
+                            v-for="unity in itemsUnity"
+                            :key="unity"
+                            class="cursor-pointer"
+                            :class="{ 'bg-accent text-accent-foreground': unity === selectedUnityName }"
+                            @click="selectUnity(unity)"
+                        >
+                            {{ unity }}
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
 
                 <Login v-if="!isAuthenticated" />
                 <UserAvatar v-else />
@@ -213,12 +232,36 @@ onUnmounted(() => {
                         <div class="p-4 space-y-6 overflow-y-auto">
                             <nav class="space-y-1">
                                 <h3 class="text-sm font-medium text-muted-foreground mb-3">Páginas</h3>
-                                <NuxtLink v-for="item in menuItems" :key="item.to" :to="item.to"
-                                    class="block rounded-md px-3 py-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-                                    :class="route.path === item.to ? 'bg-accent text-accent-foreground' : ''"
-                                    @click="closeMobileDrawer">
-                                    {{ item.label }}
-                                </NuxtLink>
+                                <div v-for="item in menuItems" :key="item.id">
+                                    <NuxtLink
+                                        v-if="item.kind === 'link'"
+                                        :to="item.to"
+                                        :external="item.external"
+                                        :target="item.external ? '_blank' : undefined"
+                                        :rel="item.external ? 'noopener noreferrer' : undefined"
+                                        class="block rounded-md px-3 py-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                                        :class="route.path === item.to ? 'bg-accent text-accent-foreground' : ''"
+                                        @click="closeMobileDrawer"
+                                    >
+                                        {{ item.label }}
+                                    </NuxtLink>
+
+                                    <div v-else class="space-y-1">
+                                        <div class="px-3 pt-3 pb-2 text-sm font-medium text-muted-foreground">
+                                            {{ item.label }}
+                                        </div>
+                                        <NuxtLink
+                                            v-for="sub in item.items"
+                                            :key="sub.id"
+                                            :to="sub.to"
+                                            class="block rounded-md px-6 py-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                                            :class="route.path === sub.to ? 'bg-accent text-accent-foreground' : ''"
+                                            @click="closeMobileDrawer"
+                                        >
+                                            {{ sub.label }}
+                                        </NuxtLink>
+                                    </div>
+                                </div>
                             </nav>
 
                             <div class="border-t border-border pt-4">

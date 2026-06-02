@@ -19,13 +19,13 @@ export default defineEventHandler((event) => {
         {
           id: 'conteudo',
           kind: 'dropdown',
-          label: 'Conteúdo',
+          label: 'Séries',
           items: [
-            { id: 'series', kind: 'link', label: 'Series', to: '/series' },
-            { id: 'unique', kind: 'link', label: 'H2unique', to: '/unique' },
-            { id: 'eventos', kind: 'link', label: 'Eventos', to: '/eventos' },
-            { id: 'unidades', kind: 'link', label: 'Unidades', to: '/unidades' },
-            { id: 'h2news', kind: 'link', label: 'H2news', to: '/blognews' },
+            { id: 'funfestival', kind: 'link', label: 'Fun Festival', to: '/series' },
+            { id: 'cph', kind: 'link', label: 'CPH', to: '/unique' },
+            { id: 'tardezinha', kind: 'link', label: 'Tardezinha', to: '/unique' },
+            { id: 'ladiesweekend', kind: 'link', label: 'Ladies Weekend', to: '/unique' },
+            { id: 'xadrez', kind: 'link', label: 'Xadrez', to: '/unique' },
           ]
         },
       ],
