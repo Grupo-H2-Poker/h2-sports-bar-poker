@@ -1,5 +1,9 @@
 // Types para o sistema de módulos dinâmicos
 
+import type { CardGenericData, SectionCTAData } from '~/types/cards'
+
+export type { CardGenericData, SectionCTAData } from '~/types/cards'
+
 export interface Unidade {
   id: number
   nome: string
@@ -29,10 +33,22 @@ export interface Modulo<
   components: ComponentData<TData>[]
 }
 
+export interface Pagina {
+  slug: string
+  titulo?: string
+  ordem?: number
+  status: 'publicado' | 'rascunho'
+  modulos: Modulo[]
+}
+
+export const PAGINA_HOME_SLUG = 'home' as const
+
 export interface UnidadeModulos {
   unidade: Unidade
   menu?: HeaderMenuItem[]
-  modulos: Modulo[]
+  paginas: Pagina[]
+  /** @deprecated Use `paginas`. Mantido só para compatibilidade temporária. */
+  modulos?: Modulo[]
 }
 
 export interface HeaderMenuBaseItem {
@@ -42,7 +58,10 @@ export interface HeaderMenuBaseItem {
 
 export interface HeaderMenuLinkItem extends HeaderMenuBaseItem {
   kind: 'link'
-  to: string
+  /** URL externa ou path legado (ex: /agenda). Preferir `pagina` para rotas da unidade. */
+  to?: string
+  /** Slug da página no JSON (`paginas[].slug`). Ex: `agenda` → `/{unidade}/agenda` */
+  pagina?: string
   external?: boolean
 }
 
@@ -55,14 +74,8 @@ export type HeaderMenuItem = HeaderMenuLinkItem | HeaderMenuDropdownItem
 
 // --- Metadados (cabeçalho / config da seção) ---
 
-export interface ModuloMetadadosSection {
-  titulo?: string
-  descricao?: string
-  cta?: string
-  cta_link?: string
-  align?: 'left' | 'center' | 'right'
-  size?: 'sm' | 'md' | 'lg'
-}
+/** @deprecated Alias de `SectionCTAData` — usar como `data` do component `section_cta`, não em `metadados` */
+export type ModuloMetadadosSection = SectionCTAData
 
 export interface ModuloMetadadosTitulo {
   titulo?: string
@@ -84,14 +97,8 @@ export type ModuloMetadadosEmpty = Record<string, never>
 
 // --- Dados de cada component (item dentro do módulo) ---
 
-export interface CardAgendaData {
-  titulo: string
-  garantido?: string
-  inicio: string
-  late?: string
-  inscricoes?: string
-  link?: string
-}
+/** Card da agenda e demais telas — layout via `variant` no JSON */
+export type CardAgendaData = CardGenericData
 
 export interface BannerData {
   titulo?: string
@@ -151,6 +158,12 @@ export type ModuloTipo =
   | 'download_app'
   | 'eventos'
 
+/**
+ * Tipo de component transversal — pode aparecer no `components[]` de qualquer
+ * módulo (ex.: bloco de título/CTA da seção). `data` segue `SectionCTAData`.
+ */
+export const SECTION_CTA_COMPONENT_TYPE = 'section_cta' as const
+
 /** Tipo do item em `components[]` para cada módulo (valor de `component.type` no JSON) */
 export const MODULO_COMPONENT_TYPE = {
   agenda: 'card',
@@ -165,6 +178,19 @@ export const MODULO_COMPONENT_TYPE = {
 } as const satisfies Record<ModuloTipo, string | null>
 
 export interface ModuloDataMap {
+  agenda: CardAgendaData | SectionCTAData
+  banner: BannerData
+  galeria: GaleriaImagemData | SectionCTAData
+  texto: TextoData
+  ranking: RankingPlayerData
+  faq: FaqItemData | SectionCTAData
+  embaixadores: EmbaixadorData
+  download_app: Record<string, never>
+  eventos: EventoData | SectionCTAData
+}
+
+/** `components[].data` excluindo `section_cta` — tipo inferido por módulo */
+export interface ModuloContentDataMap {
   agenda: CardAgendaData
   banner: BannerData
   galeria: GaleriaImagemData
@@ -177,15 +203,15 @@ export interface ModuloDataMap {
 }
 
 export interface ModuloMetadadosMap {
-  agenda: ModuloMetadadosSection
+  agenda: ModuloMetadadosEmpty
   banner: ModuloMetadadosEmpty
-  galeria: ModuloMetadadosSection
+  galeria: ModuloMetadadosEmpty
   texto: ModuloMetadadosEmpty
   ranking: ModuloMetadadosRanking
-  faq: ModuloMetadadosSection
+  faq: ModuloMetadadosEmpty
   embaixadores: ModuloMetadadosTitulo
   download_app: ModuloMetadadosDownloadApp
-  eventos: ModuloMetadadosSection
+  eventos: ModuloMetadadosEmpty
 }
 
 /** Módulo tipado pelo `tipo` — usar em todo `*Module.vue`: `modulo: ModuloOf<'agenda'>` */

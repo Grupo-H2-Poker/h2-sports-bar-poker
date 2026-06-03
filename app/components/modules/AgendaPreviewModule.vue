@@ -2,22 +2,14 @@
   <section class="py-10">
     <div class="container mx-auto px-4">
       <div class="flex gap-18 items-center">
-        <SectionCTA
-          :align="modulo.metadados?.align"
-          :size="modulo.metadados?.size"
-          :title="modulo.metadados?.titulo"
-          :description="modulo.metadados?.descricao"
-          :cta="modulo.metadados?.cta"
-          :cta-link="modulo.metadados?.cta_link"
-        />
+        <SectionCTA v-if="ctaConfig" :config="ctaConfig" />
 
-        <!-- Carousel -->
         <DragCarousel class="flex-1" content-class="gap-4 pb-1">
-          <CardAgenda
-            v-for="component in sortedComponents"
-            :key="component.id"
-            :dados="component.data"
-            :active="component.id === activeId"
+          <CardGeneric
+            v-for="card in cards"
+            :key="card.id"
+            :dados="card.data"
+            :active="card.id === activeId"
           />
         </DragCarousel>
       </div>
@@ -27,16 +19,17 @@
 
 <script setup lang="ts">
 import type { ModuloOf } from '~/types/modules'
+import { getCardHorarioInicio } from '~/composables/useCardTheme'
 
 import DragCarousel from '~/components/modules/DragCarousel.vue'
 import SectionCTA from '~/components/modules/SectionCTA.vue'
-import CardAgenda from '~/components/cards/CardAgenda.vue'
+import CardGeneric from '~/components/cards/CardGeneric.vue'
 
 const props = defineProps<{
   modulo: ModuloOf<'agenda'>
 }>()
 
-const sortedComponents = useSortedComponents(() => props.modulo)
+const { ctaConfig, items: cards } = useModuloComponents(() => props.modulo)
 
 const activeId = computed(() => {
   const now = new Date()
@@ -47,8 +40,8 @@ const activeId = computed(() => {
   let bestFutureDiff = Infinity
   let bestFutureId: number | null = null
 
-  for (const component of sortedComponents.value) {
-    const inicio = component.data.inicio
+  for (const card of cards.value) {
+    const inicio = getCardHorarioInicio(card.data)
 
     if (!inicio) continue
 
@@ -64,17 +57,15 @@ const activeId = computed(() => {
 
     if (diff >= 0 && diff < bestFutureDiff) {
       bestFutureDiff = diff
-      bestFutureId = component.id
+      bestFutureId = card.id
     }
 
     if (Math.abs(diff) < bestDiff) {
       bestDiff = Math.abs(diff)
-      bestId = component.id
+      bestId = card.id
     }
   }
 
   return bestFutureId ?? bestId
 })
-
-
 </script>

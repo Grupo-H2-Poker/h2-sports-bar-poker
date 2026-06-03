@@ -1,21 +1,14 @@
 <template>
   <section class="py-8">
     <div class="container mx-auto px-4">
-      <SectionCTA
-          :align="modulo.metadados?.align"
-          :size="modulo.metadados?.size"
-          :title="modulo.metadados?.titulo"
-          :description="modulo.metadados?.descricao"
-          :cta="modulo.metadados?.cta"
-          :cta-link="modulo.metadados?.cta_link"
-        />
+      <SectionCTA v-if="ctaConfig" :config="ctaConfig" />
 
       <br>
 
       <Carousel :opts="{ align: 'start', loop: false }" class="w-full">
         <CarouselContent class="-ml-4">
           <CarouselItem
-            v-for="component in sortedComponents"
+            v-for="component in imagens"
             :key="component.id"
             class="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4"
           >
@@ -56,5 +49,5 @@ const props = defineProps<{
   modulo: ModuloOf<'galeria'>
 }>()
 
-const sortedComponents = useSortedComponents(() => props.modulo)
+const { ctaConfig, items: imagens } = useModuloComponents(() => props.modulo)
 </script>

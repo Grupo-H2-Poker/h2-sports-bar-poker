@@ -12,28 +12,73 @@ const props = defineProps<{
   modulo: ModuloOf<'agenda'>
 }>()
 
-const sortedComponents = useSortedComponents(() => props.modulo)
+const { ctaConfig, items } = useModuloComponents(() => props.modulo)
 ```
 
 Nunca usar prop `data` separada — os itens vêm de `modulo.components`.
 
+## Composables
+
+| Composable | Uso |
+|------------|-----|
+| `useModuloComponents` | Retorna `{ ctaConfig, items }` — padrão recomendado |
+| `useModuleSectionCTA` | Só o bloco `section_cta` → `SectionCTAData` |
+| `useSortedComponents` | Itens do módulo **sem** `section_cta`, ordenados |
+
 ## Onde definir tipos
 
-- **Component data** (`CardAgendaData`, `EventoData`, …): forma de `components[].data`
-- **Metadados** (`ModuloMetadadosSection`, …): forma de `modulo.metadados`
-- **Registry**: ao criar módulo novo, atualizar em `app/types/modules.ts`:
-  - `ModuloTipo`
-  - `ModuloDataMap` / `ModuloMetadadosMap`
-  - `MODULO_COMPONENT_TYPE`
-  - entrada em `ModuleRenderer` (`moduloMapa`)
+- **Component data** (`CardGenericData`, `EventoData`, …): forma de `components[].data`
+- **Cards genéricos**: `variant` em `data` (`torneio` \| `cash_game` \| `torneio_detalhe`) → `CardGeneric.vue`
+- **Section CTA**: component em `components[]` com `type: 'section_cta'` (`SECTION_CTA_COMPONENT_TYPE`) e `data: SectionCTAData` → `<SectionCTA :config="ctaConfig" />`
+- **Metadados** (`ModuloMetadadosRanking`, `ModuloMetadadosDownloadApp`, …): só para config específica do módulo (logo, links de app). **Não** usar metadados para título/CTA de seção.
+- **Registry** (`app/types/modules.ts`): `ModuloTipo`, `ModuloDataMap`, `ModuloMetadadosMap`, `MODULO_COMPONENT_TYPE`, `ModuleRenderer`
 
 ## JSON da API / mock
 
-Cada módulo no JSON deve ter `tipo` igual a uma chave de `ModuloTipo`. Cada item em `components` deve ter `type` igual a `MODULO_COMPONENT_TYPE[tipo]`.
+```json
+{
+  "tipo": "eventos",
+  "components": [
+    {
+      "id": 100,
+      "type": "section_cta",
+      "ordem": 0,
+      "status": "publicado",
+      "data": {
+        "titulo": "Torneios de hoje",
+        "descricao": "",
+        "cta": "Ver todos",
+        "cta_link": "/eventos",
+        "align": "left",
+        "size": "md"
+      }
+    },
+    {
+      "id": 1,
+      "type": "evento",
+      "ordem": 1,
+      "data": { }
+    }
+  ]
+}
+```
+
+- `type` do conteúdo = `MODULO_COMPONENT_TYPE[tipo]` (`card`, `evento`, `imagem`, …)
+- `section_cta` pode coexistir no mesmo `components[]`
+- Módulos com `section_cta` devem incluir `SectionCTAData` na união de `ModuloDataMap[tipo]`
+
+## Módulos e components Vue
+
+| Módulo | Components Vue |
+|--------|----------------|
+| `AgendaPreviewModule` | `SectionCTA`, `CardGeneric`, `DragCarousel` |
+| `EventosCarouselModule` | `SectionCTA`, carousel de eventos |
+| `GaleriaModule` | `SectionCTA`, carousel de imagens |
+| `FaqModule` | `SectionCTA` (card muted), acordeão FAQ |
 
 ## Novo módulo (checklist)
 
-1. Interfaces em `modules.ts` + maps
-2. Componente `XxxModule.vue` com `ModuloOf<'xxx'>`
+1. Interfaces em `modules.ts` + maps (`ModuloDataMap` com união `| SectionCTAData` se tiver CTA)
+2. `XxxModule.vue` com `ModuloOf<'xxx'>` + `useModuloComponents`
 3. Registrar em `ModuleRenderer.vue`
-4. Exemplo no mock `modulos.get.ts`
+4. Exemplo no mock `modulos.get.ts` (com `section_cta` em `ordem: 0` se aplicável)

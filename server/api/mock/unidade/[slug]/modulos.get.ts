@@ -37,15 +37,21 @@ export default defineEventHandler((event) => {
           tipo: 'eventos',
           ordem: 1,
           status: 'publicado',
-          metadados: {
-            titulo: 'Torneios de hoje',
-            descricao: '',
-            cta: '',
-            cta_link: '/eventos',
-            align: 'left',
-            size: 'md'
-          },
           components: [
+            {
+              id: 100,
+              type: 'section_cta',
+              ordem: 0,
+              status: 'publicado',
+              data: {
+                titulo: 'Torneios de hoje',
+                descricao: '',
+                cta: '',
+                cta_link: '/eventos',
+                align: 'left',
+                size: 'md'
+              }
+            },
             {
               id: 1,
               type: 'evento',
@@ -93,28 +99,44 @@ export default defineEventHandler((event) => {
           tipo: 'agenda',
           ordem: 2,
           status: 'publicado',
-          metadados: {
-            titulo: 'Torneios de hoje',
-            descricao: 'Confira a agenda completa de torneios de hoje !!!!!',
-            cta: 'Veja a agenda completa',
-            cta_link: '/agenda',
-            align: 'left',
-            size: 'md'
-          },
           components: [
+            {
+              id: 100,
+              type: 'section_cta',
+              ordem: 0,
+              status: 'publicado',
+              data: {
+                titulo: 'Torneios de hoje',
+                descricao: 'Confira a agenda completa de torneios de hoje !!!!!',
+                cta: 'Veja a agenda completa',
+                cta_link: '/agenda',
+                align: 'left',
+                size: 'md'
+              }
+            },
             {
               id: 1,
               type: 'card',
               ordem: 1,
               status: 'publicado',
               data: {
+                variant: 'torneio',
+                cor: 'purple',
+                badge: { texto: '08/10', cor: 'purple' },
+                categoria: 'Torneio regular',
+                favorito: { visivel: true, ativo: true, cor: 'verde' },
                 titulo: '5K Super 5 Mega Monster',
-                garantido: '5K Garantido',
-                inicio: '15:00',
+                inicio: '12:30',
                 late: '17:00',
-                inscricoes: '16:50',
-                link: '/torneios/sunday-million'
-              }
+                buy_in: {
+                  preco: 'R$50,00',
+                  pontos: 'ou 2.500 pontos H2Rewards',
+                },
+                botoes: [
+                  { label: 'Saiba mais', variant: 'outline', cor: 'verde', link: '/torneios/sunday-million' },
+                  { label: 'Comprar buy-in', variant: 'solid', cor: 'verde', link: '/torneios/sunday-million/comprar' },
+                ],
+              },
             },
             {
               id: 2,
@@ -122,13 +144,20 @@ export default defineEventHandler((event) => {
               ordem: 2,
               status: 'publicado',
               data: {
-                titulo: 'Freezeout Noturno',
-                garantido: '50K Garantido',
-                inicio: '20:00',
-                late: '22:00',
-                inscricoes: '21:50',
-                link: '/torneios/freezeout-noturno'
-              }
+                variant: 'torneio',
+                cor: 'purple',
+                badge: { texto: '08/10', cor: 'amarelo' },
+                categoria: 'Torneio Fun Festival',
+                favorito: { visivel: true, ativo: true, cor: 'verde' },
+                titulo: '5K Super 5 Mega Monster',
+                inicio: '12:30',
+                late: '17:00',
+                buy_in: { preco: 'R$50,00', pontos: 'ou 2.500 pontos H2Rewards' },
+                botoes: [
+                  { label: 'Saiba mais', variant: 'outline', cor: 'verde', link: '/torneios/fun-festival' },
+                  { label: 'Comprar buy-in', variant: 'solid', cor: 'verde', link: '/torneios/fun-festival/comprar' },
+                ],
+              },
             },
             {
               id: 3,
@@ -136,12 +165,20 @@ export default defineEventHandler((event) => {
               ordem: 3,
               status: 'publicado',
               data: {
-                titulo: 'Turbo Semanal',
-                garantido: '10K Garantido',
-                inicio: '22:30',
-                late: '23:30',
-                link: '/torneios/turbo-semanal'
-              }
+                variant: 'torneio',
+                cor: 'vermelho',
+                badge: { texto: '08/10', cor: 'vermelho' },
+                categoria: 'CPH',
+                favorito: { visivel: true, ativo: true, cor: 'branco' },
+                titulo: '5K Super 5 Mega Monster',
+                inicio: '12:30',
+                late: '17:00',
+                buy_in: { preco: 'R$50,00', pontos: 'ou 2.500 pontos H2Rewards' },
+                botoes: [
+                  { label: 'Saiba mais', variant: 'outline', cor: 'branco', link: '/torneios/cph' },
+                  { label: 'Comprar buy-in', variant: 'solid', cor: 'branco', link: '/torneios/cph/comprar' },
+                ],
+              },
             },
             {
               id: 4,
@@ -149,38 +186,35 @@ export default defineEventHandler((event) => {
               ordem: 4,
               status: 'publicado',
               data: {
-                titulo: 'Turbo Semanal',
-                garantido: '10K Garantido',
-                inicio: '22:30',
-                late: '23:30',
-                link: '/torneios/turbo-semanal'
-              }
+                variant: 'cash_game',
+                cor: 'purple',
+                badge: { texto: 'ABERTA', cor: 'purple' },
+                categoria: 'Cash game',
+                titulo: 'Omaha 5/5',
+                subtitulo: 'Aberta',
+                botoes: [
+                  { label: 'Entrar na fila', variant: 'solid', cor: 'verde', link: '/cash/omaha-5-5' },
+                ],
+              },
             },
             {
-              id: 4,
+              id: 5,
               type: 'card',
-              ordem: 4,
+              ordem: 5,
               status: 'publicado',
               data: {
-                titulo: 'Turbo Semanal',
-                garantido: '10K Garantido',
-                inicio: '22:30',
-                late: '23:30',
-                link: '/torneios/turbo-semanal'
-              }
-            },
-            {
-              id: 4,
-              type: 'card',
-              ordem: 4,
-              status: 'publicado',
-              data: {
-                titulo: 'Turbo Semanal',
-                garantido: '10K Garantido',
-                inicio: '22:30',
-                late: '23:30',
-                link: '/torneios/turbo-semanal'
-              }
+                variant: 'torneio_detalhe',
+                cor: 'purple',
+                buy_in: { label: 'Buy-in', preco: 'R$350,00' },
+                inicio: '12:30',
+                late: '17:00',
+                faixa_info: '478 pontos no rankig do CPH',
+                descricao: 'Esse torneio dá uma vaga no Main Event do CPH 6ª Etapa',
+                botoes: [
+                  { label: 'Comprar buy-in', variant: 'solid', cor: 'verde', link: '/torneios/cph-main/comprar' },
+                ],
+                link_footer: { texto: 'Confira o regulamento', link: '/torneios/cph/regulamento' },
+              },
             },
           ]
         },
@@ -224,15 +258,21 @@ export default defineEventHandler((event) => {
           tipo: "galeria",
           ordem: 1,
           status: "publicado",
-          metadados: {
-            titulo: 'Galeria de fotos',
-            descricao: '',
-            cta: '',
-            cta_link: '',
-            align: 'center',
-            size: 'md'
-          },
           components: [
+            {
+              id: 100,
+              type: 'section_cta',
+              ordem: 0,
+              status: 'publicado',
+              data: {
+                titulo: 'Galeria de fotos',
+                descricao: '',
+                cta: '',
+                cta_link: '',
+                align: 'center',
+                size: 'md'
+              }
+            },
             {
               id: 4,
               type: "imagem",
@@ -265,25 +305,38 @@ export default defineEventHandler((event) => {
           tipo: 'agenda',
           ordem: 3,
           status: 'publicado',
-          metadados: {
-            titulo: 'Confira os próximos torneios de hoje',
-            cta: 'Veja a agenda completa',
-            cta_link: '/agenda',
-            size: 'md'
-          },
           components: [
+            {
+              id: 100,
+              type: 'section_cta',
+              ordem: 0,
+              status: 'publicado',
+              data: {
+                titulo: 'Confira os próximos torneios de hoje',
+                cta: 'Veja a agenda completa',
+                cta_link: '/agenda',
+                size: 'md'
+              }
+            },
             {
               id: 2,
               type: 'card',
               ordem: 1,
               status: 'publicado',
               data: {
+                variant: 'torneio',
+                cor: 'purple',
+                categoria: 'Torneio regular',
                 titulo: 'Main Event Campinas',
                 garantido: 'R$ 20.000 GTD',
                 inicio: '14:00',
                 late: '16:00',
                 inscricoes: '15:50',
-                link: '/torneios/main-event-campinas'
+                buy_in: { preco: 'R$200,00' },
+                botoes: [
+                  { label: 'Saiba mais', variant: 'outline', link: '/torneios/main-event-campinas' },
+                  { label: 'Comprar buy-in', variant: 'solid', cor: 'verde', link: '/torneios/main-event-campinas/comprar' },
+                ],
               }
             },
             {
@@ -292,12 +345,16 @@ export default defineEventHandler((event) => {
               ordem: 2,
               status: 'publicado',
               data: {
+                variant: 'torneio',
+                cor: 'purple',
                 titulo: 'Satélite Main Event',
                 garantido: 'R$ 2.000 GTD',
                 inicio: '19:00',
                 late: '20:30',
                 inscricoes: '20:20',
-                link: '/torneios/satelite-main'
+                botoes: [
+                  { label: 'Comprar buy-in', variant: 'solid', cor: 'verde', link: '/torneios/satelite-main/comprar' },
+                ],
               }
             },
             {
@@ -306,10 +363,14 @@ export default defineEventHandler((event) => {
               ordem: 3,
               status: 'publicado',
               data: {
+                variant: 'torneio',
+                cor: 'purple',
                 titulo: 'Bounty Noturno',
                 inicio: '21:00',
                 late: '22:30',
-                link: '/torneios/bounty-noturno'
+                botoes: [
+                  { label: 'Comprar buy-in', variant: 'solid', cor: 'verde', link: '/torneios/bounty-noturno/comprar' },
+                ],
               }
             }
           ]

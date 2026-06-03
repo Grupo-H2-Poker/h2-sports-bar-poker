@@ -23,19 +23,35 @@ onMounted(async () => {
     await fetchUnidades()
 })
 
-const unidadeSlug = computed(() => {
+const routeUnidadeSlug = computed(() => {
     const p = route.params.unidade
     return typeof p === 'string' ? p : ''
 })
 
+const effectiveUnidadeSlug = computed(() => {
+    if (routeUnidadeSlug.value) return routeUnidadeSlug.value
+    const fromSelection = getSlugFromName(selectedUnityName.value)
+    return fromSelection ?? ''
+})
+
 const { data: unidadeModulosData } = await useAsyncData(
-    () => `header-unidade-modulos-${unidadeSlug.value}`,
+    () => `header-unidade-modulos-${effectiveUnidadeSlug.value}`,
     async () => {
-        if (!unidadeSlug.value) return null
-        return await api.getUnidadeModulos(unidadeSlug.value)
+        if (!effectiveUnidadeSlug.value) return null
+        return await api.getUnidadeModulos(effectiveUnidadeSlug.value)
     },
-    { server: true }
+    { server: true, watch: [effectiveUnidadeSlug] },
 )
+
+function menuHref(item: { pagina?: string; to?: string; external?: boolean }) {
+    if (!effectiveUnidadeSlug.value) return item.to ?? '/'
+    return resolveMenuItemHref(effectiveUnidadeSlug.value, item)
+}
+
+function menuIsActive(item: { pagina?: string; to?: string }) {
+    if (!effectiveUnidadeSlug.value) return route.path === item.to
+    return isMenuItemActive(route.path, effectiveUnidadeSlug.value, item)
+}
 
 const menuItems = computed<HeaderMenuItem[]>(() => {
     return unidadeModulosData.value?.menu ?? []
@@ -93,13 +109,13 @@ const openLoginAndCloseDrawer = () => {
                         <template v-if="item.kind === 'link'">
                             <NavigationMenuLink as-child>
                                 <NuxtLink
-                                    :to="item.to"
+                                    :to="menuHref(item)"
                                     :external="item.external"
                                     :target="item.external ? '_blank' : undefined"
                                     :rel="item.external ? 'noopener noreferrer' : undefined"
                                     :class="[
                                         'group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50',
-                                        route.path === item.to ? 'bg-accent text-accent-foreground' : ''
+                                        menuIsActive(item) ? 'bg-accent text-accent-foreground' : ''
                                     ]"
                                 >
                                     {{ item.label }}
@@ -123,7 +139,7 @@ const openLoginAndCloseDrawer = () => {
                                         v-for="sub in item.items"
                                         :key="sub.id"
                                         class="cursor-pointer"
-                                        @click="router.push(sub.to)"
+                                        @click="router.push(menuHref(sub))"
                                     >
                                         {{ sub.label }}
                                     </DropdownMenuItem>
@@ -235,12 +251,12 @@ const openLoginAndCloseDrawer = () => {
                                 <div v-for="item in menuItems" :key="item.id">
                                     <NuxtLink
                                         v-if="item.kind === 'link'"
-                                        :to="item.to"
+                                        :to="menuHref(item)"
                                         :external="item.external"
                                         :target="item.external ? '_blank' : undefined"
                                         :rel="item.external ? 'noopener noreferrer' : undefined"
                                         class="block rounded-md px-3 py-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-                                        :class="route.path === item.to ? 'bg-accent text-accent-foreground' : ''"
+                                        :class="menuIsActive(item) ? 'bg-accent text-accent-foreground' : ''"
                                         @click="closeMobileDrawer"
                                     >
                                         {{ item.label }}
@@ -253,9 +269,9 @@ const openLoginAndCloseDrawer = () => {
                                         <NuxtLink
                                             v-for="sub in item.items"
                                             :key="sub.id"
-                                            :to="sub.to"
+                                            :to="menuHref(sub)"
                                             class="block rounded-md px-6 py-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-                                            :class="route.path === sub.to ? 'bg-accent text-accent-foreground' : ''"
+                                            :class="menuIsActive(sub) ? 'bg-accent text-accent-foreground' : ''"
                                             @click="closeMobileDrawer"
                                         >
                                             {{ sub.label }}

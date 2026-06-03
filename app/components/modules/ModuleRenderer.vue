@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import type { Modulo, ModuloTipo } from '~/types/modules'
-import AgendaModule from '~/components/modules/AgendaModule.vue'
+import AgendaModule from '~/components/modules/AgendaPreviewModule.vue'
 import BannerModule from '~/components/modules/BannerModule.vue'
 import GaleriaModule from '~/components/modules/GaleriaModule.vue'
 import TextoModule from '~/components/modules/TextoModule.vue'
