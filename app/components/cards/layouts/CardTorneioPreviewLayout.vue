@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[
-      CARD_PREVIEW_SHELL,
+      CARD_PREVIEW_TORNEIO_SHELL,
       largura,
       altura,
       isActive ? CARD_PREVIEW_TEXT : 'text-zinc-500',
@@ -9,7 +9,7 @@
     :style="cardStyle"
     @click="onCardClick"
   >
-    <div :class="CARD_PREVIEW_HEADER">
+    <div :class="CARD_PREVIEW_TORNEIO_HEADER">
       <span
         v-if="dados.garantido"
         :class="CARD_PREVIEW_TORNEIO_GARANTIDO"
@@ -17,11 +17,13 @@
         {{ dados.garantido }}
       </span>
 
-      <h3 :class="['mt-5', CARD_PREVIEW_TORNEIO_TITULO]">{{ dados.titulo }}</h3>
+      <div :class="CARD_PREVIEW_TORNEIO_TITULO_SLOT">
+        <h3 :class="CARD_PREVIEW_TORNEIO_TITULO">{{ dados.titulo }}</h3>
+      </div>
     </div>
 
-    <div :class="CARD_PREVIEW_FOOTER_FIXED">
-      <div :class="CARD_PREVIEW_INFO_SLOT">
+    <div :class="CARD_PREVIEW_TORNEIO_FOOTER">
+      <div :class="CARD_PREVIEW_TORNEIO_INFO_SLOT">
         <div
           v-if="dados.inicio || dados.late"
           :class="['flex flex-wrap items-center gap-x-6 gap-y-0', CARD_PREVIEW_HORARIOS]"
@@ -54,14 +56,15 @@ import type { CardGenericData } from '~/types/cards'
 import {
   CARD_PREVIEW_BUTTON,
   CARD_PREVIEW_BUTTON_SLOT,
-  CARD_PREVIEW_FOOTER_FIXED,
-  CARD_PREVIEW_HEADER,
+  CARD_PREVIEW_TORNEIO_FOOTER,
+  CARD_PREVIEW_TORNEIO_HEADER,
+  CARD_PREVIEW_TORNEIO_SHELL,
   CARD_PREVIEW_HORARIOS,
-  CARD_PREVIEW_INFO_SLOT,
-  CARD_PREVIEW_SHELL,
+  CARD_PREVIEW_TORNEIO_INFO_SLOT,
   CARD_PREVIEW_TEXT,
   CARD_PREVIEW_TORNEIO_GARANTIDO,
   CARD_PREVIEW_TORNEIO_TITULO,
+  CARD_PREVIEW_TORNEIO_TITULO_SLOT,
 } from '~/components/cards/layouts/cardPreviewShared'
 
 const TORNEIO_PREVIEW_BG_ATIVO = 'rgba(119, 21, 142, 0.30)'
