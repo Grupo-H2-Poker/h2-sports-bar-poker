@@ -12,6 +12,7 @@
 <script setup lang="ts">
 import type { Modulo, ModuloTipo } from '~/types/modules'
 import AgendaModule from '~/components/modules/AgendaPreviewModule.vue'
+import GridModule from '~/components/modules/GridModule.vue'
 import BannerModule from '~/components/modules/BannerModule.vue'
 import GaleriaModule from '~/components/modules/GaleriaModule.vue'
 import TextoModule from '~/components/modules/TextoModule.vue'
@@ -28,7 +29,8 @@ interface Props {
 const props = defineProps<Props>()
 
 const moduloMapa: Partial<Record<ModuloTipo, Component>> = {
-  agenda: AgendaModule,
+  agenda_preview: AgendaModule,
+  grid: GridModule,
   banner: BannerModule,
   galeria: GaleriaModule,
   texto: TextoModule,

@@ -1,7 +1,8 @@
 <template>
   <div
     :class="[
-      'relative overflow-hidden rounded-3xl px-8 pt-14 pb-8 text-white flex-shrink-0 flex flex-col gap-6 transition-colors',
+      'relative overflow-hidden rounded-3xl px-8 pt-14 pb-8 text-white flex flex-col gap-6 transition-colors',
+      fill ? 'w-full h-full min-h-[400px]' : 'flex-shrink-0',
       largura,
       fundoClass,
     ]"
@@ -50,6 +51,7 @@ const props = defineProps<{
   dados: CardGenericData
   active?: boolean
   largura?: string
+  fill?: boolean
 }>()
 
 const active = computed(() => props.active ?? false)
@@ -59,7 +61,10 @@ const { fundoClass, badgeClass, estrelaClass } = useCardTheme(
 )
 
 const headerLabel = computed(() => props.dados.categoria ?? props.dados.garantido)
-const largura = computed(() => props.dados.largura ?? props.largura ?? 'w-[330px]')
+const largura = computed(() => {
+  if (props.fill) return 'w-full'
+  return props.dados.largura ?? props.largura ?? 'w-[330px]'
+})
 
 function onCardClick() {
   if (props.dados.link && !props.dados.botoes?.length) {

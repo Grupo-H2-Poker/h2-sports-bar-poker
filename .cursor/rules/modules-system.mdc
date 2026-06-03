@@ -3,82 +3,71 @@ alwaysApply: true
 ---
 # Sistema de módulos
 
-## Props dos módulos
+## Hierarquia JSON (Marketing / CMS)
 
-Todo `*Module.vue` recebe **apenas** `modulo`, tipado com `ModuloOf<'tipo'>`:
-
-```ts
-const props = defineProps<{
-  modulo: ModuloOf<'agenda'>
-}>()
-
-const { ctaConfig, items } = useModuloComponents(() => props.modulo)
+```
+unidade
+├── menu[]              → Header (opcional por item: link para página)
+└── paginas[]
+    ├── slug: "home"    → rota /{unidade}
+    ├── slug: "agenda"  → rota /{unidade}/agenda
+    └── modulos[]
+        └── components[]
+            ├── type: section_cta
+            ├── type: card | evento | imagem | ...
+            └── data: { ... }
 ```
 
-Nunca usar prop `data` separada — os itens vêm de `modulo.components`.
+## Props dos módulos Vue
+
+Todo `*Module.vue` recebe **apenas** `modulo` (`ModuloOf<'tipo'>`). Itens vêm de `modulo.components`.
+
+```ts
+const { ctaConfig, items } = useModuloComponents(() => props.modulo)
+```
 
 ## Composables
 
 | Composable | Uso |
 |------------|-----|
-| `useModuloComponents` | Retorna `{ ctaConfig, items }` — padrão recomendado |
-| `useModuleSectionCTA` | Só o bloco `section_cta` → `SectionCTAData` |
-| `useSortedComponents` | Itens do módulo **sem** `section_cta`, ordenados |
+| `useModuloComponents` | `{ ctaConfig, items }` dentro de um módulo |
+| `useAgendaPreviewModule` | `{ ctaConfig, config, cards }` — widget reduzido na home |
+| `useGridModule` | Página de agenda (grid completo) |
+| `useUnidadePagina` | Filtra `paginas[]` pela rota → `modulos` da página atual |
+| `resolveMenuItemHref` | Monta URL do menu: `pagina: 'agenda'` → `/{slug}/agenda` |
 
-## Onde definir tipos
+## Módulos de agenda
 
-- **Component data** (`CardGenericData`, `EventoData`, …): forma de `components[].data`
-- **Cards genéricos**: `variant` em `data` (`torneio` \| `cash_game` \| `torneio_detalhe`) → `CardGeneric.vue`
-- **Section CTA**: component em `components[]` com `type: 'section_cta'` (`SECTION_CTA_COMPONENT_TYPE`) e `data: SectionCTAData` → `<SectionCTA :config="ctaConfig" />`
-- **Metadados** (`ModuloMetadadosRanking`, `ModuloMetadadosDownloadApp`, …): só para config específica do módulo (logo, links de app). **Não** usar metadados para título/CTA de seção.
-- **Registry** (`app/types/modules.ts`): `ModuloTipo`, `ModuloDataMap`, `ModuloMetadadosMap`, `MODULO_COMPONENT_TYPE`, `ModuleRenderer`
+| `tipo` | Uso | Cards |
+|--------|-----|-------|
+| `agenda_preview` | Widget na home (carrossel reduzido) | 1º: `cash_game` (fixo) + demais: `card` (torneio preview) |
+| `grid` | Página `/agenda` (cards completos) | `variant: torneio` \| `cash_game` no JSON |
 
-## JSON da API / mock
+## Menu
 
-```json
-{
-  "tipo": "eventos",
-  "components": [
-    {
-      "id": 100,
-      "type": "section_cta",
-      "ordem": 0,
-      "status": "publicado",
-      "data": {
-        "titulo": "Torneios de hoje",
-        "descricao": "",
-        "cta": "Ver todos",
-        "cta_link": "/eventos",
-        "align": "left",
-        "size": "md"
-      }
-    },
-    {
-      "id": 1,
-      "type": "evento",
-      "ordem": 1,
-      "data": { }
-    }
-  ]
-}
-```
+- **Interno (página da unidade):** `{ kind: 'link', label: 'Agenda', pagina: 'agenda' }`
+- **Externo:** `{ kind: 'link', to: 'https://...', external: true }`
+- **Legado:** `to: '/agenda'` ainda resolve para `/{unidade}/agenda` quando há slug na rota
 
-- `type` do conteúdo = `MODULO_COMPONENT_TYPE[tipo]` (`card`, `evento`, `imagem`, …)
-- `section_cta` pode coexistir no mesmo `components[]`
-- Módulos com `section_cta` devem incluir `SectionCTAData` na união de `ModuloDataMap[tipo]`
+Página não listada no menu pode existir no JSON (ex.: landing sem link no header).
 
-## Módulos e components Vue
+## Rotas Nuxt
 
-| Módulo | Components Vue |
-|--------|----------------|
-| `AgendaPreviewModule` | `SectionCTA`, `CardGeneric`, `DragCarousel` |
-| `EventosCarouselModule` | `SectionCTA`, carousel de eventos |
-| `GaleriaModule` | `SectionCTA`, carousel de imagens |
-| `FaqModule` | `SectionCTA` (card muted), acordeão FAQ |
+| URL | Página JSON |
+|-----|-------------|
+| `/{unidade}` | `paginas` onde `slug === 'home'` |
+| `/{unidade}/{pagina}` | `paginas` onde `slug === pagina` |
+
+Componente: `UnidadePaginaView` + `ModuleRenderer`.
+
+## Types (`app/types/modules.ts`)
+
+- `Pagina`, `PAGINA_HOME_SLUG`, `UnidadeModulos.paginas`
+- `ModuloDataMap` / `ModuloContentDataMap` / `SECTION_CTA_COMPONENT_TYPE`
 
 ## Novo módulo (checklist)
 
-1. Interfaces em `modules.ts` + maps (`ModuloDataMap` com união `| SectionCTAData` se tiver CTA)
-2. `XxxModule.vue` com `ModuloOf<'xxx'>` + `useModuloComponents`
-3. Registrar em `ModuleRenderer.vue`
-4. Exemplo no mock `modulos.get.ts` (com `section_cta` em `ordem: 0` se aplicável)
+1. Types em `modules.ts`
+2. `XxxModule.vue` + `useModuloComponents`
+3. `ModuleRenderer.vue`
+4. Mock: adicionar módulo dentro de `paginas[].modulos`

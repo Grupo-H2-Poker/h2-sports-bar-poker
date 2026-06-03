@@ -1,0 +1,68 @@
+<template>
+  <div
+    :class="[CARD_PREVIEW_SHELL, CARD_PREVIEW_TEXT, 'bg-brand-purple', largura, altura]"
+    @click="onCardClick"
+  >
+    <div :class="CARD_PREVIEW_HEADER">
+      <h3 :class="CARD_PREVIEW_CASH_TITULO">
+        <span v-for="(line, index) in titleLines" :key="index" class="block">
+          {{ line }}
+        </span>
+      </h3>
+    </div>
+
+    <div :class="CARD_PREVIEW_FOOTER_FIXED">
+      <div :class="CARD_PREVIEW_INFO_SLOT">
+        <div :class="CARD_PREVIEW_CASH_DETALHES">
+          <p v-if="dados.inicio" class="m-0">
+            Início {{ dados.inicio }}
+          </p>
+          <p v-if="dados.inscricoes" class="m-0">
+            Inscrições até {{ dados.inscricoes }}
+          </p>
+        </div>
+      </div>
+
+      <div :class="CARD_PREVIEW_BUTTON_SLOT">
+        <button
+          v-if="hasButton"
+          type="button"
+          :class="[CARD_PREVIEW_BUTTON, 'bg-brand-green text-black hover:bg-brand-green/90']"
+          @click.stop="onButtonClick(true)"
+        >
+          {{ primaryButton!.label }}
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import type { CardGenericData } from '~/types/cards'
+import {
+  CARD_PREVIEW_BUTTON,
+  CARD_PREVIEW_BUTTON_SLOT,
+  CARD_PREVIEW_CASH_DETALHES,
+  CARD_PREVIEW_CASH_TITULO,
+  CARD_PREVIEW_FOOTER_FIXED,
+  CARD_PREVIEW_HEADER,
+  CARD_PREVIEW_INFO_SLOT,
+  CARD_PREVIEW_SHELL,
+  CARD_PREVIEW_TEXT,
+} from '~/components/cards/layouts/cardPreviewShared'
+
+const props = defineProps<{
+  dados: CardGenericData
+  largura?: string
+  altura?: string
+}>()
+
+const largura = computed(() => props.dados.largura ?? props.largura)
+const altura = computed(() => props.dados.altura ?? props.altura)
+
+const titleLines = computed(() => props.dados.titulo.split(/\s+/))
+
+const { primaryButton, hasButton, onCardClick, onButtonClick } = useCardPreviewLink(
+  () => props.dados,
+)
+</script>

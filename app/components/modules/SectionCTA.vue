@@ -1,8 +1,8 @@
 <template>
   <div
     v-if="hasContent"
-    class="flex flex-col gap-6"
-    :class="wrapperClass"
+    class="flex flex-col"
+    :class="[compact ? 'gap-0' : 'gap-6', wrapperClass]"
   >
     <div class="flex flex-col gap-3">
       <h2
@@ -23,7 +23,7 @@
     </div>
 
     <div
-      v-if="config.cta"
+      v-if="config.cta && !compact"
       class="flex"
       :class="buttonWrapperClass"
     >
@@ -45,12 +45,15 @@ import type { SectionCTAData } from '~/types/cards'
 
 const props = withDefaults(defineProps<{
   config?: SectionCTAData
+  /** Sem botão CTA e layout compacto para cabeçalho de grid */
+  compact?: boolean
 }>(), {
   config: () => ({}),
+  compact: false,
 })
 
 const hasContent = computed(
-  () => !!(props.config.titulo || props.config.descricao || props.config.cta),
+  () => !!(props.config.titulo || props.config.descricao || (!props.compact && props.config.cta)),
 )
 
 const wrapperClass = computed(() => ({

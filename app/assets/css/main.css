@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;700&display=swap');
 @import "tailwindcss";
 @import "@nuxt/ui";
 @import "tw-animate-css";
@@ -8,6 +9,8 @@
   --radius: 0.625rem;
   --brand-green: #24CFA4;
   --brand-purple: #77158E;
+  --font-red-hat-display: 'Red Hat Display', sans-serif;
+  --card-preview-text: #E7E7E7;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);

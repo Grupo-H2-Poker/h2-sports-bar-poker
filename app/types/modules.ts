@@ -1,8 +1,12 @@
 // Types para o sistema de módulos dinâmicos
 
 import type { CardGenericData, SectionCTAData } from '~/types/cards'
+import type { GridConfigData, GridToolbarData } from '~/types/grid'
+import type { RankingConfigData, RankingPlayerData } from '~/types/ranking'
 
 export type { CardGenericData, SectionCTAData } from '~/types/cards'
+export type { GridConfigData, GridToolbarData, GridItemType } from '~/types/grid'
+export type { RankingConfigData, RankingPlayerData } from '~/types/ranking'
 
 export interface Unidade {
   id: number
@@ -81,11 +85,6 @@ export interface ModuloMetadadosTitulo {
   titulo?: string
 }
 
-export interface ModuloMetadadosRanking {
-  titulo?: string
-  logo?: string
-}
-
 export interface ModuloMetadadosDownloadApp {
   titulo?: string
   descricao?: string
@@ -135,11 +134,6 @@ export interface FaqItemData {
   resposta: string
 }
 
-export interface RankingPlayerData {
-  nome: string
-  avatar?: string
-}
-
 export interface EmbaixadorData {
   nome: string
   foto?: string
@@ -148,7 +142,8 @@ export interface EmbaixadorData {
 // --- Registry: tipo do módulo → shapes de data e metadados ---
 
 export type ModuloTipo =
-  | 'agenda'
+  | 'agenda_preview'
+  | 'grid'
   | 'banner'
   | 'galeria'
   | 'texto'
@@ -166,7 +161,8 @@ export const SECTION_CTA_COMPONENT_TYPE = 'section_cta' as const
 
 /** Tipo do item em `components[]` para cada módulo (valor de `component.type` no JSON) */
 export const MODULO_COMPONENT_TYPE = {
-  agenda: 'card',
+  agenda_preview: 'card',
+  grid: 'card',
   banner: 'banner',
   galeria: 'imagem',
   texto: 'texto',
@@ -178,11 +174,12 @@ export const MODULO_COMPONENT_TYPE = {
 } as const satisfies Record<ModuloTipo, string | null>
 
 export interface ModuloDataMap {
-  agenda: CardAgendaData | SectionCTAData
+  agenda_preview: CardAgendaData | SectionCTAData
+  grid: CardAgendaData | GaleriaImagemData | SectionCTAData | GridConfigData | GridToolbarData
   banner: BannerData
   galeria: GaleriaImagemData | SectionCTAData
   texto: TextoData
-  ranking: RankingPlayerData
+  ranking: RankingPlayerData | RankingConfigData
   faq: FaqItemData | SectionCTAData
   embaixadores: EmbaixadorData
   download_app: Record<string, never>
@@ -191,7 +188,8 @@ export interface ModuloDataMap {
 
 /** `components[].data` excluindo `section_cta` — tipo inferido por módulo */
 export interface ModuloContentDataMap {
-  agenda: CardAgendaData
+  agenda_preview: CardAgendaData
+  grid: CardAgendaData | GaleriaImagemData
   banner: BannerData
   galeria: GaleriaImagemData
   texto: TextoData
@@ -203,16 +201,17 @@ export interface ModuloContentDataMap {
 }
 
 export interface ModuloMetadadosMap {
-  agenda: ModuloMetadadosEmpty
+  agenda_preview: ModuloMetadadosEmpty
+  grid: ModuloMetadadosEmpty
   banner: ModuloMetadadosEmpty
   galeria: ModuloMetadadosEmpty
   texto: ModuloMetadadosEmpty
-  ranking: ModuloMetadadosRanking
+  ranking: ModuloMetadadosEmpty
   faq: ModuloMetadadosEmpty
   embaixadores: ModuloMetadadosTitulo
   download_app: ModuloMetadadosDownloadApp
   eventos: ModuloMetadadosEmpty
 }
 
-/** Módulo tipado pelo `tipo` — usar em todo `*Module.vue`: `modulo: ModuloOf<'agenda'>` */
+/** Módulo tipado pelo `tipo` — usar em todo `*Module.vue`: `modulo: ModuloOf<'agenda_preview'>` */
 export type ModuloOf<T extends ModuloTipo> = Modulo<ModuloDataMap[T], ModuloMetadadosMap[T]>

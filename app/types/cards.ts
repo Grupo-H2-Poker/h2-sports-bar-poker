@@ -8,7 +8,12 @@ export interface SectionCTAData {
   size?: 'sm' | 'md' | 'lg'
 }
 
-export type CardVariant = 'torneio' | 'cash_game' | 'torneio_detalhe'
+export type CardVariant =
+  | 'torneio'
+  | 'cash_game'
+  | 'torneio_detalhe'
+  | 'torneio_preview'
+  | 'cash_game_preview'
 
 export type CardCorPreset = 'purple' | 'vermelho' | 'amarelo' | 'verde' | 'branco'
 
@@ -90,6 +95,9 @@ export interface CardGenericData {
 
   largura?: string
   altura?: string
+
+  /** Preview: false deixa o card apagado (cinza). Padrão: true */
+  ativo?: boolean
 
   /** Navegação ao clicar no card (quando não há botões com link) */
   link?: string
