@@ -1,3 +1,7 @@
+import type { ModuloMetadadosCarousel } from '~/types/carousel'
+
+export type ModuloMetadadosAgendaPreview = ModuloMetadadosCarousel
+
 export const AGENDA_PREVIEW_CASH_GAME_COMPONENT_TYPE = 'cash_game' as const
 export const AGENDA_PREVIEW_CARD_COMPONENT_TYPE = 'card' as const
 

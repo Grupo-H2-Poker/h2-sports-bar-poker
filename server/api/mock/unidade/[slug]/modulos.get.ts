@@ -42,7 +42,7 @@ export default defineEventHandler((event) => {
             {
               id: 2,
               tipo: 'ranking',
-              ordem: 2,
+              ordem: 1,
               status: 'publicado',
               components: [
                 {
@@ -98,7 +98,7 @@ export default defineEventHandler((event) => {
             {
               id: 3,
               tipo: 'ranking',
-              ordem: 3,
+              ordem: 2,
               status: 'publicado',
               components: [
                 {
@@ -156,8 +156,11 @@ export default defineEventHandler((event) => {
             {
               id: 4,
               tipo: 'agenda_preview',
-              ordem: 4,
+              ordem: 3,
               status: 'publicado',
+              metadados: {
+                carousel_bleed_right: true,
+              },
               components: [
                 {
                   id: 100,
@@ -246,7 +249,85 @@ export default defineEventHandler((event) => {
                 },
               ],
             },
-
+            {
+              id: 1,
+              tipo: 'banner',
+              ordem: 3,
+              status: 'publicado',
+              metadados: {
+                drag_carousel: true,
+                carousel_bleed_right: true,
+              },
+              components: [
+                {
+                  id: 12,
+                  type: 'banner',
+                  ordem: 1,
+                  status: 'publicado',
+                  data: {
+                    layout: 'overlay',
+                    size: 'sm',
+                    height: 'lg',
+                    cta_position: 'bottom-center',
+                    overlay: 'gradient-bottom',
+                    imagem: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=750&fit=crop',
+                    section_cta: {
+                      titulo: 'H2bet',
+                      descricao: 'Aposte nos seus times favoritos com as melhores odds do mercado.',
+                      cta: 'Toca e Joga!',
+                      cta_link: 'https://www.h2.bet.br/',
+                      align: 'center',
+                      size: 'md',
+                    },
+                  },
+                },
+                {
+                  id: 13,
+                  type: 'banner',
+                  ordem: 2,
+                  status: 'publicado',
+                  data: {
+                    layout: 'overlay',
+                    size: 'sm',
+                    height: 'lg',
+                    cta_position: 'bottom-center',
+                    overlay: 'gradient-bottom',
+                    imagem: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=750&fit=crop',
+                    section_cta: {
+                      titulo: 'H2rewards',
+                      descricao: 'Acumule pontos em cada buy-in e troque por prêmios exclusivos.',
+                      cta: 'Saiba mais',
+                      cta_link: 'agenda',
+                      align: 'center',
+                      size: 'md',
+                    },
+                  },
+                },
+                {
+                  id: 14,
+                  type: 'banner',
+                  ordem: 3,
+                  status: 'publicado',
+                  data: {
+                    layout: 'overlay',
+                    size: 'sm',
+                    height: 'lg',
+                    cta_position: 'bottom-center',
+                    overlay: 'gradient-bottom',
+                    imagem: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=750&fit=crop',
+                    section_cta: {
+                      titulo: 'H2rewards',
+                      descricao: 'Acumule pontos em cada buy-in e troque por prêmios exclusivos.',
+                      cta: 'Saiba mais',
+                      cta_link: 'agenda',
+                      align: 'center',
+                      size: 'md',
+                    },
+                  },
+                },
+                
+              ],
+            },
             
 
 

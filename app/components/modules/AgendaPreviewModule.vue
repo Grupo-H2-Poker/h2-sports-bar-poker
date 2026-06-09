@@ -1,12 +1,16 @@
 <template>
-  <section class="py-10">
+  <section class="py-10 overflow-x-clip">
     <div class="container mx-auto px-4">
-      <div class="flex gap-12 items-center">
+      <div class="flex min-w-0 gap-12 items-center">
         <div v-if="ctaConfig" class="shrink-0">
           <SectionCTA :config="ctaConfig" />
         </div>
 
-        <DragCarousel class="min-w-0 flex-1" content-class="gap-4 items-stretch pb-1">
+        <DragCarousel
+          class="min-w-0 w-0 flex-1"
+          :bleed-right="carouselBleedRight"
+          content-class="gap-4 items-stretch pb-1"
+        >
           <CardGeneric
             v-if="cashGameCard"
             :key="cashGameCard.id"
@@ -36,4 +40,8 @@ const props = defineProps<{
 }>()
 
 const { ctaConfig, cashGameCard, torneioCards } = useAgendaPreviewModule(() => props.modulo)
+
+const carouselBleedRight = computed(
+  () => props.modulo.metadados?.carousel_bleed_right ?? false,
+)
 </script>

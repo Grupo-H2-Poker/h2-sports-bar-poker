@@ -2,7 +2,11 @@
   <div
     v-if="hasContent"
     class="flex flex-col"
-    :class="[compact ? 'gap-0' : 'gap-6', wrapperClass]"
+    :class="[
+      compact ? 'gap-0' : 'gap-6',
+      wrapperClass,
+      inverted && 'text-white',
+    ]"
   >
     <div class="flex flex-col gap-3">
       <h2
@@ -47,9 +51,12 @@ const props = withDefaults(defineProps<{
   config?: SectionCTAData
   /** Sem botão CTA e layout compacto para cabeçalho de grid */
   compact?: boolean
+  /** Texto claro sobre fundo escuro (banners, overlays) */
+  inverted?: boolean
 }>(), {
   config: () => ({}),
   compact: false,
+  inverted: false,
 })
 
 const hasContent = computed(

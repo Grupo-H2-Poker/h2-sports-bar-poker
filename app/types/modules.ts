@@ -1,9 +1,12 @@
 // Types para o sistema de módulos dinâmicos
 
+import type { ModuloMetadadosAgendaPreview } from '~/types/agenda-preview'
+import type { BannerData, ModuloMetadadosBanner } from '~/types/banner'
 import type { CardGenericData, SectionCTAData } from '~/types/cards'
 import type { GridConfigData, GridToolbarData } from '~/types/grid'
 import type { RankingConfigData, RankingPlayerData } from '~/types/ranking'
 
+export type { BannerCtaPosition, BannerData, BannerHeight, BannerLayout, BannerSize, ModuloMetadadosBanner } from '~/types/banner'
 export type { CardGenericData, SectionCTAData } from '~/types/cards'
 export type { GridConfigData, GridToolbarData, GridItemType } from '~/types/grid'
 export type { RankingConfigData, RankingPlayerData } from '~/types/ranking'
@@ -99,14 +102,6 @@ export type ModuloMetadadosEmpty = Record<string, never>
 /** Card da agenda e demais telas — layout via `variant` no JSON */
 export type CardAgendaData = CardGenericData
 
-export interface BannerData {
-  titulo?: string
-  subtitulo?: string
-  imagem: string
-  link?: string
-  cta?: string
-}
-
 export interface GaleriaImagemData {
   imagem: string
   titulo?: string
@@ -201,9 +196,9 @@ export interface ModuloContentDataMap {
 }
 
 export interface ModuloMetadadosMap {
-  agenda_preview: ModuloMetadadosEmpty
+  agenda_preview: ModuloMetadadosAgendaPreview
   grid: ModuloMetadadosEmpty
-  banner: ModuloMetadadosEmpty
+  banner: ModuloMetadadosBanner
   galeria: ModuloMetadadosEmpty
   texto: ModuloMetadadosEmpty
   ranking: ModuloMetadadosEmpty

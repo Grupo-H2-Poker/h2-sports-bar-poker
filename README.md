@@ -70,3 +70,122 @@ NUXT_EXTERNAL_API_BASE=https://rewards.h2club.com.br
 3. Se sucesso: salva dados no localStorage e atualiza estado
 4. Header reativo mostra avatar em vez do botão de login
 5. Logout limpa localStorage e reseta estado
+
+
+
+
+
+Components: 
+
+Banner > 
+
+modulos: 
+             {
+              id: 1,
+              tipo: 'banner',
+              ordem: 1,
+              status: 'publicado',
+              metadados: {
+                drag_carousel: false,
+                carousel_bleed_right: false,
+              },
+              components: [
+                {
+                  id: 10,
+                  type: 'banner',
+                  ordem: 1,
+                  status: 'publicado',
+                  data: {
+                    layout: 'overlay',
+                    size: 'lg',
+                    cta_position: 'center',
+                    imagem: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=1200&h=800&fit=crop',
+                    section_cta: {
+                      titulo: 'Sports Bar',
+                      descricao: 'O melhor lugar para assistir aos jogos enquanto curte um drink e joga poker com os amigos.',
+                      cta: 'Conheça nosso sports bar',
+                      cta_link: 'agenda',
+                      align: 'center',
+                      size: 'md',
+                    },
+                  },
+                },
+                {
+                  id: 11,
+                  type: 'banner',
+                  ordem: 2,
+                  status: 'publicado',
+                  data: {
+                    layout: 'two_column',
+                    size: 'lg',
+                    cta_column: 'left',
+                    reverse_columns: true,
+                    imagem: 'https://images.unsplash.com/photo-1606166188517-cc5e34f2e8e0?w=800&h=800&fit=crop',
+                    section_cta: {
+                      titulo: 'Poker é esporte da mente.',
+                      descricao: 'No H2, estratégia é poder, leitura é vantagem e dominar a mesa é o único caminho.',
+                      cta: 'Saiba mais',
+                      cta_link: 'agenda',
+                      align: 'left',
+                      size: 'md',
+                    },
+                  },
+                },
+                {
+                  id: 12,
+                  type: 'banner',
+                  ordem: 3,
+                  status: 'publicado',
+                  data: {
+                    layout: 'overlay',
+                    size: 'sm',
+                    height: 'lg',
+                    cta_position: 'bottom-center',
+                    overlay: 'gradient-bottom',
+                    imagem: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=750&fit=crop',
+                    section_cta: {
+                      titulo: 'H2bet',
+                      descricao: 'Aposte nos seus times favoritos com as melhores odds do mercado.',
+                      cta: 'Toca e Joga!',
+                      cta_link: 'https://www.h2.bet.br/',
+                      align: 'center',
+                      size: 'md',
+                    },
+                  },
+                },
+                {
+                  id: 13,
+                  type: 'banner',
+                  ordem: 4,
+                  status: 'publicado',
+                  data: {
+                    layout: 'overlay',
+                    size: 'sm',
+                    height: 'lg',
+                    cta_position: 'bottom-center',
+                    overlay: 'gradient-bottom',
+                    imagem: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=750&fit=crop',
+                    section_cta: {
+                      titulo: 'H2rewards',
+                      descricao: 'Acumule pontos em cada buy-in e troque por prêmios exclusivos.',
+                      cta: 'Saiba mais',
+                      cta_link: 'agenda',
+                      align: 'center',
+                      size: 'md',
+                    },
+                  },
+                },
+                {
+                  id: 14,
+                  type: 'banner',
+                  ordem: 5,
+                  status: 'publicado',
+                  data: {
+                    layout: 'overlay',
+                    size: 'lg',
+                    imagem: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=750&fit=crop',
+                    link: 'agenda',
+                  },
+                },
+              ],
+            },
