@@ -159,7 +159,7 @@ export default defineEventHandler((event) => {
               ordem: 3,
               status: 'publicado',
               metadados: {
-                carousel_bleed_right: true,
+                carousel_bleed_right: false,
               },
               components: [
                 {
@@ -256,7 +256,7 @@ export default defineEventHandler((event) => {
               status: 'publicado',
               metadados: {
                 drag_carousel: true,
-                carousel_bleed_right: true,
+                carousel_bleed_right: false,
               },
               components: [
                 {
