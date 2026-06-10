@@ -334,6 +334,9 @@ export default defineEventHandler((event) => {
               tipo: 'faq',
               ordem: 4,
               status: 'publicado',
+              metadados: {
+                margin_lateral: 150,
+              },
               components: [
                 {
                   id: 500,
@@ -722,6 +725,26 @@ export default defineEventHandler((event) => {
       ],
     },
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // ------------------------------------------------------------------------------------------------------------
 
     // UNIDADE
@@ -924,7 +947,7 @@ export default defineEventHandler((event) => {
               ordem: 1,
               status: 'publicado',
               metadados: {
-                margin_lateral: 32,
+                margin_lateral: 150,
               },
               components: [
                 {

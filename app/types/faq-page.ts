@@ -13,8 +13,14 @@ export const FAQ_PAGE_META_COMPONENT_TYPES = [
   FAQ_CATEGORIA_COMPONENT_TYPE,
 ] as const
 
-/** Metadados do módulo `faq_page` */
-export interface ModuloMetadadosFaqPage {
-  /** Margem horizontal da página — número (px) ou valor CSS (ex: `2rem`, `24px`). Padrão: `1rem`. */
+/** Margem horizontal compartilhada entre módulos FAQ (widget e página). */
+export interface ModuloMetadadosMarginLateral {
+  /** Número (px) ou valor CSS (ex: `2rem`, `24px`). Padrão: `1rem`. */
   margin_lateral?: string | number
 }
+
+/** Metadados do módulo `faq` (widget) */
+export type ModuloMetadadosFaq = ModuloMetadadosMarginLateral
+
+/** Metadados do módulo `faq_page` */
+export type ModuloMetadadosFaqPage = ModuloMetadadosMarginLateral

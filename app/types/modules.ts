@@ -3,13 +3,13 @@
 import type { ModuloMetadadosAgendaPreview } from '~/types/agenda-preview'
 import type { BannerData, ModuloMetadadosBanner } from '~/types/banner'
 import type { CardGenericData, SectionCTAData } from '~/types/cards'
-import type { FaqCategoriaData, ModuloMetadadosFaqPage } from '~/types/faq-page'
+import type { FaqCategoriaData, ModuloMetadadosFaq, ModuloMetadadosFaqPage } from '~/types/faq-page'
 import type { GridConfigData, GridToolbarData } from '~/types/grid'
 import type { RankingConfigData, RankingPlayerData } from '~/types/ranking'
 
 export type { BannerCtaPosition, BannerData, BannerHeight, BannerLayout, BannerSize, ModuloMetadadosBanner } from '~/types/banner'
 export type { CardGenericData, SectionCTAData } from '~/types/cards'
-export type { FaqCategoriaData, ModuloMetadadosFaqPage } from '~/types/faq-page'
+export type { FaqCategoriaData, ModuloMetadadosFaq, ModuloMetadadosFaqPage } from '~/types/faq-page'
 export type { GridConfigData, GridToolbarData, GridItemType } from '~/types/grid'
 export type { RankingConfigData, RankingPlayerData } from '~/types/ranking'
 
@@ -208,7 +208,7 @@ export interface ModuloMetadadosMap {
   galeria: ModuloMetadadosEmpty
   texto: ModuloMetadadosEmpty
   ranking: ModuloMetadadosEmpty
-  faq: ModuloMetadadosEmpty
+  faq: ModuloMetadadosFaq
   faq_page: ModuloMetadadosFaqPage
   embaixadores: ModuloMetadadosTitulo
   download_app: ModuloMetadadosDownloadApp

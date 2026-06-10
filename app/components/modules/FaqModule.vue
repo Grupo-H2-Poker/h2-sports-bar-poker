@@ -1,13 +1,16 @@
 <template>
   <section class="py-12">
-    <div class="container mx-auto px-4">
+    <div
+      class="container mx-auto"
+      :style="pagePaddingStyle"
+    >
       <TwoColumnLayout
         rounded
-        align="center"
+        align="stretch"
         class="bg-[#373737] text-white overflow-hidden rounded-lg"
       >
         <template #start>
-          <div class="flex flex-col justify-center h-full p-8 md:p-12 lg:p-16">
+          <div class="flex flex-col justify-center h-full p-8 md:p-12 lg:p-16 min-h-0">
             <SectionCTA
               v-if="ctaConfig"
               :config="ctaConfig"
@@ -17,22 +20,32 @@
         </template>
 
         <template #end>
-          <div class="flex flex-col justify-center h-full p-8 md:p-12 lg:pl-8 lg:pr-16">
-            <Accordion type="single" collapsible class="faq-accordion w-full">
-              <AccordionItem
-                v-for="item in itens"
-                :key="item.id"
-                :value="`item-${item.id}`"
-                class="border-white/20"
+          <div class="flex flex-col justify-center h-full p-8 md:p-12 lg:pl-8 lg:pr-16 min-h-0">
+            <div
+              ref="accordionRef"
+              class="w-full"
+              :style="accordionMinHeightStyle"
+            >
+              <Accordion
+                type="single"
+                collapsible
+                class="faq-accordion w-full"
               >
-                <AccordionTrigger class="text-left text-base font-normal text-white hover:no-underline py-5">
-                  {{ item.data.pergunta }}
-                </AccordionTrigger>
-                <AccordionContent class="text-sm text-white/70 pb-5">
-                  {{ item.data.resposta }}
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+                <AccordionItem
+                  v-for="item in itens"
+                  :key="item.id"
+                  :value="`item-${item.id}`"
+                  class="border-white/20"
+                >
+                  <AccordionTrigger class="text-left text-base font-normal text-white hover:no-underline py-5">
+                    {{ item.data.pergunta }}
+                  </AccordionTrigger>
+                  <AccordionContent class="text-sm text-white/70 pb-5">
+                    {{ item.data.resposta }}
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>
           </div>
         </template>
       </TwoColumnLayout>
@@ -51,6 +64,13 @@ const props = defineProps<{
 }>()
 
 const { ctaConfig, items: itens } = useModuloComponents(() => props.modulo)
+const pagePaddingStyle = useModuloMarginLateral(() => props.modulo.metadados)
+
+const accordionRef = ref<HTMLElement | null>(null)
+const { style: accordionMinHeightStyle } = useFaqAccordionMinHeight(
+  accordionRef,
+  computed(() => itens.value.length),
+)
 </script>
 
 <style scoped>

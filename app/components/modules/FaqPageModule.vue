@@ -104,15 +104,7 @@ const props = defineProps<{
 
 const { ctaConfig, categorias } = useFaqPageModule(() => props.modulo)
 
-const pagePaddingStyle = computed(() => {
-  const margin = props.modulo.metadados?.margin_lateral
-  const value = margin == null
-    ? '1rem'
-    : typeof margin === 'number'
-      ? `${margin}px`
-      : margin
-  return { paddingLeft: value, paddingRight: value }
-})
+const pagePaddingStyle = useModuloMarginLateral(() => props.modulo.metadados)
 
 function activeBarPositionClass(index: number, total: number) {
   if (index === 0) return 'top-0'
