@@ -19,8 +19,8 @@ export interface ModuloMetadadosMarginLateral {
   margin_lateral?: string | number
 }
 
-/** Metadados do módulo `faq` (widget) — margem lateral fixa no componente. */
-export type ModuloMetadadosFaq = Record<string, never>
+/** Metadados do módulo `faq` (widget). */
+export type ModuloMetadadosFaq = ModuloMetadadosMarginLateral
 
 /** Metadados do módulo `faq_page` */
 export type ModuloMetadadosFaqPage = ModuloMetadadosMarginLateral

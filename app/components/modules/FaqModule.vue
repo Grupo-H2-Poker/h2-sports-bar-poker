@@ -1,6 +1,9 @@
 <template>
   <section class="py-12">
-    <div class="container mx-auto px-[150px]">
+    <div
+      class="container mx-auto"
+      :style="pagePaddingStyle"
+    >
       <TwoColumnLayout
         rounded
         align="stretch"
@@ -55,6 +58,8 @@ const props = defineProps<{
 }>()
 
 const { ctaConfig, items: itens } = useModuloComponents(() => props.modulo)
+
+const pagePaddingStyle = useModuloMarginLateral(() => props.modulo.metadados)
 </script>
 
 <style scoped>

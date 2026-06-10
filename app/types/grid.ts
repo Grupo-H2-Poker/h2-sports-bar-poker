@@ -11,9 +11,32 @@ export interface GridConfigData {
 
 export type GridItemType = 'card' | 'imagem'
 
+export interface GridFilterOption {
+  id: string
+  label: string
+}
+
+export interface GridFilterSection {
+  id: string
+  titulo: string
+  opcoes: GridFilterOption[]
+}
+
+export interface GridFilterModalAction {
+  label: string
+}
+
+export interface GridFilterModal {
+  titulo?: string
+  secoes: GridFilterSection[]
+  limpar?: GridFilterModalAction
+  aplicar?: GridFilterModalAction
+}
+
 export interface GridToolbarFiltro {
   label: string
   link?: string
+  modal?: GridFilterModal
 }
 
 export interface GridToolbarBusca {
@@ -21,10 +44,15 @@ export interface GridToolbarBusca {
   habilitado?: boolean
 }
 
-/** Config do component `grid_toolbar` — filtro + busca */
+export interface GridFilterBadges {
+  limpar?: GridFilterModalAction
+}
+
+/** Config do component `grid_toolbar` — filtro + busca + modal de filtros */
 export interface GridToolbarData {
   filtro?: GridToolbarFiltro
   busca?: GridToolbarBusca
+  badges?: GridFilterBadges
 }
 
 export type GridCardItemData = CardGenericData

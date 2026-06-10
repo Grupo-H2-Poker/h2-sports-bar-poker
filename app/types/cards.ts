@@ -96,6 +96,9 @@ export interface CardGenericData {
   cor?: CardCorPreset
   classes?: CardClasses
 
+  /** Valores por seção de filtro da agenda (ex.: `{ local: 'online', buy_in: '50-200' }`) */
+  filtros?: Record<string, string>
+
   largura?: string
   altura?: string
 

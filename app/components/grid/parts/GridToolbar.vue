@@ -43,11 +43,17 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   'update:search': [value: string]
+  'open-filtros': []
 }>()
 
 const buscaHabilitada = computed(() => props.config?.busca?.habilitado !== false)
 
 function onFiltroClick() {
+  if (props.config?.filtro?.modal) {
+    emit('open-filtros')
+    return
+  }
+
   const link = props.config?.filtro?.link
   if (link) navigateTo(link)
 }

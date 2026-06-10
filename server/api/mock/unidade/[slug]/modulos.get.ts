@@ -1,3 +1,65 @@
+const AGENDA_GRID_TOOLBAR = {
+  filtro: {
+    label: 'Filtrar torneios',
+    modal: {
+      titulo: 'Filtros',
+      limpar: { label: 'Limpar filtros' },
+      aplicar: { label: 'Filtrar' },
+      secoes: [
+        {
+          id: 'local',
+          titulo: 'Local',
+          opcoes: [
+            { id: 'clube-fisico', label: 'Clube físico' },
+            { id: 'online', label: 'Online' },
+          ],
+        },
+        {
+          id: 'buy_in',
+          titulo: 'Buy-in',
+          opcoes: [
+            { id: '50-200', label: 'R$ 50,00   -  R$ 200,00' },
+            { id: '201-500', label: 'R$ 201,00   -  R$ 500,00' },
+            { id: '500-1000', label: 'R$ 500,00   -  R$ 1000,00' },
+            { id: '1001-5000', label: 'R$ 1001,00   -  R$ 5000,00' },
+            { id: '5001-10000', label: 'R$ 5001,00   -  R$ 10000,00' },
+          ],
+        },
+        {
+          id: 'garantido',
+          titulo: 'Garantido',
+          opcoes: [
+            { id: '5k', label: '5K' },
+            { id: '10k', label: '10K' },
+            { id: '15k', label: '15K' },
+            { id: '20k', label: '20K' },
+            { id: '30k', label: '30K' },
+            { id: '40k', label: '40K' },
+            { id: '50k', label: '50K' },
+            { id: '100k', label: '100K' },
+            { id: '200k', label: '200K' },
+            { id: '300k', label: '300K' },
+          ],
+        },
+        {
+          id: 'series',
+          titulo: 'Séries',
+          opcoes: [
+            { id: 'cph', label: 'CPH' },
+            { id: 'fun-festival', label: 'Fun Festival' },
+            { id: 'damas-do-poker', label: 'Damas do Poker' },
+            { id: 'unique-poker-tour', label: 'Unique Poker Tour' },
+            { id: 'xadrez', label: 'Xadrez' },
+            { id: 'ladies-weekend', label: 'Ladies Weekend' },
+          ],
+        },
+      ],
+    },
+  },
+  busca: { placeholder: 'Pesquisar torneios', habilitado: true },
+  badges: { limpar: { label: 'Limpar filtros' } },
+}
+
 export default defineEventHandler((event) => {
   const slug = getRouterParam(event, 'slug')
 
@@ -334,6 +396,9 @@ export default defineEventHandler((event) => {
               tipo: 'faq',
               ordem: 4,
               status: 'publicado',
+              metadados: {
+                margin_lateral: 150,
+              },
               components: [
                 {
                   id: 500,
@@ -347,7 +412,7 @@ export default defineEventHandler((event) => {
                     cta_link: 'faq',
                     align: 'left',
                     size: 'md',
-                    width: 'sm',
+                    width: 'md',
                   },
                 },
                 {
@@ -415,10 +480,7 @@ export default defineEventHandler((event) => {
                   type: 'grid_toolbar',
                   ordem: 1,
                   status: 'publicado',
-                  data: {
-                    filtro: { label: 'Filtrar torneios' },
-                    busca: { placeholder: 'Pesquisar torneios', habilitado: true }
-                  }
+                  data: AGENDA_GRID_TOOLBAR,
                 },
                 {
                   id: 102,
@@ -441,6 +503,12 @@ export default defineEventHandler((event) => {
                     cor: 'purple',
                     badge: { texto: '08/10', cor: 'purple' },
                     categoria: 'Torneio regular',
+                    filtros: {
+                      local: 'clube-fisico',
+                      buy_in: '50-200',
+                      garantido: '5k',
+                      series: 'unique-poker-tour',
+                    },
                     favorito: { visivel: true, ativo: true, cor: 'verde' },
                     titulo: '5K Super 5 Mega Monster',
                     inicio: '12:30',
@@ -465,6 +533,12 @@ export default defineEventHandler((event) => {
                     cor: 'purple',
                     badge: { texto: '08/10', cor: 'amarelo' },
                     categoria: 'Torneio Fun Festival',
+                    filtros: {
+                      local: 'clube-fisico',
+                      buy_in: '50-200',
+                      garantido: '5k',
+                      series: 'fun-festival',
+                    },
                     favorito: { visivel: true, ativo: true, cor: 'verde' },
                     titulo: '5K Super 5 Mega Monster',
                     inicio: '12:30',
@@ -486,6 +560,12 @@ export default defineEventHandler((event) => {
                     cor: 'vermelho',
                     badge: { texto: '08/10', cor: 'vermelho' },
                     categoria: 'CPH',
+                    filtros: {
+                      local: 'online',
+                      buy_in: '50-200',
+                      garantido: '5k',
+                      series: 'cph',
+                    },
                     favorito: { visivel: true, ativo: true, cor: 'branco' },
                     titulo: '5K Super 5 Mega Monster',
                     inicio: '12:30',
@@ -507,6 +587,12 @@ export default defineEventHandler((event) => {
                     cor: 'purple',
                     badge: { texto: '09/10', cor: 'purple' },
                     categoria: 'Torneio regular',
+                    filtros: {
+                      local: 'clube-fisico',
+                      buy_in: '50-200',
+                      garantido: '10k',
+                      series: 'unique-poker-tour',
+                    },
                     favorito: { visivel: true, cor: 'verde' },
                     titulo: 'Deep Stack Evening',
                     inicio: '19:00',
@@ -528,6 +614,12 @@ export default defineEventHandler((event) => {
                     cor: 'purple',
                     badge: { texto: '09/10', cor: 'purple' },
                     categoria: '5K Garantido',
+                    filtros: {
+                      local: 'clube-fisico',
+                      buy_in: '201-500',
+                      garantido: '5k',
+                      series: 'ladies-weekend',
+                    },
                     favorito: { visivel: true, cor: 'verde' },
                     titulo: 'Turbo Noturno',
                     inicio: '22:00',
@@ -549,6 +641,12 @@ export default defineEventHandler((event) => {
                     cor: 'purple',
                     badge: { texto: '10/10', cor: 'purple' },
                     categoria: 'Torneio regular',
+                    filtros: {
+                      local: 'online',
+                      buy_in: '201-500',
+                      garantido: '20k',
+                      series: 'xadrez',
+                    },
                     favorito: { visivel: true, ativo: true, cor: 'verde' },
                     titulo: 'Sunday Special',
                     inicio: '14:00',
@@ -854,10 +952,7 @@ export default defineEventHandler((event) => {
                   type: 'grid_toolbar',
                   ordem: 1,
                   status: 'publicado',
-                  data: {
-                    filtro: { label: 'Filtrar torneios' },
-                    busca: { placeholder: 'Pesquisar torneios', habilitado: true }
-                  }
+                  data: AGENDA_GRID_TOOLBAR,
                 },
                 {
                   id: 102,
@@ -879,6 +974,12 @@ export default defineEventHandler((event) => {
                     variant: 'torneio',
                     cor: 'purple',
                     categoria: 'Torneio regular',
+                    filtros: {
+                      local: 'clube-fisico',
+                      buy_in: '201-500',
+                      garantido: '20k',
+                      series: 'unique-poker-tour',
+                    },
                     titulo: 'Main Event Campinas',
                     garantido: 'R$ 20.000 GTD',
                     inicio: '14:00',
@@ -900,6 +1001,12 @@ export default defineEventHandler((event) => {
                     variant: 'torneio',
                     cor: 'purple',
                     titulo: 'Satélite Main Event',
+                    filtros: {
+                      local: 'online',
+                      buy_in: '50-200',
+                      garantido: '5k',
+                      series: 'fun-festival',
+                    },
                     garantido: 'R$ 2.000 GTD',
                     inicio: '19:00',
                     late: '20:30',
