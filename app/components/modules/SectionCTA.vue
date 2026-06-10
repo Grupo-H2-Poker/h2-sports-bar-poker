@@ -8,7 +8,7 @@
       inverted && 'text-white',
     ]"
   >
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-3" :class="contentWidthClass">
       <h2
         v-if="config.titulo"
         class="font-bold leading-tight"
@@ -86,14 +86,27 @@ const titleClass = computed(() => {
   }
 })
 
+const contentWidthClass = computed(() => {
+  const width = props.config.width ?? 'md'
+
+  switch (width) {
+    case 'sm':
+      return 'max-w-[200px]'
+    case 'lg':
+      return 'max-w-[560px]'
+    default:
+      return 'max-w-[360px]'
+  }
+})
+
 const descriptionClass = computed(() => {
   switch (props.config.size) {
     case 'sm':
-      return 'text-sm max-w-[240px]'
+      return 'text-sm'
     case 'lg':
-      return 'text-xl max-w-[720px]'
+      return 'text-xl'
     default:
-      return 'text-base max-w-[420px]'
+      return 'text-base'
   }
 })
 

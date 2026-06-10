@@ -18,6 +18,7 @@ import GaleriaModule from '~/components/modules/GaleriaModule.vue'
 import TextoModule from '~/components/modules/TextoModule.vue'
 import RankingModule from '~/components/modules/RankingModule.vue'
 import FaqModule from '~/components/modules/FaqModule.vue'
+import FaqPageModule from '~/components/modules/FaqPageModule.vue'
 import EmbaixadoresModule from '~/components/modules/EmbaixadoresModule.vue'
 import DownloadAppModule from '~/components/modules/DownloadAppModule.vue'
 import EventosCarouselModule from '~/components/modules/EventosCarouselModule.vue'
@@ -36,6 +37,7 @@ const moduloMapa: Partial<Record<ModuloTipo, Component>> = {
   texto: TextoModule,
   ranking: RankingModule,
   faq: FaqModule,
+  faq_page: FaqPageModule,
   embaixadores: EmbaixadoresModule,
   download_app: DownloadAppModule,
   eventos: EventosCarouselModule,

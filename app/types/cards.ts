@@ -5,7 +5,10 @@ export interface SectionCTAData {
   cta?: string
   cta_link?: string
   align?: 'left' | 'center' | 'right'
+  /** Tamanho da tipografia (título, descrição, botão) */
   size?: 'sm' | 'md' | 'lg'
+  /** Largura máxima do bloco título + descrição — `sm` deixa o texto mais junto e força quebra de linha */
+  width?: 'sm' | 'md' | 'lg'
 }
 
 export type CardVariant =

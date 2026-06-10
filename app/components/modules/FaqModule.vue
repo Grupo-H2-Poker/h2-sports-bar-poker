@@ -1,39 +1,48 @@
 <template>
   <section class="py-12">
     <div class="container mx-auto px-4">
-      <div class="flex flex-col md:flex-row gap-8 items-start">
-        <div class="md:w-64 flex-shrink-0">
-          <div class="rounded-2xl bg-muted p-6">
-            <SectionCTA v-if="ctaConfig" :config="ctaConfig" />
-            <h2 v-else class="text-xl font-bold leading-snug">
-              Perguntas frequentes
-            </h2>
+      <TwoColumnLayout
+        rounded
+        align="center"
+        class="bg-[#373737] text-white overflow-hidden rounded-lg"
+      >
+        <template #start>
+          <div class="flex flex-col justify-center h-full p-8 md:p-12 lg:p-16">
+            <SectionCTA
+              v-if="ctaConfig"
+              :config="ctaConfig"
+              inverted
+            />
           </div>
-        </div>
+        </template>
 
-        <div class="flex-1">
-          <Accordion type="single" collapsible class="w-full">
-            <AccordionItem
-              v-for="item in itens"
-              :key="item.id"
-              :value="`item-${item.id}`"
-            >
-              <AccordionTrigger class="text-left text-sm">
-                {{ item.data.pergunta }}
-              </AccordionTrigger>
-              <AccordionContent class="text-sm text-muted-foreground">
-                {{ item.data.resposta }}
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </div>
-      </div>
+        <template #end>
+          <div class="flex flex-col justify-center h-full p-8 md:p-12 lg:pl-8 lg:pr-16">
+            <Accordion type="single" collapsible class="faq-accordion w-full">
+              <AccordionItem
+                v-for="item in itens"
+                :key="item.id"
+                :value="`item-${item.id}`"
+                class="border-white/20"
+              >
+                <AccordionTrigger class="text-left text-base font-normal text-white hover:no-underline py-5">
+                  {{ item.data.pergunta }}
+                </AccordionTrigger>
+                <AccordionContent class="text-sm text-white/70 pb-5">
+                  {{ item.data.resposta }}
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
+        </template>
+      </TwoColumnLayout>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '~/components/ui/accordion'
+import TwoColumnLayout from '~/components/layout/TwoColumnLayout.vue'
 import SectionCTA from '~/components/modules/SectionCTA.vue'
 import type { ModuloOf } from '~/types/modules'
 
@@ -43,3 +52,15 @@ const props = defineProps<{
 
 const { ctaConfig, items: itens } = useModuloComponents(() => props.modulo)
 </script>
+
+<style scoped>
+.faq-accordion :deep([data-slot="accordion-item"]),
+.faq-accordion :deep([data-slot="accordion-trigger"]) {
+  max-width: none;
+  margin: 0;
+}
+
+.faq-accordion :deep([data-slot="accordion-trigger"] svg) {
+  color: white;
+}
+</style>
