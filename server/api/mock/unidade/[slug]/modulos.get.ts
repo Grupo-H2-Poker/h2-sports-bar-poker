@@ -334,9 +334,6 @@ export default defineEventHandler((event) => {
               tipo: 'faq',
               ordem: 4,
               status: 'publicado',
-              metadados: {
-                margin_lateral: 150,
-              },
               components: [
                 {
                   id: 500,
