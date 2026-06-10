@@ -1,28 +1,24 @@
 <template>
-  <div v-if="hasHeader" class="mb-10">
-    <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6 lg:gap-10">
-      <div class="flex flex-col gap-6 min-w-0 flex-1">
-        <SectionCTA v-if="ctaConfig" :config="ctaConfig" compact />
+  <div v-if="hasHeader" class="mb-10 space-y-6">
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-10">
+      <SectionCTA v-if="ctaConfig" :config="ctaConfig" compact />
 
-        <GridActiveFilters
-          v-if="activeFilterSections?.length"
-          :sections="activeFilterSections"
-          :clear-label="toolbarConfig?.badges?.limpar?.label ?? toolbarConfig?.filtro?.modal?.limpar?.label"
-          class="mb-0"
-          @remove="(sectionId, optionId) => emit('remove-filter', sectionId, optionId)"
-          @clear="emit('clear-filters')"
-        />
-      </div>
-
-      <div v-if="toolbarConfig" class="shrink-0 lg:mt-auto">
-        <GridToolbar
-          :config="toolbarConfig"
-          :search="search"
-          @update:search="emit('update:search', $event)"
-          @open-filtros="emit('open-filtros')"
-        />
-      </div>
+      <GridToolbar
+        v-if="toolbarConfig"
+        :config="toolbarConfig"
+        :search="search"
+        @update:search="emit('update:search', $event)"
+        @open-filtros="emit('open-filtros')"
+      />
     </div>
+
+    <GridActiveFilters
+      v-if="activeFilterSections?.length"
+      :sections="activeFilterSections"
+      :clear-label="toolbarConfig?.badges?.limpar?.label"
+      @remove="(sectionId, optionId) => emit('remove-filter', sectionId, optionId)"
+      @clear="emit('clear-filters')"
+    />
   </div>
 </template>
 

@@ -11,17 +11,17 @@
 
     <div
       v-if="buscaHabilitada"
-      class="relative flex items-center min-w-[240px] sm:min-w-[320px]"
+      class="relative flex w-full sm:w-[283px] sm:max-w-[283px] items-center"
     >
       <Input
         :model-value="search"
-        :placeholder="config?.busca?.placeholder ?? 'Pesquisar'"
-        class="rounded-full h-11 pl-5 pr-14 bg-muted/40 border-0 shadow-none"
+        :placeholder="config?.busca?.placeholder ?? 'Pesquisar torneios'"
+        class="h-[46px] w-full rounded-full border-0 !bg-[#373737] dark:!bg-[#373737] pl-5 pr-12 text-sm text-[#e7e7e7] shadow-none placeholder:text-sm placeholder:italic placeholder:text-[#e7e7e7]/70 focus-visible:border-0 focus-visible:ring-0"
         @update:model-value="emit('update:search', String($event ?? ''))"
       />
       <button
         type="button"
-        class="absolute right-1.5 flex size-9 items-center justify-center rounded-full bg-brand-green text-black"
+        class="absolute right-[7px] flex size-8 items-center justify-center rounded-full bg-brand-green text-black shadow-[0_2px_0_rgba(5,145,255,0.1)]"
         aria-label="Pesquisar"
       >
         <Search class="size-4" />

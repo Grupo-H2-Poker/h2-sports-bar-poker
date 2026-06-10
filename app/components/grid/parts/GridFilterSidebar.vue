@@ -5,17 +5,17 @@
     :should-scale-background="false"
   >
     <DrawerContent
-      class="bg-black border-black text-[#e7e7e7] inset-y-0 right-0 left-auto mt-0 h-full max-h-none w-full max-w-[519px] rounded-none"
+      class="bg-black border-black text-[#e7e7e7] inset-y-0 right-0 left-auto mt-0 h-full max-h-none w-full !max-w-[600px] data-[vaul-drawer-direction=right]:sm:!max-w-[600px] rounded-none"
     >
-      <div class="flex h-full flex-col">
-        <div class="relative shrink-0 px-8 pt-10 pb-6">
-          <h2 class="text-center text-2xl font-bold text-[#e7e7e7]">
+      <div class="flex h-full flex-col p-5">
+        <div class="flex shrink-0 items-center justify-between pb-6">
+          <h2 class="text-2xl font-bold text-[#e7e7e7]">
             {{ config?.titulo ?? 'Filtros' }}
           </h2>
 
           <button
             type="button"
-            class="absolute top-8 right-8 text-[#e7e7e7] transition-opacity hover:opacity-70"
+            class="text-[#e7e7e7] transition-opacity hover:opacity-70"
             aria-label="Fechar filtros"
             @click="open = false"
           >
@@ -23,29 +23,30 @@
           </button>
         </div>
 
-        <div class="flex-1 overflow-y-auto px-8 pb-6">
+        <div class="flex-1 overflow-y-auto pb-6">
           <div
             v-for="(section, index) in config?.secoes ?? []"
             :key="section.id"
             :class="index > 0 ? 'mt-10' : ''"
           >
-            <h3 class="mb-4 text-xl font-medium text-[#e7e7e7]">
+            <h3 class="mb-4 text-sm font-normal text-[#e7e7e7]">
               {{ section.titulo }}
             </h3>
 
-            <div class="flex flex-wrap gap-3">
+            <div :class="sectionGridClass(section)">
               <GridFilterChip
                 v-for="opcao in section.opcoes"
                 :key="opcao.id"
                 :label="opcao.label"
                 :selected="isSelected(section.id, opcao.id)"
+                :full-width="!!section.colunas"
                 @click="emit('toggle', section.id, opcao.id)"
               />
             </div>
           </div>
         </div>
 
-        <DrawerFooter class="shrink-0 flex-row gap-4 border-t border-white/10 px-8 py-6">
+        <DrawerFooter class="shrink-0 flex-row gap-4 border-t border-white/10 p-0 pt-6">
           <Button
             type="button"
             variant="outline"
@@ -77,7 +78,7 @@ import {
   DrawerContent,
   DrawerFooter,
 } from '@/components/ui/drawer'
-import type { GridFilterModal } from '~/types/grid'
+import type { GridFilterModal, GridFilterSection } from '~/types/grid'
 import GridFilterChip from '~/components/grid/parts/GridFilterChip.vue'
 
 defineProps<{
@@ -92,4 +93,17 @@ const emit = defineEmits<{
   apply: []
   clear: []
 }>()
+
+const SECTION_GRID_CLASSES: Record<NonNullable<GridFilterSection['colunas']>, string> = {
+  1: 'grid grid-cols-1 gap-3',
+  2: 'grid grid-cols-2 gap-3',
+  3: 'grid grid-cols-3 gap-3',
+  4: 'grid grid-cols-4 gap-3',
+  5: 'grid grid-cols-5 gap-3',
+}
+
+function sectionGridClass(section: GridFilterSection) {
+  if (!section.colunas) return 'flex flex-wrap gap-3'
+  return SECTION_GRID_CLASSES[section.colunas]
+}
 </script>

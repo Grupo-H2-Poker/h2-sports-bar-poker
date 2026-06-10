@@ -20,6 +20,8 @@ export interface GridFilterSection {
   id: string
   titulo: string
   opcoes: GridFilterOption[]
+  /** Chips por linha no modal (ex.: buy-in = 2, garantido = 5) */
+  colunas?: 1 | 2 | 3 | 4 | 5
 }
 
 export interface GridFilterModalAction {

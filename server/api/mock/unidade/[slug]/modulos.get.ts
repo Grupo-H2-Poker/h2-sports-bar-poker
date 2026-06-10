@@ -7,16 +7,9 @@ const AGENDA_GRID_TOOLBAR = {
       aplicar: { label: 'Filtrar' },
       secoes: [
         {
-          id: 'local',
-          titulo: 'Local',
-          opcoes: [
-            { id: 'clube-fisico', label: 'Clube físico' },
-            { id: 'online', label: 'Online' },
-          ],
-        },
-        {
           id: 'buy_in',
           titulo: 'Buy-in',
+          colunas: 2,
           opcoes: [
             { id: '50-200', label: 'R$ 50,00   -  R$ 200,00' },
             { id: '201-500', label: 'R$ 201,00   -  R$ 500,00' },
@@ -28,6 +21,7 @@ const AGENDA_GRID_TOOLBAR = {
         {
           id: 'garantido',
           titulo: 'Garantido',
+          colunas: 5,
           opcoes: [
             { id: '5k', label: '5K' },
             { id: '10k', label: '10K' },
@@ -48,16 +42,25 @@ const AGENDA_GRID_TOOLBAR = {
             { id: 'cph', label: 'CPH' },
             { id: 'fun-festival', label: 'Fun Festival' },
             { id: 'damas-do-poker', label: 'Damas do Poker' },
-            { id: 'unique-poker-tour', label: 'Unique Poker Tour' },
-            { id: 'xadrez', label: 'Xadrez' },
             { id: 'ladies-weekend', label: 'Ladies Weekend' },
+            { id: 'xadrez', label: 'Xadrez' },
+            { id: 'unique-poker-tour', label: 'Unique Poker Tour' },
+          ],
+        },
+        {
+          id: 'local',
+          titulo: 'Local',
+          colunas: 2,
+          opcoes: [
+            { id: 'clube-fisico', label: 'Clube físico' },
+            { id: 'online', label: 'Online' },
           ],
         },
       ],
     },
   },
   busca: { placeholder: 'Pesquisar torneios', habilitado: true },
-  badges: { limpar: { label: 'Limpar filtros' } },
+  badges: { limpar: { label: 'Limpar todos os filtros' } },
 }
 
 export default defineEventHandler((event) => {

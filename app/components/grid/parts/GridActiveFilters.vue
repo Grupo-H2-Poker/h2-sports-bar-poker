@@ -1,54 +1,42 @@
 <template>
   <div
-    v-if="sections.length"
-    class="space-y-6"
+    v-if="badges.length"
+    class="flex flex-wrap gap-3"
   >
-    <div
-      v-for="section in sections"
-      :key="section.id"
-      class="space-y-3"
-    >
-      <p class="text-xl font-medium text-[#e7e7e7]">
-        {{ section.titulo }}
-      </p>
+    <GridFilterBadge
+      v-for="badge in badges"
+      :key="`${badge.sectionId}-${badge.optionId}`"
+      :label="badge.label"
+      @remove="emit('remove', badge.sectionId, badge.optionId)"
+    />
 
-      <div class="flex flex-wrap gap-3">
-        <GridFilterChip
-          v-for="badge in section.badges"
-          :key="`${badge.sectionId}-${badge.optionId}`"
-          :label="badge.label"
-          @click="emit('remove', badge.sectionId, badge.optionId)"
-        />
-      </div>
-    </div>
-
-    <Button
+    <button
       v-if="clearLabel"
       type="button"
-      variant="outline"
-      class="rounded-full border-brand-green bg-transparent px-4 text-brand-green hover:bg-brand-green/10 hover:text-brand-green"
+      class="inline-flex h-8 items-center rounded-full border border-brand-green bg-transparent px-4 text-sm text-brand-green transition-colors hover:bg-brand-green/10"
       @click="emit('clear')"
     >
       {{ clearLabel }}
-    </Button>
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Button } from '@/components/ui/button'
-import GridFilterChip from '~/components/grid/parts/GridFilterChip.vue'
+import GridFilterBadge from '~/components/grid/parts/GridFilterBadge.vue'
+
+export interface GridActiveFilterBadge {
+  sectionId: string
+  optionId: string
+  label: string
+}
 
 export interface GridActiveFilterSection {
   id: string
   titulo: string
-  badges: {
-    sectionId: string
-    optionId: string
-    label: string
-  }[]
+  badges: GridActiveFilterBadge[]
 }
 
-defineProps<{
+const props = defineProps<{
   sections: GridActiveFilterSection[]
   clearLabel?: string
 }>()
@@ -57,4 +45,8 @@ const emit = defineEmits<{
   remove: [sectionId: string, optionId: string]
   clear: []
 }>()
+
+const badges = computed(() =>
+  props.sections.flatMap(section => section.badges),
+)
 </script>
