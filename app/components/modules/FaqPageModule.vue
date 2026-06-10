@@ -76,7 +76,7 @@
               >
                 {{ item.pergunta }}
               </AccordionTrigger>
-              <AccordionContent class="text-base font-medium text-[#e7e7e7] pb-5 leading-[26px]">
+              <AccordionContent class="text-base font-normal text-[#E7E7E7] pb-5 leading-[26px]">
                 {{ item.resposta }}
               </AccordionContent>
             </AccordionItem>
