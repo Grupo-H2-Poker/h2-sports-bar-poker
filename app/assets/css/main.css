@@ -170,6 +170,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --color-brand-green: var(--brand-green);
   --color-brand-purple: var(--brand-purple);
+  --color-card-preview-text: var(--card-preview-text);
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
   @keyframes accordion-down {

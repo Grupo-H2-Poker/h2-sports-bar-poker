@@ -1,76 +1,171 @@
+<script setup lang="ts">
+import Logo from '~/components/layout/Logo.vue'
+import jogoResponsavel from '~/assets/img/jogo_responsavel.png'
+import type { FooterData, FooterLinkItem } from '~/types/footer'
+
+const route = useRoute()
+const { getSlugFromName, selectedUnityName, defaultUnityName } = useUnidades()
+const api = useH2Api()
+
+const routeUnidadeSlug = computed(() => {
+  const p = route.params.unidade
+  return typeof p === 'string' ? p : ''
+})
+
+const effectiveUnidadeSlug = computed(() => {
+  if (routeUnidadeSlug.value) return routeUnidadeSlug.value
+  const unityName = selectedUnityName.value || defaultUnityName.value
+  const fromSelection = unityName ? getSlugFromName(unityName) : null
+  return fromSelection ?? ''
+})
+
+const { data: unidadeModulosData } = await useAsyncData(
+  () => `footer-unidade-modulos-${effectiveUnidadeSlug.value}`,
+  async () => {
+    if (!effectiveUnidadeSlug.value) return null
+    return await api.getUnidadeModulos(effectiveUnidadeSlug.value)
+  },
+  { server: true, watch: [effectiveUnidadeSlug] },
+)
+
+const footer = computed<FooterData | null>(() => unidadeModulosData.value?.footer ?? null)
+
+function linkHref(item: FooterLinkItem) {
+  if (!effectiveUnidadeSlug.value) return item.to ?? '/'
+  return resolveMenuItemHref(effectiveUnidadeSlug.value, item)
+}
+
+function linkClass(item: FooterLinkItem) {
+  if (item.estilo === 'destaque') {
+    return 'text-lg font-bold text-card-preview-text hover:text-white transition-colors'
+  }
+  return 'text-sm font-medium text-card-preview-text/80 hover:text-white transition-colors'
+}
+</script>
+
 <template>
-  <footer class="bg-muted/40 border-t border-border mt-16">
-    <div class="container mx-auto px-4 py-12">
-      <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
-        <!-- Coluna: Logo + info -->
-        <div class="md:col-span-1 flex flex-col gap-3">
+  <footer
+    v-if="footer"
+    class="mt-16 bg-[#2f185a] text-card-preview-text font-[family-name:var(--font-red-hat-display)]"
+  >
+    <div
+      class="h-1.5 w-full bg-linear-to-r from-brand-purple to-[#6433c0]"
+      aria-hidden="true"
+    />
+
+    <div class="container py-12 lg:py-14">
+      <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 xl:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))] xl:gap-12">
+        <!-- Coluna: marca -->
+        <div class="flex flex-col gap-4 sm:col-span-2 xl:col-span-1">
           <Logo :as-link="false" />
-          <p class="text-sm font-semibold">#TocaEJoga</p>
-          <div class="text-xs text-muted-foreground leading-relaxed">
-            <p>Copyright 2023 ®Grupo H2 Brasil.</p>
-            <p>Rua Henrique Schaumann, 313 -</p>
-            <p>Pinheiros, São Paulo - SP, 05413-001</p>
+          <p class="text-lg font-bold leading-[1.65]">
+            {{ footer.hashtag }}
+          </p>
+          <div class="text-base leading-[1.875]">
+            <p>{{ footer.copyright }}</p>
+            <p>{{ footer.endereco }}</p>
           </div>
-          <div class="flex gap-3 mt-1">
-            <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="text-foreground hover:text-muted-foreground transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-            </a>
-            <a href="https://youtube.com" target="_blank" aria-label="YouTube" class="text-foreground hover:text-muted-foreground transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><polygon points="10 15 15 12 10 9"/></svg>
+          <div v-if="footer.redes_sociais.length" class="flex gap-4 pt-1">
+            <a
+              v-for="rede in footer.redes_sociais"
+              :key="rede.id"
+              :href="rede.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              :aria-label="rede.label"
+              class="text-card-preview-text hover:text-white transition-colors"
+            >
+              <svg
+                v-if="rede.tipo === 'instagram'"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+              </svg>
+              <svg
+                v-else-if="rede.tipo === 'youtube'"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
+                <polygon points="10 15 15 12 10 9" />
+              </svg>
             </a>
           </div>
         </div>
 
-        <!-- Coluna: Torneios -->
-        <div class="flex flex-col gap-3">
-          <h4 class="text-sm font-bold">Torneios</h4>
-          <nav class="flex flex-col gap-2">
-            <NuxtLink to="/series" class="text-sm text-muted-foreground hover:text-foreground transition-colors">CPH</NuxtLink>
-            <NuxtLink to="/series" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Fun Festival</NuxtLink>
-            <NuxtLink to="/series" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Tardezinha</NuxtLink>
-            <NuxtLink to="/series" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Ladies Weekend</NuxtLink>
-            <NuxtLink to="/series" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Xadrez</NuxtLink>
-          </nav>
-        </div>
-
-        <!-- Coluna: O clube -->
-        <div class="flex flex-col gap-3">
-          <h4 class="text-sm font-bold">O clube</h4>
-          <nav class="flex flex-col gap-2">
-            <NuxtLink to="/sobre" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Quem somos</NuxtLink>
-            <NuxtLink to="/social" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Social</NuxtLink>
-            <NuxtLink to="/galeria" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Galeria de fotos</NuxtLink>
-          </nav>
-          <h4 class="text-sm font-bold mt-2">Jackpot</h4>
-          <h4 class="text-sm font-bold">H2bet</h4>
-        </div>
-
-        <!-- Coluna: Termos -->
-        <div class="flex flex-col gap-3">
-          <h4 class="text-sm font-bold">Termos e condições</h4>
-          <nav class="flex flex-col gap-2">
-            <NuxtLink to="/regulamentos" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Regulamentos</NuxtLink>
-            <NuxtLink to="/privacidade" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Segurança e privacidade</NuxtLink>
-          </nav>
-          <h4 class="text-sm font-bold mt-2">Atendimento</h4>
-          <nav class="flex flex-col gap-2">
-            <NuxtLink to="/trabalhe" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Trabalhe conosco</NuxtLink>
-            <NuxtLink to="/ouvidoria" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Ouvidoria</NuxtLink>
-          </nav>
+        <!-- Colunas de links -->
+        <div
+          v-for="coluna in footer.colunas"
+          :key="coluna.id"
+          class="flex flex-col gap-6"
+        >
+          <div
+            v-for="secao in coluna.secoes"
+            :key="secao.id"
+            class="flex flex-col gap-3"
+          >
+            <h4
+              v-if="secao.titulo"
+              class="mb-3 text-lg font-bold leading-none"
+            >
+              {{ secao.titulo }}
+            </h4>
+            
+            <nav class="flex flex-col gap-5">
+              <template v-for="item in secao.links" :key="item.id">
+                <NuxtLink
+                  v-if="item.to || item.pagina"
+                  :to="linkHref(item)"
+                  :external="item.external"
+                  :target="item.external ? '_blank' : undefined"
+                  :rel="item.external ? 'noopener noreferrer' : undefined"
+                  :class="linkClass(item)"
+                >
+                  {{ item.label }}
+                </NuxtLink>
+                <span
+                  v-else
+                  :class="linkClass(item)"
+                >
+                  {{ item.label }}
+                </span>
+              </template>
+            </nav>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Rodapé inferior -->
-    <div class="border-t border-border">
-      <div class="container mx-auto px-4 py-4 flex items-center justify-center gap-2 text-xs text-muted-foreground">
-        <div class="flex items-center justify-center w-6 h-6 rounded-full border border-muted-foreground text-[10px] font-bold">18</div>
-        <span>Aplica-se T&C. Jogue com responsabilidade</span>
+    <div class="container pb-5">
+      <div class="border-t border-white/20 pt-5">
+        <div class="flex items-center justify-center gap-2 text-sm font-medium text-card-preview-text">
+          <img
+            :src="jogoResponsavel"
+            alt="Maiores de 18 anos"
+            class="h-14 w-auto shrink-0"
+          />
+        </div>
       </div>
     </div>
   </footer>
 </template>
-
-<script setup lang="ts">
-import Logo from '~/components/layout/Logo.vue'
-</script>

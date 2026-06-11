@@ -96,6 +96,79 @@ export default defineEventHandler((event) => {
           ]
         },
       ],
+      footer: {
+        hashtag: '#TocaEJoga',
+        copyright: 'Copyright 2023 ®Grupo H2 Brasil.',
+        endereco: 'Rua Henrique Schaumann, 313 - Pinheiros, São Paulo - SP, 05413-001',
+        redes_sociais: [
+          { id: 'instagram', tipo: 'instagram', url: 'https://instagram.com', label: 'Instagram' },
+          { id: 'youtube', tipo: 'youtube', url: 'https://youtube.com', label: 'YouTube' },
+        ],
+        colunas: [
+          {
+            id: 'torneios',
+            secoes: [
+              {
+                id: 'torneios',
+                titulo: 'Torneios',
+                links: [
+                  { id: 'cph', label: 'CPH', to: '/series' },
+                  { id: 'fun-festival', label: 'Fun Festival', to: '/series' },
+                  { id: 'damas-do-poker', label: 'Damas do Poker', to: '/series' },
+                  { id: 'ladies-weekend', label: 'Ladies Weekend', to: '/series' },
+                  { id: 'xadrez', label: 'Xadrez', to: '/series' },
+                ],
+              },
+            ],
+          },
+          {
+            id: 'clube',
+            secoes: [
+              {
+                id: 'o-clube',
+                titulo: 'O clube',
+                links: [
+                  { id: 'quem-somos', label: 'Quem somos', to: '/sobre' },
+                  { id: 'social', label: 'Social', to: '/social' },
+                  { id: 'galeria', label: 'Galeria de fotos', to: '/galeria' },
+                ],
+              },
+              {
+                id: 'destaques',
+                links: [
+                  { id: 'jackpot', label: 'Jackpot', to: '/jackpot', estilo: 'destaque' },
+                  { id: 'h2bet', label: 'H2bet', to: 'https://www.h2.bet.br/', external: true, estilo: 'destaque' },
+                ],
+              },
+            ],
+          },
+          {
+            id: 'legal',
+            secoes: [
+              {
+                id: 'termos',
+                titulo: 'Termos e condições',
+                links: [
+                  { id: 'regulamentos', label: 'Regulamentos', to: '/regulamentos' },
+                  { id: 'privacidade', label: 'Segurança e privacidade', to: '/privacidade' },
+                ],
+              },
+              {
+                id: 'atendimento',
+                titulo: 'Atendimento',
+                links: [
+                  { id: 'trabalhe', label: 'Trabalhe conosco', to: '/trabalhe' },
+                  { id: 'ouvidoria', label: 'Ouvidoria', to: '/ouvidoria' },
+                ],
+              },
+            ],
+          },
+        ],
+        aviso: {
+          texto: 'Aplica-se T&C. Jogue com responsabilidade',
+          idade_minima: 18,
+        },
+      },
       // Páginas
       paginas: [
         // Pagina Home

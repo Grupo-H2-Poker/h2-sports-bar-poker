@@ -1,5 +1,6 @@
 // Types para o sistema de módulos dinâmicos
 
+import type { FooterData } from '~/types/footer'
 import type { ModuloMetadadosAgendaPreview } from '~/types/agenda-preview'
 import type { BannerData, ModuloMetadadosBanner } from '~/types/banner'
 import type { CardGenericData, SectionCTAData } from '~/types/cards'
@@ -55,6 +56,7 @@ export const PAGINA_HOME_SLUG = 'home' as const
 export interface UnidadeModulos {
   unidade: Unidade
   menu?: HeaderMenuItem[]
+  footer?: FooterData
   paginas: Pagina[]
   /** @deprecated Use `paginas`. Mantido só para compatibilidade temporária. */
   modulos?: Modulo[]
