@@ -126,13 +126,13 @@ const openLoginAndCloseDrawer = () => {
                         <template v-else>
                             <DropdownMenu>
                                 <DropdownMenuTrigger as-child>
-                                    <button
-                                        type="button"
-                                        class="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                                    <Button
+                                        variant="ghost"
+                                        class="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium"
                                     >
                                         {{ item.label }}
                                         <ChevronDown class="ml-2 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
-                                    </button>
+                                    </Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align="start" class="w-56">
                                     <DropdownMenuItem

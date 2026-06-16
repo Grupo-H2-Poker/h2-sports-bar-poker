@@ -10,18 +10,20 @@
       @remove="emit('remove', badge.sectionId, badge.optionId)"
     />
 
-    <button
+    <Button
       v-if="clearLabel"
       type="button"
-      class="inline-flex h-8 items-center rounded-full border border-brand-green bg-transparent px-4 text-sm text-brand-green transition-colors hover:bg-brand-green/10"
+      variant="outline"
+      class="inline-flex h-8 items-center rounded-full border-brand-green bg-transparent px-4 text-sm text-brand-green hover:bg-brand-green/10 hover:text-brand-green"
       @click="emit('clear')"
     >
       {{ clearLabel }}
-    </button>
+    </Button>
   </div>
 </template>
 
 <script setup lang="ts">
+import { Button } from '~/components/ui/button'
 import GridFilterBadge from '~/components/grid/parts/GridFilterBadge.vue'
 
 export interface GridActiveFilterBadge {

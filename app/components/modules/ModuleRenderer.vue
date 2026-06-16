@@ -23,6 +23,7 @@ import FaqPageModule from '~/components/modules/FaqPageModule.vue'
 import EmbaixadoresModule from '~/components/modules/EmbaixadoresModule.vue'
 import DownloadAppModule from '~/components/modules/DownloadAppModule.vue'
 import EventosCarouselModule from '~/components/modules/EventosCarouselModule.vue'
+import FaixaCtaModule from '~/components/modules/FaixaCtaModule.vue'
 
 interface Props {
   modulos: Modulo[]
@@ -43,6 +44,7 @@ const moduloMapa: Partial<Record<ModuloTipo, Component>> = {
   embaixadores: EmbaixadoresModule,
   download_app: DownloadAppModule,
   eventos: EventosCarouselModule,
+  faixa_cta: FaixaCtaModule,
 }
 
 const sortedModulos = computed(() => {

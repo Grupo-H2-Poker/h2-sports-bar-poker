@@ -7,12 +7,14 @@ import type { CardGenericData, SectionCTAData } from '~/types/cards'
 import type { FaqCategoriaData, ModuloMetadadosFaq, ModuloMetadadosFaqPage } from '~/types/faq-page'
 import type { GridConfigData, GridToolbarData } from '~/types/grid'
 import type { RankingConfigData, RankingPlayerData } from '~/types/ranking'
+import type { FaixaCtaData } from '~/types/faixa-cta'
 import type { RankingTabelaConfigData, RankingTabelaLinhaData } from '~/types/ranking-tabela'
 
 export type { BannerCtaPosition, BannerData, BannerHeight, BannerLayout, BannerSize, ModuloMetadadosBanner } from '~/types/banner'
 export type { CardGenericData, SectionCTAData } from '~/types/cards'
 export type { FaqCategoriaData, ModuloMetadadosFaq, ModuloMetadadosFaqPage } from '~/types/faq-page'
 export type { GridConfigData, GridToolbarData, GridItemType } from '~/types/grid'
+export type { FaixaCtaData } from '~/types/faixa-cta'
 export type { RankingTabelaConfigData, RankingTabelaLinhaData } from '~/types/ranking-tabela'
 
 export interface Unidade {
@@ -160,6 +162,7 @@ export type ModuloTipo =
   | 'embaixadores'
   | 'download_app'
   | 'eventos'
+  | 'faixa_cta'
 
 /**
  * Tipo de component transversal — pode aparecer no `components[]` de qualquer
@@ -181,6 +184,7 @@ export const MODULO_COMPONENT_TYPE = {
   embaixadores: 'embaixador',
   download_app: null,
   eventos: 'evento',
+  faixa_cta: 'faixa_cta',
 } as const satisfies Record<ModuloTipo, string | null>
 
 export interface ModuloDataMap {
@@ -196,6 +200,7 @@ export interface ModuloDataMap {
   embaixadores: EmbaixadorData
   download_app: Record<string, never>
   eventos: EventoData | SectionCTAData
+  faixa_cta: FaixaCtaData
 }
 
 /** `components[].data` excluindo `section_cta` — tipo inferido por módulo */
@@ -212,6 +217,7 @@ export interface ModuloContentDataMap {
   embaixadores: EmbaixadorData
   download_app: Record<string, never>
   eventos: EventoData
+  faixa_cta: FaixaCtaData
 }
 
 export interface ModuloMetadadosMap {
@@ -227,6 +233,7 @@ export interface ModuloMetadadosMap {
   embaixadores: ModuloMetadadosTitulo
   download_app: ModuloMetadadosDownloadApp
   eventos: ModuloMetadadosEmpty
+  faixa_cta: ModuloMetadadosEmpty
 }
 
 /** Módulo tipado pelo `tipo` — usar em todo `*Module.vue`: `modulo: ModuloOf<'agenda_preview'>` */

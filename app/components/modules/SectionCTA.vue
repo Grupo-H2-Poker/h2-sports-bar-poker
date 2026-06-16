@@ -31,20 +31,11 @@
       class="flex"
       :class="buttonWrapperClass"
     >
-      <button
-        v-if="ctaButtonClass"
-        type="button"
-        class="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold transition-colors"
-        :class="ctaButtonClass"
-        @click="handleClick"
-      >
-        {{ config.cta }}
-      </button>
       <Button
-        v-else
-        variant="brand"
+        :variant="buttonVariant"
         :size="buttonSize"
         class="rounded-full"
+        :class="ctaButtonClass"
         @click="handleClick"
       >
         {{ config.cta }}
@@ -54,7 +45,8 @@
 </template>
 
 <script setup lang="ts">
-import { Button } from '@/components/ui/button'
+import { Button } from '~/components/ui/button'
+import type { ButtonVariants } from '~/components/ui/button'
 import type { SectionCTAData } from '~/types/cards'
 
 const props = withDefaults(defineProps<{
@@ -134,6 +126,11 @@ const buttonSize = computed(() => {
 const ctaButtonClass = computed(() =>
   resolveSectionCtaButtonClass(props.config.cta_cor, props.config.cta_variant),
 )
+
+const buttonVariant = computed((): ButtonVariants['variant'] => {
+  if (ctaButtonClass.value) return 'ghost'
+  return 'brand'
+})
 
 const route = useRoute()
 

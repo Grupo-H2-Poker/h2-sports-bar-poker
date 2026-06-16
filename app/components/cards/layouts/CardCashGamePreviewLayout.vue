@@ -24,20 +24,22 @@
       </div>
 
       <div :class="CARD_PREVIEW_BUTTON_SLOT">
-        <button
+        <Button
           v-if="hasButton"
-          type="button"
+          variant="brand"
+          size="sm"
           :class="[CARD_PREVIEW_BUTTON, 'bg-brand-green text-black hover:bg-brand-green/90']"
           @click.stop="onButtonClick(true)"
         >
           {{ primaryButton!.label }}
-        </button>
+        </Button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { Button } from '~/components/ui/button'
 import type { CardGenericData } from '~/types/cards'
 import {
   CARD_PREVIEW_BUTTON,

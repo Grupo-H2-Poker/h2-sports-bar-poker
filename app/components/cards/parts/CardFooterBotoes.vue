@@ -1,19 +1,20 @@
 <template>
   <div class="flex gap-3">
-    <button
+    <Button
       v-for="(botao, index) in botoes"
       :key="index"
-      type="button"
-      class="rounded-full px-6 py-3 text-sm font-semibold transition-colors text-center whitespace-nowrap"
+      variant="ghost"
+      class="rounded-full px-6 py-3 text-sm font-semibold text-center whitespace-nowrap"
       :class="[botaoClasses(botao), fullWidth ? 'flex-1' : 'w-auto']"
       @click.stop="onClick(botao)"
     >
       {{ botao.label }}
-    </button>
+    </Button>
   </div>
 </template>
 
 <script setup lang="ts">
+import { Button } from '~/components/ui/button'
 import type { CardBotao } from '~/types/cards'
 
 const props = withDefaults(defineProps<{
@@ -24,6 +25,9 @@ const props = withDefaults(defineProps<{
 })
 
 function botaoClasses(botao: CardBotao) {
+  const presetClass = resolveSectionCtaButtonClass(botao.cor, botao.variant)
+  if (presetClass) return presetClass
+
   if (botao.cor && typeof botao.cor === 'string' && botao.cor !== 'verde' && botao.cor !== 'branco') {
     return botao.cor
   }

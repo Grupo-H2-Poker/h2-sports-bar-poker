@@ -37,9 +37,10 @@
                 v-for="(categoria, index) in categorias"
                 :key="categoria.slug"
               >
-                <button
+                <Button
                   type="button"
-                  class="relative w-full text-left py-3 pl-4 pr-2 text-base leading-7 transition-colors"
+                  variant="ghost"
+                  class="relative h-auto w-full justify-start rounded-none py-3 pl-4 pr-2 text-left text-base leading-7 hover:bg-transparent"
                   :class="categoria.slug === activeCategoria
                     ? 'text-[#e7e7e7] font-bold'
                     : 'text-[#e7e7e7] font-medium opacity-70 hover:opacity-100'"
@@ -52,7 +53,7 @@
                     aria-hidden="true"
                   />
                   {{ categoria.titulo }}
-                </button>
+                </Button>
               </li>
             </ul>
           </div>
@@ -96,6 +97,7 @@
 
 <script setup lang="ts">
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '~/components/ui/accordion'
+import { Button } from '~/components/ui/button'
 import type { ModuloOf } from '~/types/modules'
 
 const props = defineProps<{

@@ -38,20 +38,22 @@
       </div>
 
       <div :class="CARD_PREVIEW_BUTTON_SLOT">
-        <button
+        <Button
           v-if="hasButton"
-          type="button"
+          variant="ghost"
+          size="sm"
           :class="[CARD_PREVIEW_BUTTON, botaoClass]"
           @click.stop="onButtonClick(isActive)"
         >
           {{ primaryButton!.label }}
-        </button>
+        </Button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { Button } from '~/components/ui/button'
 import type { CardGenericData } from '~/types/cards'
 import {
   CARD_PREVIEW_BUTTON,

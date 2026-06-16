@@ -13,14 +13,16 @@
             {{ config?.titulo ?? 'Filtros' }}
           </h2>
 
-          <button
+          <Button
             type="button"
-            class="text-[#e7e7e7] transition-opacity hover:opacity-70"
+            variant="ghost"
+            size="icon"
+            class="text-[#e7e7e7] hover:bg-transparent hover:opacity-70"
             aria-label="Fechar filtros"
             @click="open = false"
           >
             <CircleX class="size-6" />
-          </button>
+          </Button>
         </div>
 
         <div class="flex-1 overflow-y-auto pb-6">
@@ -72,7 +74,7 @@
 
 <script setup lang="ts">
 import { CircleX } from 'lucide-vue-next'
-import { Button } from '@/components/ui/button'
+import { Button } from '~/components/ui/button'
 import {
   Drawer,
   DrawerContent,
