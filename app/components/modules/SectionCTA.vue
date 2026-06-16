@@ -31,7 +31,17 @@
       class="flex"
       :class="buttonWrapperClass"
     >
+      <button
+        v-if="ctaButtonClass"
+        type="button"
+        class="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold transition-colors"
+        :class="ctaButtonClass"
+        @click="handleClick"
+      >
+        {{ config.cta }}
+      </button>
       <Button
+        v-else
         variant="brand"
         :size="buttonSize"
         class="rounded-full"
@@ -120,6 +130,10 @@ const buttonSize = computed(() => {
       return 'default'
   }
 })
+
+const ctaButtonClass = computed(() =>
+  resolveSectionCtaButtonClass(props.config.cta_cor, props.config.cta_variant),
+)
 
 const route = useRoute()
 

@@ -52,6 +52,7 @@ const props = defineProps<{
 const { ctaConfig, toolbarConfig, gridConfig, items } = useGridModule(() => props.modulo)
 
 const filterModalConfig = computed(() => toolbarConfig.value?.filtro?.modal)
+const initialFilters = computed(() => gridConfig.value.filtros_iniciais)
 
 const {
   isOpen: isFilterOpen,
@@ -64,7 +65,7 @@ const {
   clearAll,
   clearDraft,
   removeAppliedOption,
-} = useGridFilters(filterModalConfig)
+} = useGridFilters(filterModalConfig, initialFilters)
 
 const searchQuery = ref('')
 

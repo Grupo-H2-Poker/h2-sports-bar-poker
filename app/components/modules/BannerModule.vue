@@ -1,6 +1,12 @@
 <template>
-  <section class="banner-module py-4 overflow-x-clip">
-    <div class="container mx-auto px-4 flex flex-col gap-6">
+  <section
+    class="banner-module overflow-x-clip"
+    :class="fullWidth ? 'py-0' : 'py-4'"
+  >
+    <div
+      class="flex flex-col gap-6"
+      :class="fullWidth ? 'w-full' : 'container mx-auto px-4'"
+    >
       <template v-for="(group, index) in bannerGroups" :key="index">
         <!-- Banners sm consecutivos: grid ou carrossel -->
         <div v-if="group.type === 'sm-row'" class="w-full">
@@ -56,6 +62,7 @@ const props = defineProps<{
 const sortedComponents = useSortedComponents(() => props.modulo)
 
 const dragCarousel = computed(() => props.modulo.metadados?.drag_carousel ?? false)
+const fullWidth = computed(() => props.modulo.metadados?.full_width ?? false)
 const carouselBleedRight = computed(
   () => dragCarousel.value && (props.modulo.metadados?.carousel_bleed_right ?? false),
 )

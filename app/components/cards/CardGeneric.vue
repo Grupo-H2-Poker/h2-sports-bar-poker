@@ -12,6 +12,7 @@
 import type { CardGenericData, CardVariant } from '~/types/cards'
 import CardCashGameLayout from '~/components/cards/layouts/CardCashGameLayout.vue'
 import CardCashGamePreviewLayout from '~/components/cards/layouts/CardCashGamePreviewLayout.vue'
+import CardEtapaPreviewLayout from '~/components/cards/layouts/CardEtapaPreviewLayout.vue'
 import CardTorneioDetalheLayout from '~/components/cards/layouts/CardTorneioDetalheLayout.vue'
 import CardTorneioLayout from '~/components/cards/layouts/CardTorneioLayout.vue'
 import CardTorneioPreviewLayout from '~/components/cards/layouts/CardTorneioPreviewLayout.vue'
@@ -21,6 +22,7 @@ const LAYOUTS: Record<CardVariant, Component> = {
   cash_game: CardCashGameLayout,
   torneio_detalhe: CardTorneioDetalheLayout,
   torneio_preview: CardTorneioPreviewLayout,
+  etapa_preview: CardEtapaPreviewLayout,
   cash_game_preview: CardCashGamePreviewLayout,
 }
 

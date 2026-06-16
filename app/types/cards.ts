@@ -9,6 +9,12 @@ export interface SectionCTAData {
   size?: 'sm' | 'md' | 'lg'
   /** Largura máxima do bloco título + descrição — `sm` deixa o texto mais junto e força quebra de linha */
   width?: 'sm' | 'md' | 'lg'
+  /** Preset ou classe Tailwind do botão CTA (ex.: `branco`, `verde`, `vermelho`) */
+  cta_cor?: CardCorPreset | string
+  /** Variante visual do botão CTA — padrão: `solid` */
+  cta_variant?: CardBotaoVariant
+  /** Aba do módulo (ex.: ranking_tabela) — associa o bloco ao filtro ativo */
+  tab?: string
 }
 
 export type CardVariant =
@@ -17,6 +23,7 @@ export type CardVariant =
   | 'torneio_detalhe'
   | 'torneio_preview'
   | 'cash_game_preview'
+  | 'etapa_preview'
 
 export type CardCorPreset = 'purple' | 'vermelho' | 'amarelo' | 'verde' | 'branco'
 

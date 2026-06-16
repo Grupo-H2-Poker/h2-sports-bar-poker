@@ -15,10 +15,35 @@ function emptyFilterState(): FilterState {
   return {}
 }
 
-export function useGridFilters(modalConfig: MaybeRefOrGetter<GridFilterModal | undefined>) {
+export function useGridFilters(
+  modalConfig: MaybeRefOrGetter<GridFilterModal | undefined>,
+  initialFilters?: MaybeRefOrGetter<Record<string, string[]> | undefined>,
+) {
   const isOpen = ref(false)
-  const draft = ref<FilterState>(emptyFilterState())
-  const applied = ref<FilterState>(emptyFilterState())
+
+  function buildInitialState(): FilterState {
+    const initial = toValue(initialFilters)
+    if (!initial) return emptyFilterState()
+
+    return Object.fromEntries(
+      Object.entries(initial)
+        .filter(([, values]) => values.length > 0)
+        .map(([key, values]) => [key, new Set(values)]),
+    )
+  }
+
+  const draft = ref<FilterState>(buildInitialState())
+  const applied = ref<FilterState>(buildInitialState())
+
+  watch(
+    () => toValue(initialFilters),
+    () => {
+      const next = buildInitialState()
+      draft.value = cloneFilterState(next)
+      applied.value = cloneFilterState(next)
+    },
+    { deep: true },
+  )
 
   function syncDraftFromApplied() {
     draft.value = cloneFilterState(applied.value)

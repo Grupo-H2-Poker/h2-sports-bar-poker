@@ -6,7 +6,8 @@ export interface GridConfigData {
   colunas?: 1 | 2 | 3 | 4
   gap?: 'sm' | 'md' | 'lg'
   /** Tipos de item renderizados no grid (demais `components[]` com esse type) */
-  item_types?: GridItemType[]
+  /** Filtros aplicados ao carregar a página (ex.: `{ series: ['cph'] }`) */
+  filtros_iniciais?: Record<string, string[]>
 }
 
 export type GridItemType = 'card' | 'imagem'

@@ -7,12 +7,13 @@ import type { CardGenericData, SectionCTAData } from '~/types/cards'
 import type { FaqCategoriaData, ModuloMetadadosFaq, ModuloMetadadosFaqPage } from '~/types/faq-page'
 import type { GridConfigData, GridToolbarData } from '~/types/grid'
 import type { RankingConfigData, RankingPlayerData } from '~/types/ranking'
+import type { RankingTabelaConfigData, RankingTabelaLinhaData } from '~/types/ranking-tabela'
 
 export type { BannerCtaPosition, BannerData, BannerHeight, BannerLayout, BannerSize, ModuloMetadadosBanner } from '~/types/banner'
 export type { CardGenericData, SectionCTAData } from '~/types/cards'
 export type { FaqCategoriaData, ModuloMetadadosFaq, ModuloMetadadosFaqPage } from '~/types/faq-page'
 export type { GridConfigData, GridToolbarData, GridItemType } from '~/types/grid'
-export type { RankingConfigData, RankingPlayerData } from '~/types/ranking'
+export type { RankingTabelaConfigData, RankingTabelaLinhaData } from '~/types/ranking-tabela'
 
 export interface Unidade {
   id: number
@@ -99,6 +100,12 @@ export interface ModuloMetadadosDownloadApp {
   link_ios?: string
 }
 
+export interface ModuloMetadadosTexto {
+  align?: 'left' | 'center'
+  max_width?: 'sm' | 'md' | 'lg' | 'full'
+  background?: 'default' | 'none'
+}
+
 export type ModuloMetadadosEmpty = Record<string, never>
 
 // --- Dados de cada component (item dentro do módulo) ---
@@ -147,6 +154,7 @@ export type ModuloTipo =
   | 'galeria'
   | 'texto'
   | 'ranking'
+  | 'ranking_tabela'
   | 'faq'
   | 'faq_page'
   | 'embaixadores'
@@ -167,6 +175,7 @@ export const MODULO_COMPONENT_TYPE = {
   galeria: 'imagem',
   texto: 'texto',
   ranking: 'ranking',
+  ranking_tabela: 'ranking_linha',
   faq: 'faq',
   faq_page: 'faq_categoria',
   embaixadores: 'embaixador',
@@ -181,6 +190,7 @@ export interface ModuloDataMap {
   galeria: GaleriaImagemData | SectionCTAData
   texto: TextoData
   ranking: RankingPlayerData | RankingConfigData
+  ranking_tabela: RankingTabelaLinhaData | RankingTabelaConfigData | SectionCTAData
   faq: FaqItemData | SectionCTAData
   faq_page: FaqCategoriaData | SectionCTAData
   embaixadores: EmbaixadorData
@@ -196,6 +206,7 @@ export interface ModuloContentDataMap {
   galeria: GaleriaImagemData
   texto: TextoData
   ranking: RankingPlayerData
+  ranking_tabela: RankingTabelaLinhaData
   faq: FaqItemData
   faq_page: FaqItemData
   embaixadores: EmbaixadorData
@@ -208,8 +219,9 @@ export interface ModuloMetadadosMap {
   grid: ModuloMetadadosEmpty
   banner: ModuloMetadadosBanner
   galeria: ModuloMetadadosEmpty
-  texto: ModuloMetadadosEmpty
+  texto: ModuloMetadadosTexto
   ranking: ModuloMetadadosEmpty
+  ranking_tabela: ModuloMetadadosEmpty
   faq: ModuloMetadadosFaq
   faq_page: ModuloMetadadosFaqPage
   embaixadores: ModuloMetadadosTitulo

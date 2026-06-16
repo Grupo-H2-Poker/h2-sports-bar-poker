@@ -18,7 +18,7 @@
           />
 
           <CardGeneric
-            v-for="card in torneioCards"
+            v-for="card in previewCards"
             :key="card.id"
             :dados="card.data"
           />
@@ -39,7 +39,7 @@ const props = defineProps<{
   modulo: ModuloOf<'agenda_preview'>
 }>()
 
-const { ctaConfig, cashGameCard, torneioCards } = useAgendaPreviewModule(() => props.modulo)
+const { ctaConfig, cashGameCard, previewCards } = useAgendaPreviewModule(() => props.modulo)
 
 const carouselBleedRight = computed(
   () => props.modulo.metadados?.carousel_bleed_right ?? false,

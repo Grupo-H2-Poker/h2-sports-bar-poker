@@ -3,16 +3,19 @@ import type { BannerCtaPosition, BannerData, BannerHeight, BannerSize } from '~/
 /** Altura mínima por `height` — escala conforme a largura (`size`) */
 const HEIGHT_CLASSES: Record<BannerSize, Record<BannerHeight, string>> = {
   lg: {
+    strip: 'w-full',
     sm: 'min-h-[240px] md:min-h-[300px]',
     md: 'min-h-[320px] md:min-h-[420px] lg:min-h-[480px]',
     lg: 'min-h-[400px] md:min-h-[520px] lg:min-h-[600px]',
   },
   md: {
+    strip: 'w-full',
     sm: 'min-h-[200px] md:min-h-[260px]',
     md: 'min-h-[280px] md:min-h-[360px]',
     lg: 'min-h-[360px] md:min-h-[460px]',
   },
   sm: {
+    strip: 'w-full',
     sm: 'min-h-[180px]',
     md: 'min-h-[220px]',
     lg: 'min-h-[320px] md:min-h-[400px]',
@@ -31,9 +34,11 @@ function getWidthClasses(size: BannerSize, inline: boolean): string {
 }
 
 function getBannerClasses(size: BannerSize, height: BannerHeight, inline: boolean) {
+  const isStrip = height === 'strip'
   return {
     wrapper: `${getWidthClasses(size, inline)} ${HEIGHT_CLASSES[size][height]}`,
-    image: 'w-full h-full object-cover',
+    image: isStrip ? 'block w-full h-auto' : 'w-full h-full object-cover',
+    strip: isStrip,
   }
 }
 
@@ -84,7 +89,11 @@ export function useBannerLayout(
     if (d.reverse_columns_mobile !== undefined) return d.reverse_columns_mobile
     return d.cta_column !== 'right' && !d.reverse_columns
   })
-  const rounded = computed(() => toValue(dados).rounded ?? size.value !== 'lg')
+  const rounded = computed(() => {
+    const d = toValue(dados)
+    if (d.height === 'strip') return false
+    return d.rounded ?? size.value !== 'lg'
+  })
 
   const sizeClasses = computed(() =>
     getBannerClasses(size.value, height.value, inline.value),

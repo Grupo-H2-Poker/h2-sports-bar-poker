@@ -53,9 +53,10 @@
   <div
     v-else
     :class="[
-      'relative overflow-hidden bg-muted',
+      'relative overflow-hidden',
+      isStripBanner ? 'bg-black' : 'bg-muted',
       sizeClasses.wrapper,
-      rounded && 'rounded-2xl',
+      !isStripBanner && rounded && 'rounded-2xl',
       isClickable && 'cursor-pointer',
     ]"
     @click="handleImageClick"
@@ -65,7 +66,11 @@
       :src="dados.imagem"
       :alt="imageAlt"
       draggable="false"
-      class="absolute inset-0 w-full h-full object-cover pointer-events-none"
+      :class="[
+        isStripBanner
+          ? 'block w-full h-auto'
+          : 'absolute inset-0 w-full h-full object-cover pointer-events-none',
+      ]"
     />
 
     <div
@@ -113,7 +118,10 @@ const {
   rounded,
   ctaPositionClasses,
   overlayGradient,
+  height,
 } = useBannerLayout(() => props.dados, () => ({ inline: props.inline }))
+
+const isStripBanner = computed(() => height.value === 'strip')
 
 const { ctaConfig, hasCta } = useBannerCta(() => props.dados)
 

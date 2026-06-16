@@ -17,7 +17,7 @@ export type BannerCtaPosition =
 export type BannerSize = 'lg' | 'md' | 'sm'
 
 /** Altura do banner — independente da largura */
-export type BannerHeight = 'sm' | 'md' | 'lg'
+export type BannerHeight = 'sm' | 'md' | 'lg' | 'strip'
 
 /** Layout do banner */
 export type BannerLayout = 'overlay' | 'two_column'
@@ -26,6 +26,8 @@ export type BannerLayout = 'overlay' | 'two_column'
 export interface ModuloMetadadosBanner extends ModuloMetadadosCarousel {
   /** Agrupa banners `sm` consecutivos em DragCarousel (padrão: grid 2 colunas) */
   drag_carousel?: boolean
+  /** Banner ocupa largura total da viewport (sem container) */
+  full_width?: boolean
 }
 
 export interface BannerData {
@@ -34,7 +36,7 @@ export interface BannerData {
   link?: string
   layout?: BannerLayout
   size?: BannerSize
-  /** Altura: `sm` mais fino, `md` normal, `lg` mais alto. Padrão: `md` */
+  /** Altura: `strip` = faixa 48:5 (1440×150), imagem em tamanho natural sem crop */
   height?: BannerHeight
   /**
    * Posição do bloco SectionCTA no layout overlay.

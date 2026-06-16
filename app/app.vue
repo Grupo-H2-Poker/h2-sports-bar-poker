@@ -6,7 +6,7 @@ import 'vue-sonner/style.css'
 </script>
 
 <template>
-  <div>
+  <div class="min-h-screen bg-background">
     <Header />
     <NuxtPage />
     <Footer />
