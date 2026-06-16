@@ -3,7 +3,7 @@
     <div class="container mx-auto flex flex-col px-4">
       <div
         v-if="tabs.length"
-        class="ml-[20%] w-[calc(80%-130px)]"
+        class="w-full max-w-4xl self-center"
       >
         <RankingTabelaFiltro
           :tabs="tabs"
@@ -22,7 +22,7 @@
 
       <div
         v-if="podioLinhas.length"
-        class="mt-14 grid w-full grid-cols-5 items-end"
+        class="mt-14 grid w-full grid-cols-5 items-end justify-items-center"
       >
         <RankingPodioCard
           v-for="linha in podioLinhas"

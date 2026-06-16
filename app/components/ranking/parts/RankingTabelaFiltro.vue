@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex h-[55px] w-full items-center justify-between rounded-full bg-[#323232] px-6 font-[family-name:var(--font-red-hat-display)]"
+    class="flex w-full items-center justify-between rounded-full bg-[#323232] p-[7.5px] font-[family-name:var(--font-red-hat-display)]"
     role="tablist"
     aria-label="Filtrar ranking"
   >
@@ -9,7 +9,7 @@
       :key="tab.id"
       type="button"
       role="tab"
-      class="flex h-10 shrink-0 items-center justify-center whitespace-nowrap rounded-full px-6 text-lg leading-none text-[#e7e7e7] transition-colors"
+      class="flex h-10 w-[98px] shrink-0 items-center justify-center whitespace-nowrap rounded-full px-2 text-base leading-none text-[#e7e7e7] transition-colors"
       :class="activeTab === tab.id
         ? 'font-bold'
         : 'bg-transparent font-medium hover:bg-white/10'"

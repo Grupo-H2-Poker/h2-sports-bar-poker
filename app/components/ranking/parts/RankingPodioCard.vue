@@ -1,14 +1,22 @@
 <template>
-  <div class="relative h-[220px] w-full min-w-0">
+  <div
+    class="relative mx-auto h-[222px]"
+    :style="{ width: `${PODIO_COLUMN_WIDTH}px` }"
+  >
     <img
       :src="rankImage"
       alt=""
       aria-hidden="true"
-      class="pointer-events-none absolute bottom-0 left-0 h-[220px] w-[220px] select-none object-contain object-left-bottom"
+      class="pointer-events-none absolute top-0 z-0 h-[222px] w-[220px] select-none object-contain object-left-bottom"
+      :style="{ left: `${layout.numberLeft}px` }"
     >
 
     <div
-      class="absolute bottom-0 right-0 z-10 flex h-[220px] w-[130px] flex-col justify-end overflow-hidden rounded-md"
+      class="absolute z-10 flex h-[220px] w-[160px] flex-col justify-end overflow-hidden rounded-[6px]"
+      :style="{
+        left: `${layout.cardLeft}px`,
+        top: `${PODIO_CARD_TOP}px`,
+      }"
     >
       <img
         v-if="avatar"
@@ -22,7 +30,7 @@
         aria-hidden="true"
       />
 
-      <div class="relative z-10 flex flex-col gap-1 p-2">
+      <div class="relative z-10 flex flex-col gap-1 px-2.5 pb-2.5 pt-2">
         <p class="text-sm font-medium leading-snug text-[#e7e7e7]">
           {{ nome }}
         </p>
@@ -53,6 +61,27 @@ const RANKING_NUMBER_IMAGES: Record<number, string> = {
   5: ranking5,
 }
 
+/** Largura uniforme entre cards no Figma (~243–244px). */
+const PODIO_COLUMN_WIDTH = 244
+
+/** Foto 3px acima do topo do número (Figma: card y=934, number y=937). */
+const PODIO_CARD_TOP = -3
+
+/**
+ * Offsets relativos ao número (nodes 408:1617, 1273:956, 1273:958, 1273:962, 1273:966
+ * + cards 408:2079, 408:2091, 408:2093, 408:2095, 408:2097).
+ * numberLeft extra nos dígitos 4 e 5 compensa o PNG mais largo.
+ */
+const PODIO_LAYOUT: Record<number, { cardLeft: number; numberLeft: number }> = {
+  1: { cardLeft: 63, numberLeft: 0 },
+  2: { cardLeft: 80, numberLeft: -10 },
+  3: { cardLeft: 89, numberLeft: -7 },
+  4: { cardLeft: 97, numberLeft: -36 },
+  5: { cardLeft: 97, numberLeft: 10 },
+}
+
+const DEFAULT_PODIO_LAYOUT = PODIO_LAYOUT[3]!
+
 const props = defineProps<{
   colocacao: number | string
   nome: string
@@ -75,4 +104,6 @@ const numero = computed(() => {
 })
 
 const rankImage = computed(() => RANKING_NUMBER_IMAGES[numero.value])
+
+const layout = computed(() => PODIO_LAYOUT[numero.value] ?? DEFAULT_PODIO_LAYOUT)
 </script>
