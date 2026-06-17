@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-muted py-20">
+  <section class="bg-muted">
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-2xl font-bold">
         {{ modulo.metadados?.titulo || 'Baixe o app H2' }}

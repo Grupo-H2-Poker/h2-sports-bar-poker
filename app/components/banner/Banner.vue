@@ -6,6 +6,7 @@
     :border-radius="borderRadiusPx"
     :reverse="reverseColumns"
     :reverse-on-mobile="reverseColumnsMobile"
+    :clip-overflow="!hasCarouselBleed"
     class="bg-black"
     :class="sizeClasses.wrapper"
   >
@@ -20,25 +21,15 @@
           inverted
         />
       </div>
-      <div
+      <BannerTwoColumnImageColumn
         v-else
-        :class="twoColumnImageWrapperClass"
-      >
-        <div
-          :class="twoColumnImageShellClass"
-          :style="borderRadiusStyle"
-        >
-          <BannerImage
-            :src="dados.imagem"
-            :alt="imageAlt"
-            :fill="false"
-            :class="imagemSize !== 'lg' ? 'h-full w-full' : 'w-full'"
-            :image-class="twoColumnImageClass"
-            :link="imageLink"
-            :style="borderRadiusStyle"
-          />
-        </div>
-      </div>
+        :dados="dados"
+        :image-alt="imageAlt"
+        :image-link="imageLink"
+        :border-radius-style="borderRadiusStyle"
+        :bleed-right="carouselBleedRight"
+        :bleed-left="carouselBleedLeft"
+      />
     </template>
 
     <template #end>
@@ -52,25 +43,15 @@
           inverted
         />
       </div>
-      <div
+      <BannerTwoColumnImageColumn
         v-else
-        :class="twoColumnImageWrapperClass"
-      >
-        <div
-          :class="twoColumnImageShellClass"
-          :style="borderRadiusStyle"
-        >
-          <BannerImage
-            :src="dados.imagem"
-            :alt="imageAlt"
-            :fill="false"
-            :class="imagemSize !== 'lg' ? 'h-full w-full' : 'w-full'"
-            :image-class="twoColumnImageClass"
-            :link="imageLink"
-            :style="borderRadiusStyle"
-          />
-        </div>
-      </div>
+        :dados="dados"
+        :image-alt="imageAlt"
+        :image-link="imageLink"
+        :border-radius-style="borderRadiusStyle"
+        :bleed-right="carouselBleedRight"
+        :bleed-left="carouselBleedLeft"
+      />
     </template>
   </TwoColumnLayout>
 
@@ -126,7 +107,7 @@
 <script setup lang="ts">
 import TwoColumnLayout from '~/components/layout/TwoColumnLayout.vue'
 import SectionCTA from '~/components/modules/SectionCTA.vue'
-import BannerImage from '~/components/banner/BannerImage.vue'
+import BannerTwoColumnImageColumn from '~/components/banner/BannerTwoColumnImageColumn.vue'
 import type { BannerData } from '~/types/banner'
 
 const props = defineProps<{
@@ -164,30 +145,19 @@ const imageLink = computed(() => {
 
 const isClickable = computed(() => !hasCta.value && !!props.dados.link)
 
-const imagemSize = computed(() => props.dados.imagem_size ?? 'lg')
-
-const twoColumnImageWrapperClass = 'flex h-full w-full items-center justify-center p-6 md:p-10'
-
-const twoColumnImageShellClass = computed(() => {
-  const roundedShell = borderRadiusStyle.value ? 'overflow-hidden' : ''
-
-  switch (imagemSize.value) {
-    case 'sm':
-      return `h-[220px] w-[300px] shrink-0 overflow-hidden md:h-[260px] md:w-[360px] ${roundedShell}`
-    case 'md':
-      return `h-[320px] w-[420px] shrink-0 overflow-hidden md:h-[380px] md:w-[500px] ${roundedShell}`
-    default:
-      return `w-[400px] shrink-0 md:w-[480px] ${roundedShell}`
-  }
+const carouselBleedRight = computed(() => {
+  if (!props.dados.drag_carousel) return false
+  return props.dados.carousel_bleed_right ?? !reverseColumns.value
 })
 
-const twoColumnImageClass = computed(() => {
-  if (imagemSize.value === 'lg') {
-    return 'aspect-square w-full'
-  }
-
-  return 'h-full w-full object-cover'
+const carouselBleedLeft = computed(() => {
+  if (!props.dados.drag_carousel) return false
+  return props.dados.carousel_bleed_left ?? reverseColumns.value
 })
+
+const hasCarouselBleed = computed(
+  () => carouselBleedRight.value || carouselBleedLeft.value,
+)
 
 const route = useRoute()
 

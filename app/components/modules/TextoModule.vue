@@ -1,6 +1,5 @@
 <template>
   <section
-    class="py-16"
     :class="sectionClass"
   >
     <div

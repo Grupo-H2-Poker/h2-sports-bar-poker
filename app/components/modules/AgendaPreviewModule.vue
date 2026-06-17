@@ -1,5 +1,5 @@
 <template>
-  <section class="py-10 overflow-x-clip">
+  <section class="overflow-x-clip">
     <div class="container mx-auto px-4">
       <div class="flex min-w-0 gap-12 items-center">
         <div v-if="ctaConfig" class="shrink-0">

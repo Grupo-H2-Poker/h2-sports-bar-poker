@@ -8,30 +8,29 @@
       inverted && 'text-white',
     ]"
   >
-    <div class="flex flex-col gap-3" :class="contentWidthClass">
+    <div class="flex flex-col gap-3">
       <h2
         v-if="config.titulo"
         class="font-bold leading-tight"
-        :class="titleClass"
+        :class="[titleClass, config.titulo_nowrap && 'whitespace-nowrap']"
       >
         {{ config.titulo }}
       </h2>
 
-      <p
-        v-if="config.descricao"
-        class="opacity-80"
-        :class="descriptionClass"
+      <div
+        v-if="descricoes.length"
+        class="flex flex-col"
+        :class="contentWidthClass"
       >
-        {{ config.descricao }}
-      </p>
-
-      <p
-        v-if="config.descricao_2"
-        class="opacity-80 mt-3"
-        :class="descriptionClass"
-      >
-        {{ config.descricao_2 }}
-      </p>
+        <p
+          v-for="(texto, index) in descricoes"
+          :key="index"
+          class="opacity-80"
+          :class="[descriptionClass, index > 0 && 'mt-3']"
+        >
+          {{ texto }}
+        </p>
+      </div>
     </div>
 
     <div
@@ -69,8 +68,17 @@ const props = withDefaults(defineProps<{
   inverted: false,
 })
 
+const descricoes = computed(() =>
+  [
+    props.config.descricao,
+    props.config.descricao_2,
+    props.config.descricao_3,
+    props.config.descricao_4,
+  ].filter((texto): texto is string => !!texto),
+)
+
 const hasContent = computed(
-  () => !!(props.config.titulo || props.config.descricao || props.config.descricao_2 || (!props.compact && props.config.cta)),
+  () => !!(props.config.titulo || descricoes.value.length || (!props.compact && props.config.cta)),
 )
 
 const wrapperClass = computed(() => ({

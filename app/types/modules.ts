@@ -34,10 +34,18 @@ export interface ComponentData<T = Record<string, unknown>> {
   data: T
 }
 
+/** Espaçamento vertical configurável via CMS (entre módulos da página). */
+export interface ModuloSpacing {
+  /** Número (px) ou valor CSS (ex: `2.5rem`, `40px`). Padrão: ver `MODULO_DEFAULT_MARGIN_TOP`. */
+  margin_top?: string | number
+  /** Número (px) ou valor CSS (ex: `2.5rem`, `40px`). Padrão: ver `MODULO_DEFAULT_MARGIN_BOTTOM`. */
+  margin_bottom?: string | number
+}
+
 export interface Modulo<
   TData = Record<string, unknown>,
   TMetadados = Record<string, unknown>,
-> {
+> extends ModuloSpacing {
   id: number
   tipo: ModuloTipo
   ordem: number

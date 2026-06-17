@@ -1271,6 +1271,8 @@ export default defineEventHandler((event) => {
               tipo: 'agenda_preview',
               ordem: 2,
               status: 'publicado',
+              margin_top: 40,
+              margin_bottom: 40,
               metadados: {
                 carousel_bleed_right: false,
                 card_variant: 'etapa_preview',
@@ -1353,6 +1355,8 @@ export default defineEventHandler((event) => {
               tipo: 'ranking_tabela',
               ordem: 3,
               status: 'publicado',
+              margin_top: 93,
+              margin_bottom: 40,
               components: [
                 {
                   id: 520,
@@ -1386,6 +1390,8 @@ export default defineEventHandler((event) => {
               tipo: 'faixa_cta',
               ordem: 4,
               status: 'publicado',
+              margin_top: 93,
+              margin_bottom: 40,
               components: [
                 {
                   id: 530,
@@ -1413,10 +1419,36 @@ export default defineEventHandler((event) => {
               ],
             },
             {
-              id: 54,
+              id: 454,
               tipo: 'banner',
               ordem: 5,
               status: 'publicado',
+              margin_top: 0,
+              margin_bottom: 0,
+              metadados: { full_width: true },
+              components: [
+                {
+                  id: 405,
+                  type: 'banner',
+                  ordem: 1,
+                  status: 'publicado',
+                  data: {
+                    imagem: '/img/decembernine.png',
+                    size: 'lg',
+                    height: 'strip',
+                    overlay: 'none',
+                    rounded: false,
+                  },
+                },
+              ],
+            },
+            {
+              id: 54,
+              tipo: 'banner',
+              ordem: 6,
+              status: 'publicado',
+              margin_top: 40,
+              margin_bottom: 0,
               components: [
                 {
                   id: 540,
@@ -1430,7 +1462,7 @@ export default defineEventHandler((event) => {
                     reverse_columns: true,
                     imagem_size: 'md',
                     border_radius: 'sm',
-                    imagem: 'https://picsum.photos/400',
+                    imagem: 'https://picsum.photos/seed/cph-history-4/400/400',
                     section_cta: {
                       descricao: 'No fim da temporada, o topo tem dono: R$ 250.000 e um lugar definitivo na história do CPH.',
                       descricao_2: 'No fim da temporada, o topo tem dono: R$ 250.000 e um lugar definitivo na história do CPH.',
@@ -1444,8 +1476,10 @@ export default defineEventHandler((event) => {
             {
               id: 54,
               tipo: 'banner',
-              ordem: 5,
+              ordem: 7,
               status: 'publicado',
+              margin_top: 0,
+              margin_bottom: 0,
               components: [
                 {
                   id: 540,
@@ -1456,16 +1490,139 @@ export default defineEventHandler((event) => {
                     layout: 'two_column',
                     size: 'lg',
                     cta_column: 'left',
-                    reverse_columns: false,
+                    reverse_columns: true,
                     imagem_size: 'md',
                     border_radius: 'sm',
-                    imagem: 'https://picsum.photos/300',
+                    imagem: 'https://picsum.photos/seed/cph-history-5/400/400',
                     section_cta: {
                       titulo: 'Premiação CPH',
                       descricao: 'No fim da temporada, o topo tem dono: R$ 250.000 e um lugar definitivo na história do CPH.',
                       align: 'left',
                       size: 'md',
                     },
+                  },
+                },
+              ],
+            },
+            {
+              id: 54,
+              tipo: 'banner',
+              ordem: 8,
+              status: 'publicado',
+              margin_top: 0,
+              margin_bottom: 40,
+              components: [
+                {
+                  id: 541,
+                  type: 'banner',
+                  ordem: 1,
+                  status: 'publicado',
+                  data: {
+                    layout: 'two_column',
+                    size: 'lg',
+                    cta_column: 'left',
+                    reverse_columns: false,
+                    imagem_size: 'lg',
+                    border_radius: 'sm',
+                    drag_carousel: true,
+                    imagens: [
+                      'https://picsum.photos/seed/cph-history-1/400/400',
+                      'https://picsum.photos/seed/cph-history-2/400/400',
+                      'https://picsum.photos/seed/cph-history-3/400/400',
+                      'https://picsum.photos/seed/cph-history-4/400/400',
+                      'https://picsum.photos/seed/cph-history-5/400/400',
+                    ],
+                    carousel_bleed_right: false,
+                    section_cta: {
+                      titulo: 'Mais de 20 anos de história!',
+                      titulo_nowrap: true,
+                      descricao: 'O Campeonato Paulista de Poker é a principal série estadual de Texas Hold’em do Brasil e uma das principais referências técnicas do Hemisfério Sul.',
+                      descricao_2: 'Criado em 2004, construiu um legado baseado em tradição, competitividade e excelência.',
+                      descricao_3: 'Ao longo de suas temporadas, o CPH consolidou seu formato clássico de deep stack, valorizando habilidade, estratégia e performance de longo prazo — características que definem os verdadeiros campeões.',
+                      descricao_4: 'Desde 2015, sob a gestão do H2 Sports Bar & Poker, o CPH preserva sua essência, fortalece sua estrutura e amplia sua credibilidade no cenário do poker brasileiro.',
+                      align: 'left',
+                      size: 'md',
+                    },
+                  },
+                },
+              ],
+            },
+            {
+              id: 454,
+              tipo: 'banner',
+              ordem: 9,
+              status: 'publicado',
+              margin_top: 0,
+              margin_bottom: 40,
+              metadados: { full_width: true },
+              components: [
+                {
+                  id: 405,
+                  type: 'banner',
+                  ordem: 1,
+                  status: 'publicado',
+                  data: {
+                    imagem: '/img/thebests/thebests.png',
+                    size: 'lg',
+                    height: 'strip',
+                    overlay: 'none',
+                    rounded: false,
+                  },
+                },
+              ],
+            },
+            {
+              id: 5,
+              tipo: 'faq',
+              ordem: 10,
+              status: 'publicado',
+              metadados: {
+                margin_lateral: 150,
+              },
+              components: [
+                {
+                  id: 500,
+                  type: 'section_cta',
+                  ordem: 0,
+                  status: 'publicado',
+                  data: {
+                    titulo: 'Precisa de ajuda?',
+                    descricao: 'Aqui estão algumas das perguntas mais frequentes sobre o H2.',
+                    cta: 'Saiba mais',
+                    cta_link: 'faq',
+                    align: 'left',
+                    size: 'md',
+                    width: 'md',
+                  },
+                },
+                {
+                  id: 501,
+                  type: 'faq',
+                  ordem: 1,
+                  status: 'publicado',
+                  data: {
+                    pergunta: 'Que horas o clube abre?',
+                    resposta: 'O clube abre todos os dias às 12h. Os torneios e cash games seguem a agenda do dia — confira os horários na página de agenda.',
+                  },
+                },
+                {
+                  id: 502,
+                  type: 'faq',
+                  ordem: 2,
+                  status: 'publicado',
+                  data: {
+                    pergunta: 'Pode entrar menor de idade no clube?',
+                    resposta: 'Não. O acesso ao clube é permitido apenas para maiores de 18 anos, conforme a legislação vigente.',
+                  },
+                },
+                {
+                  id: 503,
+                  type: 'faq',
+                  ordem: 3,
+                  status: 'publicado',
+                  data: {
+                    pergunta: 'Quais as modalidades do Cash Game',
+                    resposta: 'Oferecemos mesas de Texas Hold\'em No Limit com blinds a partir de R$ 2/4. A disponibilidade varia conforme a demanda — consulte a agenda para ver as mesas abertas hoje.',
                   },
                 },
               ],
@@ -1507,6 +1664,8 @@ export default defineEventHandler((event) => {
               tipo: 'agenda_preview',
               ordem: 2,
               status: 'publicado',
+              margin_top: 40,
+              margin_bottom: 40,
               metadados: {
                 carousel_bleed_right: false,
                 card_variant: 'etapa_preview',

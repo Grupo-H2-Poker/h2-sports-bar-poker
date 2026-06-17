@@ -1,5 +1,5 @@
 <template>
-  <section class="py-8">
+  <section>
     <div class="container mx-auto px-4">
       <SectionCTA v-if="ctaConfig" :config="ctaConfig" />
 

@@ -1,5 +1,5 @@
 <template>
-  <section class="py-12">
+  <section>
     <div
       class="container mx-auto"
       :style="pagePaddingStyle"

@@ -4,7 +4,7 @@
     :class="[
       gapClass,
       alignClass,
-      hasRoundedCorners && 'overflow-hidden',
+      shouldClipOverflow && 'overflow-hidden',
       rounded && !borderRadius && 'rounded-2xl',
     ]"
     :style="borderRadiusStyle"
@@ -43,6 +43,8 @@ const props = withDefaults(defineProps<{
   reverse?: boolean
   /** Alias de `reverse` */
   inverted?: boolean
+  /** Recorta conteúdo nas bordas arredondadas — desative quando o filho precisa sangrar (ex.: carousel) */
+  clipOverflow?: boolean
 }>(), {
   gap: 'none',
   align: 'stretch',
@@ -50,6 +52,7 @@ const props = withDefaults(defineProps<{
   reverseOnMobile: false,
   reverse: false,
   inverted: false,
+  clipOverflow: true,
 })
 
 const isReversed = computed(() => props.reverse || props.inverted)
@@ -59,6 +62,10 @@ const borderRadiusStyle = computed(() =>
 )
 
 const hasRoundedCorners = computed(() => props.rounded || !!props.borderRadius)
+
+const shouldClipOverflow = computed(
+  () => props.clipOverflow && hasRoundedCorners.value,
+)
 
 const gapClass = computed(() => ({
   'gap-0': props.gap === 'none',

@@ -1,15 +1,19 @@
 /** Configuração do bloco lateral (SectionCTA) — passada inteira via JSON */
 export interface SectionCTAData {
   titulo?: string
+  /** Mantém o título em uma única linha */
+  titulo_nowrap?: boolean
   descricao?: string
-  /** Segunda descrição — renderizada abaixo de `descricao` com espaçamento */
+  /** Descrições adicionais — renderizadas abaixo de `descricao` com espaçamento */
   descricao_2?: string
+  descricao_3?: string
+  descricao_4?: string
   cta?: string
   cta_link?: string
   align?: 'left' | 'center' | 'right'
   /** Tamanho da tipografia (título, descrição, botão) */
   size?: 'sm' | 'md' | 'lg'
-  /** Largura máxima do bloco título + descrição — `sm` deixa o texto mais junto e força quebra de linha */
+  /** Largura máxima do bloco de descrições — `sm` deixa o texto mais junto e força quebra de linha */
   width?: 'sm' | 'md' | 'lg'
   /** Preset ou classe Tailwind do botão CTA (ex.: `branco`, `verde`, `vermelho`) */
   cta_cor?: CardCorPreset | string

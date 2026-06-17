@@ -1,5 +1,5 @@
 <template>
-  <section class="py-10 overflow-x-clip">
+  <section class="overflow-x-clip">
     <div class="container mx-auto flex flex-col px-4">
       <div
         v-if="tabs.length"

@@ -1,7 +1,6 @@
 <template>
   <section
     class="banner-module overflow-x-clip"
-    :class="fullWidth ? 'py-0' : 'py-4'"
   >
     <div
       class="flex flex-col gap-6"

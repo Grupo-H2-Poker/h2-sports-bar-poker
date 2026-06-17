@@ -25,17 +25,20 @@ import { useResizeObserver, useWindowSize } from '@vueuse/core'
 interface Props {
   contentClass?: string
   bleedRight?: boolean
+  bleedLeft?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   contentClass: '',
   bleedRight: false,
+  bleedLeft: false,
 })
 
 const sizingRef = ref<HTMLElement | null>(null)
 const carousel = ref<HTMLElement | null>(null)
 const carouselWidth = ref(0)
 const bleedRightPx = ref(0)
+const bleedLeftPx = ref(0)
 
 /** Espaço extra após o último card ao scrollar até o fim */
 const SCROLL_END_GAP_PX = 16
@@ -47,14 +50,25 @@ const trackStyle = computed(() =>
 )
 
 const carouselStyle = computed(() => {
-  if (!props.bleedRight || bleedRightPx.value <= 0) return undefined
-
-  const bleed = bleedRightPx.value
-  return {
-    width: `calc(100% + ${bleed}px)`,
-    marginRight: `-${bleed}px`,
-    paddingRight: `${bleed + SCROLL_END_GAP_PX}px`,
+  if (props.bleedRight && bleedRightPx.value > 0) {
+    const bleed = bleedRightPx.value
+    return {
+      width: `calc(100% + ${bleed}px)`,
+      marginRight: `-${bleed}px`,
+      paddingRight: `${bleed + SCROLL_END_GAP_PX}px`,
+    }
   }
+
+  if (props.bleedLeft && bleedLeftPx.value > 0) {
+    const bleed = bleedLeftPx.value
+    return {
+      width: `calc(100% + ${bleed}px)`,
+      marginLeft: `-${bleed}px`,
+      paddingLeft: `${bleed + SCROLL_END_GAP_PX}px`,
+    }
+  }
+
+  return undefined
 })
 
 function updateLayout() {
@@ -62,19 +76,25 @@ function updateLayout() {
 
   carouselWidth.value = sizingRef.value.clientWidth
 
-  if (!props.bleedRight || import.meta.server) {
+  if (import.meta.server) {
     bleedRightPx.value = 0
+    bleedLeftPx.value = 0
     return
   }
 
   const rect = sizingRef.value.getBoundingClientRect()
-  bleedRightPx.value = Math.max(0, window.innerWidth - rect.right)
+  bleedRightPx.value = props.bleedRight
+    ? Math.max(0, window.innerWidth - rect.right)
+    : 0
+  bleedLeftPx.value = props.bleedLeft
+    ? Math.max(0, rect.left)
+    : 0
 }
 
 useResizeObserver(sizingRef, updateLayout)
 
 const { width: windowWidth } = useWindowSize()
-watch(() => props.bleedRight, updateLayout)
+watch(() => [props.bleedRight, props.bleedLeft], updateLayout)
 watch(windowWidth, updateLayout)
 
 onMounted(() => {

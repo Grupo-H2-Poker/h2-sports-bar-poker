@@ -1,11 +1,15 @@
 <template>
-  <div class="flex flex-col">
-    <component
+  <div>
+    <div
       v-for="modulo in sortedModulos"
       :key="modulo.id"
-      :is="getModuleComponent(modulo.tipo)"
-      :modulo="modulo"
-    />
+      :style="getModuloMarginStyle(modulo)"
+    >
+      <component
+        :is="getModuleComponent(modulo.tipo)"
+        :modulo="modulo"
+      />
+    </div>
   </div>
 </template>
 
@@ -52,6 +56,11 @@ const sortedModulos = computed(() => {
     .filter(m => m.status === 'publicado')
     .sort((a, b) => a.ordem - b.ordem)
 })
+
+const getModuloMarginStyle = (modulo: Modulo) => {
+  const { marginTop, marginBottom } = resolveModuloMargins(modulo)
+  return { marginTop, marginBottom }
+}
 
 const getModuleComponent = (tipo: ModuloTipo | string) => {
   return moduloMapa[tipo as ModuloTipo] ?? {

@@ -1,5 +1,5 @@
 <template>
-  <section class="py-10">
+  <section>
     <div class="container mx-auto px-4">
       <GridPageHeader
         :cta-config="ctaConfig"
