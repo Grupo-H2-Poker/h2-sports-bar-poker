@@ -382,6 +382,8 @@ export default defineEventHandler((event) => {
               tipo: 'agenda_preview',
               ordem: 3,
               status: 'publicado',
+              margin_top: 40,
+              margin_bottom: 40,
               metadados: {
                 carousel_bleed_right: false,
               },
@@ -557,6 +559,8 @@ export default defineEventHandler((event) => {
               tipo: 'faq',
               ordem: 4,
               status: 'publicado',
+              margin_top: 40,
+              margin_bottom: 40,
               metadados: {
                 margin_lateral: 150,
               },
@@ -836,6 +840,8 @@ export default defineEventHandler((event) => {
               tipo: 'grid',
               ordem: 1,
               status: 'publicado',
+              margin_top: 40,
+              margin_bottom: 40,
               components: [
                 {
                   id: 600,
