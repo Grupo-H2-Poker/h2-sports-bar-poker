@@ -1,19 +1,19 @@
 <template>
-  <div class="w-full">
-    <div
-      class="mb-1 grid items-center gap-4 border-b border-white/20 px-4 pb-3 text-sm font-bold uppercase text-[#e7e7e7]"
-      :style="{ gridTemplateColumns }"
-    >
-      <span
-        v-for="coluna in colunas"
-        :key="coluna.id"
-        class="text-center"
-      >
-        {{ coluna.label }}
-      </span>
-    </div>
+  <Table class="w-full">
+    <TableHeader>
+      <TableRow class="border-white/20 hover:bg-transparent">
+        <TableHead
+          v-for="coluna in colunas"
+          :key="coluna.id"
+          class="h-auto px-4 pb-3 text-center text-sm font-bold uppercase text-[#e7e7e7]"
+          :class="columnWidthClass(coluna.id, colunas.length)"
+        >
+          {{ coluna.label }}
+        </TableHead>
+      </TableRow>
+    </TableHeader>
 
-    <div class="flex flex-col">
+    <TableBody>
       <RankingTabelaLinha
         v-for="(linha, index) in linhas"
         :key="linhaKey(linha, index)"
@@ -23,11 +23,18 @@
         :colunas="colunas.length"
         :striped="index % 2 === 1"
       />
-    </div>
-  </div>
+    </TableBody>
+  </Table>
 </template>
 
 <script setup lang="ts">
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '~/components/ui/table'
 import type { RankingTabelaColunaData } from '~/types/ranking-tabela'
 import RankingTabelaLinha from '~/components/ranking/parts/RankingTabelaLinha.vue'
 
@@ -43,10 +50,17 @@ const props = defineProps<{
   linhas: RankingTabelaGridLinha[]
 }>()
 
-const gridTemplateColumns = computed(() => {
-  if (props.colunas.length === 2) return '100px 1fr'
-  return '100px 1fr 100px'
-})
+function columnWidthClass(colunaId: string, totalColunas: number) {
+  if (totalColunas === 2) {
+    return colunaId === 'colocacao' ? 'w-[100px]' : undefined
+  }
+
+  if (colunaId === 'colocacao' || colunaId === 'pontos') {
+    return 'w-[100px]'
+  }
+
+  return undefined
+}
 
 function linhaKey(linha: RankingTabelaGridLinha, index: number) {
   return linha.id ?? `${linha.colocacao}-${linha.nome}-${index}`

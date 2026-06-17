@@ -35,12 +35,15 @@
         />
       </div>
 
-      <RankingTabelaGrid
+      <div
         v-if="tabelaLinhas.length"
         class="mt-24 w-full max-w-4xl self-center"
-        :colunas="colunas"
-        :linhas="tabelaLinhasGrid"
-      />
+      >
+        <RankingTabelaGrid
+          :colunas="colunas"
+          :linhas="tabelaLinhasGrid"
+        />
+      </div>
 
       <div
         v-if="config.cta"

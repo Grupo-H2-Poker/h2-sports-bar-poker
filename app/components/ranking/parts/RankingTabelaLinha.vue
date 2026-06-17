@@ -1,24 +1,28 @@
 <template>
-  <div
-    class="grid h-[76px] items-center gap-4 px-4 text-sm text-[#e7e7e7]"
+  <TableRow
+    class="h-[76px] border-none hover:bg-transparent"
     :class="striped ? 'bg-[#323232]' : 'bg-transparent'"
-    :style="{ gridTemplateColumns }"
   >
-    <span class="text-center font-medium tabular-nums">
+    <TableCell class="px-4 text-center text-sm font-medium tabular-nums text-[#e7e7e7]">
       {{ colocacaoLabel }}
-    </span>
+    </TableCell>
 
-    <p class="text-center font-medium uppercase">
+    <TableCell class="px-4 text-center text-sm font-medium uppercase text-[#e7e7e7]">
       {{ nome }}
-    </p>
+    </TableCell>
 
-    <span class="text-center font-medium tabular-nums">
+    <TableCell
+      v-if="colunas > 2"
+      class="px-4 text-center text-sm font-medium tabular-nums text-[#e7e7e7]"
+    >
       {{ pontosLabel }}
-    </span>
-  </div>
+    </TableCell>
+  </TableRow>
 </template>
 
 <script setup lang="ts">
+import { TableCell, TableRow } from '~/components/ui/table'
+
 const props = defineProps<{
   colocacao: number | string
   nome: string
@@ -29,9 +33,4 @@ const props = defineProps<{
 
 const colocacaoLabel = computed(() => formatRankingColocacao(props.colocacao))
 const pontosLabel = computed(() => formatRankingPontos(props.pontos))
-
-const gridTemplateColumns = computed(() => {
-  if (props.colunas === 2) return '100px 1fr'
-  return '100px 1fr 100px'
-})
 </script>
