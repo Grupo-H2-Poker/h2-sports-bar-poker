@@ -10,7 +10,7 @@ import type { RankingConfigData, RankingPlayerData } from '~/types/ranking'
 import type { FaixaCtaData } from '~/types/faixa-cta'
 import type { RankingTabelaConfigData, RankingTabelaLinhaData } from '~/types/ranking-tabela'
 
-export type { BannerCtaPosition, BannerData, BannerHeight, BannerLayout, BannerSize, ModuloMetadadosBanner } from '~/types/banner'
+export type { BannerCtaPosition, BannerData, BannerHeight, BannerImagemSize, BannerLayout, BannerSize, ModuloMetadadosBanner } from '~/types/banner'
 export type { CardGenericData, SectionCTAData } from '~/types/cards'
 export type { FaqCategoriaData, ModuloMetadadosFaq, ModuloMetadadosFaqPage } from '~/types/faq-page'
 export type { GridConfigData, GridToolbarData, GridItemType } from '~/types/grid'

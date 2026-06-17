@@ -19,13 +19,20 @@
           inverted
         />
       </div>
-      <BannerImage
+      <div
         v-else
-        :src="dados.imagem"
-        :alt="imageAlt"
-        :image-class="twoColumnImageClass"
-        :link="imageLink"
-      />
+        :class="twoColumnImageWrapperClass"
+      >
+        <div :class="twoColumnImageShellClass">
+          <BannerImage
+            :src="dados.imagem"
+            :alt="imageAlt"
+            :fill="false"
+            :image-class="twoColumnImageClass"
+            :link="imageLink"
+          />
+        </div>
+      </div>
     </template>
 
     <template #end>
@@ -39,13 +46,20 @@
           inverted
         />
       </div>
-      <BannerImage
+      <div
         v-else
-        :src="dados.imagem"
-        :alt="imageAlt"
-        :image-class="twoColumnImageClass"
-        :link="imageLink"
-      />
+        :class="twoColumnImageWrapperClass"
+      >
+        <div :class="twoColumnImageShellClass">
+          <BannerImage
+            :src="dados.imagem"
+            :alt="imageAlt"
+            :fill="false"
+            :image-class="twoColumnImageClass"
+            :link="imageLink"
+          />
+        </div>
+      </div>
     </template>
   </TwoColumnLayout>
 
@@ -136,7 +150,22 @@ const imageLink = computed(() => {
 
 const isClickable = computed(() => !hasCta.value && !!props.dados.link)
 
-const twoColumnImageClass = 'w-full h-full min-h-[240px] md:min-h-0 md:flex-1 object-cover'
+const imagemSize = computed(() => props.dados.imagem_size ?? 'lg')
+
+const twoColumnImageWrapperClass = 'flex h-full w-full items-center justify-center p-6 md:p-10'
+
+const twoColumnImageShellClass = computed(() => {
+  switch (imagemSize.value) {
+    case 'sm':
+      return 'w-[220px] md:w-[260px] shrink-0'
+    case 'md':
+      return 'w-[320px] md:w-[380px] shrink-0'
+    default:
+      return 'w-[400px] md:w-[480px] shrink-0'
+  }
+})
+
+const twoColumnImageClass = 'aspect-square w-full'
 
 const route = useRoute()
 

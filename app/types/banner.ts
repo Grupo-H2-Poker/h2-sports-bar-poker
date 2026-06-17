@@ -22,6 +22,9 @@ export type BannerHeight = 'sm' | 'md' | 'lg' | 'strip'
 /** Layout do banner */
 export type BannerLayout = 'overlay' | 'two_column'
 
+/** Tamanho da imagem na coluna do layout `two_column` */
+export type BannerImagemSize = 'sm' | 'md' | 'lg'
+
 /** Metadados do módulo `banner` */
 export interface ModuloMetadadosBanner extends ModuloMetadadosCarousel {
   /** Agrupa banners `sm` consecutivos em DragCarousel (padrão: grid 2 colunas) */
@@ -49,6 +52,8 @@ export interface BannerData {
   reverse_columns?: boolean
   /** Inverte a ordem das colunas no mobile (two_column). Padrão: imagem em cima quando CTA está à esquerda */
   reverse_columns_mobile?: boolean
+  /** Tamanho do quadrado da foto na coluna de imagem (`two_column`). Padrão: `lg` */
+  imagem_size?: BannerImagemSize
   /** SectionCTA embutido — omitir para banner só imagem */
   section_cta?: SectionCTAData
   /** Gradiente escuro para legibilidade do texto sobre a imagem */

@@ -24,6 +24,14 @@
       >
         {{ config.descricao }}
       </p>
+
+      <p
+        v-if="config.descricao_2"
+        class="opacity-80 mt-3"
+        :class="descriptionClass"
+      >
+        {{ config.descricao_2 }}
+      </p>
     </div>
 
     <div
@@ -62,7 +70,7 @@ const props = withDefaults(defineProps<{
 })
 
 const hasContent = computed(
-  () => !!(props.config.titulo || props.config.descricao || (!props.compact && props.config.cta)),
+  () => !!(props.config.titulo || props.config.descricao || props.config.descricao_2 || (!props.compact && props.config.cta)),
 )
 
 const wrapperClass = computed(() => ({

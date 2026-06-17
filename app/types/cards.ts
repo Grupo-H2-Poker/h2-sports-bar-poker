@@ -2,6 +2,8 @@
 export interface SectionCTAData {
   titulo?: string
   descricao?: string
+  /** Segunda descrição — renderizada abaixo de `descricao` com espaçamento */
+  descricao_2?: string
   cta?: string
   cta_link?: string
   align?: 'left' | 'center' | 'right'

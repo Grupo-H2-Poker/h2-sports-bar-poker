@@ -2,8 +2,11 @@
   <component
     :is="link ? 'button' : 'div'"
     type="button"
-    class="block w-full h-full bg-muted overflow-hidden"
-    :class="link && 'cursor-pointer'"
+    class="block bg-muted overflow-hidden"
+    :class="[
+      fill ? 'h-full w-full' : 'h-auto w-full max-w-full',
+      link && 'cursor-pointer',
+    ]"
     @click="handleClick"
   >
     <img
@@ -11,19 +14,26 @@
       :src="src"
       :alt="alt"
       draggable="false"
-      class="w-full h-full object-cover pointer-events-none"
-      :class="imageClass"
+      class="pointer-events-none object-cover"
+      :class="[
+        fill ? 'h-full w-full' : 'h-auto w-full',
+        imageClass,
+      ]"
     />
   </component>
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   src: string
   alt?: string
   link?: string
   imageClass?: string | string[]
-}>()
+  /** Preenche o container pai (padrão). `false` respeita dimensões do `imageClass` */
+  fill?: boolean
+}>(), {
+  fill: true,
+})
 
 const route = useRoute()
 

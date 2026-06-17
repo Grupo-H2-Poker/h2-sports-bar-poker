@@ -27,7 +27,7 @@ export function useBannerCta(dados: MaybeRefOrGetter<BannerData>) {
 
   const hasCta = computed(() => {
     const c = ctaConfig.value
-    return !!(c?.titulo || c?.descricao || c?.cta)
+    return !!(c?.titulo || c?.descricao || c?.descricao_2 || c?.cta)
   })
 
   return { ctaConfig, hasCta }
