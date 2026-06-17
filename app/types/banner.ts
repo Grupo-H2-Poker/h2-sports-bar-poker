@@ -25,6 +25,22 @@ export type BannerLayout = 'overlay' | 'two_column'
 /** Tamanho da imagem na coluna do layout `two_column` */
 export type BannerImagemSize = 'sm' | 'md' | 'lg'
 
+/** Raio das bordas do banner — `sm` 8px, `md` 16px, `lg` 24px */
+export type BannerBorderRadius = 'sm' | 'md' | 'lg'
+
+export const BANNER_BORDER_RADIUS_PX: Record<BannerBorderRadius, string> = {
+  sm: '8px',
+  md: '16px',
+  lg: '24px',
+}
+
+export function resolveBannerBorderRadius(
+  value: BannerBorderRadius | undefined,
+): string | undefined {
+  if (!value) return undefined
+  return BANNER_BORDER_RADIUS_PX[value]
+}
+
 /** Metadados do módulo `banner` */
 export interface ModuloMetadadosBanner extends ModuloMetadadosCarousel {
   /** Agrupa banners `sm` consecutivos em DragCarousel (padrão: grid 2 colunas) */
@@ -59,6 +75,8 @@ export interface BannerData {
   /** Gradiente escuro para legibilidade do texto sobre a imagem */
   overlay?: 'none' | 'gradient' | 'gradient-bottom'
   rounded?: boolean
+  /** Raio das bordas: `sm` 8px, `md` 16px, `lg` 24px. Sobrescreve `rounded` quando definido. */
+  border_radius?: BannerBorderRadius
   /** @deprecated Preferir `section_cta.titulo` */
   titulo?: string
   /** @deprecated Preferir `section_cta.descricao` */

@@ -3,10 +3,11 @@
   <TwoColumnLayout
     v-if="layout === 'two_column'"
     :rounded="rounded"
+    :border-radius="borderRadiusPx"
     :reverse="reverseColumns"
     :reverse-on-mobile="reverseColumnsMobile"
     class="bg-black"
-    :class="[sizeClasses.wrapper, rounded && 'rounded-2xl overflow-hidden']"
+    :class="sizeClasses.wrapper"
   >
     <template #start>
       <div
@@ -23,13 +24,18 @@
         v-else
         :class="twoColumnImageWrapperClass"
       >
-        <div :class="twoColumnImageShellClass">
+        <div
+          :class="twoColumnImageShellClass"
+          :style="borderRadiusStyle"
+        >
           <BannerImage
             :src="dados.imagem"
             :alt="imageAlt"
             :fill="false"
+            :class="imagemSize !== 'lg' ? 'h-full w-full' : 'w-full'"
             :image-class="twoColumnImageClass"
             :link="imageLink"
+            :style="borderRadiusStyle"
           />
         </div>
       </div>
@@ -50,13 +56,18 @@
         v-else
         :class="twoColumnImageWrapperClass"
       >
-        <div :class="twoColumnImageShellClass">
+        <div
+          :class="twoColumnImageShellClass"
+          :style="borderRadiusStyle"
+        >
           <BannerImage
             :src="dados.imagem"
             :alt="imageAlt"
             :fill="false"
+            :class="imagemSize !== 'lg' ? 'h-full w-full' : 'w-full'"
             :image-class="twoColumnImageClass"
             :link="imageLink"
+            :style="borderRadiusStyle"
           />
         </div>
       </div>
@@ -73,6 +84,7 @@
       !isStripBanner && rounded && 'rounded-2xl',
       isClickable && 'cursor-pointer',
     ]"
+    :style="borderRadiusStyle"
     @click="handleImageClick"
   >
     <img
@@ -130,6 +142,8 @@ const {
   reverseColumnsMobile,
   sizeClasses,
   rounded,
+  borderRadiusPx,
+  borderRadiusStyle,
   ctaPositionClasses,
   overlayGradient,
   height,
@@ -155,17 +169,25 @@ const imagemSize = computed(() => props.dados.imagem_size ?? 'lg')
 const twoColumnImageWrapperClass = 'flex h-full w-full items-center justify-center p-6 md:p-10'
 
 const twoColumnImageShellClass = computed(() => {
+  const roundedShell = borderRadiusStyle.value ? 'overflow-hidden' : ''
+
   switch (imagemSize.value) {
     case 'sm':
-      return 'w-[220px] md:w-[260px] shrink-0'
+      return `h-[220px] w-[300px] shrink-0 overflow-hidden md:h-[260px] md:w-[360px] ${roundedShell}`
     case 'md':
-      return 'w-[320px] md:w-[380px] shrink-0'
+      return `h-[320px] w-[420px] shrink-0 overflow-hidden md:h-[380px] md:w-[500px] ${roundedShell}`
     default:
-      return 'w-[400px] md:w-[480px] shrink-0'
+      return `w-[400px] shrink-0 md:w-[480px] ${roundedShell}`
   }
 })
 
-const twoColumnImageClass = 'aspect-square w-full'
+const twoColumnImageClass = computed(() => {
+  if (imagemSize.value === 'lg') {
+    return 'aspect-square w-full'
+  }
+
+  return 'h-full w-full object-cover'
+})
 
 const route = useRoute()
 

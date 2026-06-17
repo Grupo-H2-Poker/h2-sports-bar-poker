@@ -1,4 +1,10 @@
-import type { BannerCtaPosition, BannerData, BannerHeight, BannerSize } from '~/types/banner'
+import {
+  resolveBannerBorderRadius,
+  type BannerCtaPosition,
+  type BannerData,
+  type BannerHeight,
+  type BannerSize,
+} from '~/types/banner'
 
 /** Altura mínima por `height` — escala conforme a largura (`size`) */
 const HEIGHT_CLASSES: Record<BannerSize, Record<BannerHeight, string>> = {
@@ -89,11 +95,20 @@ export function useBannerLayout(
     if (d.reverse_columns_mobile !== undefined) return d.reverse_columns_mobile
     return d.cta_column !== 'right' && !d.reverse_columns
   })
+  const borderRadiusPx = computed(() => resolveBannerBorderRadius(toValue(dados).border_radius))
+
+  const borderRadiusStyle = computed(() => {
+    const value = borderRadiusPx.value
+    return value ? { borderRadius: value } : undefined
+  })
+
   const rounded = computed(() => {
     const d = toValue(dados)
-    if (d.height === 'strip') return false
+    if (d.height === 'strip' || d.border_radius) return false
     return d.rounded ?? size.value !== 'lg'
   })
+
+  const hasRoundedCorners = computed(() => rounded.value || !!borderRadiusPx.value)
 
   const sizeClasses = computed(() =>
     getBannerClasses(size.value, height.value, inline.value),
@@ -118,6 +133,9 @@ export function useBannerLayout(
     reverseColumns,
     reverseColumnsMobile,
     rounded,
+    borderRadiusPx,
+    borderRadiusStyle,
+    hasRoundedCorners,
     sizeClasses,
     ctaPositionClasses,
     overlayGradient,

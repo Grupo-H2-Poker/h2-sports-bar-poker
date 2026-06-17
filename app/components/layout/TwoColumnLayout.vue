@@ -4,8 +4,10 @@
     :class="[
       gapClass,
       alignClass,
-      rounded && 'overflow-hidden rounded-2xl',
+      hasRoundedCorners && 'overflow-hidden',
+      rounded && !borderRadius && 'rounded-2xl',
     ]"
+    :style="borderRadiusStyle"
   >
     <div
       :class="[
@@ -34,6 +36,7 @@ const props = withDefaults(defineProps<{
   gap?: 'none' | 'sm' | 'md'
   align?: 'stretch' | 'center'
   rounded?: boolean
+  borderRadius?: string
   /** Inverte ordem das colunas no mobile (slot end fica em cima) */
   reverseOnMobile?: boolean
   /** Inverte ordem das colunas no desktop (troca start ↔ end) */
@@ -50,6 +53,12 @@ const props = withDefaults(defineProps<{
 })
 
 const isReversed = computed(() => props.reverse || props.inverted)
+
+const borderRadiusStyle = computed(() =>
+  props.borderRadius ? { borderRadius: props.borderRadius } : undefined,
+)
+
+const hasRoundedCorners = computed(() => props.rounded || !!props.borderRadius)
 
 const gapClass = computed(() => ({
   'gap-0': props.gap === 'none',
