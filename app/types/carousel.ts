@@ -18,3 +18,7 @@ export interface ModuloMetadadosCarousel {
  */
 export const BANNER_CAROUSEL_SLIDE_CLASS =
   'shrink-0 w-[min(85vw,320px)] sm:w-[calc((var(--carousel-width,320px)-1rem)/2)]' as const
+
+/** Largura de cada slide no carrossel de imagens (`galeria`). */
+export const GALERIA_CAROUSEL_SLIDE_CLASS =
+  'shrink-0 w-[min(75vw,240px)] sm:w-[calc((var(--carousel-width,320px)-2rem)/3)] lg:w-[calc((var(--carousel-width,320px)-3rem)/4)]' as const

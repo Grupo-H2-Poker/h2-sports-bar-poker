@@ -385,7 +385,7 @@ export default defineEventHandler((event) => {
               margin_top: 40,
               margin_bottom: 40,
               metadados: {
-                carousel_bleed_right: false,
+                carousel_bleed_right: true,
               },
               components: [
                 {
@@ -476,13 +476,93 @@ export default defineEventHandler((event) => {
               ],
             },
             {
+              id: 6,
+              tipo: 'galeria',
+              ordem: 4,
+              status: 'publicado',
+              margin_top: 40,
+              margin_bottom: 40,
+              metadados: {
+                layout: 'drag_carousel',
+                carousel_bleed_right: true,
+              },
+              components: [
+                {
+                  id: 601,
+                  type: 'imagem',
+                  ordem: 1,
+                  status: 'publicado',
+                  data: {
+                    imagem: 'https://images.unsplash.com/photo-1511193311914-0346f16efe90?w=600&h=800&fit=crop',
+                    titulo: 'Eventos',
+                    descricao: 'Jogue onde quiser. O resto é com a gente. Seu foco? Só no all-in.',
+                  },
+                },
+                {
+                  id: 602,
+                  type: 'imagem',
+                  ordem: 2,
+                  status: 'publicado',
+                  data: {
+                    imagem: 'https://images.unsplash.com/photo-1606166188517-cc5b3f65547d?w=600&h=800&fit=crop',
+                    titulo: 'Torneio noturno',
+                    descricao: 'Mesas abertas até tarde com estrutura profissional e prêmios garantidos.',
+                  },
+                },
+                {
+                  id: 603,
+                  type: 'imagem',
+                  ordem: 3,
+                  status: 'publicado',
+                  data: {
+                    imagem: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&h=800&fit=crop',
+                    titulo: 'Cash game',
+                    descricao: 'Texas Hold\'em No Limit com blinds para todos os níveis de jogo.',
+                  },
+                },
+                {
+                  id: 604,
+                  type: 'imagem',
+                  ordem: 4,
+                  status: 'publicado',
+                  data: {
+                    imagem: 'https://images.unsplash.com/photo-1596838132731-3301c3aa4310?w=600&h=800&fit=crop',
+                    titulo: 'Ambiente',
+                    descricao: 'Estrutura premium, conforto e a melhor experiência de poker da cidade.',
+                  },
+                },
+                {
+                  id: 605,
+                  type: 'imagem',
+                  ordem: 5,
+                  status: 'publicado',
+                  data: {
+                    imagem: 'https://images.unsplash.com/photo-1596838132731-3301c3aa4310?w=600&h=800&fit=crop',
+                    titulo: 'Séries',
+                    descricao: 'Grandes festivais com garantidos milionários e calendário o ano todo.',
+                  },
+                },
+                {
+                  id: 606,
+                  type: 'imagem',
+                  ordem: 6,
+                  status: 'publicado',
+                  data: {
+                    imagem: 'https://images.unsplash.com/photo-1596838132731-3301c3aa4310?w=600&h=800&fit=crop',
+                    titulo: 'Experiência H2',
+                    descricao: 'Mais que um clube: comunidade, gastronomia e poker em alto nível.',
+                  },
+                },
+              ],
+            },
+            {
               id: 1,
               tipo: 'banner',
-              ordem: 3,
+              ordem: 5,
               status: 'publicado',
               metadados: {
                 drag_carousel: true,
-                carousel_bleed_right: false,
+                carousel_bleed_right: true,
               },
               components: [
                 {
@@ -557,7 +637,7 @@ export default defineEventHandler((event) => {
             {
               id: 5,
               tipo: 'faq',
-              ordem: 4,
+              ordem: 6,
               status: 'publicado',
               margin_top: 40,
               margin_bottom: 40,
@@ -1876,6 +1956,12 @@ export default defineEventHandler((event) => {
               tipo: "galeria",
               ordem: 1,
               status: "publicado",
+              metadados: {
+                layout: 'grid',
+                colunas: 3,
+                itens_por_linha: 2,
+                gap: 'md',
+              },
               components: [
                 {
                   id: 100,

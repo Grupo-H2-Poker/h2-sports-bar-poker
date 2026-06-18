@@ -1,48 +1,45 @@
 <template>
-  <section>
+  <section :class="isCarousel ? 'overflow-x-clip' : undefined">
     <div class="container mx-auto px-4">
       <SectionCTA v-if="ctaConfig" :config="ctaConfig" />
 
-      <br>
-
-      <Carousel :opts="{ align: 'start', loop: false }" class="w-full">
-        <CarouselContent class="-ml-4">
-          <CarouselItem
+      <div v-if="imagens.length" :class="contentSpacingClass">
+        <DragCarousel
+          v-if="isCarousel"
+          class="w-full"
+          :bleed-right="carouselBleedRight"
+          content-class="gap-4 items-stretch pb-1"
+        >
+          <div
             v-for="component in imagens"
             :key="component.id"
-            class="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4"
+            :class="GALERIA_CAROUSEL_SLIDE_CLASS"
           >
-            <div
-              class="rounded-xl overflow-hidden bg-muted cursor-pointer group"
-              @click="component.data.link && navigateTo(component.data.link)"
-            >
-              <div class="aspect-[3/4] bg-muted overflow-hidden">
-                <img
-                  v-if="component.data.imagem"
-                  :src="component.data.imagem"
-                  :alt="component.data.titulo || ''"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div class="p-4">
-                <h3 class="font-bold text-base mb-1">{{ component.data.titulo }}</h3>
-                <p v-if="component.data.descricao" class="text-sm text-muted-foreground line-clamp-2">
-                  {{ component.data.descricao }}
-                </p>
-              </div>
-            </div>
-          </CarouselItem>
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
+            <GaleriaImagemCard :dados="component.data" />
+          </div>
+        </DragCarousel>
+
+        <div
+          v-else
+          :class="gridClass"
+        >
+          <GaleriaImagemCard
+            v-for="component in imagens"
+            :key="component.id"
+            :dados="component.data"
+          />
+        </div>
+      </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '~/components/ui/carousel'
+import GaleriaImagemCard from '~/components/galeria/GaleriaImagemCard.vue'
+import DragCarousel from '~/components/modules/DragCarousel.vue'
 import SectionCTA from '~/components/modules/SectionCTA.vue'
+import { GALERIA_CAROUSEL_SLIDE_CLASS } from '~/types/carousel'
+import { GALERIA_DEFAULT_LAYOUT, resolveGaleriaGridClasses } from '~/types/galeria'
 import type { ModuloOf } from '~/types/modules'
 
 const props = defineProps<{
@@ -50,4 +47,15 @@ const props = defineProps<{
 }>()
 
 const { ctaConfig, items: imagens } = useModuloComponents(() => props.modulo)
+
+const layout = computed(() => props.modulo.metadados?.layout ?? GALERIA_DEFAULT_LAYOUT)
+const isCarousel = computed(() => layout.value === 'drag_carousel')
+
+const carouselBleedRight = computed(
+  () => isCarousel.value && (props.modulo.metadados?.carousel_bleed_right ?? false),
+)
+
+const gridClass = computed(() => resolveGaleriaGridClasses(props.modulo.metadados))
+
+const contentSpacingClass = computed(() => (ctaConfig.value ? 'mt-6' : undefined))
 </script>

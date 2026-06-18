@@ -9,6 +9,7 @@ import type { GridConfigData, GridToolbarData } from '~/types/grid'
 import type { RankingConfigData, RankingPlayerData } from '~/types/ranking'
 import type { FaixaCtaData } from '~/types/faixa-cta'
 import type { RankingTabelaConfigData, RankingTabelaLinhaData } from '~/types/ranking-tabela'
+import type { ModuloMetadadosGaleria } from '~/types/galeria'
 
 export type { BannerCtaPosition, BannerData, BannerHeight, BannerImagemSize, BannerLayout, BannerSize, ModuloMetadadosBanner } from '~/types/banner'
 export type { CardGenericData, SectionCTAData } from '~/types/cards'
@@ -232,7 +233,7 @@ export interface ModuloMetadadosMap {
   agenda_preview: ModuloMetadadosAgendaPreview
   grid: ModuloMetadadosEmpty
   banner: ModuloMetadadosBanner
-  galeria: ModuloMetadadosEmpty
+  galeria: ModuloMetadadosGaleria
   texto: ModuloMetadadosTexto
   ranking: ModuloMetadadosEmpty
   ranking_tabela: ModuloMetadadosEmpty
