@@ -206,6 +206,9 @@ export default defineEventHandler((event) => {
                 links: [
                   { id: 'cph', label: 'CPH', to: '/series/cph' },
                   { id: 'fun-festival', label: 'Fun Festival', to: '/series/fun-festival' },
+                  { id: 'damas-do-poker', label: 'Damas do Poker', to: '/series/damas-do-poker' },
+                  { id: 'ladies-weekend', label: 'Ladies Weekend', to: '/series/ladies-weekend' },
+                  { id: 'xadrez', label: 'Xadrez', to: '/series/xadrez' },
                 ],
               },
             ],
@@ -1991,6 +1994,9 @@ export default defineEventHandler((event) => {
                 links: [
                   { id: 'cph', label: 'CPH', to: '/series' },
                   { id: 'fun-festival', label: 'Fun Festival', to: '/series' },
+                  { id: 'damas-do-poker', label: 'Damas do Poker', to: '/series' },
+                  { id: 'ladies-weekend', label: 'Ladies Weekend', to: '/series' },
+                  { id: 'xadrez', label: 'Xadrez', to: '/series' },
                 ],
               },
             ],

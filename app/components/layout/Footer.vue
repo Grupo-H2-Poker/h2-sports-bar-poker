@@ -1,7 +1,14 @@
 <script setup lang="ts">
-import Logo from '~/components/layout/Logo.vue'
 import jogoResponsavel from '~/assets/img/jogo_responsavel.png'
-import type { FooterData, FooterLinkItem } from '~/types/footer'
+import h2Mark from '~/assets/img/footer/h2-mark.png'
+import iconInstagram from '~/assets/img/footer/instagram.svg'
+import iconYoutube from '~/assets/img/footer/youtube.svg'
+import type { FooterData, FooterLinkItem, FooterSocialTipo } from '~/types/footer'
+
+const SOCIAL_ICONS: Record<FooterSocialTipo, string> = {
+  instagram: iconInstagram,
+  youtube: iconYoutube,
+}
 
 const route = useRoute()
 const { getSlugFromName, selectedUnityName, defaultUnityName } = useUnidades()
@@ -37,9 +44,9 @@ function linkHref(item: FooterLinkItem) {
 
 function linkClass(item: FooterLinkItem) {
   if (item.estilo === 'destaque') {
-    return 'text-lg font-bold text-card-preview-text hover:text-white transition-colors'
+    return 'text-lg font-bold leading-snug text-card-preview-text hover:text-white transition-colors'
   }
-  return 'text-sm font-medium text-card-preview-text/80 hover:text-white transition-colors'
+  return 'text-sm font-medium leading-snug text-card-preview-text hover:text-white transition-colors'
 }
 </script>
 
@@ -49,23 +56,31 @@ function linkClass(item: FooterLinkItem) {
     class="mt-16 bg-[#2f185a] text-card-preview-text font-[family-name:var(--font-red-hat-display)]"
   >
     <div
-      class="h-1.5 w-full bg-linear-to-r from-brand-purple to-[#6433c0]"
+      class="h-2 w-full bg-linear-to-r from-brand-purple to-[#2f185a]"
       aria-hidden="true"
     />
 
-    <div class="container py-12 lg:py-14">
-      <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 xl:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))] xl:gap-12">
+    <div class="container pt-12 pb-10 lg:pt-14 lg:pb-12">
+      <div
+        class="grid grid-cols-1 gap-10 sm:grid-cols-2 xl:grid-cols-[minmax(0,1.35fr)_repeat(3,minmax(0,1fr))] xl:gap-x-12 xl:gap-y-10"
+      >
         <!-- Coluna: marca -->
-        <div class="flex flex-col gap-4 sm:col-span-2 xl:col-span-1">
-          <Logo :as-link="false" />
-          <p class="text-lg font-bold leading-[1.65]">
+        <div class="flex flex-col gap-4 sm:col-span-2 xl:col-span-1 xl:max-w-[17rem]">
+          <img
+            :src="h2Mark"
+            alt="H2"
+            class="h-9 w-auto object-contain object-left"
+            width="55"
+            height="36"
+          >
+          <p class="text-lg font-bold leading-snug">
             {{ footer.hashtag }}
           </p>
-          <div class="text-base leading-[1.875]">
+          <div class="text-base font-normal leading-[1.875]">
             <p>{{ footer.copyright }}</p>
             <p>{{ footer.endereco }}</p>
           </div>
-          <div v-if="footer.redes_sociais.length" class="flex gap-4 pt-1">
+          <div v-if="footer.redes_sociais.length" class="flex items-center gap-4 pt-2">
             <a
               v-for="rede in footer.redes_sociais"
               :key="rede.id"
@@ -73,41 +88,16 @@ function linkClass(item: FooterLinkItem) {
               target="_blank"
               rel="noopener noreferrer"
               :aria-label="rede.label"
-              class="text-card-preview-text hover:text-white transition-colors"
+              class="inline-flex size-8 items-center justify-center overflow-hidden opacity-90 hover:opacity-100 transition-opacity"
             >
-              <svg
-                v-if="rede.tipo === 'instagram'"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+              <img
+                :src="SOCIAL_ICONS[rede.tipo]"
+                :alt="''"
+                class="size-full object-contain"
+                width="31"
+                height="31"
                 aria-hidden="true"
               >
-                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-              </svg>
-              <svg
-                v-else-if="rede.tipo === 'youtube'"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
-                <polygon points="10 15 15 12 10 9" />
-              </svg>
             </a>
           </div>
         </div>
@@ -116,7 +106,7 @@ function linkClass(item: FooterLinkItem) {
         <div
           v-for="coluna in footer.colunas"
           :key="coluna.id"
-          class="flex flex-col gap-6"
+          class="flex flex-col gap-8"
         >
           <div
             v-for="secao in coluna.secoes"
@@ -125,12 +115,12 @@ function linkClass(item: FooterLinkItem) {
           >
             <h4
               v-if="secao.titulo"
-              class="mb-3 text-lg font-bold leading-none"
+              class="text-lg font-bold leading-snug"
             >
               {{ secao.titulo }}
             </h4>
-            
-            <nav class="flex flex-col gap-5">
+
+            <nav class="flex flex-col gap-3">
               <template v-for="item in secao.links" :key="item.id">
                 <NuxtLink
                   v-if="item.to || item.pagina"
@@ -157,13 +147,15 @@ function linkClass(item: FooterLinkItem) {
 
     <!-- Rodapé inferior -->
     <div class="container pb-5">
-      <div class="border-t border-white/20 pt-5">
-        <div class="flex items-center justify-center gap-2 text-sm font-medium text-card-preview-text">
+      <div class="border-t border-[#e7e7e7]/30 pt-3">
+        <div class="flex items-center justify-center">
           <img
             :src="jogoResponsavel"
-            alt="Maiores de 18 anos"
+            alt="Aplica-se T&C. Jogue com responsabilidade. Maiores de 18 anos."
             class="h-14 w-auto shrink-0"
-          />
+            width="331"
+            height="57"
+          >
         </div>
       </div>
     </div>

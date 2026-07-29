@@ -41,5 +41,6 @@ export interface FooterData {
   endereco: string
   redes_sociais: FooterSocialItem[]
   colunas: FooterColuna[]
-  aviso: FooterAviso
+  /** Opcional — o selo 18+ + T&C já é renderizado no layout. */
+  aviso?: FooterAviso
 }
