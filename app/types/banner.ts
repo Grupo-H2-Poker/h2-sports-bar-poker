@@ -1,5 +1,6 @@
 import type { ModuloMetadadosCarousel } from '~/types/carousel'
 import type { SectionCTAData } from '~/types/cards'
+import type { ModuloMetadadosMarginLateral } from '~/types/faq-page'
 
 /** Posição do SectionCTA sobre a imagem (layout overlay) */
 export type BannerCtaPosition =
@@ -52,11 +53,16 @@ export function resolveBannerBorderRadius(
 }
 
 /** Metadados do módulo `banner` */
-export interface ModuloMetadadosBanner extends ModuloMetadadosCarousel {
+export interface ModuloMetadadosBanner extends ModuloMetadadosCarousel, ModuloMetadadosMarginLateral {
   /** Agrupa banners `sm` consecutivos em DragCarousel (padrão: grid 2 colunas) */
   drag_carousel?: boolean
   /** Banner ocupa largura total da viewport (sem container) */
   full_width?: boolean
+  /**
+   * Quando `true`, usa o `margin_lateral` do módulo `faq` / `faq_page`
+   * imediatamente acima ou abaixo na página.
+   */
+  use_same_faq_margin?: boolean
 }
 
 export interface BannerData {
@@ -95,6 +101,8 @@ export interface BannerData {
   rounded?: boolean
   /** Raio das bordas: `sm` 8px, `md` 16px, `lg` 24px. Sobrescreve `rounded` quando definido. */
   border_radius?: BannerBorderRadius
+  /** Como a imagem preenche o banner no layout overlay. Padrão: `cover` */
+  object_fit?: 'cover' | 'contain'
   /** @deprecated Preferir `section_cta.titulo` */
   titulo?: string
   /** @deprecated Preferir `section_cta.descricao` */

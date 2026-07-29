@@ -4,7 +4,8 @@
   >
     <div
       class="flex flex-col gap-6"
-      :class="fullWidth ? 'w-full' : 'container mx-auto px-4'"
+      :class="wrapperClass"
+      :style="wrapperStyle"
     >
       <template v-for="(group, index) in bannerGroups" :key="index">
         <!-- Banners sm consecutivos: grid ou carrossel -->
@@ -62,9 +63,29 @@ const sortedComponents = useSortedComponents(() => props.modulo)
 
 const dragCarousel = computed(() => props.modulo.metadados?.drag_carousel ?? false)
 const fullWidth = computed(() => props.modulo.metadados?.full_width ?? false)
+const useSameFaqMargin = computed(() => props.modulo.metadados?.use_same_faq_margin ?? false)
 const carouselBleedRight = computed(
   () => dragCarousel.value && (props.modulo.metadados?.carousel_bleed_right ?? false),
 )
+
+const marginLateralStyle = useBannerMarginLateral(() => props.modulo)
+
+const hasCustomLateralMargin = computed(
+  () => useSameFaqMargin.value || props.modulo.metadados?.margin_lateral != null,
+)
+
+const wrapperStyle = computed(() =>
+  hasCustomLateralMargin.value ? marginLateralStyle.value : undefined,
+)
+
+const wrapperClass = computed(() => {
+  if (fullWidth.value) return 'w-full'
+  // Mesma base do FAQ: container + padding lateral via style (sem px-4 fixo)
+  if (hasCustomLateralMargin.value) {
+    return 'container mx-auto'
+  }
+  return 'container mx-auto px-4'
+})
 
 type BannerGroup =
   | { type: 'single', items: ComponentData<BannerData>[] }

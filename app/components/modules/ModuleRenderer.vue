@@ -15,6 +15,7 @@
 
 <script setup lang="ts">
 import type { Modulo, ModuloTipo } from '~/types/modules'
+import { PAGINA_MODULOS_KEY } from '~/composables/useSameFaqMargin'
 import AgendaModule from '~/components/modules/AgendaPreviewModule.vue'
 import GridModule from '~/components/modules/GridModule.vue'
 import BannerModule from '~/components/modules/BannerModule.vue'
@@ -56,6 +57,8 @@ const sortedModulos = computed(() => {
     .filter(m => m.status === 'publicado')
     .sort((a, b) => a.ordem - b.ordem)
 })
+
+provide(PAGINA_MODULOS_KEY, sortedModulos)
 
 const getModuloMarginStyle = (modulo: Modulo) => {
   const { marginTop, marginBottom } = resolveModuloMargins(modulo)

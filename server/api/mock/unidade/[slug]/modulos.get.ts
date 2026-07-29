@@ -556,9 +556,42 @@ export default defineEventHandler((event) => {
               ],
             },
             {
+              id: 700,
+              tipo: 'banner',
+              margin_bottom: 40,
+              ordem: 5,
+              status: 'publicado',
+              components: [
+                {
+                  id: 701,
+                  type: 'banner',
+                  ordem: 1,
+                  status: 'publicado',
+                  data: {
+                    layout: 'overlay',
+                    height: 'md',
+                    cta_position: 'left',
+                    overlay: 'gradient',
+                    border_radius: 'lg',
+                    object_fit: 'contain',
+                    imagem: 'https://www.figma.com/api/mcp/asset/22f6c331-8be6-4b34-af85-d0a7d04c498e',
+                    section_cta: {
+                      titulo: 'Sports Bar',
+                      descricao: 'Os maiores jogos do esporte ao vivo.\nTorcida, menu especial e bebidas para acompanhar cada lance.',
+                      cta: 'Conheça nosso sports bar',
+                      cta_cor: 'verde',
+                      align: 'left',
+                      size: 'md',
+                    },
+                  },
+                },
+              ],
+            },
+
+            {
               id: 1,
               tipo: 'banner',
-              ordem: 5,
+              ordem: 6,
               status: 'publicado',
               metadados: {
                 drag_carousel: true,
@@ -635,14 +668,48 @@ export default defineEventHandler((event) => {
               ],
             },
             {
+              id: 702,
+              tipo: 'banner',
+              ordem: 7,
+              status: 'publicado',
+              margin_top: 40,
+              margin_bottom: 40,
+              components: [
+                {
+                  id: 7021,
+                  type: 'banner',
+                  ordem: 1,
+                  status: 'publicado',
+                  data: {
+                    layout: 'two_column',
+                    size: 'lg',
+                    cta_column: 'left',
+                    reverse_columns: true,
+                    imagem_size: 'lg',
+                    border_radius: 'lg',
+                    imagem: 'https://www.figma.com/api/mcp/asset/0152536d-3aad-4477-8d87-1b3f809be619',
+                    section_cta: {
+                      titulo: 'Poker é esporte da mente.',
+                      descricao: 'No H2, estratégia é poder, leitura é vantagem e dominar a mesa é o único caminho.',
+                      cta: 'Saiba mais',
+                      cta_cor: 'verde',
+                      align: 'left',
+                      size: 'md',
+                    },
+                  },
+                },
+              ],
+            },
+
+            {
               id: 5,
               tipo: 'faq',
-              ordem: 6,
+              ordem: 8,
               status: 'publicado',
               margin_top: 40,
               margin_bottom: 40,
               metadados: {
-                margin_lateral: 150,
+                margin_lateral: 100,
               },
               components: [
                 {
@@ -693,8 +760,37 @@ export default defineEventHandler((event) => {
               ],
             },
 
+            {
+              id: 703,
+              tipo: 'banner',
+              ordem: 9,
+              status: 'publicado',
+              margin_top: 40,
+              margin_bottom: 40,
+              metadados: {
+                use_same_faq_margin: true,
+              },
+              components: [
+                {
+                  id: 7031,
+                  type: 'banner',
+                  ordem: 1,
+                  status: 'publicado',
+                  data: {
+                    layout: 'overlay',
+                    size: 'lg',
+                    border_radius: 'lg',
+                    object_fit: 'contain',
+                    overlay: 'none',
+                    imagem: 'https://www.figma.com/api/mcp/asset/d87f2bd7-ee22-4adb-a9d9-8ab1613beea8',
+                  },
+                },
+              ],
+            },
+
           ],
         },
+
         // Pagina Agenda
         {
           slug: 'agenda',
@@ -1181,7 +1277,7 @@ export default defineEventHandler((event) => {
               ordem: 1,
               status: 'publicado',
               metadados: {
-                margin_lateral: 150,
+                margin_lateral: 100,
               },
               components: [
                 {
@@ -1663,7 +1759,7 @@ export default defineEventHandler((event) => {
               ordem: 10,
               status: 'publicado',
               metadados: {
-                margin_lateral: 150,
+                margin_lateral: 100,
               },
               components: [
                 {
@@ -2131,7 +2227,7 @@ export default defineEventHandler((event) => {
               ordem: 1,
               status: 'publicado',
               metadados: {
-                margin_lateral: 150,
+                margin_lateral: 100,
               },
               components: [
                 {

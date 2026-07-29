@@ -60,8 +60,8 @@
     v-else
     :class="[
       'relative overflow-hidden',
-      isStripBanner ? 'bg-black' : 'bg-muted',
-      sizeClasses.wrapper,
+      (isStripBanner || isContainFit) ? 'bg-black' : 'bg-muted',
+      isContainFit ? sizeClasses.widthOnly : sizeClasses.wrapper,
       !isStripBanner && rounded && 'rounded-2xl',
       isClickable && 'cursor-pointer',
     ]"
@@ -74,7 +74,7 @@
       :alt="imageAlt"
       draggable="false"
       :class="[
-        isStripBanner
+        isStripBanner || isContainFit
           ? 'block w-full h-auto'
           : 'absolute inset-0 w-full h-full object-cover pointer-events-none',
       ]"
@@ -131,6 +131,7 @@ const {
 } = useBannerLayout(() => props.dados, () => ({ inline: props.inline }))
 
 const isStripBanner = computed(() => height.value === 'strip')
+const isContainFit = computed(() => props.dados.object_fit === 'contain')
 
 const { ctaConfig, hasCta } = useBannerCta(() => props.dados)
 

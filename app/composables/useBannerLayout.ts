@@ -41,8 +41,11 @@ function getWidthClasses(size: BannerSize, inline: boolean): string {
 
 function getBannerClasses(size: BannerSize, height: BannerHeight, inline: boolean) {
   const isStrip = height === 'strip'
+  const width = getWidthClasses(size, inline)
   return {
-    wrapper: `${getWidthClasses(size, inline)} ${HEIGHT_CLASSES[size][height]}`,
+    wrapper: `${width} ${HEIGHT_CLASSES[size][height]}`,
+    /** Só largura — altura definida pela imagem (`object_fit: contain`) */
+    widthOnly: width,
     image: isStrip ? 'block w-full h-auto' : 'w-full h-full object-cover',
     strip: isStrip,
   }
