@@ -10,6 +10,12 @@ const SOCIAL_ICONS: Record<FooterSocialTipo, string> = {
   youtube: iconYoutube,
 }
 
+/** Tamanhos ópticos: YouTube é mais largo, então usa altura menor para equilibrar o peso visual. */
+const SOCIAL_ICON_SIZE: Record<FooterSocialTipo, { class: string; width: number; height: number }> = {
+  instagram: { class: 'size-[22px]', width: 22, height: 22 },
+  youtube: { class: 'h-[18px] w-auto', width: 25, height: 18 },
+}
+
 const route = useRoute()
 const { getSlugFromName, selectedUnityName, defaultUnityName } = useUnidades()
 const api = useH2Api()
@@ -46,7 +52,7 @@ function linkClass(item: FooterLinkItem) {
   if (item.estilo === 'destaque') {
     return 'text-lg font-bold leading-snug text-card-preview-text hover:text-white transition-colors'
   }
-  return 'text-sm font-medium leading-snug text-card-preview-text hover:text-white transition-colors'
+  return 'text-sm font-medium leading-snug text-[#9a9a9a] hover:text-white transition-colors'
 }
 </script>
 
@@ -80,7 +86,7 @@ function linkClass(item: FooterLinkItem) {
             <p>{{ footer.copyright }}</p>
             <p>{{ footer.endereco }}</p>
           </div>
-          <div v-if="footer.redes_sociais.length" class="flex items-center gap-4 pt-2">
+          <div v-if="footer.redes_sociais.length" class="flex items-center gap-3.5 pt-2">
             <a
               v-for="rede in footer.redes_sociais"
               :key="rede.id"
@@ -88,14 +94,14 @@ function linkClass(item: FooterLinkItem) {
               target="_blank"
               rel="noopener noreferrer"
               :aria-label="rede.label"
-              class="inline-flex size-8 items-center justify-center overflow-hidden opacity-90 hover:opacity-100 transition-opacity"
+              class="inline-flex h-6 items-center justify-center opacity-90 hover:opacity-100 transition-opacity"
             >
               <img
                 :src="SOCIAL_ICONS[rede.tipo]"
                 :alt="''"
-                class="size-full object-contain"
-                width="31"
-                height="31"
+                :class="['object-contain', SOCIAL_ICON_SIZE[rede.tipo].class]"
+                :width="SOCIAL_ICON_SIZE[rede.tipo].width"
+                :height="SOCIAL_ICON_SIZE[rede.tipo].height"
                 aria-hidden="true"
               >
             </a>
@@ -152,7 +158,7 @@ function linkClass(item: FooterLinkItem) {
           <img
             :src="jogoResponsavel"
             alt="Aplica-se T&C. Jogue com responsabilidade. Maiores de 18 anos."
-            class="h-14 w-auto shrink-0"
+            class="h-10 w-auto max-w-full object-contain object-center mix-blend-screen sm:h-12"
             width="331"
             height="57"
           >
