@@ -5,31 +5,40 @@
       altura,
       largura,
       fundoClass,
+      !isActive && 'opacity-50',
     ]"
-    @click="onCardClick"
   >
     <CardBadge :badge="dados.badge" :badge-class="badgeClass(dados.badge?.cor)" />
 
     <div class="flex-1 flex flex-col justify-center gap-2">
-      <span v-if="dados.categoria" class="text-2xl font-bold leading-tight">
+      <span v-if="dados.categoria" class="text-base font-medium leading-tight opacity-90">
         {{ dados.categoria }}
       </span>
       <h3 class="text-[2rem] font-bold leading-[1.1]">{{ dados.titulo }}</h3>
       <p v-if="dados.subtitulo" class="text-base opacity-80">{{ dados.subtitulo }}</p>
     </div>
 
-    <CardFooterBotoes
-      v-if="dados.botoes?.length"
-      :botoes="dados.botoes"
-      :full-width="false"
-    />
+    <Button
+      v-if="ctaLabel && isActive"
+      variant="ghost"
+      class="w-fit rounded-full px-6 py-3 text-sm font-semibold btn-green-solid"
+      @click.stop="onEntrar"
+    >
+      {{ ctaLabel }}
+    </Button>
+    <div
+      v-else-if="ctaLabel"
+      class="rounded-full px-6 py-3 text-sm font-semibold bg-white/10 text-white/50 w-fit"
+    >
+      {{ ctaLabel }}
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { CardGenericData } from '~/types/cards'
+import { Button } from '~/components/ui/button'
 import CardBadge from '~/components/cards/parts/CardBadge.vue'
-import CardFooterBotoes from '~/components/cards/parts/CardFooterBotoes.vue'
 
 const props = defineProps<{
   dados: CardGenericData
@@ -37,18 +46,19 @@ const props = defineProps<{
   largura?: string
 }>()
 
-const active = computed(() => props.active ?? false)
+const isActive = computed(() => props.dados.ativo ?? props.active ?? true)
 const { fundoClass, badgeClass } = useCardTheme(
   () => props.dados,
-  () => active.value,
+  () => isActive.value,
 )
+const { entrarNaFila } = useCashGameFila()
 
-const largura = computed(() => props.dados.largura ?? props.largura ?? 'w-[330px]')
+const largura = computed(() => props.dados.largura ?? props.largura ?? 'w-full')
 const altura = computed(() => props.dados.altura ?? 'min-h-[320px]')
+const ctaLabel = computed(() => props.dados.botoes?.[0]?.label ?? 'Entrar na fila')
 
-function onCardClick() {
-  if (props.dados.link && !props.dados.botoes?.length) {
-    navigateTo(props.dados.link)
-  }
+function onEntrar() {
+  if (!isActive.value) return
+  entrarNaFila(props.dados.titulo)
 }
 </script>

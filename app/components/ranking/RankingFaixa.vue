@@ -37,9 +37,9 @@
       <!-- CTA -->
       <Button
         v-if="config.cta"
-        variant="outline"
+        variant="ghost"
         size="sm"
-        class="rounded-full border-white bg-transparent text-white hover:bg-white/10 hover:text-white dark:border-white dark:bg-transparent dark:hover:bg-white/10"
+        class="rounded-full outline-smooth-white bg-transparent text-white hover:bg-white/10 hover:text-white"
         @click="handleCtaClick"
       >
         {{ config.cta }}

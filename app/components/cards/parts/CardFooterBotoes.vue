@@ -1,11 +1,11 @@
 <template>
-  <div class="flex gap-3">
+  <div v-if="botoesVisiveis.length" class="flex gap-3">
     <Button
-      v-for="(botao, index) in botoes"
+      v-for="(botao, index) in botoesVisiveis"
       :key="index"
       variant="ghost"
       class="rounded-full px-6 py-3 text-sm font-semibold text-center whitespace-nowrap"
-      :class="[botaoClasses(botao), fullWidth ? 'flex-1' : 'w-auto']"
+      :class="[botaoClasses(botao), stretchButtons ? 'flex-1' : 'w-auto']"
       @click.stop="onClick(botao)"
     >
       {{ botao.label }}
@@ -16,6 +16,7 @@
 <script setup lang="ts">
 import { Button } from '~/components/ui/button'
 import type { CardBotao } from '~/types/cards'
+import { filterCardBotoes } from '~/utils/features'
 
 const props = withDefaults(defineProps<{
   botoes: CardBotao[]
@@ -23,6 +24,13 @@ const props = withDefaults(defineProps<{
 }>(), {
   fullWidth: true,
 })
+
+const botoesVisiveis = computed(() => filterCardBotoes(props.botoes))
+
+/** Só estica quando há 2+ botões; com 1 (ex.: buy-in off) mantém o tamanho natural. */
+const stretchButtons = computed(
+  () => props.fullWidth && botoesVisiveis.value.length > 1,
+)
 
 function botaoClasses(botao: CardBotao) {
   const presetClass = resolveSectionCtaButtonClass(botao.cor, botao.variant)
@@ -37,16 +45,18 @@ function botaoClasses(botao: CardBotao) {
 
   if (outline) {
     return branco
-      ? 'border border-white text-white bg-transparent hover:bg-white/10'
-      : 'border border-brand-green text-brand-green bg-transparent hover:bg-brand-green/10'
+      ? 'outline-smooth-white text-white bg-transparent hover:bg-white/10'
+      : 'outline-smooth-green text-brand-green bg-transparent hover:bg-brand-green/10'
   }
 
   return branco
     ? 'bg-white text-black hover:bg-white/90'
-    : 'bg-brand-green text-black hover:bg-brand-green/90'
+    : 'btn-green-solid'
 }
 
+const { navigateLink } = useCardLink()
+
 function onClick(botao: CardBotao) {
-  if (botao.link) navigateTo(botao.link)
+  if (botao.link) navigateLink(botao.link)
 }
 </script>

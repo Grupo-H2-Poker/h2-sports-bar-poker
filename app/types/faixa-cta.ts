@@ -14,6 +14,9 @@ export interface FaixaCtaData {
   textColor?: string
   cta_backgroundColor?: string
   cta_textColor?: string
+  cta_border?: string
+  /** Classe de radius do botão (ex.: `rounded-lg`). Padrão: `rounded-full` */
+  cta_rounded?: string
   /** Preset ou classe Tailwind do botão (sobrescreve cores customizadas quando definido) */
   cta_cor?: CardCorPreset | string
   cta_variant?: CardBotaoVariant
@@ -31,6 +34,8 @@ export interface FaixaCtaData {
   titulo_size?: string
   descricao_size?: string
 
+  /** Empilha conteúdo e botão em todas as larguras */
+  stack?: boolean
   /** Empilha conteúdo e botão em telas menores. Padrão: true */
   stack_mobile?: boolean
 }
@@ -103,6 +108,7 @@ export function resolveFaixaCtaCtaStyle(
 
   if (data.cta_backgroundColor) style.backgroundColor = data.cta_backgroundColor
   if (data.cta_textColor) style.color = data.cta_textColor
+  if (data.cta_border) style.border = data.cta_border
 
   return Object.keys(style).length > 0 ? style : undefined
 }

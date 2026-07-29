@@ -2,6 +2,10 @@
 export const CARD_PREVIEW_SHELL =
   'relative overflow-hidden rounded-lg flex-shrink-0 w-[265px] h-[280px] p-8 font-[\'Red_Hat_Display\',sans-serif]'
 
+/** Cursor + hover para cards clicáveis (agenda / preview) */
+export const CARD_INTERACTIVE =
+  'cursor-pointer transition-all duration-300 ease-out will-change-transform hover:-translate-y-1.5 hover:brightness-110 hover:shadow-[0_16px_40px_rgba(0,0,0,0.45)]'
+
 export const CARD_PREVIEW_TEXT = 'text-[#E7E7E7]'
 
 export const CARD_PREVIEW_HEADER = 'max-h-[148px] overflow-hidden'
@@ -42,6 +46,6 @@ export const CARD_PREVIEW_CASH_DETALHES =
   'text-left text-base font-normal leading-[28px] text-[#E7E7E7]'
 
 export const CARD_PREVIEW_BUTTON =
-  'rounded-full px-5 py-2.5 text-xs font-semibold transition-colors'
+  'w-auto self-start rounded-full px-5 py-2.5 text-xs font-semibold transition-colors'
 
-export const CARD_PREVIEW_BUTTON_SLOT = 'mt-5 min-h-[34px]'
+export const CARD_PREVIEW_BUTTON_SLOT = 'mt-5 flex min-h-[34px] items-start'

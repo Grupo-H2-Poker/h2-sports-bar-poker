@@ -1,13 +1,14 @@
 <template>
-  <div :class="['grid', colunasClass, gapClass]">
+  <div :class="['grid py-1', colunasClass, gapClass]">
     <div
       v-for="item in items"
       :key="item.id"
-      class="min-w-0"
+      class="min-w-0 h-full"
     >
       <CardGeneric
         v-if="item.type === 'card'"
         fill
+        :active="true"
         :dados="item.data as CardGenericData"
       />
       <GridImagemItem

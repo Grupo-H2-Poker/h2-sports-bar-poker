@@ -13,8 +13,8 @@
     <Button
       v-if="clearLabel"
       type="button"
-      variant="outline"
-      class="inline-flex h-8 items-center rounded-full border-brand-green bg-transparent px-4 text-sm text-brand-green hover:bg-brand-green/10 hover:text-brand-green"
+      variant="ghost"
+      class="inline-flex h-8 items-center rounded-full outline-smooth-green bg-transparent px-4 text-sm text-brand-green hover:bg-brand-green/10 hover:text-brand-green"
       @click="emit('clear')"
     >
       {{ clearLabel }}

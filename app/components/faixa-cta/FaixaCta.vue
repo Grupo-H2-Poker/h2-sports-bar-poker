@@ -17,7 +17,7 @@
         >
           <div
             class="flex min-w-0 flex-col"
-            :class="contentAlignClass"
+            :class="[contentAlignClass, stackAlways ? 'max-w-[510px]' : '']"
             :style="textStyle"
           >
             <h2
@@ -40,9 +40,9 @@
           <Button
             v-if="data.cta"
             :variant="buttonVariant"
-            size="sm"
-            class="shrink-0 rounded-full"
-            :class="ctaButtonClass"
+            :size="stackAlways ? 'lg' : 'sm'"
+            class="shrink-0"
+            :class="[ctaRoundedClass, ctaButtonClass]"
             :style="ctaStyle"
             @click="handleClick"
           >
@@ -90,6 +90,7 @@ const hasContent = computed(
   () => !!(props.data.titulo || props.data.descricao || props.data.cta),
 )
 
+const stackAlways = computed(() => props.data.stack === true)
 const stackMobile = computed(() => props.data.stack_mobile ?? true)
 
 const isFullWidth = computed(() => props.data.fullWidth ?? false)
@@ -134,18 +135,24 @@ const outerLayoutClasses = computed(() => {
   ]
 })
 
+const stackDirectionClass = computed(() => {
+  if (stackAlways.value) return 'flex-col'
+  if (stackMobile.value) return 'flex-col sm:flex-row'
+  return 'flex-row'
+})
+
 const contentGroupClasses = computed(() => {
   if (isSpreadLayout.value) {
     return [
       'flex w-full justify-between',
-      stackMobile.value ? 'flex-col sm:flex-row' : 'flex-row',
+      stackDirectionClass.value,
       VERTICAL_ALIGN_CLASS[props.data.align_vertical ?? 'center'] ?? 'items-center',
     ]
   }
 
   return [
     'flex',
-    stackMobile.value ? 'flex-col sm:flex-row' : 'flex-row',
+    stackDirectionClass.value,
     VERTICAL_ALIGN_CLASS[props.data.align_vertical ?? 'center'] ?? 'items-center',
   ]
 })
@@ -171,8 +178,10 @@ const descricaoStyle = computed(() => {
 const contentAlignClass = computed(() => ({
   'text-left': props.data.align_horizontal !== 'center',
   'text-center': props.data.align_horizontal === 'center',
-  'sm:text-left': stackMobile.value && props.data.align_horizontal !== 'center',
+  'sm:text-left': !stackAlways.value && stackMobile.value && props.data.align_horizontal !== 'center',
 }))
+
+const ctaRoundedClass = computed(() => props.data.cta_rounded ?? 'rounded-full')
 
 const ctaButtonClass = computed(() =>
   resolveSectionCtaButtonClass(props.data.cta_cor, props.data.cta_variant),

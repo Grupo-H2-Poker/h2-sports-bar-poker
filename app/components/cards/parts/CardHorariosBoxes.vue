@@ -3,7 +3,7 @@
     <div
       v-for="slot in slots"
       :key="slot.label"
-      class="flex-1 rounded-xl border border-white/25 px-4 py-4 text-center text-lg font-semibold"
+      class="flex-1 rounded-xl outline-smooth-white-25 px-4 py-4 text-center text-lg font-semibold"
     >
       {{ slot.label }} {{ slot.valor }}
     </div>

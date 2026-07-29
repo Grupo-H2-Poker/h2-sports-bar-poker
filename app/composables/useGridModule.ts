@@ -1,16 +1,18 @@
 import type { ComponentData, ModuloContentDataMap, ModuloOf } from '~/types/modules'
 import type {
   GridConfigData,
+  GridDiaGroup,
   GridItemType,
   GridToolbarData,
 } from '~/types/grid'
-import type { SectionCTAData } from '~/types/cards'
+import type { CardGenericData, SectionCTAData } from '~/types/cards'
 import {
   GRID_CONFIG_COMPONENT_TYPE,
   GRID_META_COMPONENT_TYPES,
   GRID_TOOLBAR_COMPONENT_TYPE,
 } from '~/types/grid'
 import { SECTION_CTA_COMPONENT_TYPE } from '~/types/modules'
+import { isDataHojeOuFutura, resolveDiaGrupo, sortDiaGrupos } from '~/utils/agenda-dias'
 
 const DEFAULT_GRID_CONFIG: GridConfigData = {
   colunas: 3,
@@ -71,4 +73,44 @@ export function filterGridItemsBySearch(
       .toLowerCase()
     return haystack.includes(q)
   })
+}
+
+/**
+ * Agrupa itens do grid por `data` (ISO no card) — só hoje e datas futuras.
+ * Label inteligente: Hoje, Amanhã ou Quarta-feira - 29 de julho.
+ * Retorna `null` se não houver campo `data`; `[]` se todas as datas forem passadas.
+ */
+export function groupGridItemsByDia(
+  items: GridModuleItem[],
+): GridDiaGroup<GridModuleItem>[] | null {
+  const hasDia = items.some((item) => Boolean((item.data as CardGenericData).data))
+  if (!hasDia) return null
+
+  type Acc = { id: string, label: string, sortKey: string, items: GridModuleItem[] }
+  const map = new Map<string, Acc>()
+
+  for (const item of items) {
+    const d = item.data as CardGenericData
+    if (!d.data || !isDataHojeOuFutura(d.data)) continue
+
+    const grupo = resolveDiaGrupo(d.data)
+    const existing = map.get(grupo.id)
+    if (existing) {
+      existing.items.push(item)
+    }
+    else {
+      map.set(grupo.id, {
+        id: grupo.id,
+        label: grupo.label,
+        sortKey: grupo.sortKey,
+        items: [item],
+      })
+    }
+  }
+
+  return sortDiaGrupos([...map.values()]).map(({ id, label, items: groupItems }) => ({
+    id,
+    label,
+    items: groupItems,
+  }))
 }

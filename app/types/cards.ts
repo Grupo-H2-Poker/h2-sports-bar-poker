@@ -112,11 +112,17 @@ export interface CardGenericData {
   /** Valores por seção de filtro da agenda (ex.: `{ local: 'online', buy_in: '50-200' }`) */
   filtros?: Record<string, string>
 
+  /** Data do evento (ISO `YYYY-MM-DD`) — o front compara com hoje e monta o label */
+  data?: string
+
   largura?: string
   altura?: string
 
   /** Preview: false deixa o card apagado (cinza). Padrão: true */
   ativo?: boolean
+
+  /** Identificador estável (agenda / detalhe / cash game) */
+  slug?: string
 
   /** Navegação ao clicar no card (quando não há botões com link) */
   link?: string

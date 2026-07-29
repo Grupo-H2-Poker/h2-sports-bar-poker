@@ -35,8 +35,8 @@
 
     <NuxtLink
       v-if="dados.link_footer"
-      :to="dados.link_footer.link"
-      class="text-sm text-white/80 underline underline-offset-2 hover:text-white"
+      :to="footerHref"
+      class="text-sm text-white/80 underline underline-offset-2 hover:text-white cursor-pointer"
     >
       {{ dados.link_footer.texto }}
     </NuxtLink>
@@ -54,7 +54,8 @@ const props = defineProps<{
   largura?: string
 }>()
 
-const active = computed(() => props.active ?? false)
+const route = useRoute()
+const active = computed(() => props.active ?? true)
 const { fundoClass, faixaInfoClass } = useCardTheme(
   () => props.dados,
   () => active.value,
@@ -65,4 +66,12 @@ const buyInValor = computed(() => props.dados.buy_in?.preco ?? '')
 const tituloTopo = computed(() => !!props.dados.buy_in || !!props.dados.titulo)
 
 const largura = computed(() => props.dados.largura ?? props.largura ?? 'w-[330px]')
+
+const footerHref = computed(() => {
+  const link = props.dados.link_footer?.link
+  if (!link || link === '#') return '#'
+  const unidadeSlug = route.params.unidade as string | undefined
+  if (unidadeSlug) return resolveUnidadeHref(unidadeSlug, link)
+  return link.startsWith('/') ? link : `/${link}`
+})
 </script>

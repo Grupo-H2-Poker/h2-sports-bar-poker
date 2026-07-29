@@ -114,8 +114,8 @@ const openLoginAndCloseDrawer = () => {
                                     :target="item.external ? '_blank' : undefined"
                                     :rel="item.external ? 'noopener noreferrer' : undefined"
                                     :class="[
-                                        'group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50',
-                                        menuIsActive(item) ? 'bg-accent text-accent-foreground' : ''
+                                        'nav-menu-link group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-transparent focus:bg-transparent focus:outline-none data-[active=true]:bg-transparent data-[active=true]:hover:bg-transparent data-[active=true]:focus:bg-transparent disabled:pointer-events-none disabled:opacity-50',
+                                        menuIsActive(item) ? 'is-active text-foreground' : ''
                                     ]"
                                 >
                                     {{ item.label }}
@@ -255,8 +255,8 @@ const openLoginAndCloseDrawer = () => {
                                         :external="item.external"
                                         :target="item.external ? '_blank' : undefined"
                                         :rel="item.external ? 'noopener noreferrer' : undefined"
-                                        class="block rounded-md px-3 py-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-                                        :class="menuIsActive(item) ? 'bg-accent text-accent-foreground' : ''"
+                                        class="nav-menu-link nav-menu-link-mobile block rounded-md px-3 py-3 text-sm font-medium transition-colors"
+                                        :class="menuIsActive(item) ? 'is-active' : ''"
                                         @click="closeMobileDrawer"
                                     >
                                         {{ item.label }}
@@ -270,8 +270,8 @@ const openLoginAndCloseDrawer = () => {
                                             v-for="sub in item.items"
                                             :key="sub.id"
                                             :to="menuHref(sub)"
-                                            class="block rounded-md px-6 py-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-                                            :class="menuIsActive(sub) ? 'bg-accent text-accent-foreground' : ''"
+                                            class="nav-menu-link nav-menu-link-mobile block rounded-md px-6 py-3 text-sm font-medium transition-colors"
+                                            :class="menuIsActive(sub) ? 'is-active' : ''"
                                             @click="closeMobileDrawer"
                                         >
                                             {{ sub.label }}

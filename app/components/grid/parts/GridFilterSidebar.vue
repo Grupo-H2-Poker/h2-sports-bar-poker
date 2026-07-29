@@ -45,14 +45,34 @@
                 @click="emit('toggle', section.id, opcao.id)"
               />
             </div>
+
+            <div
+              v-for="sub in section.subsecoes ?? []"
+              :key="sub.id"
+              class="mt-6"
+            >
+              <h4 class="mb-3 text-sm font-normal text-[#e7e7e7]/70">
+                {{ sub.titulo }}
+              </h4>
+              <div :class="sectionGridClass(sub)">
+                <GridFilterChip
+                  v-for="opcao in sub.opcoes"
+                  :key="opcao.id"
+                  :label="opcao.label"
+                  :selected="isSelected(sub.id, opcao.id)"
+                  :full-width="!!sub.colunas"
+                  @click="emit('toggle', sub.id, opcao.id)"
+                />
+              </div>
+            </div>
           </div>
         </div>
 
         <DrawerFooter class="shrink-0 flex-row gap-4 border-t border-white/10 p-0 pt-6">
           <Button
             type="button"
-            variant="outline"
-            class="flex-1 rounded-full border-brand-green bg-transparent text-brand-green hover:bg-brand-green/10 hover:text-brand-green"
+            variant="ghost"
+            class="flex-1 rounded-full outline-smooth-green bg-transparent text-brand-green hover:bg-brand-green/10 hover:text-brand-green"
             @click="emit('clear')"
           >
             {{ config?.limpar?.label ?? 'Limpar filtros' }}

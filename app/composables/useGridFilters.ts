@@ -15,6 +15,10 @@ function emptyFilterState(): FilterState {
   return {}
 }
 
+function normalizeFilterId(value: string): string {
+  return value.trim().toLowerCase()
+}
+
 export function useGridFilters(
   modalConfig: MaybeRefOrGetter<GridFilterModal | undefined>,
   initialFilters?: MaybeRefOrGetter<Record<string, string[]> | undefined>,
@@ -28,7 +32,7 @@ export function useGridFilters(
     return Object.fromEntries(
       Object.entries(initial)
         .filter(([, values]) => values.length > 0)
-        .map(([key, values]) => [key, new Set(values)]),
+        .map(([key, values]) => [key, new Set(values.map(normalizeFilterId))]),
     )
   }
 
@@ -58,25 +62,30 @@ export function useGridFilters(
     isOpen.value = false
   }
 
+  /** Sempre troca a referência do state — Sets mutados no lugar não disparam re-render. */
   function toggleDraftOption(sectionId: string, optionId: string) {
-    if (!draft.value[sectionId]) {
-      draft.value[sectionId] = new Set()
+    const id = normalizeFilterId(optionId)
+    const next = cloneFilterState(draft.value)
+    if (!next[sectionId]) {
+      next[sectionId] = new Set()
     }
 
-    const selected = draft.value[sectionId]
-    if (selected.has(optionId)) {
-      selected.delete(optionId)
+    const selected = next[sectionId]
+    if (selected.has(id)) {
+      selected.delete(id)
       if (selected.size === 0) {
-        delete draft.value[sectionId]
+        delete next[sectionId]
       }
     }
     else {
-      selected.add(optionId)
+      selected.add(id)
     }
+
+    draft.value = next
   }
 
   function isDraftSelected(sectionId: string, optionId: string) {
-    return draft.value[sectionId]?.has(optionId) ?? false
+    return draft.value[sectionId]?.has(normalizeFilterId(optionId)) ?? false
   }
 
   function apply() {
@@ -94,43 +103,70 @@ export function useGridFilters(
   }
 
   function removeAppliedOption(sectionId: string, optionId: string) {
-    applied.value[sectionId]?.delete(optionId)
-    if (applied.value[sectionId]?.size === 0) {
-      delete applied.value[sectionId]
+    const id = normalizeFilterId(optionId)
+    const nextApplied = cloneFilterState(applied.value)
+    nextApplied[sectionId]?.delete(id)
+    if (nextApplied[sectionId]?.size === 0) {
+      delete nextApplied[sectionId]
     }
+    applied.value = nextApplied
 
-    draft.value[sectionId]?.delete(optionId)
-    if (draft.value[sectionId]?.size === 0) {
-      delete draft.value[sectionId]
+    const nextDraft = cloneFilterState(draft.value)
+    nextDraft[sectionId]?.delete(id)
+    if (nextDraft[sectionId]?.size === 0) {
+      delete nextDraft[sectionId]
     }
+    draft.value = nextDraft
   }
 
   const activeSections = computed(() => {
     const config = toValue(modalConfig)
     if (!config) return []
 
-    return config.secoes
-      .map((section: GridFilterSection) => {
-        const selectedIds = applied.value[section.id]
-        if (!selectedIds?.size) return null
+    function sectionBadges(section: GridFilterSection) {
+      const selectedIds = applied.value[section.id]
+      if (!selectedIds?.size) return null
 
-        const badges = section.opcoes
-          .filter(opcao => selectedIds.has(opcao.id))
-          .map(opcao => ({
-            sectionId: section.id,
-            optionId: opcao.id,
-            label: opcao.label,
-          }))
+      const badges = section.opcoes
+        .filter(opcao => selectedIds.has(normalizeFilterId(opcao.id)))
+        .map(opcao => ({
+          sectionId: section.id,
+          optionId: opcao.id,
+          label: opcao.label,
+        }))
 
-        if (!badges.length) return null
-
+      if (!badges.length) {
         return {
           id: section.id,
           titulo: section.titulo,
-          badges,
+          badges: [...selectedIds].map(optionId => ({
+            sectionId: section.id,
+            optionId,
+            label: optionId,
+          })),
         }
-      })
-      .filter((section): section is NonNullable<typeof section> => section !== null)
+      }
+
+      return {
+        id: section.id,
+        titulo: section.titulo,
+        badges,
+      }
+    }
+
+    const result: NonNullable<ReturnType<typeof sectionBadges>>[] = []
+
+    for (const section of config.secoes) {
+      const main = sectionBadges(section)
+      if (main) result.push(main)
+
+      for (const sub of section.subsecoes ?? []) {
+        const nested = sectionBadges(sub)
+        if (nested) result.push(nested)
+      }
+    }
+
+    return result
   })
 
   const hasActiveFilters = computed(() => activeSections.value.length > 0)
@@ -152,6 +188,23 @@ export function useGridFilters(
   }
 }
 
+/** Valor do card para uma seção de filtro (`filtros[id]`, com fallback de `data` no dia). */
+export function getCardFilterValue(
+  card: CardGenericData,
+  sectionId: string,
+): string | undefined {
+  const fromFiltros = card.filtros?.[sectionId]
+  if (fromFiltros != null && String(fromFiltros).trim() !== '') {
+    return normalizeFilterId(String(fromFiltros))
+  }
+
+  if (sectionId === 'dia' && card.data) {
+    return normalizeFilterId(card.data)
+  }
+
+  return undefined
+}
+
 export function filterGridItemsByFilters(
   items: GridModuleItem[],
   applied: FilterState,
@@ -160,10 +213,10 @@ export function filterGridItemsByFilters(
   if (!activeSections.length) return items
 
   return items.filter((item) => {
-    const cardFilters = (item.data as CardGenericData).filtros ?? {}
+    const card = item.data as CardGenericData
 
     return activeSections.every(([sectionId, selectedIds]) => {
-      const cardValue = cardFilters[sectionId]
+      const cardValue = getCardFilterValue(card, sectionId)
       if (!cardValue) return false
       return selectedIds.has(cardValue)
     })

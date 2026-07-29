@@ -14,10 +14,13 @@ export function resolveUnidadeHref(
 ): string {
   if (external || /^https?:\/\//i.test(target)) return target
 
-  const clean = target.replace(/^\//, '')
-  if (!clean || clean === PAGINA_HOME_SLUG) return `/${unidadeSlug}`
+  const [pathPart, query = ''] = target.split('?')
+  const clean = (pathPart ?? '').replace(/^\//, '')
+  const suffix = query ? `?${query}` : ''
 
-  return `/${unidadeSlug}/${clean}`
+  if (!clean || clean === PAGINA_HOME_SLUG) return `/${unidadeSlug}${suffix}`
+
+  return `/${unidadeSlug}/${clean}${suffix}`
 }
 
 export function resolveMenuItemHref(

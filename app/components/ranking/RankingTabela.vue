@@ -50,8 +50,8 @@
         class="mt-10 flex justify-center"
       >
         <Button
-          variant="outline"
-          class="rounded-full border-white bg-transparent text-white hover:bg-white/10"
+          variant="ghost"
+          class="rounded-full outline-smooth-white bg-transparent text-white hover:bg-white/10"
           @click="handleCtaClick"
         >
           {{ config.cta }}

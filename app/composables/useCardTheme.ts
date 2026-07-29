@@ -1,7 +1,7 @@
 import type { CardCorPreset, CardGenericData } from '~/types/cards'
 
 const PRESET_FUNDO: Record<CardCorPreset, { ativo: string; inativo: string }> = {
-  purple: { ativo: 'bg-[#3c2348]', inativo: 'bg-[#2d1a35]' },
+  purple: { ativo: 'bg-[rgba(119,21,142,0.50)]', inativo: 'bg-[rgba(119,21,142,0.30)]' },
   vermelho: { ativo: 'bg-[#6e2a24]', inativo: 'bg-[#5d2320]' },
   amarelo: { ativo: 'bg-[#4a3d12]', inativo: 'bg-[#2d1a35]' },
   verde: { ativo: 'bg-[#1f5142]', inativo: 'bg-[#173d31]' },
@@ -11,7 +11,7 @@ const PRESET_FUNDO: Record<CardCorPreset, { ativo: string; inativo: string }> = 
 const PRESET_BADGE: Record<CardCorPreset, string> = {
   purple: 'bg-brand-purple text-white',
   vermelho: 'bg-[#c4392a] text-white',
-  amarelo: 'bg-[#e6a23a] text-black',
+  amarelo: 'bg-[#F4AD00] text-black',
   verde: 'bg-brand-green text-black',
   branco: 'bg-white text-black',
 }

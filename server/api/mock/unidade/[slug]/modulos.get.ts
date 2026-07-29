@@ -1,4 +1,17 @@
-const AGENDA_GRID_TOOLBAR = {
+import {
+  AGENDA_TORNEIOS_PINHEIROS,
+  AGENDA_TORNEIOS_CPH,
+  AGENDA_TORNEIOS_FUN,
+  ALL_TORNEIOS,
+  CASH_GAME_MESAS,
+  toGridCardComponent,
+  toPreviewCardComponent,
+  toCashGameCardComponent,
+  withDiaFilter,
+  withEtapaFilter,
+} from '../../../../utils/mock-agenda-data'
+
+const AGENDA_GRID_TOOLBAR_BASE = {
   filtro: {
     label: 'Filtrar torneios',
     modal: {
@@ -42,6 +55,20 @@ const AGENDA_GRID_TOOLBAR = {
             { id: 'cph', label: 'CPH' },
             { id: 'fun-festival', label: 'Fun Festival' },
           ],
+          subsecoes: [
+            {
+              id: 'etapa',
+              titulo: 'Etapas',
+              colunas: 3,
+              opcoes: [
+                { id: '1', label: '1ª Etapa' },
+                { id: '2', label: '2ª Etapa' },
+                { id: '3', label: '3ª Etapa' },
+                { id: '4', label: '4ª Etapa' },
+                { id: '5', label: '5ª Etapa' },
+              ],
+            },
+          ],
         },
         {
           id: 'local',
@@ -50,6 +77,60 @@ const AGENDA_GRID_TOOLBAR = {
           opcoes: [
             { id: 'clube-fisico', label: 'Clube físico' },
             { id: 'online', label: 'Online' },
+          ],
+        },
+      ],
+    },
+  },
+  busca: { placeholder: 'Pesquisar torneios', habilitado: true },
+  badges: { limpar: { label: 'Limpar todos os filtros' } },
+}
+
+const AGENDA_GRID_TOOLBAR = withDiaFilter(
+  AGENDA_GRID_TOOLBAR_BASE,
+  ALL_TORNEIOS,
+)
+
+function withoutSeriesFilter<T extends {
+  filtro: { modal: { secoes: { id: string }[] } }
+}>(toolbar: T): T {
+  return {
+    ...toolbar,
+    filtro: {
+      ...toolbar.filtro,
+      modal: {
+        ...toolbar.filtro.modal,
+        secoes: toolbar.filtro.modal.secoes.filter(s => s.id !== 'series'),
+      },
+    },
+  }
+}
+
+/** Séries: sem filtro "Séries" (página já é da série) — mesma lógica de etapa/dia/buy-in. */
+const AGENDA_SERIES_GRID_TOOLBAR_CPH = withDiaFilter(
+  withoutSeriesFilter(withEtapaFilter(AGENDA_GRID_TOOLBAR_BASE)),
+  AGENDA_TORNEIOS_CPH,
+)
+const AGENDA_SERIES_GRID_TOOLBAR_FUN = withDiaFilter(
+  withoutSeriesFilter(withEtapaFilter(AGENDA_GRID_TOOLBAR_BASE)),
+  AGENDA_TORNEIOS_FUN,
+)
+
+const CASH_GAME_GRID_TOOLBAR = {
+  filtro: {
+    label: 'Filtrar torneios',
+    modal: {
+      titulo: 'Filtros',
+      limpar: { label: 'Limpar filtros' },
+      aplicar: { label: 'Filtrar' },
+      secoes: [
+        {
+          id: 'status',
+          titulo: 'Status',
+          colunas: 2,
+          opcoes: [
+            { id: 'aberta', label: 'Aberta' },
+            { id: 'off', label: 'Off' },
           ],
         },
       ],
@@ -270,6 +351,7 @@ export default defineEventHandler((event) => {
               id: 2,
               tipo: 'ranking',
               ordem: 1,
+              margin_top: 10,
               status: 'publicado',
               components: [
                 {
@@ -326,6 +408,7 @@ export default defineEventHandler((event) => {
               id: 3,
               tipo: 'ranking',
               ordem: 2,
+              margin_top: 0,
               status: 'publicado',
               components: [
                 {
@@ -413,69 +496,13 @@ export default defineEventHandler((event) => {
                     titulo: 'Cash Game',
                     inicio: '12:00',
                     inscricoes: '06:00',
-                    link: 'agenda',
-                    botoes: [{ label: 'Garanta seu lugar', link: 'agenda' }],
+                    link: 'fila-cash-game',
+                    botoes: [{ label: 'Garanta seu lugar', link: 'fila-cash-game' }],
                   },
                 },
-                {
-                  id: 401,
-                  type: 'card',
-                  ordem: 2,
-                  status: 'publicado',
-                  data: {
-                    ativo: true,
-                    garantido: '50K Garantido',
-                    titulo: '50K Start Up',
-                    inicio: '16:00',
-                    late: '20:30',
-                    link: 'agenda',
-                    botoes: [{ label: 'Comprar buy-in', link: 'agenda' }],
-                  },
-                },
-                {
-                  id: 402,
-                  type: 'card',
-                  ordem: 3,
-                  status: 'publicado',
-                  data: {
-                    ativo: false,
-                    garantido: '5K Garantido',
-                    titulo: '5K Super 5 Mega Monster',
-                    inicio: '12:30',
-                    late: '17:00',
-                    link: 'agenda',
-                    botoes: [{ label: 'Comprar buy-in', link: 'agenda' }],
-                  },
-                },
-                {
-                  id: 403,
-                  type: 'card',
-                  ordem: 4,
-                  status: 'publicado',
-                  data: {
-                    ativo: false,
-                    garantido: '50K Garantido',
-                    titulo: '50K Start Up',
-                    inicio: '16:00',
-                    late: '20:30',
-                    link: 'agenda',
-                  },
-                },
-                {
-                  id: 404,
-                  type: 'card',
-                  ordem: 5,
-                  status: 'publicado',
-                  data: {
-                    ativo: false,
-                    garantido: '50K Garantido',
-                    titulo: '50K Start Up',
-                    inicio: '16:00',
-                    late: '20:30',
-                    link: 'agenda',
-                    botoes: [{ label: 'Comprar buy-in', link: 'agenda' }],
-                  },
-                },
+                ...AGENDA_TORNEIOS_PINHEIROS.slice(0, 4).map((t, i) =>
+                  toPreviewCardComponent(t, 401 + i, 2 + i, i === 0),
+                ),
               ],
             },
             {
@@ -834,174 +861,13 @@ export default defineEventHandler((event) => {
                   data: {
                     colunas: 3,
                     gap: 'md',
-                    item_types: ['card']
+                    item_types: ['card'],
+                    agrupar_por_dia: true,
                   }
                 },
-                {
-                  id: 1,
-                  type: 'card',
-                  ordem: 10,
-                  status: 'publicado',
-                  data: {
-                    variant: 'torneio',
-                    cor: 'purple',
-                    badge: { texto: '08/10', cor: 'purple' },
-                    categoria: 'Torneio regular',
-                    filtros: {
-                      local: 'clube-fisico',
-                      buy_in: '50-200',
-                      garantido: '5k',
-                      series: 'fun-festival',
-                    },
-                    favorito: { visivel: true, ativo: true, cor: 'verde' },
-                    titulo: '5K Super 5 Mega Monster',
-                    inicio: '12:30',
-                    late: '17:00',
-                    buy_in: {
-                      preco: 'R$50,00',
-                      pontos: 'ou 2.500 pontos H2Rewards',
-                    },
-                    botoes: [
-                      { label: 'Saiba mais', variant: 'outline', cor: 'verde', link: '/torneios/sunday-million' },
-                      { label: 'Comprar buy-in', variant: 'solid', cor: 'verde', link: '/torneios/sunday-million/comprar' },
-                    ],
-                  },
-                },
-                {
-                  id: 2,
-                  type: 'card',
-                  ordem: 11,
-                  status: 'publicado',
-                  data: {
-                    variant: 'torneio',
-                    cor: 'purple',
-                    badge: { texto: '08/10', cor: 'amarelo' },
-                    categoria: 'Torneio Fun Festival',
-                    filtros: {
-                      local: 'clube-fisico',
-                      buy_in: '50-200',
-                      garantido: '5k',
-                      series: 'fun-festival',
-                    },
-                    favorito: { visivel: true, ativo: true, cor: 'verde' },
-                    titulo: '5K Super 5 Mega Monster',
-                    inicio: '12:30',
-                    late: '17:00',
-                    buy_in: { preco: 'R$50,00', pontos: 'ou 2.500 pontos H2Rewards' },
-                    botoes: [
-                      { label: 'Saiba mais', variant: 'outline', cor: 'verde', link: '/torneios/fun-festival' },
-                      { label: 'Comprar buy-in', variant: 'solid', cor: 'verde', link: '/torneios/fun-festival/comprar' },
-                    ],
-                  },
-                },
-                {
-                  id: 3,
-                  type: 'card',
-                  ordem: 12,
-                  status: 'publicado',
-                  data: {
-                    variant: 'torneio',
-                    cor: 'vermelho',
-                    badge: { texto: '08/10', cor: 'vermelho' },
-                    categoria: 'CPH',
-                    filtros: {
-                      local: 'online',
-                      buy_in: '50-200',
-                      garantido: '5k',
-                      series: 'cph',
-                    },
-                    favorito: { visivel: true, ativo: true, cor: 'branco' },
-                    titulo: '5K Super 5 Mega Monster',
-                    inicio: '12:30',
-                    late: '17:00',
-                    buy_in: { preco: 'R$50,00', pontos: 'ou 2.500 pontos H2Rewards' },
-                    botoes: [
-                      { label: 'Saiba mais', variant: 'outline', cor: 'branco', link: '/torneios/cph' },
-                      { label: 'Comprar buy-in', variant: 'solid', cor: 'branco', link: '/torneios/cph/comprar' },
-                    ],
-                  },
-                },
-                {
-                  id: 4,
-                  type: 'card',
-                  ordem: 13,
-                  status: 'publicado',
-                  data: {
-                    variant: 'torneio',
-                    cor: 'purple',
-                    badge: { texto: '09/10', cor: 'purple' },
-                    categoria: 'Torneio regular',
-                    filtros: {
-                      local: 'clube-fisico',
-                      buy_in: '50-200',
-                      garantido: '10k',
-                      series: 'cph',
-                    },
-                    favorito: { visivel: true, cor: 'verde' },
-                    titulo: 'Deep Stack Evening',
-                    inicio: '19:00',
-                    late: '21:00',
-                    buy_in: { preco: 'R$80,00', pontos: 'ou 4.000 pontos H2Rewards' },
-                    botoes: [
-                      { label: 'Saiba mais', variant: 'outline', cor: 'verde', link: '/torneios/deep-stack' },
-                      { label: 'Comprar buy-in', variant: 'solid', cor: 'verde', link: '/torneios/deep-stack/comprar' },
-                    ],
-                  },
-                },
-                {
-                  id: 5,
-                  type: 'card',
-                  ordem: 14,
-                  status: 'publicado',
-                  data: {
-                    variant: 'torneio',
-                    cor: 'purple',
-                    badge: { texto: '09/10', cor: 'purple' },
-                    categoria: '5K Garantido',
-                    filtros: {
-                      local: 'clube-fisico',
-                      buy_in: '201-500',
-                      garantido: '5k',
-                      series: 'fun-festival',
-                    },
-                    favorito: { visivel: true, cor: 'verde' },
-                    titulo: 'Turbo Noturno',
-                    inicio: '22:00',
-                    late: '23:00',
-                    buy_in: { preco: 'R$120,00' },
-                    botoes: [
-                      { label: 'Saiba mais', variant: 'outline', cor: 'verde', link: '/torneios/turbo-noturno' },
-                      { label: 'Comprar buy-in', variant: 'solid', cor: 'verde', link: '/torneios/turbo-noturno/comprar' },
-                    ],
-                  },
-                },
-                {
-                  id: 6,
-                  type: 'card',
-                  ordem: 15,
-                  status: 'publicado',
-                  data: {
-                    variant: 'torneio',
-                    cor: 'purple',
-                    badge: { texto: '10/10', cor: 'purple' },
-                    categoria: 'Torneio regular',
-                    filtros: {
-                      local: 'online',
-                      buy_in: '201-500',
-                      garantido: '20k',
-                      series: 'cph',
-                    },
-                    favorito: { visivel: true, ativo: true, cor: 'verde' },
-                    titulo: 'Sunday Special',
-                    inicio: '14:00',
-                    late: '16:00',
-                    buy_in: { preco: 'R$150,00', pontos: 'ou 7.500 pontos H2Rewards' },
-                    botoes: [
-                      { label: 'Saiba mais', variant: 'outline', cor: 'verde', link: '/torneios/sunday-special' },
-                      { label: 'Comprar buy-in', variant: 'solid', cor: 'verde', link: '/torneios/sunday-special/comprar' },
-                    ],
-                  },
-                },
+                ...ALL_TORNEIOS.map((t, i) =>
+                  toGridCardComponent(t, 1 + i, 10 + i),
+                ),
               ]
             },
           ],
@@ -1039,7 +905,7 @@ export default defineEventHandler((event) => {
                   type: 'grid_toolbar',
                   ordem: 1,
                   status: 'publicado',
-                  data: AGENDA_GRID_TOOLBAR,
+                  data: AGENDA_SERIES_GRID_TOOLBAR_CPH,
                 },
                 {
                   id: 602,
@@ -1050,89 +916,12 @@ export default defineEventHandler((event) => {
                     colunas: 3,
                     gap: 'md',
                     item_types: ['card'],
+                    agrupar_por_dia: true,
                   },
                 },
-                {
-                  id: 603,
-                  type: 'card',
-                  ordem: 10,
-                  status: 'publicado',
-                  data: {
-                    variant: 'torneio',
-                    cor: 'vermelho',
-                    badge: { texto: '22/02', cor: 'vermelho' },
-                    categoria: 'CPH',
-                    filtros: {
-                      local: 'clube-fisico',
-                      buy_in: '201-500',
-                      garantido: '50k',
-                      series: 'cph',
-                    },
-                    favorito: { visivel: true, ativo: true, cor: 'branco' },
-                    titulo: 'CPH Main Event 500K GTD',
-                    inicio: '14:00',
-                    late: '18:00',
-                    buy_in: { preco: 'R$1.500,00', pontos: 'ou 75.000 pontos H2Rewards' },
-                    botoes: [
-                      { label: 'Saiba mais', variant: 'outline', cor: 'branco', link: 'series/cph' },
-                      { label: 'Comprar buy-in', variant: 'solid', cor: 'branco', link: 'series/cph' },
-                    ],
-                  },
-                },
-                {
-                  id: 604,
-                  type: 'card',
-                  ordem: 11,
-                  status: 'publicado',
-                  data: {
-                    variant: 'torneio',
-                    cor: 'vermelho',
-                    badge: { texto: '23/02', cor: 'vermelho' },
-                    categoria: 'CPH',
-                    filtros: {
-                      local: 'clube-fisico',
-                      buy_in: '201-500',
-                      garantido: '100k',
-                      series: 'cph',
-                    },
-                    favorito: { visivel: true, cor: 'branco' },
-                    titulo: 'CPH High Roller 100K GTD',
-                    inicio: '16:00',
-                    late: '20:00',
-                    buy_in: { preco: 'R$2.500,00' },
-                    botoes: [
-                      { label: 'Saiba mais', variant: 'outline', cor: 'branco', link: 'series/cph' },
-                      { label: 'Comprar buy-in', variant: 'solid', cor: 'branco', link: 'series/cph' },
-                    ],
-                  },
-                },
-                {
-                  id: 605,
-                  type: 'card',
-                  ordem: 12,
-                  status: 'publicado',
-                  data: {
-                    variant: 'torneio',
-                    cor: 'vermelho',
-                    badge: { texto: '24/02', cor: 'vermelho' },
-                    categoria: 'CPH',
-                    filtros: {
-                      local: 'online',
-                      buy_in: '50-200',
-                      garantido: '20k',
-                      series: 'cph',
-                    },
-                    favorito: { visivel: true, cor: 'branco' },
-                    titulo: 'CPH Turbo Deep Stack',
-                    inicio: '19:00',
-                    late: '21:00',
-                    buy_in: { preco: 'R$150,00' },
-                    botoes: [
-                      { label: 'Saiba mais', variant: 'outline', cor: 'branco', link: 'series/cph' },
-                      { label: 'Comprar buy-in', variant: 'solid', cor: 'branco', link: 'series/cph' },
-                    ],
-                  },
-                },
+                ...AGENDA_TORNEIOS_CPH.map((t, i) =>
+                  toGridCardComponent(t, 603 + i, 10 + i),
+                ),
               ],
             },
           ],
@@ -1168,7 +957,7 @@ export default defineEventHandler((event) => {
                   type: 'grid_toolbar',
                   ordem: 1,
                   status: 'publicado',
-                  data: AGENDA_GRID_TOOLBAR,
+                  data: AGENDA_SERIES_GRID_TOOLBAR_FUN,
                 },
                 {
                   id: 612,
@@ -1179,87 +968,119 @@ export default defineEventHandler((event) => {
                     colunas: 3,
                     gap: 'md',
                     item_types: ['card'],
+                    agrupar_por_dia: true,
+                  },
+                },
+                ...AGENDA_TORNEIOS_FUN.map((t, i) =>
+                  toGridCardComponent(t, 613 + i, 10 + i),
+                ),
+              ],
+            },
+          ],
+        },
+
+        // Página Fila Cash Game
+        {
+          slug: 'fila-cash-game',
+          titulo: 'Cash game',
+          ordem: 22,
+          status: 'publicado',
+          modulos: [
+            {
+              id: 70,
+              tipo: 'grid',
+              ordem: 1,
+              status: 'publicado',
+              margin_top: 40,
+              margin_bottom: 100,
+              components: [
+                {
+                  id: 700,
+                  type: 'section_cta',
+                  ordem: 0,
+                  status: 'publicado',
+                  data: {
+                    titulo: 'Cash game',
+                    descricao: 'Confira as mesas abertas, e garanta o seu lugar.',
+                    align: 'left',
+                    size: 'md',
                   },
                 },
                 {
-                  id: 613,
-                  type: 'card',
-                  ordem: 10,
+                  id: 701,
+                  type: 'grid_toolbar',
+                  ordem: 1,
+                  status: 'publicado',
+                  data: CASH_GAME_GRID_TOOLBAR,
+                },
+                {
+                  id: 702,
+                  type: 'grid_config',
+                  ordem: 2,
                   status: 'publicado',
                   data: {
-                    variant: 'torneio',
-                    cor: 'purple',
-                    badge: { texto: '22/02', cor: 'purple' },
-                    categoria: 'Fun Festival',
-                    filtros: {
-                      local: 'clube-fisico',
-                      buy_in: '201-500',
-                      garantido: '50k',
-                      series: 'fun-festival',
-                    },
-                    favorito: { visivel: true, ativo: true, cor: 'verde' },
-                    titulo: 'Fun Festival Main Event 500K GTD',
-                    inicio: '14:00',
-                    late: '18:00',
-                    buy_in: { preco: 'R$1.500,00', pontos: 'ou 75.000 pontos H2Rewards' },
-                    botoes: [
-                      { label: 'Saiba mais', variant: 'outline', cor: 'verde', link: 'series/fun-festival' },
-                      { label: 'Comprar buy-in', variant: 'solid', cor: 'verde', link: 'series/fun-festival' },
-                    ],
+                    colunas: 3,
+                    gap: 'md',
+                    item_types: ['card'],
+                  },
+                },
+                ...CASH_GAME_MESAS.map((m, i) =>
+                  toCashGameCardComponent(m, 703 + i, 10 + i),
+                ),
+              ],
+            },
+            {
+              id: 71,
+              tipo: 'faq',
+              ordem: 2,
+              status: 'publicado',
+              margin_top: 100,
+              margin_bottom: 40,
+              metadados: { margin_lateral: 24 },
+              components: [
+                {
+                  id: 710,
+                  type: 'section_cta',
+                  ordem: 0,
+                  status: 'publicado',
+                  data: {
+                    titulo: 'Perguntas frequentes',
+                    descricao: 'Aqui estão algumas das perguntas mais frequentes sobre a agenda.',
+                    cta: 'Saiba mais',
+                    cta_link: 'faq',
+                    cta_cor: 'verde',
+                    align: 'left',
+                    size: 'md',
                   },
                 },
                 {
-                  id: 614,
-                  type: 'card',
-                  ordem: 11,
+                  id: 711,
+                  type: 'faq',
+                  ordem: 1,
                   status: 'publicado',
                   data: {
-                    variant: 'torneio',
-                    cor: 'purple',
-                    badge: { texto: '23/02', cor: 'purple' },
-                    categoria: 'Fun Festival',
-                    filtros: {
-                      local: 'clube-fisico',
-                      buy_in: '201-500',
-                      garantido: '100k',
-                      series: 'fun-festival',
-                    },
-                    favorito: { visivel: true, cor: 'verde' },
-                    titulo: 'Fun Festival High Roller 100K GTD',
-                    inicio: '16:00',
-                    late: '20:00',
-                    buy_in: { preco: 'R$2.500,00' },
-                    botoes: [
-                      { label: 'Saiba mais', variant: 'outline', cor: 'verde', link: 'series/fun-festival' },
-                      { label: 'Comprar buy-in', variant: 'solid', cor: 'verde', link: 'series/fun-festival' },
-                    ],
+                    pergunta: 'Como entro na fila do cash game?',
+                    resposta: 'Escolha uma mesa aberta e toque em Entrar na fila. Você verá sua posição na fila de espera.',
                   },
                 },
                 {
-                  id: 615,
-                  type: 'card',
-                  ordem: 12,
+                  id: 712,
+                  type: 'faq',
+                  ordem: 2,
                   status: 'publicado',
                   data: {
-                    variant: 'torneio',
-                    cor: 'purple',
-                    badge: { texto: '24/02', cor: 'purple' },
-                    categoria: 'Fun Festival',
-                    filtros: {
-                      local: 'online',
-                      buy_in: '50-200',
-                      garantido: '20k',
-                      series: 'fun-festival',
-                    },
-                    favorito: { visivel: true, cor: 'verde' },
-                    titulo: 'Fun Festival Turbo Deep Stack',
-                    inicio: '19:00',
-                    late: '21:00',
-                    buy_in: { preco: 'R$150,00' },
-                    botoes: [
-                      { label: 'Saiba mais', variant: 'outline', cor: 'verde', link: 'series/fun-festival' },
-                      { label: 'Comprar buy-in', variant: 'solid', cor: 'verde', link: 'series/fun-festival' },
-                    ],
+                    pergunta: 'Posso sair da fila?',
+                    resposta: 'Sim. Fale com a equipe de piso ou use o app para cancelar sua inscrição na fila.',
+                  },
+                },
+                {
+                  id: 713,
+                  type: 'faq',
+                  ordem: 3,
+                  status: 'publicado',
+                  data: {
+                    pergunta: 'Quais blinds estão disponíveis?',
+                    resposta: 'As mesas e blinds abertos aparecem nesta página e são atualizados conforme o movimento do clube.',
                   },
                 },
               ],
@@ -1460,7 +1281,7 @@ export default defineEventHandler((event) => {
               margin_top: 40,
               margin_bottom: 40,
               metadados: {
-                carousel_bleed_right: false,
+                carousel_bleed_right: true,
                 card_variant: 'etapa_preview',
                 hide_cash_game: true,
               },
@@ -1473,7 +1294,7 @@ export default defineEventHandler((event) => {
                   data: {
                     titulo: 'Próximas etapas',
                     cta: 'Confira os torneios da 2ª etapa',
-                    cta_link: 'agenda/cph',
+                    cta_link: 'agenda/cph?etapa=2',
                     cta_cor: 'branco',
                     align: 'left',
                     size: 'md',
@@ -1490,7 +1311,7 @@ export default defineEventHandler((event) => {
                     titulo: '2ª Etapa',
                     subtitulo: 'CPH',
                     faixa_info: '22 de Fevereiro a 03 de Março',
-                    link: 'agenda/cph',
+                    link: 'agenda/cph?etapa=2',
                     cor: 'vermelho',
                     classes: { fundo_ativo: '#d63d1d' },
                   },
@@ -1505,7 +1326,7 @@ export default defineEventHandler((event) => {
                     titulo: '3ª Etapa',
                     subtitulo: 'CPH',
                     faixa_info: '05 a 14 de Abril',
-                    link: 'agenda/cph',
+                    link: 'agenda/cph?etapa=3',
                   },
                 },
                 {
@@ -1518,7 +1339,7 @@ export default defineEventHandler((event) => {
                     titulo: '4ª Etapa',
                     subtitulo: 'CPH',
                     faixa_info: '10 a 19 de Maio',
-                    link: 'agenda/cph',
+                    link: 'agenda/cph?etapa=4',
                   },
                 },
                 {
@@ -1531,7 +1352,7 @@ export default defineEventHandler((event) => {
                     titulo: '5ª Etapa',
                     subtitulo: 'CPH',
                     faixa_info: '07 a 16 de Junho',
-                    link: 'agenda/cph',
+                    link: 'agenda/cph?etapa=5',
                   },
                 },
               ],
@@ -1853,7 +1674,7 @@ export default defineEventHandler((event) => {
               margin_top: 40,
               margin_bottom: 40,
               metadados: {
-                carousel_bleed_right: false,
+                carousel_bleed_right: true,
                 card_variant: 'etapa_preview',
                 hide_cash_game: true,
               },
@@ -1866,7 +1687,7 @@ export default defineEventHandler((event) => {
                   data: {
                     titulo: 'Próximas etapas',
                     cta: 'Confira os torneios da 1ª etapa',
-                    cta_link: 'agenda/fun-festival',
+                    cta_link: 'agenda/fun-festival?etapa=1',
                     cta_cor: 'verde',
                     align: 'left',
                     size: 'md',
@@ -1883,7 +1704,7 @@ export default defineEventHandler((event) => {
                     titulo: '1ª Etapa',
                     subtitulo: 'Fun Festival',
                     faixa_info: '22 de Fevereiro a 03 de Março',
-                    link: 'agenda/fun-festival',
+                    link: 'agenda/fun-festival?etapa=1',
                     cor: 'vermelho',
                     classes: { fundo_ativo: '#B41E92' },
                   },
@@ -1898,7 +1719,7 @@ export default defineEventHandler((event) => {
                     titulo: '2ª Etapa',
                     subtitulo: 'Fun Festival',
                     faixa_info: '05 a 14 de Abril',
-                    link: 'agenda/fun-festival',
+                    link: 'agenda/fun-festival?etapa=2',
                   },
                 },
                 {
@@ -1911,7 +1732,7 @@ export default defineEventHandler((event) => {
                     titulo: '3ª Etapa',
                     subtitulo: 'Fun Festival',
                     faixa_info: '10 a 19 de Maio',
-                    link: 'agenda/fun-festival',
+                    link: 'agenda/fun-festival?etapa=3',
                   },
                 },
               ],

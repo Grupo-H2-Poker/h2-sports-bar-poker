@@ -5,7 +5,7 @@
       largura,
       altura,
       CARD_PREVIEW_TEXT,
-      'cursor-pointer transition-colors',
+      CARD_INTERACTIVE,
     ]"
     :style="cardStyle"
     @click="onCardClick"
@@ -30,6 +30,7 @@
 <script setup lang="ts">
 import type { CardGenericData } from '~/types/cards'
 import {
+  CARD_INTERACTIVE,
   CARD_PREVIEW_HORARIOS,
   CARD_PREVIEW_TORNEIO_FOOTER,
   CARD_PREVIEW_TORNEIO_SHELL,
@@ -37,7 +38,7 @@ import {
 } from '~/components/cards/layouts/cardPreviewShared'
 
 const ETAPA_PREVIEW_BG_ATIVO = '#d63d1d'
-const ETAPA_PREVIEW_BG_INATIVO = 'rgba(255, 255, 255, 0.06)'
+const ETAPA_PREVIEW_BG_INATIVO = '#E7E7E74D'
 
 const props = defineProps<{
   dados: CardGenericData

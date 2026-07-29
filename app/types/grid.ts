@@ -1,16 +1,29 @@
 import type { CardGenericData } from '~/types/cards'
 import type { GaleriaImagemData } from '~/types/modules'
 
+export type GridItemType = 'card' | 'imagem'
+
 /** Config do component `grid_config` — layout do grid */
 export interface GridConfigData {
   colunas?: 1 | 2 | 3 | 4
   gap?: 'sm' | 'md' | 'lg'
   /** Tipos de item renderizados no grid (demais `components[]` com esse type) */
+  item_types?: GridItemType[]
   /** Filtros aplicados ao carregar a página (ex.: `{ series: ['cph'] }`) */
   filtros_iniciais?: Record<string, string[]>
+  /**
+   * Agrupa cards por `grupo_dia` (Hoje, Ontem, data, Semana passada…).
+   * Padrão: `true` quando há itens com `grupo_dia`.
+   */
+  agrupar_por_dia?: boolean
 }
 
-export type GridItemType = 'card' | 'imagem'
+/** Seção do grid agrupada por dia */
+export interface GridDiaGroup<T = unknown> {
+  id: string
+  label: string
+  items: T[]
+}
 
 export interface GridFilterOption {
   id: string
@@ -23,6 +36,11 @@ export interface GridFilterSection {
   opcoes: GridFilterOption[]
   /** Chips por linha no modal (ex.: buy-in = 2, garantido = 5) */
   colunas?: 1 | 2 | 3 | 4 | 5
+  /**
+   * Subseções no mesmo bloco (ex.: Séries → Etapas).
+   * O `id` da subseção é a chave de filtro (`etapa`, etc.).
+   */
+  subsecoes?: GridFilterSection[]
 }
 
 export interface GridFilterModalAction {

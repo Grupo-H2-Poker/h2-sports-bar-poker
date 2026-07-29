@@ -1,6 +1,13 @@
 <template>
   <div
-    :class="[CARD_PREVIEW_SHELL, CARD_PREVIEW_TEXT, 'bg-brand-purple', largura, altura]"
+    :class="[
+      CARD_PREVIEW_SHELL,
+      CARD_PREVIEW_TEXT,
+      CARD_INTERACTIVE,
+      largura,
+      altura,
+    ]"
+    :style="{ background: '#77158E' }"
     @click="onCardClick"
   >
     <div :class="CARD_PREVIEW_HEADER">
@@ -28,7 +35,7 @@
           v-if="hasButton"
           variant="brand"
           size="sm"
-          :class="[CARD_PREVIEW_BUTTON, 'bg-brand-green text-black hover:bg-brand-green/90']"
+          :class="[CARD_PREVIEW_BUTTON, 'btn-green-solid']"
           @click.stop="onButtonClick(true)"
         >
           {{ primaryButton!.label }}
@@ -42,6 +49,7 @@
 import { Button } from '~/components/ui/button'
 import type { CardGenericData } from '~/types/cards'
 import {
+  CARD_INTERACTIVE,
   CARD_PREVIEW_BUTTON,
   CARD_PREVIEW_BUTTON_SLOT,
   CARD_PREVIEW_CASH_DETALHES,

@@ -5,6 +5,7 @@
       largura,
       altura,
       isActive ? CARD_PREVIEW_TEXT : 'text-zinc-500',
+      isClickable && CARD_INTERACTIVE,
     ]"
     :style="cardStyle"
     @click="onCardClick"
@@ -56,6 +57,7 @@
 import { Button } from '~/components/ui/button'
 import type { CardGenericData } from '~/types/cards'
 import {
+  CARD_INTERACTIVE,
   CARD_PREVIEW_BUTTON,
   CARD_PREVIEW_BUTTON_SLOT,
   CARD_PREVIEW_TORNEIO_FOOTER,
@@ -69,8 +71,8 @@ import {
   CARD_PREVIEW_TORNEIO_TITULO_SLOT,
 } from '~/components/cards/layouts/cardPreviewShared'
 
-const TORNEIO_PREVIEW_BG_ATIVO = 'rgba(119, 21, 142, 0.30)'
-const TORNEIO_PREVIEW_BG_INATIVO = 'rgba(255, 255, 255, 0.06)'
+const TORNEIO_PREVIEW_BG_ATIVO = 'rgba(119, 21, 142, 0.50)'
+const TORNEIO_PREVIEW_BG_INATIVO = '#77158E4D'
 
 const props = defineProps<{
   dados: CardGenericData
@@ -83,13 +85,15 @@ const altura = computed(() => props.dados.altura ?? props.altura)
 
 const isActive = computed(() => props.dados.ativo !== false)
 
+const isClickable = computed(() => !!(props.dados.link || props.dados.botoes?.some(b => b.link)))
+
 const cardStyle = computed(() => ({
   background: isActive.value ? TORNEIO_PREVIEW_BG_ATIVO : TORNEIO_PREVIEW_BG_INATIVO,
 }))
 
 const botaoClass = computed(() =>
   isActive.value
-    ? 'bg-brand-green text-black hover:bg-brand-green/90'
+    ? 'btn-green-solid cursor-pointer'
     : 'bg-zinc-700 text-zinc-500 cursor-default',
 )
 

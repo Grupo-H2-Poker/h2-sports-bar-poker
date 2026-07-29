@@ -9,7 +9,7 @@
         <DragCarousel
           class="min-w-0 w-0 flex-1"
           :bleed-right="carouselBleedRight"
-          content-class="gap-4 items-stretch pb-1"
+          content-class="gap-4 items-stretch py-2"
         >
           <CardGeneric
             v-if="cashGameCard"

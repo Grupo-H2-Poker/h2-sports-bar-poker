@@ -33,7 +33,7 @@ const props = withDefaults(defineProps<{
   /** Preenche a célula do grid (largura/altura 100%) */
   fill?: boolean
 }>(), {
-  active: false,
+  active: true,
   fill: false,
 })
 
