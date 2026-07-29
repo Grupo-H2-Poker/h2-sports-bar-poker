@@ -1,57 +1,56 @@
 <template>
-  <section>
+  <section class="font-[family-name:var(--font-red-hat-display)]">
     <div
       class="container mx-auto"
       :style="pagePaddingStyle"
     >
-      <div
+      <header
         v-if="ctaConfig?.titulo"
-        class="bg-[#373737] rounded-lg py-12 px-8 text-center mb-10"
+        class="mb-12 rounded-2xl border border-white/5 bg-[#373737] px-8 py-10 text-center sm:px-12 sm:py-12"
       >
-        <h1 class="text-[#e7e7e7] text-3xl font-bold leading-tight">
+        <h1 class="text-xl font-bold leading-tight tracking-tight text-card-preview-text sm:text-2xl">
           {{ ctaConfig.titulo }}
         </h1>
         <p
           v-if="ctaConfig.descricao"
-          class="text-[#e7e7e7]/70 text-base mt-3 max-w-2xl mx-auto"
+          class="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-card-preview-text/65"
         >
           {{ ctaConfig.descricao }}
         </p>
-      </div>
+      </header>
 
       <div
         v-if="categorias.length"
-        class="flex flex-col lg:flex-row items-start gap-10 lg:gap-16"
+        class="flex flex-col items-start gap-10 lg:flex-row lg:gap-16"
       >
         <nav
-          class="lg:w-48 shrink-0 self-start"
+          class="w-full shrink-0 self-start lg:sticky lg:top-28 lg:w-52"
           aria-label="Categorias do FAQ"
         >
           <div class="relative">
             <div
-              class="pointer-events-none absolute left-0 top-0 bottom-0 w-1.5 bg-[rgba(231,231,231,0.5)] rounded-[8px]"
+              class="pointer-events-none absolute bottom-0 left-0 top-0 w-1 rounded-full bg-white/10"
               aria-hidden="true"
             />
-            <ul class="relative flex flex-col gap-1">
+            <span
+              class="pointer-events-none absolute left-0 z-[1] h-10 w-1 rounded-full bg-brand-green shadow-[0_0_12px_rgba(36,207,164,0.45)] transition-[top] duration-300 ease-out"
+              :style="activeBarStyle"
+              aria-hidden="true"
+            />
+            <ul class="relative flex flex-col gap-0.5">
               <li
-                v-for="(categoria, index) in categorias"
+                v-for="categoria in categorias"
                 :key="categoria.slug"
               >
                 <Button
                   type="button"
                   variant="ghost"
-                  class="relative h-auto w-full justify-start rounded-none py-3 pl-4 pr-2 text-left text-base leading-7 hover:bg-transparent"
+                  class="relative h-auto w-full justify-start rounded-r-lg rounded-l-none py-3 pl-5 pr-3 text-left text-base leading-7 transition-colors hover:bg-white/4"
                   :class="categoria.slug === activeCategoria
-                    ? 'text-[#e7e7e7] font-bold'
-                    : 'text-[#e7e7e7] font-medium opacity-70 hover:opacity-100'"
+                    ? 'text-card-preview-text font-bold'
+                    : 'text-card-preview-text/55 font-medium hover:text-card-preview-text/85'"
                   @click="activeCategoria = categoria.slug"
                 >
-                  <span
-                    v-if="categoria.slug === activeCategoria"
-                    class="pointer-events-none absolute left-0 z-[1] w-1.5 h-10 bg-[#24cfa4] rounded-[8px]"
-                    :class="activeBarPositionClass(index, categorias.length)"
-                    aria-hidden="true"
-                  />
                   {{ categoria.titulo }}
                 </Button>
               </li>
@@ -59,36 +58,43 @@
           </div>
         </nav>
 
-        <div class="flex-1 min-w-0">
-          <Accordion
-            v-if="activeItems.length"
-            type="single"
-            collapsible
-            class="faq-page-accordion w-full"
+        <div class="min-w-0 flex-1">
+          <Transition
+            name="faq-fade"
+            mode="out-in"
           >
-            <AccordionItem
-              v-for="(item, index) in activeItems"
-              :key="`${activeCategoria}-${index}`"
-              :value="`item-${activeCategoria}-${index}`"
-              class="border-[rgba(231,231,231,0.30)]"
+            <Accordion
+              v-if="activeItems.length"
+              :key="activeCategoria"
+              type="single"
+              collapsible
+              class="faq-page-accordion w-full"
             >
-              <AccordionTrigger
-                class="text-left text-xl font-bold text-[#e7e7e7] hover:no-underline py-5 gap-4"
+              <AccordionItem
+                v-for="(item, index) in activeItems"
+                :key="`${activeCategoria}-${index}`"
+                :value="`item-${activeCategoria}-${index}`"
+                class="border-white/10 transition-colors data-[state=open]:border-brand-green/25"
               >
-                {{ item.pergunta }}
-              </AccordionTrigger>
-              <AccordionContent class="text-base font-normal text-[#E7E7E7] pb-5 leading-[26px]">
-                {{ item.resposta }}
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+                <AccordionTrigger
+                  class="gap-4 py-5 text-left text-base font-semibold text-card-preview-text hover:no-underline [&[data-state=open]]:text-white"
+                >
+                  {{ item.pergunta }}
+                </AccordionTrigger>
+                <AccordionContent class="pb-6 text-sm font-normal leading-relaxed text-card-preview-text/70">
+                  {{ item.resposta }}
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
 
-          <p
-            v-else
-            class="text-[#e7e7e7]/60 text-base py-8"
-          >
-            Nenhuma pergunta nesta categoria.
-          </p>
+            <p
+              v-else
+              :key="`empty-${activeCategoria}`"
+              class="py-10 text-base text-card-preview-text/50"
+            >
+              Nenhuma pergunta nesta categoria.
+            </p>
+          </Transition>
         </div>
       </div>
     </div>
@@ -100,6 +106,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '~/
 import { Button } from '~/components/ui/button'
 import type { ModuloOf } from '~/types/modules'
 
+const CATEGORY_ITEM_HEIGHT_PX = 52
+
 const props = defineProps<{
   modulo: ModuloOf<'faq_page'>
 }>()
@@ -107,12 +115,6 @@ const props = defineProps<{
 const { ctaConfig, categorias } = useFaqPageModule(() => props.modulo)
 
 const pagePaddingStyle = useModuloMarginLateral(() => props.modulo.metadados)
-
-function activeBarPositionClass(index: number, total: number) {
-  if (index === 0) return 'top-0'
-  if (index === total - 1) return 'bottom-0'
-  return 'top-1/2 -translate-y-1/2'
-}
 
 const activeCategoria = ref('')
 
@@ -131,6 +133,14 @@ watch(
   { immediate: true },
 )
 
+const activeIndex = computed(() =>
+  Math.max(0, categorias.value.findIndex(c => c.slug === activeCategoria.value)),
+)
+
+const activeBarStyle = computed(() => ({
+  top: `${activeIndex.value * CATEGORY_ITEM_HEIGHT_PX + 6}px`,
+}))
+
 const activeItems = computed(() =>
   getFaqItemsByCategoria(categorias.value, activeCategoria.value),
 )
@@ -145,5 +155,23 @@ const activeItems = computed(() =>
 
 .faq-page-accordion :deep([data-slot="accordion-trigger"] svg) {
   color: #e7e7e7;
+  opacity: 0.7;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.faq-page-accordion :deep([data-slot="accordion-trigger"][data-state="open"] svg) {
+  color: var(--brand-green);
+  opacity: 1;
+}
+
+.faq-fade-enter-active,
+.faq-fade-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.faq-fade-enter-from,
+.faq-fade-leave-to {
+  opacity: 0;
+  transform: translateY(6px);
 }
 </style>

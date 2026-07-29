@@ -52,7 +52,7 @@ function linkClass(item: FooterLinkItem) {
   if (item.estilo === 'destaque') {
     return 'text-lg font-bold leading-snug text-card-preview-text hover:text-white transition-colors'
   }
-  return 'text-sm font-medium leading-snug text-[#9a9a9a] hover:text-white transition-colors'
+  return 'text-sm font-medium leading-snug text-[#c4c4c4] hover:text-white transition-colors'
 }
 </script>
 

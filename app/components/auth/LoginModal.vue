@@ -274,12 +274,20 @@ const onSubmit = handleSubmit(handleLogin)
 </script>
 
 <style>
-/* Garantir que o Dialog de Login tenha z-index maior que o Drawer */
+/* Login acima do Drawer; recuperar senha acima do login */
 [data-slot="dialog-overlay"] {
     z-index: 100 !important;
 }
 
 [data-slot="dialog-content"] {
     z-index: 101 !important;
+}
+
+[data-slot="alert-dialog-overlay"] {
+    z-index: 110 !important;
+}
+
+[data-slot="alert-dialog-content"] {
+    z-index: 111 !important;
 }
 </style>

@@ -1278,6 +1278,7 @@ export default defineEventHandler((event) => {
               id: 11,
               tipo: 'faq_page',
               ordem: 1,
+              margin_top: 40,
               status: 'publicado',
               metadados: {
                 margin_lateral: 100,
