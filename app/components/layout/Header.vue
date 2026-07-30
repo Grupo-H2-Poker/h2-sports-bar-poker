@@ -118,7 +118,7 @@ const openLoginAndCloseDrawer = () => {
                                         menuIsActive(item) ? 'is-active text-foreground' : ''
                                     ]"
                                 >
-                                    {{ item.label }}
+                                    <span class="nav-menu-link-label">{{ item.label }}</span>
                                 </NuxtLink>
                             </NavigationMenuLink>
                         </template>
@@ -128,10 +128,12 @@ const openLoginAndCloseDrawer = () => {
                                 <DropdownMenuTrigger as-child>
                                     <Button
                                         variant="ghost"
-                                        class="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium"
+                                        class="nav-menu-link group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-transparent focus:bg-transparent focus-visible:bg-transparent data-[state=open]:bg-transparent"
                                     >
-                                        {{ item.label }}
-                                        <ChevronDown class="ml-2 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                                        <span class="nav-menu-link-label">
+                                            {{ item.label }}
+                                            <ChevronDown class="ml-2 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                                        </span>
                                     </Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent side="bottom" align="start" class="w-56">
@@ -154,9 +156,11 @@ const openLoginAndCloseDrawer = () => {
             <div class="hidden md:flex flex-1 items-center justify-end space-x-2">
                 <DropdownMenu>
                     <DropdownMenuTrigger as-child>
-                        <Button variant="ghost" class="h-9 px-3 text-sm font-medium">
-                            {{ selectedUnityName }}
-                            <ChevronDown class="ml-2 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                        <Button variant="ghost" class="nav-menu-link group inline-flex h-9 items-center justify-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-transparent focus:bg-transparent focus-visible:bg-transparent data-[state=open]:bg-transparent">
+                            <span class="nav-menu-link-label">
+                                {{ selectedUnityName }}
+                                <ChevronDown class="ml-2 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                            </span>
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent side="bottom" align="end" class="w-56">
@@ -179,9 +183,11 @@ const openLoginAndCloseDrawer = () => {
                 <!-- Language Switcher -->
                 <DropdownMenu>
                     <DropdownMenuTrigger as-child>
-                        <Button variant="ghost" class="h-9 px-3 text-sm font-medium ml-4">
-                            {{ language.toUpperCase() }}
-                            <ChevronDown class="ml-2 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                        <Button variant="ghost" class="nav-menu-link group inline-flex h-9 items-center justify-center rounded-md px-3 text-sm font-medium ml-4 transition-colors hover:bg-transparent focus:bg-transparent focus-visible:bg-transparent data-[state=open]:bg-transparent">
+                            <span class="nav-menu-link-label">
+                                {{ language.toUpperCase() }}
+                                <ChevronDown class="ml-2 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                            </span>
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent side="bottom" align="end" class="w-28">
@@ -208,9 +214,11 @@ const openLoginAndCloseDrawer = () => {
                 <!-- Language Switcher Mobile -->
                 <DropdownMenu>
                     <DropdownMenuTrigger as-child>
-                        <Button variant="ghost" class="h-9 px-3 text-sm font-medium">
-                            {{ language.toUpperCase() }}
-                            <ChevronDown class="ml-2 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                        <Button variant="ghost" class="nav-menu-link group inline-flex h-9 items-center justify-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-transparent focus:bg-transparent focus-visible:bg-transparent data-[state=open]:bg-transparent">
+                            <span class="nav-menu-link-label">
+                                {{ language.toUpperCase() }}
+                                <ChevronDown class="ml-2 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                            </span>
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent side="bottom" align="end" class="w-28">
@@ -259,7 +267,7 @@ const openLoginAndCloseDrawer = () => {
                                         :class="menuIsActive(item) ? 'is-active' : ''"
                                         @click="closeMobileDrawer"
                                     >
-                                        {{ item.label }}
+                                        <span class="nav-menu-link-label">{{ item.label }}</span>
                                     </NuxtLink>
 
                                     <div v-else class="space-y-1">
@@ -274,7 +282,7 @@ const openLoginAndCloseDrawer = () => {
                                             :class="menuIsActive(sub) ? 'is-active' : ''"
                                             @click="closeMobileDrawer"
                                         >
-                                            {{ sub.label }}
+                                            <span class="nav-menu-link-label">{{ sub.label }}</span>
                                         </NuxtLink>
                                     </div>
                                 </div>
