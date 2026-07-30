@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { watch } from 'vue'
-import { toast } from 'vue-sonner'
 
 export interface User {
     nome: string
@@ -30,6 +29,7 @@ export const useAuthStore = defineStore('auth', () => {
     const token = ref<string | null>(null)
     const isLoading = ref(false)
     const isAuthenticated = ref(false)
+    const fetchError = ref<string | null>(null)
 
     watch([token, user], ([newToken, newUser]) => {
         const hasToken = !!newToken
@@ -50,13 +50,14 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     // Buscar dados do usuário
-    const fetchUserData = async () => {
+    const fetchUserData = async (): Promise<boolean> => {
         if (!token.value) {
-            return
+            return false
         }
 
         try {
             isLoading.value = true
+            fetchError.value = null
 
             const response = await $fetch<{ success: boolean, data: User }>('/api/users', {
                 headers: {
@@ -67,11 +68,22 @@ export const useAuthStore = defineStore('auth', () => {
             if (response.success && response.data) {
                 const userData = (response.data as any).data || response.data
                 user.value = userData
+                return true
             }
 
-        } catch (error) {
+            fetchError.value = 'Não foi possível carregar os dados do usuário.'
+            return false
+        } catch (error: any) {
             console.error('Erro ao buscar dados do usuário:', error)
-            logout()
+            const status = error?.statusCode || error?.status
+            fetchError.value = error?.statusMessage
+                || error?.data?.message
+                || 'Erro ao buscar dados do usuário.'
+
+            if (status === 401) {
+                logout()
+            }
+            return false
         } finally {
             isLoading.value = false
         }
@@ -92,6 +104,7 @@ export const useAuthStore = defineStore('auth', () => {
     const logout = () => {
         user.value = null
         token.value = null
+        fetchError.value = null
 
         if (import.meta.client) {
             localStorage.removeItem('auth_token')
@@ -110,6 +123,7 @@ export const useAuthStore = defineStore('auth', () => {
         token,
         isLoading,
         isAuthenticated,
+        fetchError,
         initAuth,
         fetchUserData,
         login,

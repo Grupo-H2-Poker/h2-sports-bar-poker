@@ -13,6 +13,7 @@
           <DragCarousel
             v-if="dragCarousel"
             :bleed-right="carouselBleedRight"
+            :bleed-left="carouselBleedLeft"
             content-class="gap-4 items-stretch pb-1"
           >
             <div
@@ -66,6 +67,9 @@ const fullWidth = computed(() => props.modulo.metadados?.full_width ?? false)
 const useSameFaqMargin = computed(() => props.modulo.metadados?.use_same_faq_margin ?? false)
 const carouselBleedRight = computed(
   () => dragCarousel.value && (props.modulo.metadados?.carousel_bleed_right ?? false),
+)
+const carouselBleedLeft = computed(
+  () => dragCarousel.value && (props.modulo.metadados?.carousel_bleed_left ?? false),
 )
 
 const marginLateralStyle = useBannerMarginLateral(() => props.modulo)

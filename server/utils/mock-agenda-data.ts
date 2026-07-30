@@ -477,12 +477,13 @@ export function buildDiaFilterSection(torneios: TorneioMock[]) {
   }
 }
 
-export function withDiaFilter(
-  toolbar: {
-    filtro: { label: string, modal: { titulo: string, limpar: { label: string }, aplicar: { label: string }, secoes: unknown[] } }
-    busca: { placeholder: string, habilitado: boolean }
-    badges: { limpar: { label: string } }
-  },
+/** Toolbar mínimo para helpers que manipulam `filtro.modal.secoes` (preserva o restante via genérico). */
+type ToolbarWithSecoes = {
+  filtro: { modal: { secoes: ReadonlyArray<{ id: string }> } }
+}
+
+export function withDiaFilter<T extends ToolbarWithSecoes>(
+  toolbar: T,
   torneios: TorneioMock[],
 ) {
   return {
@@ -497,11 +498,7 @@ export function withDiaFilter(
   }
 }
 
-export function withEtapaFilter(toolbar: {
-  filtro: { label: string, modal: { titulo: string, limpar: { label: string }, aplicar: { label: string }, secoes: unknown[] } }
-  busca: { placeholder: string, habilitado: boolean }
-  badges: { limpar: { label: string } }
-}) {
+export function withEtapaFilter<T extends ToolbarWithSecoes>(toolbar: T) {
   return {
     ...toolbar,
     filtro: {

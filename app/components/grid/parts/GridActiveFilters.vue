@@ -13,8 +13,9 @@
     <Button
       v-if="clearLabel"
       type="button"
-      variant="ghost"
-      class="inline-flex h-8 items-center rounded-full outline-smooth-green bg-transparent px-4 text-sm text-brand-green hover:bg-brand-green/10 hover:text-brand-green"
+      :variant="clearAppearance.variant"
+      class="inline-flex h-8 items-center rounded-full px-4 text-sm"
+      :class="clearAppearance.class"
       @click="emit('clear')"
     >
       {{ clearLabel }}
@@ -24,6 +25,7 @@
 
 <script setup lang="ts">
 import { Button } from '~/components/ui/button'
+import { resolveCtaButtonAppearance } from '~/utils/sectionCtaButton'
 import GridFilterBadge from '~/components/grid/parts/GridFilterBadge.vue'
 
 export interface GridActiveFilterBadge {
@@ -47,6 +49,8 @@ const emit = defineEmits<{
   remove: [sectionId: string, optionId: string]
   clear: []
 }>()
+
+const clearAppearance = computed(() => resolveCtaButtonAppearance('verde', 'outline'))
 
 const badges = computed(() =>
   props.sections.flatMap(section => section.badges),

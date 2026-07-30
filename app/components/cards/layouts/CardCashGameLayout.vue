@@ -20,8 +20,8 @@
 
     <Button
       v-if="ctaLabel && isActive"
-      variant="ghost"
-      class="w-fit rounded-full px-6 py-3 text-sm font-semibold btn-green-solid"
+      variant="brand"
+      class="w-fit rounded-full px-6 py-3 text-sm font-semibold"
       @click.stop="onEntrar"
     >
       {{ ctaLabel }}

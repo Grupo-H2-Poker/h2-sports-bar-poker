@@ -183,7 +183,7 @@
 }
 
 .container {
-  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  @apply mx-auto w-full max-w-[90rem] px-3 sm:px-4 lg:px-5;
 }
 
 .mobile-menu-overlay {
@@ -292,6 +292,28 @@
     z-index: 111 !important;
 }
 
+/**
+ * Só o fundo do Nuxt UI (bg-default) → preto do site.
+ * Não sobrescreve ring/borda/progress/animações do Toast.
+ * Success (toast/login) usa o verde da marca dos botões.
+ */
+:root,
+.light,
+.dark,
+:host {
+  --ui-bg: #000000;
+  --ui-success: var(--brand-green);
+}
+
+[data-slot="dialog-overlay"],
+[data-slot="alert-dialog-overlay"],
+[data-slot="drawer-overlay"] {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -359,6 +381,35 @@
   html,
   body {
     @apply min-h-full bg-background text-foreground;
+  }
+  html {
+    background-color: var(--background);
+    color-scheme: dark;
+    scrollbar-width: thin;
+    scrollbar-color: oklch(0.35 0 0) transparent;
+  }
+
+  /* Scrollbar dark e fina — track transparente (sem corredor preto) */
+  html::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  html::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  html::-webkit-scrollbar-thumb {
+    background: oklch(0.35 0 0);
+    border-radius: 9999px;
+  }
+
+  html::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.45 0 0);
+  }
+
+  html::-webkit-scrollbar-corner {
+    background: transparent;
   }
   button,
   [role="button"],

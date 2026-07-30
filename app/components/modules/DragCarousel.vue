@@ -50,25 +50,28 @@ const trackStyle = computed(() =>
 )
 
 const carouselStyle = computed(() => {
-  if (props.bleedRight && bleedRightPx.value > 0) {
-    const bleed = bleedRightPx.value
-    return {
-      width: `calc(100% + ${bleed}px)`,
-      marginRight: `-${bleed}px`,
-      paddingRight: `${bleed + SCROLL_END_GAP_PX}px`,
-    }
+  const left = props.bleedLeft ? bleedLeftPx.value : 0
+  const right = props.bleedRight ? bleedRightPx.value : 0
+
+  if (left <= 0 && right <= 0) return undefined
+
+  const style: Record<string, string> = {
+    width: `calc(100% + ${left + right}px)`,
   }
 
-  if (props.bleedLeft && bleedLeftPx.value > 0) {
-    const bleed = bleedLeftPx.value
-    return {
-      width: `calc(100% + ${bleed}px)`,
-      marginLeft: `-${bleed}px`,
-      paddingLeft: `${bleed + SCROLL_END_GAP_PX}px`,
-    }
+  // paddingLeft = bleed: em scrollLeft=0 o conteúdo fica na margem do container;
+  // ao rolar, os cards avançam sobre a área de bleed até a borda da viewport.
+  if (left > 0) {
+    style.marginLeft = `-${left}px`
+    style.paddingLeft = `${left}px`
   }
 
-  return undefined
+  if (right > 0) {
+    style.marginRight = `-${right}px`
+    style.paddingRight = `${right + SCROLL_END_GAP_PX}px`
+  }
+
+  return style
 })
 
 function updateLayout() {

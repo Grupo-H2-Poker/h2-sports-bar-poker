@@ -18,11 +18,18 @@ export function useCardLink(dados?: () => Pick<CardGenericData, 'link' | 'botoes
 
   function navigateLink(link: string) {
     const unidadeSlug = route.params.unidade as string | undefined
-    if (unidadeSlug) {
-      navigateTo(resolveUnidadeHref(unidadeSlug, link))
+    const href = unidadeSlug
+      ? resolveUnidadeHref(unidadeSlug, link)
+      : /^https?:\/\//i.test(link) || link.startsWith('/')
+        ? link
+        : `/${link}`
+
+    if (/^https?:\/\//i.test(href)) {
+      navigateTo(href, { external: true })
       return
     }
-    navigateTo(link.startsWith('/') ? link : `/${link}`)
+
+    navigateTo(href)
   }
 
   function onCardClick() {

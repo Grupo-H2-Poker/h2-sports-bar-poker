@@ -2,7 +2,10 @@
 import type { DropdownMenuRootEmits, DropdownMenuRootProps } from "reka-ui"
 import { DropdownMenuRoot, useForwardPropsEmits } from "reka-ui"
 
-const props = defineProps<DropdownMenuRootProps>()
+const props = withDefaults(defineProps<DropdownMenuRootProps>(), {
+  // Evita RemoveScroll no body (barra some/volta ao abrir o menu).
+  modal: false,
+})
 const emits = defineEmits<DropdownMenuRootEmits>()
 
 const forwarded = useForwardPropsEmits(props, emits)

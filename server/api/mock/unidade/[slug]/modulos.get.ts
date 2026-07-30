@@ -92,8 +92,8 @@ const AGENDA_GRID_TOOLBAR = withDiaFilter(
 )
 
 function withoutSeriesFilter<T extends {
-  filtro: { modal: { secoes: { id: string }[] } }
-}>(toolbar: T): T {
+  filtro: { modal: { secoes: ReadonlyArray<{ id: string }> } }
+}>(toolbar: T) {
   return {
     ...toolbar,
     filtro: {
@@ -118,7 +118,7 @@ const AGENDA_SERIES_GRID_TOOLBAR_FUN = withDiaFilter(
 
 const CASH_GAME_GRID_TOOLBAR = {
   filtro: {
-    label: 'Filtrar torneios',
+    label: 'Filtrar Mesas',
     modal: {
       titulo: 'Filtros',
       limpar: { label: 'Limpar filtros' },
@@ -151,51 +151,51 @@ const SERIES_MENU_ITEMS = [
 ]
 
 const CPH_SERIES_RANKING_LINHAS = [
-  { id: 5201, type: 'ranking_linha', ordem: 10, status: 'publicado', data: { tab: 'geral', colocacao: 1, nome: 'Nome', avatar: 'https://www.figma.com/api/mcp/asset/78b87d60-f592-4743-91c0-6836b47c1fd2', pontos: 15987 } },
-  { id: 5202, type: 'ranking_linha', ordem: 11, status: 'publicado', data: { tab: 'geral', colocacao: 2, nome: 'Nome Sobrenome', avatar: 'https://i.pravatar.cc/400?img=12', pontos: 14520 } },
-  { id: 5203, type: 'ranking_linha', ordem: 12, status: 'publicado', data: { tab: 'geral', colocacao: 3, nome: 'Nome Sobrenome', avatar: 'https://i.pravatar.cc/400?img=15', pontos: 13240 } },
-  { id: 5204, type: 'ranking_linha', ordem: 13, status: 'publicado', data: { tab: 'geral', colocacao: 4, nome: 'Nome Sobrenome', avatar: 'https://i.pravatar.cc/400?img=20', pontos: 12110 } },
-  { id: 5205, type: 'ranking_linha', ordem: 14, status: 'publicado', data: { tab: 'geral', colocacao: 5, nome: 'Nome Sobrenome', avatar: 'https://i.pravatar.cc/400?img=25', pontos: 11890 } },
+  { id: 5201, type: 'ranking_linha', ordem: 10, status: 'publicado', data: { tab: 'geral', colocacao: 1, nome: 'Nome', avatar: '/img/avatars/jogador-1.png', pontos: 15987 } },
+  { id: 5202, type: 'ranking_linha', ordem: 11, status: 'publicado', data: { tab: 'geral', colocacao: 2, nome: 'Nome Sobrenome', avatar: '/img/avatars/jogador-1.png', pontos: 14520 } },
+  { id: 5203, type: 'ranking_linha', ordem: 12, status: 'publicado', data: { tab: 'geral', colocacao: 3, nome: 'Nome Sobrenome', avatar: '/img/avatars/jogador-2.png', pontos: 13240 } },
+  { id: 5204, type: 'ranking_linha', ordem: 13, status: 'publicado', data: { tab: 'geral', colocacao: 4, nome: 'Nome Sobrenome', avatar: '/img/cph/history-5.png', pontos: 12110 } },
+  { id: 5205, type: 'ranking_linha', ordem: 14, status: 'publicado', data: { tab: 'geral', colocacao: 5, nome: 'Nome Sobrenome', avatar: '/img/cph/history-6.jpg', pontos: 11890 } },
   { id: 5206, type: 'ranking_linha', ordem: 15, status: 'publicado', data: { tab: 'geral', colocacao: 6, nome: 'Rodrigo de Miranda Ribeiro Bueno', pontos: 7981 } },
   { id: 5207, type: 'ranking_linha', ordem: 16, status: 'publicado', data: { tab: 'geral', colocacao: 7, nome: 'Rodrigo de Miranda Ribeiro Bueno', pontos: 7981 } },
   { id: 5208, type: 'ranking_linha', ordem: 17, status: 'publicado', data: { tab: 'geral', colocacao: 8, nome: 'Rodrigo de Miranda Ribeiro Bueno', pontos: 7981 } },
   { id: 5209, type: 'ranking_linha', ordem: 18, status: 'publicado', data: { tab: 'geral', colocacao: 9, nome: 'Rodrigo de Miranda Ribeiro Bueno', pontos: 7981 } },
   { id: 5210, type: 'ranking_linha', ordem: 19, status: 'publicado', data: { tab: 'geral', colocacao: 10, nome: 'Rodrigo de Miranda Ribeiro Bueno', pontos: 7981 } },
-  { id: 5211, type: 'ranking_linha', ordem: 20, status: 'publicado', data: { tab: 'omaha', colocacao: 1, nome: 'Ana Carolina Lima', avatar: 'https://i.pravatar.cc/400?img=31', pontos: 14200 } },
-  { id: 5212, type: 'ranking_linha', ordem: 21, status: 'publicado', data: { tab: 'omaha', colocacao: 2, nome: 'Bruno Ferreira', avatar: 'https://i.pravatar.cc/400?img=32', pontos: 13650 } },
-  { id: 5213, type: 'ranking_linha', ordem: 22, status: 'publicado', data: { tab: 'omaha', colocacao: 3, nome: 'Carla Mendes', avatar: 'https://i.pravatar.cc/400?img=33', pontos: 12980 } },
-  { id: 5214, type: 'ranking_linha', ordem: 23, status: 'publicado', data: { tab: 'omaha', colocacao: 4, nome: 'Diego Alves', avatar: 'https://i.pravatar.cc/400?img=34', pontos: 12140 } },
-  { id: 5215, type: 'ranking_linha', ordem: 24, status: 'publicado', data: { tab: 'omaha', colocacao: 5, nome: 'Eduarda Prado', avatar: 'https://i.pravatar.cc/400?img=35', pontos: 11720 } },
+  { id: 5211, type: 'ranking_linha', ordem: 20, status: 'publicado', data: { tab: 'omaha', colocacao: 1, nome: 'Ana Carolina Lima', avatar: '/img/avatars/player-a.png', pontos: 14200 } },
+  { id: 5212, type: 'ranking_linha', ordem: 21, status: 'publicado', data: { tab: 'omaha', colocacao: 2, nome: 'Bruno Ferreira', avatar: '/img/avatars/rank.png', pontos: 13650 } },
+  { id: 5213, type: 'ranking_linha', ordem: 22, status: 'publicado', data: { tab: 'omaha', colocacao: 3, nome: 'Carla Mendes', avatar: '/img/avatars/jogador-1.png', pontos: 12980 } },
+  { id: 5214, type: 'ranking_linha', ordem: 23, status: 'publicado', data: { tab: 'omaha', colocacao: 4, nome: 'Diego Alves', avatar: '/img/avatars/jogador-2.png', pontos: 12140 } },
+  { id: 5215, type: 'ranking_linha', ordem: 24, status: 'publicado', data: { tab: 'omaha', colocacao: 5, nome: 'Eduarda Prado', avatar: '/img/cph/history-5.png', pontos: 11720 } },
   { id: 5216, type: 'ranking_linha', ordem: 25, status: 'publicado', data: { tab: 'omaha', colocacao: 6, nome: 'Felipe Nogueira', pontos: 7540 } },
   { id: 5217, type: 'ranking_linha', ordem: 26, status: 'publicado', data: { tab: 'omaha', colocacao: 7, nome: 'Gabriela Souza', pontos: 7320 } },
   { id: 5218, type: 'ranking_linha', ordem: 27, status: 'publicado', data: { tab: 'omaha', colocacao: 8, nome: 'Henrique Barros', pontos: 7110 } },
   { id: 5219, type: 'ranking_linha', ordem: 28, status: 'publicado', data: { tab: 'omaha', colocacao: 9, nome: 'Isabela Rocha', pontos: 6980 } },
   { id: 5220, type: 'ranking_linha', ordem: 29, status: 'publicado', data: { tab: 'omaha', colocacao: 10, nome: 'João Pedro Costa', pontos: 6840 } },
-  { id: 5221, type: 'ranking_linha', ordem: 30, status: 'publicado', data: { tab: 'ladies', colocacao: 1, nome: 'Mariana Duarte', avatar: 'https://i.pravatar.cc/400?img=41', pontos: 15120 } },
-  { id: 5222, type: 'ranking_linha', ordem: 31, status: 'publicado', data: { tab: 'ladies', colocacao: 2, nome: 'Patrícia Gomes', avatar: 'https://i.pravatar.cc/400?img=42', pontos: 14780 } },
-  { id: 5223, type: 'ranking_linha', ordem: 32, status: 'publicado', data: { tab: 'ladies', colocacao: 3, nome: 'Renata Pires', avatar: 'https://i.pravatar.cc/400?img=43', pontos: 13990 } },
-  { id: 5224, type: 'ranking_linha', ordem: 33, status: 'publicado', data: { tab: 'ladies', colocacao: 4, nome: 'Sandra Moura', avatar: 'https://i.pravatar.cc/400?img=44', pontos: 12840 } },
-  { id: 5225, type: 'ranking_linha', ordem: 34, status: 'publicado', data: { tab: 'ladies', colocacao: 5, nome: 'Tatiana Reis', avatar: 'https://i.pravatar.cc/400?img=45', pontos: 12310 } },
+  { id: 5221, type: 'ranking_linha', ordem: 30, status: 'publicado', data: { tab: 'ladies', colocacao: 1, nome: 'Mariana Duarte', avatar: '/img/cph/history-6.jpg', pontos: 15120 } },
+  { id: 5222, type: 'ranking_linha', ordem: 31, status: 'publicado', data: { tab: 'ladies', colocacao: 2, nome: 'Patrícia Gomes', avatar: '/img/avatars/player-a.png', pontos: 14780 } },
+  { id: 5223, type: 'ranking_linha', ordem: 32, status: 'publicado', data: { tab: 'ladies', colocacao: 3, nome: 'Renata Pires', avatar: '/img/avatars/rank.png', pontos: 13990 } },
+  { id: 5224, type: 'ranking_linha', ordem: 33, status: 'publicado', data: { tab: 'ladies', colocacao: 4, nome: 'Sandra Moura', avatar: '/img/avatars/jogador-1.png', pontos: 12840 } },
+  { id: 5225, type: 'ranking_linha', ordem: 34, status: 'publicado', data: { tab: 'ladies', colocacao: 5, nome: 'Tatiana Reis', avatar: '/img/avatars/jogador-2.png', pontos: 12310 } },
   { id: 5226, type: 'ranking_linha', ordem: 35, status: 'publicado', data: { tab: 'ladies', colocacao: 6, nome: 'Vanessa Teixeira', pontos: 8120 } },
   { id: 5227, type: 'ranking_linha', ordem: 36, status: 'publicado', data: { tab: 'ladies', colocacao: 7, nome: 'Yasmin Farias', pontos: 7990 } },
   { id: 5228, type: 'ranking_linha', ordem: 37, status: 'publicado', data: { tab: 'ladies', colocacao: 8, nome: 'Aline Borges', pontos: 7760 } },
   { id: 5229, type: 'ranking_linha', ordem: 38, status: 'publicado', data: { tab: 'ladies', colocacao: 9, nome: 'Bianca Lopes', pontos: 7540 } },
   { id: 5230, type: 'ranking_linha', ordem: 39, status: 'publicado', data: { tab: 'ladies', colocacao: 10, nome: 'Camila Andrade', pontos: 7310 } },
-  { id: 5231, type: 'ranking_linha', ordem: 40, status: 'publicado', data: { tab: 'seniors', colocacao: 1, nome: 'Antônio Silva', avatar: 'https://i.pravatar.cc/400?img=51', pontos: 13840 } },
-  { id: 5232, type: 'ranking_linha', ordem: 41, status: 'publicado', data: { tab: 'seniors', colocacao: 2, nome: 'Carlos Eduardo', avatar: 'https://i.pravatar.cc/400?img=52', pontos: 13120 } },
-  { id: 5233, type: 'ranking_linha', ordem: 42, status: 'publicado', data: { tab: 'seniors', colocacao: 3, nome: 'Fernando Rocha', avatar: 'https://i.pravatar.cc/400?img=53', pontos: 12670 } },
-  { id: 5234, type: 'ranking_linha', ordem: 43, status: 'publicado', data: { tab: 'seniors', colocacao: 4, nome: 'José Martins', avatar: 'https://i.pravatar.cc/400?img=54', pontos: 11980 } },
-  { id: 5235, type: 'ranking_linha', ordem: 44, status: 'publicado', data: { tab: 'seniors', colocacao: 5, nome: 'Paulo Henrique', avatar: 'https://i.pravatar.cc/400?img=55', pontos: 11450 } },
+  { id: 5231, type: 'ranking_linha', ordem: 40, status: 'publicado', data: { tab: 'seniors', colocacao: 1, nome: 'Antônio Silva', avatar: '/img/cph/history-5.png', pontos: 13840 } },
+  { id: 5232, type: 'ranking_linha', ordem: 41, status: 'publicado', data: { tab: 'seniors', colocacao: 2, nome: 'Carlos Eduardo', avatar: '/img/cph/history-6.jpg', pontos: 13120 } },
+  { id: 5233, type: 'ranking_linha', ordem: 42, status: 'publicado', data: { tab: 'seniors', colocacao: 3, nome: 'Fernando Rocha', avatar: '/img/avatars/player-a.png', pontos: 12670 } },
+  { id: 5234, type: 'ranking_linha', ordem: 43, status: 'publicado', data: { tab: 'seniors', colocacao: 4, nome: 'José Martins', avatar: '/img/avatars/rank.png', pontos: 11980 } },
+  { id: 5235, type: 'ranking_linha', ordem: 44, status: 'publicado', data: { tab: 'seniors', colocacao: 5, nome: 'Paulo Henrique', avatar: '/img/avatars/jogador-1.png', pontos: 11450 } },
   { id: 5236, type: 'ranking_linha', ordem: 45, status: 'publicado', data: { tab: 'seniors', colocacao: 6, nome: 'Roberto Campos', pontos: 7680 } },
   { id: 5237, type: 'ranking_linha', ordem: 46, status: 'publicado', data: { tab: 'seniors', colocacao: 7, nome: 'Sérgio Nunes', pontos: 7420 } },
   { id: 5238, type: 'ranking_linha', ordem: 47, status: 'publicado', data: { tab: 'seniors', colocacao: 8, nome: 'Valter Dias', pontos: 7210 } },
   { id: 5239, type: 'ranking_linha', ordem: 48, status: 'publicado', data: { tab: 'seniors', colocacao: 9, nome: 'Wilson Araújo', pontos: 6990 } },
   { id: 5240, type: 'ranking_linha', ordem: 49, status: 'publicado', data: { tab: 'seniors', colocacao: 10, nome: 'Zeca Oliveira', pontos: 6750 } },
-  { id: 5241, type: 'ranking_linha', ordem: 50, status: 'publicado', data: { tab: 'high-roller', colocacao: 1, nome: 'Lucas Fontana', avatar: 'https://i.pravatar.cc/400?img=61', pontos: 22450 } },
-  { id: 5242, type: 'ranking_linha', ordem: 51, status: 'publicado', data: { tab: 'high-roller', colocacao: 2, nome: 'Marcelo Viana', avatar: 'https://i.pravatar.cc/400?img=62', pontos: 21180 } },
-  { id: 5243, type: 'ranking_linha', ordem: 52, status: 'publicado', data: { tab: 'high-roller', colocacao: 3, nome: 'Otávio Bastos', avatar: 'https://i.pravatar.cc/400?img=63', pontos: 19870 } },
-  { id: 5244, type: 'ranking_linha', ordem: 53, status: 'publicado', data: { tab: 'high-roller', colocacao: 4, nome: 'Rafael Monteiro', avatar: 'https://i.pravatar.cc/400?img=64', pontos: 18640 } },
-  { id: 5245, type: 'ranking_linha', ordem: 54, status: 'publicado', data: { tab: 'high-roller', colocacao: 5, nome: 'Thiago Pacheco', avatar: 'https://i.pravatar.cc/400?img=65', pontos: 17920 } },
+  { id: 5241, type: 'ranking_linha', ordem: 50, status: 'publicado', data: { tab: 'high-roller', colocacao: 1, nome: 'Lucas Fontana', avatar: '/img/avatars/jogador-2.png', pontos: 22450 } },
+  { id: 5242, type: 'ranking_linha', ordem: 51, status: 'publicado', data: { tab: 'high-roller', colocacao: 2, nome: 'Marcelo Viana', avatar: '/img/cph/history-5.png', pontos: 21180 } },
+  { id: 5243, type: 'ranking_linha', ordem: 52, status: 'publicado', data: { tab: 'high-roller', colocacao: 3, nome: 'Otávio Bastos', avatar: '/img/cph/history-6.jpg', pontos: 19870 } },
+  { id: 5244, type: 'ranking_linha', ordem: 53, status: 'publicado', data: { tab: 'high-roller', colocacao: 4, nome: 'Rafael Monteiro', avatar: '/img/avatars/player-a.png', pontos: 18640 } },
+  { id: 5245, type: 'ranking_linha', ordem: 54, status: 'publicado', data: { tab: 'high-roller', colocacao: 5, nome: 'Thiago Pacheco', avatar: '/img/avatars/rank.png', pontos: 17920 } },
   { id: 5246, type: 'ranking_linha', ordem: 55, status: 'publicado', data: { tab: 'high-roller', colocacao: 6, nome: 'Vitor Cunha', pontos: 12450 } },
   { id: 5247, type: 'ranking_linha', ordem: 56, status: 'publicado', data: { tab: 'high-roller', colocacao: 7, nome: 'Wagner Lins', pontos: 11980 } },
   { id: 5248, type: 'ranking_linha', ordem: 57, status: 'publicado', data: { tab: 'high-roller', colocacao: 8, nome: 'Xavier Braga', pontos: 11420 } },
@@ -361,10 +361,10 @@ export default defineEventHandler((event) => {
                   status: 'publicado',
                   data: {
                     titulo: 'Ranking',
-                    logo: 'https://placehold.co/48x48/333/fff?text=CPH',
+                    logo: '/img/ranking/logo-cph.png',
                     cor: 'branco',
                     cta: 'Confira o ranking',
-                    cta_link: 'ranking/cph'
+                    cta_link: 'series/cph#ranking'
                   }
                 },
                 {
@@ -372,35 +372,35 @@ export default defineEventHandler((event) => {
                   type: 'ranking',
                   ordem: 1,
                   status: 'publicado',
-                  data: { nome: 'Nome', avatar: 'https://i.pravatar.cc/80?img=1', pontos: 283000 }
+                  data: { nome: 'Nome', avatar: '/img/avatars/jogador-1.png', pontos: 283000 }
                 },
                 {
                   id: 202,
                   type: 'ranking',
                   ordem: 2,
                   status: 'publicado',
-                  data: { nome: 'Nome', avatar: 'https://i.pravatar.cc/80?img=2', pontos: 275000 }
+                  data: { nome: 'Nome', avatar: '/img/avatars/jogador-1.png', pontos: 275000 }
                 },
                 {
                   id: 203,
                   type: 'ranking',
                   ordem: 3,
                   status: 'publicado',
-                  data: { nome: 'Nome', avatar: 'https://i.pravatar.cc/80?img=3', pontos: 268000 }
+                  data: { nome: 'Nome', avatar: '/img/avatars/jogador-1.png', pontos: 268000 }
                 },
                 {
                   id: 204,
                   type: 'ranking',
                   ordem: 4,
                   status: 'publicado',
-                  data: { nome: 'Nome', avatar: 'https://i.pravatar.cc/80?img=4', pontos: 260000 }
+                  data: { nome: 'Nome', avatar: '/img/avatars/jogador-1.png', pontos: 260000 }
                 },
                 {
                   id: 205,
                   type: 'ranking',
                   ordem: 5,
                   status: 'publicado',
-                  data: { nome: 'Nome', avatar: 'https://i.pravatar.cc/80?img=5', pontos: 255000 }
+                  data: { nome: 'Nome', avatar: '/img/avatars/jogador-1.png', pontos: 255000 }
                 }
               ]
             },
@@ -418,7 +418,7 @@ export default defineEventHandler((event) => {
                   status: 'publicado',
                   data: {
                     titulo: 'Ranking',
-                    logo: 'https://placehold.co/48x48/3c2348/fff?text=FUN',
+                    logo: '/img/ranking/logo-fun-festival.svg',
                     cor: 'purple',
                     cta: 'Confira o ranking',
                     cta_link: '/ranking/fun-festival'
@@ -429,35 +429,35 @@ export default defineEventHandler((event) => {
                   type: 'ranking',
                   ordem: 1,
                   status: 'publicado',
-                  data: { nome: 'Nome', avatar: 'https://i.pravatar.cc/80?img=6', pontos: 283000 }
+                  data: { nome: 'Nome', avatar: '/img/avatars/jogador-1.png', pontos: 283000 }
                 },
                 {
                   id: 212,
                   type: 'ranking',
                   ordem: 2,
                   status: 'publicado',
-                  data: { nome: 'Nome', avatar: 'https://i.pravatar.cc/80?img=7', pontos: 275000 }
+                  data: { nome: 'Nome', avatar: '/img/avatars/jogador-1.png', pontos: 275000 }
                 },
                 {
                   id: 213,
                   type: 'ranking',
                   ordem: 3,
                   status: 'publicado',
-                  data: { nome: 'Nome', avatar: 'https://i.pravatar.cc/80?img=8', pontos: 268000 }
+                  data: { nome: 'Nome', avatar: '/img/avatars/jogador-1.png', pontos: 268000 }
                 },
                 {
                   id: 214,
                   type: 'ranking',
                   ordem: 4,
                   status: 'publicado',
-                  data: { nome: 'Nome', avatar: 'https://i.pravatar.cc/80?img=9', pontos: 260000 }
+                  data: { nome: 'Nome', avatar: '/img/avatars/jogador-1.png', pontos: 260000 }
                 },
                 {
                   id: 215,
                   type: 'ranking',
                   ordem: 5,
                   status: 'publicado',
-                  data: { nome: 'Nome', avatar: 'https://i.pravatar.cc/80?img=10', pontos: 255000 }
+                  data: { nome: 'Nome', avatar: '/img/avatars/jogador-1.png', pontos: 255000 }
                 }
               ]
             },
@@ -523,9 +523,10 @@ export default defineEventHandler((event) => {
                   ordem: 1,
                   status: 'publicado',
                   data: {
-                    imagem: 'https://images.unsplash.com/photo-1511193311914-0346f16efe90?w=600&h=800&fit=crop',
+                    imagem: '/img/galeria/eventos.png',
                     titulo: 'Eventos',
                     descricao: 'Jogue onde quiser. O resto é com a gente. Seu foco? Só no all-in.',
+                    link: 'agenda',
                   },
                 },
                 {
@@ -534,9 +535,10 @@ export default defineEventHandler((event) => {
                   ordem: 2,
                   status: 'publicado',
                   data: {
-                    imagem: 'https://images.unsplash.com/photo-1606166188517-cc5b3f65547d?w=600&h=800&fit=crop',
-                    titulo: 'Torneio noturno',
+                    imagem: '/img/galeria/comunidade.png',
+                    titulo: 'Comunidade',
                     descricao: 'Mesas abertas até tarde com estrutura profissional e prêmios garantidos.',
+                    link: 'faq',
                   },
                 },
                 {
@@ -545,9 +547,10 @@ export default defineEventHandler((event) => {
                   ordem: 3,
                   status: 'publicado',
                   data: {
-                    imagem: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&h=800&fit=crop',
-                    titulo: 'Cash game',
+                    imagem: '/img/galeria/damas-do-poker.png',
+                    titulo: 'Damas do Poker',
                     descricao: 'Texas Hold\'em No Limit com blinds para todos os níveis de jogo.',
+                    link: 'agenda/cph',
                   },
                 },
                 {
@@ -556,9 +559,10 @@ export default defineEventHandler((event) => {
                   ordem: 4,
                   status: 'publicado',
                   data: {
-                    imagem: 'https://images.unsplash.com/photo-1596838132731-3301c3aa4310?w=600&h=800&fit=crop',
-                    titulo: 'Ambiente',
+                    imagem: '/img/galeria/eventos-corporativos.png',
+                    titulo: 'Eventos Corporativos',
                     descricao: 'Estrutura premium, conforto e a melhor experiência de poker da cidade.',
+                    link: 'fila-cash-game',
                   },
                 },
                 {
@@ -567,9 +571,10 @@ export default defineEventHandler((event) => {
                   ordem: 5,
                   status: 'publicado',
                   data: {
-                    imagem: 'https://images.unsplash.com/photo-1596838132731-3301c3aa4310?w=600&h=800&fit=crop',
-                    titulo: 'Séries',
+                    imagem: '/img/galeria/franqueado.png',
+                    titulo: 'Franqueado',
                     descricao: 'Grandes festivais com garantidos milionários e calendário o ano todo.',
+                    link: 'https://h2.com.br',
                   },
                 },
                 {
@@ -578,9 +583,10 @@ export default defineEventHandler((event) => {
                   ordem: 6,
                   status: 'publicado',
                   data: {
-                    imagem: 'https://images.unsplash.com/photo-1596838132731-3301c3aa4310?w=600&h=800&fit=crop',
-                    titulo: 'Experiência H2',
+                    imagem: '/img/galeria/poker-esporte-da-mente.png',
+                    titulo: 'Poker Esporte da Mente',
                     descricao: 'Mais que um clube: comunidade, gastronomia e poker em alto nível.',
+                    link: 'series/cph',
                   },
                 },
               ],
@@ -604,7 +610,7 @@ export default defineEventHandler((event) => {
                     overlay: 'gradient',
                     border_radius: 'lg',
                     object_fit: 'contain',
-                    imagem: 'https://www.figma.com/api/mcp/asset/22f6c331-8be6-4b34-af85-d0a7d04c498e',
+                    imagem: '/img/banners/sports-bar.jpg',
                     section_cta: {
                       titulo: 'Sports Bar',
                       descricao: 'Os maiores jogos do esporte ao vivo.\nTorcida, menu especial e bebidas para acompanhar cada lance.',
@@ -626,6 +632,7 @@ export default defineEventHandler((event) => {
               metadados: {
                 drag_carousel: true,
                 carousel_bleed_right: true,
+                carousel_bleed_left: true,
               },
               components: [
                 {
@@ -639,7 +646,7 @@ export default defineEventHandler((event) => {
                     height: 'lg',
                     cta_position: 'bottom-center',
                     overlay: 'gradient-bottom',
-                    imagem: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=750&fit=crop',
+                    imagem: '/img/promos/h2bet.png',
                     section_cta: {
                       titulo: 'H2bet',
                       descricao: 'Aposte nos seus times favoritos com as melhores odds do mercado.',
@@ -661,7 +668,7 @@ export default defineEventHandler((event) => {
                     height: 'lg',
                     cta_position: 'bottom-center',
                     overlay: 'gradient-bottom',
-                    imagem: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=750&fit=crop',
+                    imagem: '/img/promos/h2rewards-1.png',
                     section_cta: {
                       titulo: 'H2rewards',
                       descricao: 'Acumule pontos em cada buy-in e troque por prêmios exclusivos.',
@@ -683,7 +690,7 @@ export default defineEventHandler((event) => {
                     height: 'lg',
                     cta_position: 'bottom-center',
                     overlay: 'gradient-bottom',
-                    imagem: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=750&fit=crop',
+                    imagem: '/img/promos/h2rewards-2.png',
                     section_cta: {
                       titulo: 'H2rewards',
                       descricao: 'Acumule pontos em cada buy-in e troque por prêmios exclusivos.',
@@ -717,7 +724,7 @@ export default defineEventHandler((event) => {
                     reverse_columns: true,
                     imagem_size: 'lg',
                     border_radius: 'lg',
-                    imagem: 'https://www.figma.com/api/mcp/asset/0152536d-3aad-4477-8d87-1b3f809be619',
+                    imagem: '/img/banners/poker-esporte-da-mente.png',
                     section_cta: {
                       titulo: 'Poker é esporte da mente.',
                       descricao: 'No H2, estratégia é poder, leitura é vantagem e dominar a mesa é o único caminho.',
@@ -739,7 +746,7 @@ export default defineEventHandler((event) => {
               margin_top: 40,
               margin_bottom: 40,
               metadados: {
-                margin_lateral: 100,
+                margin_lateral: 40,
               },
               components: [
                 {
@@ -812,7 +819,7 @@ export default defineEventHandler((event) => {
                     border_radius: 'lg',
                     object_fit: 'contain',
                     overlay: 'none',
-                    imagem: 'https://www.figma.com/api/mcp/asset/d87f2bd7-ee22-4adb-a9d9-8ab1613beea8',
+                    imagem: '/img/avatars/embaixador.png',
                   },
                 },
               ],
@@ -1102,7 +1109,7 @@ export default defineEventHandler((event) => {
               margin_top: 40,
               status: 'publicado',
               metadados: {
-                margin_lateral: 100,
+                margin_lateral: 40,
               },
               components: [
                 {
@@ -1469,7 +1476,7 @@ export default defineEventHandler((event) => {
                     reverse_columns: true,
                     imagem_size: 'md',
                     border_radius: 'sm',
-                    imagem: 'https://picsum.photos/seed/cph-history-4/400/400',
+                    imagem: '/img/cph/history-4.png',
                     section_cta: {
                       descricao: 'No fim da temporada, o topo tem dono: R$ 250.000 e um lugar definitivo na história do CPH.',
                       descricao_2: 'No fim da temporada, o topo tem dono: R$ 250.000 e um lugar definitivo na história do CPH.',
@@ -1500,7 +1507,7 @@ export default defineEventHandler((event) => {
                     reverse_columns: true,
                     imagem_size: 'md',
                     border_radius: 'sm',
-                    imagem: 'https://picsum.photos/seed/cph-history-5/400/400',
+                    imagem: '/img/cph/history-6.jpg',
                     section_cta: {
                       titulo: 'Premiação CPH',
                       descricao: 'No fim da temporada, o topo tem dono: R$ 250.000 e um lugar definitivo na história do CPH.',
@@ -1533,11 +1540,11 @@ export default defineEventHandler((event) => {
                     border_radius: 'sm',
                     drag_carousel: true,
                     imagens: [
-                      'https://picsum.photos/seed/cph-history-1/400/400',
-                      'https://picsum.photos/seed/cph-history-2/400/400',
-                      'https://picsum.photos/seed/cph-history-3/400/400',
-                      'https://picsum.photos/seed/cph-history-4/400/400',
-                      'https://picsum.photos/seed/cph-history-5/400/400',
+                      '/img/cph/history-1.jpg',
+                      '/img/cph/history-2.jpg',
+                      '/img/cph/history-3.jpg',
+                      '/img/cph/history-4.png',
+                      '/img/cph/history-6.jpg',
                     ],
                     carousel_bleed_right: false,
                     section_cta: {
@@ -1584,7 +1591,7 @@ export default defineEventHandler((event) => {
               ordem: 10,
               status: 'publicado',
               metadados: {
-                margin_lateral: 100,
+                margin_lateral: 40,
               },
               components: [
                 {
@@ -1907,9 +1914,10 @@ export default defineEventHandler((event) => {
                   ordem: 1,
                   status: "publicado",
                   data: {
-                    imagem: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/d9/fa/1b/lost-valley.jpg?w=700&h=400&s=1",
-                    titulo: "Quadra de Tênis",
-                    descricao: "4 quadras profissionais"
+                    imagem: "/img/galeria/eventos.png",
+                    titulo: "Eventos",
+                    descricao: "Jogue onde quiser. O resto é com a gente.",
+                    link: "agenda",
                   }
                 },
                 {
@@ -1918,9 +1926,10 @@ export default defineEventHandler((event) => {
                   ordem: 2,
                   status: "publicado",
                   data: {
-                    imagem: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/d9/fa/09/meet-and-greet.jpg?w=1000&h=-1&s=1",
-                    titulo: "Piscina Olímpica",
-                    descricao: "Piscina aquecida 50m"
+                    imagem: "/img/galeria/comunidade.png",
+                    titulo: "Comunidade",
+                    descricao: "A melhor experiência de poker da cidade",
+                    link: "faq",
                   }
                 }
               ]
@@ -2055,7 +2064,7 @@ export default defineEventHandler((event) => {
               ordem: 1,
               status: 'publicado',
               metadados: {
-                margin_lateral: 100,
+                margin_lateral: 40,
               },
               components: [
                 {

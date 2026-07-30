@@ -1,7 +1,12 @@
 <template>
   <div
-    class="relative aspect-[3/4] h-full overflow-hidden rounded-xl bg-muted cursor-pointer group"
-    @click="dados.link && navigateTo(dados.link)"
+    class="relative aspect-[3/4] h-full overflow-hidden rounded-xl bg-muted group"
+    :class="hasLink ? 'cursor-pointer' : undefined"
+    :role="hasLink ? 'link' : undefined"
+    :tabindex="hasLink ? 0 : undefined"
+    @click="onClick"
+    @keydown.enter.prevent="onClick"
+    @keydown.space.prevent="onClick"
   >
     <img
       v-if="dados.imagem"
@@ -19,24 +24,24 @@
       v-if="dados.titulo || dados.descricao"
       class="absolute inset-x-0 bottom-0 z-10 px-5 pb-5 pt-5 font-[family-name:var(--font-red-hat-display)]"
     >
-      <div class="flex h-32 flex-col">
+      <div class="flex h-[7.5rem] flex-col">
         <h3
           v-if="dados.titulo"
-          class="h-9 shrink-0 text-[28px] font-bold leading-9 text-white line-clamp-1"
+          class="h-7 shrink-0 text-xl font-bold leading-7 text-white line-clamp-1"
         >
           {{ dados.titulo }}
         </h3>
-        <div v-else class="h-9 shrink-0" aria-hidden="true" />
+        <div v-else class="h-7 shrink-0" aria-hidden="true" />
 
         <p
           v-if="dados.descricao"
-          class="mt-2 h-[5.25rem] shrink-0 text-md font-medium leading-7 text-card-preview-text line-clamp-3"
+          class="mt-2 h-[4.5rem] shrink-0 text-sm font-medium leading-6 text-[#c4c4c4] line-clamp-3"
         >
           {{ dados.descricao }}
         </p>
         <div
           v-else
-          class="mt-2 h-[5.25rem] shrink-0"
+          class="mt-2 h-[4.5rem] shrink-0"
           aria-hidden="true"
         />
       </div>
@@ -47,7 +52,16 @@
 <script setup lang="ts">
 import type { GaleriaImagemData } from '~/types/modules'
 
-defineProps<{
+const props = defineProps<{
   dados: GaleriaImagemData
 }>()
+
+const { navigateLink } = useCardLink()
+
+const hasLink = computed(() => !!props.dados.link)
+
+function onClick() {
+  const link = props.dados.link
+  if (link) navigateLink(link)
+}
 </script>

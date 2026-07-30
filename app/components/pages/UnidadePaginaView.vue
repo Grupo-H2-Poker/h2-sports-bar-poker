@@ -69,6 +69,29 @@ const { data, pending, error, refresh } = await useAsyncData<UnidadeModulos>(
 
 const { modulos, paginaAtual } = useUnidadePagina(data, () => props.paginaSlug)
 
+function scrollToRouteHash() {
+  const hash = route.hash?.replace(/^#/, '')
+  if (!hash || import.meta.server) return
+
+  const el = document.getElementById(hash)
+  if (!el) return
+
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
+watch(
+  [() => route.hash, () => pending.value, () => modulos.value.length],
+  async ([hash, isPending, moduloCount]) => {
+    if (!hash || isPending || moduloCount === 0) return
+    await nextTick()
+    // Aguarda layout/imagens do módulo ancorado
+    requestAnimationFrame(() => {
+      setTimeout(scrollToRouteHash, 50)
+    })
+  },
+  { flush: 'post', immediate: true },
+)
+
 useHead({
   title: () => {
     const pagina = paginaAtual.value?.titulo

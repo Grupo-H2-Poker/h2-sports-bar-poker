@@ -71,8 +71,9 @@
         <DrawerFooter class="shrink-0 flex-row gap-4 border-t border-white/10 p-0 pt-6">
           <Button
             type="button"
-            variant="ghost"
-            class="flex-1 rounded-full outline-smooth-green bg-transparent text-brand-green hover:bg-brand-green/10 hover:text-brand-green"
+            :variant="clearAppearance.variant"
+            class="flex-1 rounded-full"
+            :class="clearAppearance.class"
             @click="emit('clear')"
           >
             {{ config?.limpar?.label ?? 'Limpar filtros' }}
@@ -101,6 +102,7 @@ import {
   DrawerFooter,
 } from '@/components/ui/drawer'
 import type { GridFilterModal, GridFilterSection } from '~/types/grid'
+import { resolveCtaButtonAppearance } from '~/utils/sectionCtaButton'
 import GridFilterChip from '~/components/grid/parts/GridFilterChip.vue'
 
 defineProps<{
@@ -115,6 +117,8 @@ const emit = defineEmits<{
   apply: []
   clear: []
 }>()
+
+const clearAppearance = computed(() => resolveCtaButtonAppearance('verde', 'outline'))
 
 const SECTION_GRID_CLASSES: Record<NonNullable<GridFilterSection['colunas']>, string> = {
   1: 'grid grid-cols-1 gap-3',

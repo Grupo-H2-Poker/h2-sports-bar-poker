@@ -121,7 +121,6 @@ import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
 import { AlertCircle, Eye, EyeOff } from 'lucide-vue-next'
 import { useForm } from 'vee-validate'
-import { toast } from 'vue-sonner'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -133,6 +132,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Spinner } from '@/components/ui/spinner'
 
 const { isOpen, close } = useLoginModal()
+const { success: toastSuccess } = useAppToast()
 
 const isLoading = ref(false)
 const generalError = ref('')
@@ -233,14 +233,11 @@ async function handleLogin(values: LoginValues) {
             await auth.login(resp.data.token)
 
             const apelido = auth.user.value?.apelido || auth.user.value?.nome || 'Usuário'
-            
-            toast('Login realizado com sucesso!', {
-                description: `Olá, ${apelido}!`,
-                action: {
-                    label: 'Fechar',
-                    onClick: () => console.log('close toast'),
-                },
-            })
+
+            toastSuccess(
+                'Login realizado com sucesso!',
+                `Olá, ${apelido}!`,
+            )
 
             close()
             resetForm()

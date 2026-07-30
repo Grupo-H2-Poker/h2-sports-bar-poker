@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col py-1 [zoom:0.9] origin-top" :class="rowsGapClass">
+  <div class="flex flex-col py-1" :class="rowsGapClass">
     <div
       v-for="(row, rowIndex) in packedRows"
       :key="rowIndex"

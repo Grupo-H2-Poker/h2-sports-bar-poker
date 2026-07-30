@@ -41,7 +41,7 @@
       <div :class="CARD_PREVIEW_BUTTON_SLOT">
         <Button
           v-if="hasButton"
-          variant="ghost"
+          :variant="isActive ? 'brand' : 'plain'"
           size="sm"
           :class="[CARD_PREVIEW_BUTTON, botaoClass]"
           @click.stop="onButtonClick(isActive)"
@@ -91,10 +91,9 @@ const cardStyle = computed(() => ({
   background: isActive.value ? TORNEIO_PREVIEW_BG_ATIVO : TORNEIO_PREVIEW_BG_INATIVO,
 }))
 
+/** Estado inativo não é um preset CTA — só desabilita visualmente. */
 const botaoClass = computed(() =>
-  isActive.value
-    ? 'btn-green-solid cursor-pointer'
-    : 'bg-zinc-700 text-zinc-500 cursor-default',
+  isActive.value ? 'cursor-pointer' : 'bg-zinc-700 text-zinc-500 cursor-default',
 )
 
 const { primaryButton, hasButton, onCardClick, onButtonClick } = useCardPreviewLink(

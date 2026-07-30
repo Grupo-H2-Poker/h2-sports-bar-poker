@@ -55,6 +55,7 @@
 import { Button } from '~/components/ui/button'
 import type { ButtonVariants } from '~/components/ui/button'
 import type { SectionCTAData } from '~/types/cards'
+import { resolveCtaButtonAppearance } from '~/utils/sectionCtaButton'
 
 const props = withDefaults(defineProps<{
   config?: SectionCTAData
@@ -139,14 +140,13 @@ const buttonSize = computed(() => {
   }
 })
 
-const ctaButtonClass = computed(() =>
-  resolveSectionCtaButtonClass(props.config.cta_cor, props.config.cta_variant),
+const ctaAppearance = computed(() =>
+  resolveCtaButtonAppearance(props.config.cta_cor, props.config.cta_variant),
 )
 
-const buttonVariant = computed((): ButtonVariants['variant'] => {
-  if (ctaButtonClass.value) return 'ghost'
-  return 'brand'
-})
+const ctaButtonClass = computed(() => ctaAppearance.value.class)
+
+const buttonVariant = computed((): ButtonVariants['variant'] => ctaAppearance.value.variant)
 
 const route = useRoute()
 

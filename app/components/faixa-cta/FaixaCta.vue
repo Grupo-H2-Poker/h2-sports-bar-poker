@@ -66,6 +66,7 @@ import {
   resolveFaixaCtaPaddingStyle,
   resolveFaixaCtaTextStyle,
 } from '~/types/faixa-cta'
+import { resolveCtaButtonAppearance } from '~/utils/sectionCtaButton'
 
 const HORIZONTAL_ALIGN_CLASS: Record<string, string> = {
   start: 'justify-start',
@@ -183,18 +184,20 @@ const contentAlignClass = computed(() => ({
 
 const ctaRoundedClass = computed(() => props.data.cta_rounded ?? 'rounded-full')
 
-const ctaButtonClass = computed(() =>
-  resolveSectionCtaButtonClass(props.data.cta_cor, props.data.cta_variant),
+const ctaAppearance = computed(() =>
+  resolveCtaButtonAppearance(props.data.cta_cor, props.data.cta_variant),
 )
 
+const ctaButtonClass = computed(() => ctaAppearance.value.class)
+
 const ctaStyle = computed(() => {
-  if (ctaButtonClass.value) return undefined
+  if (props.data.cta_cor) return undefined
   return resolveFaixaCtaCtaStyle(props.data)
 })
 
 const buttonVariant = computed((): ButtonVariants['variant'] => {
-  if (ctaButtonClass.value || ctaStyle.value) return 'ghost'
-  return 'brand'
+  if (ctaStyle.value) return 'plain'
+  return ctaAppearance.value.variant
 })
 
 const route = useRoute()

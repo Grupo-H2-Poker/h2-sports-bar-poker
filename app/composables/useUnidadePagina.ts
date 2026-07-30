@@ -14,9 +14,13 @@ export function resolveUnidadeHref(
 ): string {
   if (external || /^https?:\/\//i.test(target)) return target
 
-  const [pathPart, query = ''] = target.split('?')
+  const hashIndex = target.indexOf('#')
+  const hash = hashIndex >= 0 ? target.slice(hashIndex) : ''
+  const withoutHash = hashIndex >= 0 ? target.slice(0, hashIndex) : target
+
+  const [pathPart, query = ''] = withoutHash.split('?')
   const clean = (pathPart ?? '').replace(/^\//, '')
-  const suffix = query ? `?${query}` : ''
+  const suffix = `${query ? `?${query}` : ''}${hash}`
 
   if (!clean || clean === PAGINA_HOME_SLUG) return `/${unidadeSlug}${suffix}`
 

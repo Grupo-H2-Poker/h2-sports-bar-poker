@@ -20,6 +20,11 @@ export const buttonVariants = cva(
           "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+        /**
+         * Sem hover próprio — usar com `resolveCtaButtonAppearance` / presets de cor.
+         * Evita conflito com `dark:hover:bg-accent` dos CTAs customizados.
+         */
+        plain: "bg-transparent shadow-none",
         link: "text-primary underline-offset-4 hover:underline",
       },
 

@@ -134,7 +134,7 @@ const openLoginAndCloseDrawer = () => {
                                         <ChevronDown class="ml-2 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                                     </Button>
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent align="start" class="w-56">
+                                <DropdownMenuContent side="bottom" align="start" class="w-56">
                                     <DropdownMenuItem
                                         v-for="sub in item.items"
                                         :key="sub.id"
@@ -159,7 +159,7 @@ const openLoginAndCloseDrawer = () => {
                             <ChevronDown class="ml-2 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" class="w-56">
+                    <DropdownMenuContent side="bottom" align="end" class="w-56">
                         <DropdownMenuItem
                             v-for="unity in itemsUnity"
                             :key="unity"
@@ -184,7 +184,7 @@ const openLoginAndCloseDrawer = () => {
                             <ChevronDown class="ml-2 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" class="w-28">
+                    <DropdownMenuContent side="bottom" align="end" class="w-28">
                         <DropdownMenuItem
                             class="cursor-pointer"
                             :class="{ 'bg-accent text-accent-foreground': language === 'pt' }"
@@ -213,7 +213,7 @@ const openLoginAndCloseDrawer = () => {
                             <ChevronDown class="ml-2 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" class="w-28">
+                    <DropdownMenuContent side="bottom" align="end" class="w-28">
                         <DropdownMenuItem
                             class="cursor-pointer"
                             :class="{ 'bg-accent text-accent-foreground': language === 'pt' }"

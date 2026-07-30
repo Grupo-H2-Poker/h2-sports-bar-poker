@@ -6,20 +6,16 @@
   >
     <div class="container flex h-full items-center justify-between gap-4 md:gap-6">
       <!-- Título + logo da etapa -->
-      <div class="flex items-center gap-2 shrink-0">
+      <div class="flex items-center gap-3 shrink-0">
         <span class="text-sm font-bold text-white whitespace-nowrap">
           {{ config.titulo ?? 'Ranking' }}
         </span>
-        <div
+        <img
           v-if="config.logo"
-          class="w-9 h-9 rounded-full border-2 border-white/30 overflow-hidden bg-white/10 flex items-center justify-center shrink-0"
+          :src="config.logo"
+          :alt="config.titulo ?? 'Ranking'"
+          class="h-9 w-9 shrink-0 object-contain"
         >
-          <img
-            :src="config.logo"
-            :alt="config.titulo ?? 'Ranking'"
-            class="w-full h-full object-contain"
-          >
-        </div>
       </div>
 
       <!-- Jogadores -->
@@ -37,9 +33,10 @@
       <!-- CTA -->
       <Button
         v-if="config.cta"
-        variant="ghost"
+        :variant="ctaAppearance.variant"
         size="sm"
-        class="rounded-full outline-smooth-white bg-transparent text-white hover:bg-white/10 hover:text-white"
+        class="rounded-full"
+        :class="ctaAppearance.class"
         @click="handleCtaClick"
       >
         {{ config.cta }}
@@ -56,6 +53,7 @@ import {
   resolveRankingBackground,
   resolveRankingBackgroundStyle,
 } from '~/types/ranking'
+import { resolveCtaButtonAppearance } from '~/utils/sectionCtaButton'
 import RankingPlayerItem from '~/components/ranking/parts/RankingPlayerItem.vue'
 
 type RankingPlayer = ComponentData<ModuloContentDataMap['ranking']>
@@ -67,6 +65,7 @@ const props = defineProps<{
 
 const backgroundClass = computed(() => resolveRankingBackground(props.config))
 const backgroundStyle = computed(() => resolveRankingBackgroundStyle(props.config))
+const ctaAppearance = computed(() => resolveCtaButtonAppearance('branco', 'outline'))
 
 const route = useRoute()
 

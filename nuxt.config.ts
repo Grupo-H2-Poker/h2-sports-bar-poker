@@ -23,7 +23,6 @@ export default defineNuxtConfig({
         'tailwind-merge',
         'vaul-vue',
         'vee-validate',
-        'vue-sonner',
         'zod',
       ]
     }

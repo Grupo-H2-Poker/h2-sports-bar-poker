@@ -128,6 +128,10 @@ export interface GaleriaImagemData {
   imagem: string
   titulo?: string
   descricao?: string
+  /**
+   * Destino ao clicar no card.
+   * Relativo à unidade (`agenda`, `series/cph`, `faq`) ou URL absoluta (`https://...`).
+   */
   link?: string
 }
 

@@ -1,95 +1,115 @@
 <template>
   <DropdownMenu v-if="withDropdown">
     <DropdownMenuTrigger as-child>
-      <Button variant="ghost" :class="`relative ${size} rounded-full cursor-pointer`">
+      <Button
+        variant="ghost"
+        size="icon"
+        class="relative rounded-full cursor-pointer"
+        :aria-label="`Menu da conta de ${user?.nome || 'usuário'}`"
+      >
         <Avatar :class="size">
           <AvatarImage :src="user?.avatar || ''" :alt="user?.nome || 'Usuário'" />
-          <AvatarFallback :class="textSize" class="text-white" :style="`background-color: ${bgColor};`">
+          <AvatarFallback :class="textSize" class="text-white" :style="{ backgroundColor: bgColor }">
             {{ getInitials(user?.nome || 'U') }}
           </AvatarFallback>
         </Avatar>
       </Button>
     </DropdownMenuTrigger>
 
-    <DropdownMenuContent class="w-80" align="end">
-      <DropdownMenuLabel class="font-normal">
-        <div class="flex flex-col space-y-2">
-          <div class="flex items-center space-x-3">
-            <Avatar class="h-12 w-12">
-              <AvatarImage :src="user?.avatar || ''" :alt="user?.nome || 'Usuário'" />
-              <AvatarFallback class="text-lg text-white bg-brand-purple">
-                {{ getInitials(user?.nome || 'U') }}
-              </AvatarFallback>
-            </Avatar>
-            <div class="flex-1">
-              <p class="text-sm font-medium leading-none">{{ user?.nome }}</p>
-              <p class="text-xs leading-none text-muted-foreground mt-1">
-                {{ user?.email }}
-              </p>
-            </div>
-          </div>
-
-          <br>
-
-          <div v-if="user?.status" class="flex items-center space-x-2">
-            <div class="flex items-center space-x-1">
-              <div :class="[
-                'w-2 h-2 rounded-full',
-                user.status === 1 ? 'bg-green-500' : 'bg-red-500'
-              ]"></div>
-              <span class="text-xs">
-                {{ user.status === 1 ? 'Cliente Ativo' : 'Cliente Inativo' }}
+    <DropdownMenuContent
+      class="w-72 overflow-visible rounded-xl p-0 shadow-lg"
+      side="bottom"
+      align="end"
+      :side-offset="8"
+      :collision-padding="8"
+      :arrow-padding="8"
+    >
+      <DropdownMenuArrow class="-mt-px" />
+      <DropdownMenuLabel class="font-normal p-0">
+        <div class="flex items-start gap-3 px-3 py-3">
+          <Avatar class="h-10 w-10 shrink-0">
+            <AvatarImage :src="user?.avatar || ''" :alt="user?.nome || 'Usuário'" />
+            <AvatarFallback class="text-sm text-white bg-brand-purple">
+              {{ getInitials(user?.nome || 'U') }}
+            </AvatarFallback>
+          </Avatar>
+          <div class="min-w-0 flex-1 space-y-1">
+            <p class="truncate text-sm font-semibold leading-tight tracking-tight">
+              {{ user?.nome }}
+            </p>
+            <p class="truncate text-xs text-muted-foreground">
+              {{ user?.email }}
+            </p>
+            <div v-if="user" class="flex flex-wrap gap-1.5 pt-1">
+              <span
+                class="inline-flex items-center gap-1 rounded-md border border-border/60 bg-muted/40 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-muted-foreground"
+              >
+                <span
+                  class="size-1.5 rounded-full"
+                  :class="user.status === 1 ? 'bg-emerald-500' : 'bg-red-500'"
+                />
+                {{ user.status === 1 ? 'Cliente ativo' : 'Cliente inativo' }}
               </span>
-            </div>
-
-            <div v-if="user.pontua_h2rewards === 1" class="flex items-center space-x-1">
-              <div class="w-2 h-2 rounded-full bg-blue-500"></div>
-              <span class="text-xs">Tem H2 Rewards</span>
+              <span
+                v-if="user.pontua_h2rewards === 1"
+                class="inline-flex items-center gap-1 rounded-md border border-border/60 bg-muted/40 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-muted-foreground"
+              >
+                <span class="size-1.5 rounded-full bg-sky-500" />
+                H2 Rewards
+              </span>
             </div>
           </div>
         </div>
       </DropdownMenuLabel>
 
-      <DropdownMenuSeparator />
+      <DropdownMenuSeparator class="my-0" />
 
-      <DropdownMenuItem @click="navigateTo('/perfil')" class="cursor-pointer">
-        <User class="mr-2 h-4 w-4" />
-        <span>Perfil</span>
-      </DropdownMenuItem>
+      <DropdownMenuGroup class="p-1">
+        <DropdownMenuItem as-child class="cursor-pointer rounded-md px-2 py-2">
+          <NuxtLink to="/perfil">
+            <User class="size-4" />
+            <span>Perfil</span>
+          </NuxtLink>
+        </DropdownMenuItem>
+      </DropdownMenuGroup>
 
-      <DropdownMenuSeparator />
+      <DropdownMenuSeparator class="my-0" />
 
-      <DropdownMenuItem @click="showLogoutDialog = true" class="cursor-pointer text-red-600 focus:text-red-600">
-        <LogOut class="mr-2 h-4 w-4" />
-        <span>Sair</span>
-      </DropdownMenuItem>
+      <DropdownMenuGroup class="p-1">
+        <DropdownMenuItem
+          variant="destructive"
+          class="cursor-pointer rounded-md px-2 py-2"
+          @click="showLogoutDialog = true"
+        >
+          <LogOut class="size-4" />
+          <span>Sair</span>
+        </DropdownMenuItem>
+      </DropdownMenuGroup>
     </DropdownMenuContent>
   </DropdownMenu>
 
-  <!-- Versão simples sem dropdown -->
   <Avatar v-else :class="size" @click="handleClick">
     <AvatarImage :src="user?.avatar || ''" :alt="user?.nome || 'Usuário'" />
-    <AvatarFallback :class="textSize" class="text-white" :style="`background-color: ${bgColor};`">
+    <AvatarFallback :class="textSize" class="text-white" :style="{ backgroundColor: bgColor }">
       {{ getInitials(user?.nome || 'U') }}
     </AvatarFallback>
   </Avatar>
 
-  <!-- Dialog de confirmação de logout -->
   <Dialog v-model:open="showLogoutDialog">
     <DialogContent class="sm:max-w-md">
       <DialogHeader>
-        <DialogTitle>Confirmar Saída</DialogTitle>
+        <DialogTitle>Confirmar saída</DialogTitle>
         <DialogDescription>
           Tem certeza que deseja sair da sua conta? Você precisará fazer login novamente para acessar o sistema.
         </DialogDescription>
       </DialogHeader>
       <DialogFooter class="flex gap-2">
-        <Button variant="outline" @click="showLogoutDialog = false" :disabled="isLoggingOut">
+        <Button variant="outline" :disabled="isLoggingOut" @click="showLogoutDialog = false">
           Cancelar
         </Button>
-        <Button variant="destructive" @click="handleLogout" :disabled="isLoggingOut">
+        <Button variant="destructive" :disabled="isLoggingOut" @click="handleLogout">
           <div v-if="isLoggingOut" class="flex items-center gap-2">
-            <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            <div class="size-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
             Saindo...
           </div>
           <span v-else>Sair</span>
@@ -101,11 +121,12 @@
 
 <script setup lang="ts">
 import { User, LogOut } from 'lucide-vue-next'
-import { toast } from 'vue-sonner'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
+  DropdownMenuArrow,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -125,7 +146,6 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 
-// Props
 interface Props {
   size?: string
   bgColor?: string
@@ -139,10 +159,11 @@ const props = withDefaults(defineProps<Props>(), {
   bgColor: 'var(--brand-purple)',
   textSize: 'text-sm',
   withDropdown: true,
-  onClick: undefined
+  onClick: undefined,
 })
 
 const { user, logout } = useAuth()
+const { error: toastError } = useAppToast()
 
 const showLogoutDialog = ref(false)
 const isLoggingOut = ref(false)
@@ -161,27 +182,19 @@ const handleLogout = async () => {
 
   try {
     await new Promise(resolve => setTimeout(resolve, 1000))
-
     logout()
     showLogoutDialog.value = false
-    navigateTo('/')
-
+    await navigateTo('/')
+    toastError(
+      'Logout realizado com sucesso!',
+      'Faça o login para acessar novamente!',
+    )
   } finally {
     isLoggingOut.value = false
-
-    toast('Logout realizado com sucesso!', {
-      description: `Faça o login para acessar novamente!`,
-      action: {
-        label: 'Fechar',
-        onClick: () => console.log('Undo'),
-      },
-    })
   }
 }
 
 const handleClick = () => {
-  if (props.onClick) {
-    props.onClick()
-  }
+  props.onClick?.()
 }
 </script>

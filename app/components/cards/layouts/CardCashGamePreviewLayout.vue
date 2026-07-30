@@ -35,7 +35,7 @@
           v-if="hasButton"
           variant="brand"
           size="sm"
-          :class="[CARD_PREVIEW_BUTTON, 'btn-green-solid']"
+          :class="CARD_PREVIEW_BUTTON"
           @click.stop="onButtonClick(true)"
         >
           {{ primaryButton!.label }}

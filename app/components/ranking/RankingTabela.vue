@@ -1,5 +1,5 @@
 <template>
-  <section class="overflow-x-clip">
+  <section id="ranking" class="scroll-mt-24 overflow-x-clip">
     <div class="container mx-auto flex flex-col px-4">
       <div
         v-if="tabs.length"
@@ -50,8 +50,9 @@
         class="mt-10 flex justify-center"
       >
         <Button
-          variant="ghost"
-          class="rounded-full outline-smooth-white bg-transparent text-white hover:bg-white/10"
+          :variant="ctaAppearance.variant"
+          class="rounded-full"
+          :class="ctaAppearance.class"
           @click="handleCtaClick"
         >
           {{ config.cta }}
@@ -67,6 +68,7 @@ import type { ComponentData, ModuloContentDataMap } from '~/types/modules'
 import type { RankingTabelaConfigData } from '~/types/ranking-tabela'
 import type { SectionCTAData } from '~/types/cards'
 import { resolveRankingTabelaAccent } from '~/types/ranking-tabela'
+import { resolveCtaButtonAppearance } from '~/utils/sectionCtaButton'
 import SectionCTA from '~/components/modules/SectionCTA.vue'
 import RankingPodioCard from '~/components/ranking/parts/RankingPodioCard.vue'
 import RankingTabelaFiltro from '~/components/ranking/parts/RankingTabelaFiltro.vue'
@@ -95,6 +97,7 @@ watch(defaultTabId, (id) => {
 })
 
 const accentColor = computed(() => resolveRankingTabelaAccent(props.config))
+const ctaAppearance = computed(() => resolveCtaButtonAppearance('branco', 'outline'))
 
 const headerConfig = computed(() =>
   resolveRankingSectionCta(

@@ -1,5 +1,6 @@
 export { default as DropdownMenu } from "./DropdownMenu.vue"
 
+export { default as DropdownMenuArrow } from "./DropdownMenuArrow.vue"
 export { default as DropdownMenuCheckboxItem } from "./DropdownMenuCheckboxItem.vue"
 export { default as DropdownMenuContent } from "./DropdownMenuContent.vue"
 export { default as DropdownMenuGroup } from "./DropdownMenuGroup.vue"

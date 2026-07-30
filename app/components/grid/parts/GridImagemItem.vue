@@ -1,7 +1,12 @@
 <template>
   <div
-    class="rounded-2xl overflow-hidden bg-muted cursor-pointer group h-full flex flex-col"
-    @click="dados.link && navigateTo(dados.link)"
+    class="rounded-2xl overflow-hidden bg-muted group h-full flex flex-col"
+    :class="hasLink ? 'cursor-pointer' : undefined"
+    :role="hasLink ? 'link' : undefined"
+    :tabindex="hasLink ? 0 : undefined"
+    @click="onClick"
+    @keydown.enter.prevent="onClick"
+    @keydown.space.prevent="onClick"
   >
     <div class="aspect-[4/3] bg-muted overflow-hidden flex-shrink-0">
       <img
@@ -9,7 +14,7 @@
         :src="dados.imagem"
         :alt="dados.titulo || ''"
         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-      />
+      >
     </div>
     <div v-if="dados.titulo || dados.descricao" class="p-4 flex-1">
       <h3 v-if="dados.titulo" class="font-bold text-base mb-1">{{ dados.titulo }}</h3>
@@ -23,7 +28,16 @@
 <script setup lang="ts">
 import type { GaleriaImagemData } from '~/types/modules'
 
-defineProps<{
+const props = defineProps<{
   dados: GaleriaImagemData
 }>()
+
+const { navigateLink } = useCardLink()
+
+const hasLink = computed(() => !!props.dados.link)
+
+function onClick() {
+  const link = props.dados.link
+  if (link) navigateLink(link)
+}
 </script>
