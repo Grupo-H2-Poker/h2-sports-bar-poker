@@ -74,7 +74,7 @@
                 v-for="(item, index) in activeItems"
                 :key="`${activeCategoria}-${index}`"
                 :value="`item-${activeCategoria}-${index}`"
-                class="border-white/10 transition-colors data-[state=open]:border-brand-green/25"
+                class="border-white/10"
               >
                 <AccordionTrigger
                   class="gap-4 py-5 text-left text-base font-semibold text-card-preview-text hover:no-underline [&[data-state=open]]:text-white"
@@ -156,7 +156,7 @@ const activeItems = computed(() =>
 .faq-page-accordion :deep([data-slot="accordion-trigger"] svg) {
   color: #e7e7e7;
   opacity: 0.7;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
 }
 
 .faq-page-accordion :deep([data-slot="accordion-trigger"][data-state="open"] svg) {
