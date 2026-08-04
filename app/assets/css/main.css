@@ -107,8 +107,8 @@
 
 /**
  * Outline em elementos arredondados.
- * `border` e `box-shadow: inset` cortam o pixel na junção reto→curva
- * (pior com zoom ≠ 100%). Anel via mask + ::before segue o radius limpo.
+ * `border` e `inset` + radius “achatam” o pixel na ponta da curva.
+ * `box-shadow` externo (spread 1px) acompanha o radius sem clip.
  */
 .outline-smooth,
 .outline-smooth-green,
@@ -119,69 +119,64 @@
 .outline-smooth-amarelo,
 .outline-smooth-white-25,
 .outline-smooth-border {
-  --outline-smooth-color: currentColor;
-  position: relative;
-  isolation: isolate;
   border-width: 0 !important;
   border-color: transparent !important;
-  box-shadow: none !important;
+  overflow: visible !important;
+  background-clip: padding-box;
 }
 
-.outline-smooth { --outline-smooth-color: currentColor; }
-.outline-smooth-green { --outline-smooth-color: var(--brand-green); }
-.outline-smooth-white { --outline-smooth-color: #ffffff; }
-.outline-smooth-muted { --outline-smooth-color: #e7e7e7; }
-.outline-smooth-purple { --outline-smooth-color: var(--brand-purple); }
-.outline-smooth-vermelho { --outline-smooth-color: #d63d1d; }
-.outline-smooth-amarelo { --outline-smooth-color: #e6a23a; }
-.outline-smooth-white-25 { --outline-smooth-color: rgb(255 255 255 / 0.25); }
-.outline-smooth-border { --outline-smooth-color: var(--input); }
+.outline-smooth {
+  box-shadow: 0 0 0 1px currentColor !important;
+}
 
-.outline-smooth::before,
-.outline-smooth-green::before,
-.outline-smooth-white::before,
-.outline-smooth-muted::before,
-.outline-smooth-purple::before,
-.outline-smooth-vermelho::before,
-.outline-smooth-amarelo::before,
-.outline-smooth-white-25::before,
-.outline-smooth-border::before,
-.btn-green-solid:hover::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  padding: 1px;
-  background: var(--outline-smooth-color, currentColor);
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
+.outline-smooth-green {
+  box-shadow: 0 0 0 1px var(--brand-green) !important;
+}
+
+.outline-smooth-white {
+  box-shadow: 0 0 0 1px #ffffff !important;
+}
+
+.outline-smooth-muted {
+  box-shadow: 0 0 0 1px #e7e7e7 !important;
+}
+
+.outline-smooth-purple {
+  box-shadow: 0 0 0 1px var(--brand-purple) !important;
+}
+
+.outline-smooth-vermelho {
+  box-shadow: 0 0 0 1px #d63d1d !important;
+}
+
+.outline-smooth-amarelo {
+  box-shadow: 0 0 0 1px #e6a23a !important;
+}
+
+.outline-smooth-white-25 {
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.25) !important;
+}
+
+.outline-smooth-border {
+  box-shadow: 0 0 0 1px var(--input) !important;
 }
 
 /**
  * Botão verde sólido → no hover vira outline (evita hover preto do variant ghost).
  */
 .btn-green-solid {
-  position: relative;
-  isolation: isolate;
   background-color: var(--brand-green) !important;
   color: #000000 !important;
   border-width: 0 !important;
   box-shadow: none !important;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  overflow: visible !important;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-green-solid:hover {
-  --outline-smooth-color: var(--brand-green);
   background-color: transparent !important;
   color: var(--brand-green) !important;
-  box-shadow: none !important;
+  box-shadow: 0 0 0 1px var(--brand-green) !important;
 }
 
 .btn-green-solid:disabled,
@@ -190,12 +185,6 @@
   background-color: var(--brand-green) !important;
   color: #000000 !important;
   box-shadow: none !important;
-}
-
-.btn-green-solid:disabled::before,
-.btn-green-solid[aria-disabled='true']::before,
-.btn-green-solid.cursor-default:hover::before {
-  content: none;
 }
 
 .container {

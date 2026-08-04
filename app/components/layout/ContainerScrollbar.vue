@@ -10,8 +10,11 @@ const THUMB_MAX = 110
 const props = withDefaults(defineProps<{
   /** Espaço à direita do conteúdo (afasta badges do thumb). */
   contentPaddingRight?: number
+  /** Espaço à esquerda — evita clip da sombra/borda arredondada. */
+  contentPaddingLeft?: number
 }>(), {
   contentPaddingRight: 16,
+  contentPaddingLeft: 3,
 })
 
 const scrollerRef = ref<HTMLElement | null>(null)
@@ -138,8 +141,11 @@ defineExpose({ update: scheduleUpdate })
   <div class="container-scrollbar relative min-h-0 flex-1">
     <div
       ref="scrollerRef"
-      class="container-scrollbar__scroller h-full min-w-0 overflow-x-hidden overflow-y-auto"
-      :style="{ paddingRight: `${contentPaddingRight}px` }"
+      class="container-scrollbar__scroller h-full min-w-0 overflow-y-auto"
+      :style="{
+        paddingRight: `${contentPaddingRight}px`,
+        paddingLeft: `${contentPaddingLeft}px`,
+      }"
     >
       <slot />
     </div>

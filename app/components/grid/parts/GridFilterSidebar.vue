@@ -5,9 +5,9 @@
     :should-scale-background="false"
   >
     <DrawerContent
-      class="bg-black border-black text-[#e7e7e7] inset-y-0 right-0 left-auto mt-0 h-full max-h-none rounded-none data-[vaul-drawer-direction=right]:!w-[min(100vw,600px)] data-[vaul-drawer-direction=right]:!max-w-[600px]"
+      class="overflow-visible bg-black border-black text-[#e7e7e7] inset-y-0 right-0 left-auto mt-0 h-full max-h-none rounded-none data-[vaul-drawer-direction=right]:!w-[min(100vw,600px)] data-[vaul-drawer-direction=right]:!max-w-[600px]"
     >
-      <div class="flex h-full min-h-0 flex-col px-5 pt-5 pb-5">
+      <div class="flex h-full min-h-0 flex-col overflow-visible px-5 pt-5 pb-5">
         <div class="flex shrink-0 items-center justify-between pb-6 pr-1">
           <h2 class="text-2xl font-bold text-[#e7e7e7]">
             {{ config?.titulo ?? 'Filtros' }}
@@ -26,8 +26,9 @@
         </div>
 
         <ContainerScrollbar
+          :content-padding-left="4"
           :content-padding-right="20"
-          class="min-w-0 overflow-x-hidden pb-2"
+          class="min-w-0 overflow-visible pb-2"
         >
           <div
             v-for="(section, index) in config?.secoes ?? []"
