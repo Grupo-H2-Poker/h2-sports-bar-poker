@@ -4,6 +4,7 @@ import type { FooterData } from '~/types/footer'
 import type { ModuloMetadadosAgendaPreview } from '~/types/agenda-preview'
 import type { BannerData, ModuloMetadadosBanner } from '~/types/banner'
 import type { CardGenericData, SectionCTAData } from '~/types/cards'
+import type { DocumentoSecaoData, ModuloMetadadosDocumentoPage } from '~/types/documento-page'
 import type { FaqCategoriaData, ModuloMetadadosFaq, ModuloMetadadosFaqPage } from '~/types/faq-page'
 import type { GridConfigData, GridToolbarData } from '~/types/grid'
 import type { RankingConfigData, RankingPlayerData } from '~/types/ranking'
@@ -13,6 +14,7 @@ import type { ModuloMetadadosGaleria } from '~/types/galeria'
 
 export type { BannerCtaPosition, BannerData, BannerHeight, BannerImagemSize, BannerLayout, BannerSize, ModuloMetadadosBanner } from '~/types/banner'
 export type { CardGenericData, SectionCTAData } from '~/types/cards'
+export type { DocumentoSecaoData, ModuloMetadadosDocumentoPage } from '~/types/documento-page'
 export type { FaqCategoriaData, ModuloMetadadosFaq, ModuloMetadadosFaqPage } from '~/types/faq-page'
 export type { GridConfigData, GridToolbarData, GridItemType } from '~/types/grid'
 export type { FaixaCtaData } from '~/types/faixa-cta'
@@ -189,6 +191,7 @@ export type ModuloTipo =
   | 'ranking_tabela'
   | 'faq'
   | 'faq_page'
+  | 'documento_page'
   | 'embaixadores'
   | 'download_app'
   | 'eventos'
@@ -211,6 +214,7 @@ export const MODULO_COMPONENT_TYPE = {
   ranking_tabela: 'ranking_linha',
   faq: 'faq',
   faq_page: 'faq_categoria',
+  documento_page: 'documento_secao',
   embaixadores: 'embaixador',
   download_app: null,
   eventos: 'evento',
@@ -227,6 +231,7 @@ export interface ModuloDataMap {
   ranking_tabela: RankingTabelaLinhaData | RankingTabelaConfigData | SectionCTAData
   faq: FaqItemData | SectionCTAData
   faq_page: FaqCategoriaData | SectionCTAData
+  documento_page: DocumentoSecaoData | SectionCTAData
   embaixadores: EmbaixadorData
   download_app: Record<string, never>
   eventos: EventoData | SectionCTAData
@@ -244,6 +249,7 @@ export interface ModuloContentDataMap {
   ranking_tabela: RankingTabelaLinhaData
   faq: FaqItemData
   faq_page: FaqItemData
+  documento_page: DocumentoSecaoData
   embaixadores: EmbaixadorData
   download_app: Record<string, never>
   eventos: EventoData
@@ -260,6 +266,7 @@ export interface ModuloMetadadosMap {
   ranking_tabela: ModuloMetadadosEmpty
   faq: ModuloMetadadosFaq
   faq_page: ModuloMetadadosFaqPage
+  documento_page: ModuloMetadadosDocumentoPage
   embaixadores: ModuloMetadadosTitulo
   download_app: ModuloMetadadosDownloadApp
   eventos: ModuloMetadadosEmpty

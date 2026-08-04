@@ -43,6 +43,13 @@ const { ctaConfig, items } = useModuloComponents(() => props.modulo)
 | `agenda_preview` | Widget na home (carrossel reduzido) | 1º: `cash_game` (fixo) + demais: `card` (torneio preview) |
 | `grid` | Página `/agenda` (cards completos) | `variant: torneio` \| `cash_game` no JSON |
 
+## Páginas documentais (mesmo layout do FAQ)
+
+| `tipo` | Uso | Components |
+|--------|-----|------------|
+| `faq_page` | `/faq` — accordion pergunta/resposta | `faq_categoria` + `section_cta` |
+| `documento_page` | `/regulamentos`, `/seguranca-e-privacidade` — texto corrido | `documento_secao` (`slug`, `titulo`, `conteudo` HTML) + `section_cta` |
+
 ## Menu
 
 - **Interno (página da unidade):** `{ kind: 'link', label: 'Agenda', pagina: 'agenda' }`

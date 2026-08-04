@@ -1,13 +1,13 @@
 <template>
   <Button
     type="button"
-    variant="ghost"
-    class="inline-flex h-8 items-center justify-center rounded-full px-4 text-sm"
+    variant="plain"
+    class="inline-flex h-auto min-h-8 min-w-0 max-w-full shrink items-center justify-center rounded-full px-4 py-1.5 text-sm whitespace-normal text-center outline-smooth-muted"
     :class="[
       fullWidth ? 'w-full' : '',
       selected
-        ? 'outline-smooth-muted bg-[#e7e7e7] text-black hover:bg-[#e7e7e7]'
-        : 'outline-smooth-muted bg-transparent text-[#e7e7e7] hover:bg-[#e7e7e7]/10',
+        ? 'bg-[#e7e7e7] text-black hover:bg-[#e7e7e7] hover:text-black'
+        : 'bg-transparent text-[#e7e7e7] hover:bg-[#e7e7e7]/10 hover:text-[#e7e7e7]',
     ]"
     @click="emit('click')"
   >

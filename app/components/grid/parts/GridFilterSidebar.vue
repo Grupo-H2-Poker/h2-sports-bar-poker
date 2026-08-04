@@ -5,10 +5,10 @@
     :should-scale-background="false"
   >
     <DrawerContent
-      class="bg-black border-black text-[#e7e7e7] inset-y-0 right-0 left-auto mt-0 h-full max-h-none w-full !max-w-[600px] data-[vaul-drawer-direction=right]:sm:!max-w-[600px] rounded-none"
+      class="bg-black border-black text-[#e7e7e7] inset-y-0 right-0 left-auto mt-0 h-full max-h-none rounded-none data-[vaul-drawer-direction=right]:!w-[min(100vw,600px)] data-[vaul-drawer-direction=right]:!max-w-[600px]"
     >
-      <div class="flex h-full flex-col p-5">
-        <div class="flex shrink-0 items-center justify-between pb-6">
+      <div class="flex h-full min-h-0 flex-col px-5 pt-5 pb-5">
+        <div class="flex shrink-0 items-center justify-between pb-6 pr-1">
           <h2 class="text-2xl font-bold text-[#e7e7e7]">
             {{ config?.titulo ?? 'Filtros' }}
           </h2>
@@ -25,7 +25,10 @@
           </Button>
         </div>
 
-        <div class="flex-1 overflow-y-auto pb-6">
+        <ContainerScrollbar
+          :content-padding-right="20"
+          class="min-w-0 overflow-x-hidden pb-2"
+        >
           <div
             v-for="(section, index) in config?.secoes ?? []"
             :key="section.id"
@@ -35,7 +38,10 @@
               {{ section.titulo }}
             </h3>
 
-            <div :class="sectionGridClass(section)">
+            <div
+              :class="sectionGridClass(section)"
+              class="min-w-0"
+            >
               <GridFilterChip
                 v-for="opcao in section.opcoes"
                 :key="opcao.id"
@@ -49,12 +55,15 @@
             <div
               v-for="sub in section.subsecoes ?? []"
               :key="sub.id"
-              class="mt-6"
+              class="mt-6 min-w-0"
             >
               <h4 class="mb-3 text-sm font-normal text-[#e7e7e7]/70">
                 {{ sub.titulo }}
               </h4>
-              <div :class="sectionGridClass(sub)">
+              <div
+                :class="sectionGridClass(sub)"
+                class="min-w-0"
+              >
                 <GridFilterChip
                   v-for="opcao in sub.opcoes"
                   :key="opcao.id"
@@ -66,7 +75,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </ContainerScrollbar>
 
         <DrawerFooter class="shrink-0 flex-row gap-4 border-t border-white/10 p-0 pt-6">
           <Button
@@ -104,6 +113,7 @@ import {
 import type { GridFilterModal, GridFilterSection } from '~/types/grid'
 import { resolveCtaButtonAppearance } from '~/utils/sectionCtaButton'
 import GridFilterChip from '~/components/grid/parts/GridFilterChip.vue'
+import ContainerScrollbar from '~/components/layout/ContainerScrollbar.vue'
 
 defineProps<{
   config?: GridFilterModal
@@ -122,10 +132,10 @@ const clearAppearance = computed(() => resolveCtaButtonAppearance('verde', 'outl
 
 const SECTION_GRID_CLASSES: Record<NonNullable<GridFilterSection['colunas']>, string> = {
   1: 'grid grid-cols-1 gap-3',
-  2: 'grid grid-cols-2 gap-3',
-  3: 'grid grid-cols-3 gap-3',
-  4: 'grid grid-cols-4 gap-3',
-  5: 'grid grid-cols-5 gap-3',
+  2: 'grid grid-cols-1 gap-3 sm:grid-cols-2',
+  3: 'grid grid-cols-2 gap-3 sm:grid-cols-3',
+  4: 'grid grid-cols-2 gap-3 sm:grid-cols-4',
+  5: 'grid grid-cols-3 gap-3 sm:grid-cols-5',
 }
 
 function sectionGridClass(section: GridFilterSection) {

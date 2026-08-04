@@ -25,6 +25,7 @@ import RankingModule from '~/components/modules/RankingModule.vue'
 import RankingTabelaModule from '~/components/modules/RankingTabelaModule.vue'
 import FaqModule from '~/components/modules/FaqModule.vue'
 import FaqPageModule from '~/components/modules/FaqPageModule.vue'
+import DocumentoPageModule from '~/components/modules/DocumentoPageModule.vue'
 import EmbaixadoresModule from '~/components/modules/EmbaixadoresModule.vue'
 import DownloadAppModule from '~/components/modules/DownloadAppModule.vue'
 import EventosCarouselModule from '~/components/modules/EventosCarouselModule.vue'
@@ -46,6 +47,7 @@ const moduloMapa: Partial<Record<ModuloTipo, Component>> = {
   ranking_tabela: RankingTabelaModule,
   faq: FaqModule,
   faq_page: FaqPageModule,
+  documento_page: DocumentoPageModule,
   embaixadores: EmbaixadoresModule,
   download_app: DownloadAppModule,
   eventos: EventosCarouselModule,

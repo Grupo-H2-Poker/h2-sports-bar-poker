@@ -10,6 +10,10 @@ import {
   withDiaFilter,
   withEtapaFilter,
 } from '../../../../utils/mock-agenda-data'
+import {
+  createRegulamentosPagina,
+  createSegurancaPrivacidadePagina,
+} from '../../../../utils/mock-documento-pages'
 
 const AGENDA_GRID_TOOLBAR_BASE = {
   filtro: {
@@ -586,8 +590,8 @@ export default defineEventHandler((event) => {
                 id: 'termos',
                 titulo: 'Termos e condições',
                 links: [
-                  { id: 'regulamentos', label: 'Regulamentos', to: '/regulamentos' },
-                  { id: 'privacidade', label: 'Segurança e privacidade', to: '/privacidade' },
+                  { id: 'regulamentos', label: 'Regulamentos', pagina: 'regulamentos' },
+                  { id: 'privacidade', label: 'Segurança e privacidade', pagina: 'seguranca-e-privacidade' },
                 ],
               },
               {
@@ -1519,6 +1523,9 @@ export default defineEventHandler((event) => {
           ],
         },
 
+        createRegulamentosPagina(90, 9000),
+        createSegurancaPrivacidadePagina(91, 9100),
+
         // Página Galeria de fotos
         {
           slug: 'galeria',
@@ -2396,8 +2403,8 @@ export default defineEventHandler((event) => {
                 id: 'termos',
                 titulo: 'Termos e condições',
                 links: [
-                  { id: 'regulamentos', label: 'Regulamentos', to: '/regulamentos' },
-                  { id: 'privacidade', label: 'Segurança e privacidade', to: '/privacidade' },
+                  { id: 'regulamentos', label: 'Regulamentos', pagina: 'regulamentos' },
+                  { id: 'privacidade', label: 'Segurança e privacidade', pagina: 'seguranca-e-privacidade' },
                 ],
               },
               {
@@ -2721,6 +2728,8 @@ export default defineEventHandler((event) => {
             },
           ],
         },
+        createRegulamentosPagina(92, 9200),
+        createSegurancaPrivacidadePagina(93, 9300),
       ],
     },
 
