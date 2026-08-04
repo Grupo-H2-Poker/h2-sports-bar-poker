@@ -6,7 +6,7 @@
     :border-radius="borderRadiusPx"
     :reverse="reverseColumns"
     :reverse-on-mobile="reverseColumnsMobile"
-    :clip-overflow="!hasCarouselBleed"
+    :clip-overflow="!hasCarouselBleed && !hasDecoracao"
     class="bg-black"
     :class="sizeClasses.wrapper"
   >
@@ -159,6 +159,8 @@ const carouselBleedLeft = computed(() => {
 const hasCarouselBleed = computed(
   () => carouselBleedRight.value || carouselBleedLeft.value,
 )
+
+const hasDecoracao = computed(() => !!props.dados.decoracao?.imagem)
 
 const route = useRoute()
 

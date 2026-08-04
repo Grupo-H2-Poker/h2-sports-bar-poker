@@ -27,6 +27,7 @@
 
     <div
       v-else
+      class="relative"
       :class="imageShellClass"
       :style="borderRadiusStyle"
     >
@@ -40,6 +41,16 @@
         :link="imageLink"
         :style="borderRadiusStyle"
       />
+      <img
+        v-if="dados.decoracao?.imagem"
+        :src="dados.decoracao.imagem"
+        alt=""
+        aria-hidden="true"
+        draggable="false"
+        class="pointer-events-none absolute z-10 select-none"
+        :class="decoracaoPositionClass"
+        :style="decoracaoStyle"
+      />
     </div>
   </div>
 </template>
@@ -50,8 +61,16 @@ import DragCarousel from '~/components/modules/DragCarousel.vue'
 import {
   BANNER_TWO_COLUMN_CAROUSEL_CARD_CLASS,
   type BannerData,
+  type BannerDecoracaoPosition,
   type BannerImagemSize,
 } from '~/types/banner'
+
+const DECORACAO_POSITION_CLASS: Record<BannerDecoracaoPosition, string> = {
+  'bottom-right': 'bottom-0 right-0',
+  'bottom-left': 'bottom-0 left-0',
+  'top-right': 'top-0 right-0',
+  'top-left': 'top-0 left-0',
+}
 
 const props = defineProps<{
   dados: BannerData
@@ -89,13 +108,15 @@ const wrapperClass = computed(() => {
 const roundedShell = computed(() => (props.borderRadiusStyle ? 'overflow-hidden' : ''))
 
 const imageShellClass = computed(() => {
+  const overflow = props.dados.decoracao ? 'overflow-visible' : roundedShell.value
+
   switch (imagemSize.value) {
     case 'sm':
-      return `h-[220px] w-[300px] shrink-0 overflow-hidden md:h-[260px] md:w-[360px] ${roundedShell.value}`
+      return `h-[220px] w-[300px] shrink-0 md:h-[260px] md:w-[360px] ${overflow}`
     case 'md':
-      return `h-[320px] w-[420px] shrink-0 overflow-hidden md:h-[380px] md:w-[500px] ${roundedShell.value}`
+      return `h-[320px] w-[420px] shrink-0 md:h-[380px] md:w-[500px] ${overflow}`
     default:
-      return `w-[400px] shrink-0 md:w-[480px] ${roundedShell.value}`
+      return `w-[400px] shrink-0 md:w-[480px] ${overflow}`
   }
 })
 
@@ -109,5 +130,29 @@ const imageClass = computed(() => {
   }
 
   return 'h-full w-full object-cover'
+})
+
+const decoracaoPositionClass = computed(() => {
+  const position = props.dados.decoracao?.position ?? 'bottom-right'
+  return DECORACAO_POSITION_CLASS[position]
+})
+
+const decoracaoStyle = computed(() => {
+  const decoracao = props.dados.decoracao
+  if (!decoracao) return undefined
+
+  const width = decoracao.width ?? '52px'
+  const offsetX = decoracao.offset_x ?? '-12px'
+  const offsetY = decoracao.offset_y ?? '-12px'
+  const position = decoracao.position ?? 'bottom-right'
+
+  const style: Record<string, string> = { width, height: 'auto' }
+
+  if (position.includes('right')) style.right = offsetX
+  if (position.includes('left')) style.left = offsetX
+  if (position.includes('bottom')) style.bottom = offsetY
+  if (position.includes('top')) style.top = offsetY
+
+  return style
 })
 </script>

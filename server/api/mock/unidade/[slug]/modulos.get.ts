@@ -140,10 +140,273 @@ const CASH_GAME_GRID_TOOLBAR = {
   badges: { limpar: { label: 'Limpar todos os filtros' } },
 }
 
+/** Mesma margem lateral do FAQ da home (sp-pinheiros). */
+const HOME_FAQ_MARGIN_LATERAL = 100
+
+/** FAQ abaixo do grid das agendas — reutiliza conteúdo/margem da home. */
+function createAgendaFaqModulo(id: number, componentIdBase: number) {
+  return {
+    id,
+    tipo: 'faq' as const,
+    ordem: 2,
+    status: 'publicado' as const,
+    margin_top: 100,
+    margin_bottom: 40,
+    metadados: {
+      margin_lateral: HOME_FAQ_MARGIN_LATERAL,
+    },
+    components: [
+      {
+        id: componentIdBase,
+        type: 'section_cta',
+        ordem: 0,
+        status: 'publicado',
+        data: {
+          titulo: 'Precisa de ajuda?',
+          descricao: 'Aqui estão algumas das perguntas mais frequentes sobre o H2.',
+          cta: 'Saiba mais',
+          cta_link: 'faq',
+          cta_cor: 'verde',
+          align: 'left',
+          size: 'md',
+          width: 'md',
+        },
+      },
+      {
+        id: componentIdBase + 1,
+        type: 'faq',
+        ordem: 1,
+        status: 'publicado',
+        data: {
+          pergunta: 'Que horas o clube abre?',
+          resposta: 'O clube abre todos os dias às 12h. Os torneios e cash games seguem a agenda do dia — confira os horários na página de agenda.',
+        },
+      },
+      {
+        id: componentIdBase + 2,
+        type: 'faq',
+        ordem: 2,
+        status: 'publicado',
+        data: {
+          pergunta: 'Pode entrar menor de idade no clube?',
+          resposta: 'Não. O acesso ao clube é permitido apenas para maiores de 18 anos, conforme a legislação vigente.',
+        },
+      },
+      {
+        id: componentIdBase + 3,
+        type: 'faq',
+        ordem: 3,
+        status: 'publicado',
+        data: {
+          pergunta: 'Quais as modalidades do Cash Game',
+          resposta: 'Oferecemos mesas de Texas Hold\'em No Limit com blinds a partir de R$ 2/4. A disponibilidade varia conforme a demanda — consulte a agenda para ver as mesas abertas hoje.',
+        },
+      },
+    ],
+  }
+}
+
 const SERIES_BANNERS = {
   cph: '/img/banner_cph.png',
   'fun-festival': '/img/banner_funfestival.png',
 }
+
+/** Fotos mock reutilizadas entre álbuns (CMS envia `fotos[]` por álbum). */
+const GALERIA_FOTOS_CPH = [
+  { imagem: '/img/cph/history-1.jpg' },
+  { imagem: '/img/cph/history-2.jpg' },
+  { imagem: '/img/cph/history-3.jpg' },
+  { imagem: '/img/cph/history-4.png' },
+  { imagem: '/img/cph/history-5.png' },
+  { imagem: '/img/cph/history-6.jpg' },
+]
+
+const GALERIA_FOTOS_FUN = [
+  { imagem: '/img/fun-festival/jogue-com-a-diversao.png' },
+  { imagem: '/img/fun-festival/features-collage.png' },
+  { imagem: '/img/fun-festival/estrela.png' },
+  { imagem: '/img/galeria/eventos.png' },
+  { imagem: '/img/galeria/comunidade.png' },
+  { imagem: '/img/galeria/damas-do-poker.png' },
+]
+
+const GALERIA_FOTOS_GERAL = [
+  { imagem: '/img/galeria/damas-do-poker.png' },
+  { imagem: '/img/galeria/eventos.png' },
+  { imagem: '/img/galeria/comunidade.png' },
+  { imagem: '/img/galeria/eventos-corporativos.png' },
+  { imagem: '/img/galeria/franqueado.png' },
+  { imagem: '/img/galeria/poker-esporte-da-mente.png' },
+]
+
+/** Álbuns da página Galeria — todas as séries/etapas existentes. */
+const GALERIA_ALBUNS = [
+  {
+    id: 801,
+    type: 'imagem' as const,
+    ordem: 1,
+    status: 'publicado' as const,
+    data: {
+      imagem: '/img/cph/history-1.jpg',
+      titulo: '1ª Etapa CPH',
+      series: 'cph',
+      series_label: 'CPH',
+      etapa: '1',
+      fotos: GALERIA_FOTOS_CPH,
+    },
+  },
+  {
+    id: 802,
+    type: 'imagem' as const,
+    ordem: 2,
+    status: 'publicado' as const,
+    data: {
+      imagem: '/img/cph/history-2.jpg',
+      titulo: '2ª Etapa CPH',
+      series: 'cph',
+      series_label: 'CPH',
+      etapa: '2',
+      fotos: [
+        { imagem: '/img/cph/history-2.jpg' },
+        { imagem: '/img/cph/history-3.jpg' },
+        { imagem: '/img/cph/history-4.png' },
+        { imagem: '/img/cph/history-5.png' },
+        { imagem: '/img/cph/history-6.jpg' },
+        { imagem: '/img/cph/history-1.jpg' },
+      ],
+    },
+  },
+  {
+    id: 803,
+    type: 'imagem' as const,
+    ordem: 3,
+    status: 'publicado' as const,
+    data: {
+      imagem: '/img/cph/history-3.jpg',
+      titulo: '3ª Etapa CPH',
+      series: 'cph',
+      series_label: 'CPH',
+      etapa: '3',
+      fotos: [
+        { imagem: '/img/cph/history-3.jpg' },
+        { imagem: '/img/cph/history-4.png' },
+        { imagem: '/img/cph/history-5.png' },
+        { imagem: '/img/cph/history-6.jpg' },
+        { imagem: '/img/cph/history-1.jpg' },
+        { imagem: '/img/cph/history-2.jpg' },
+      ],
+    },
+  },
+  {
+    id: 804,
+    type: 'imagem' as const,
+    ordem: 4,
+    status: 'publicado' as const,
+    data: {
+      imagem: '/img/cph/history-4.png',
+      titulo: '4ª Etapa CPH',
+      series: 'cph',
+      series_label: 'CPH',
+      etapa: '4',
+      fotos: [
+        { imagem: '/img/cph/history-4.png' },
+        { imagem: '/img/cph/history-5.png' },
+        { imagem: '/img/cph/history-6.jpg' },
+        { imagem: '/img/cph/history-1.jpg' },
+        { imagem: '/img/cph/history-2.jpg' },
+        { imagem: '/img/cph/history-3.jpg' },
+      ],
+    },
+  },
+  {
+    id: 805,
+    type: 'imagem' as const,
+    ordem: 5,
+    status: 'publicado' as const,
+    data: {
+      imagem: '/img/fun-festival/jogue-com-a-diversao.png',
+      titulo: '1ª Etapa Fun Festival',
+      series: 'fun-festival',
+      series_label: 'Fun Festival',
+      etapa: '1',
+      fotos: GALERIA_FOTOS_FUN,
+    },
+  },
+  {
+    id: 806,
+    type: 'imagem' as const,
+    ordem: 6,
+    status: 'publicado' as const,
+    data: {
+      imagem: '/img/fun-festival/features-collage.png',
+      titulo: '2ª Etapa Fun Festival',
+      series: 'fun-festival',
+      series_label: 'Fun Festival',
+      etapa: '2',
+      fotos: [
+        { imagem: '/img/fun-festival/features-collage.png' },
+        { imagem: '/img/fun-festival/jogue-com-a-diversao.png' },
+        { imagem: '/img/fun-festival/estrela.png' },
+        { imagem: '/img/galeria/comunidade.png' },
+        { imagem: '/img/galeria/eventos.png' },
+        { imagem: '/img/galeria/franqueado.png' },
+      ],
+    },
+  },
+  {
+    id: 807,
+    type: 'imagem' as const,
+    ordem: 7,
+    status: 'publicado' as const,
+    data: {
+      imagem: '/img/galeria/damas-do-poker.png',
+      titulo: 'Damas do Poker',
+      series: 'damas-do-poker',
+      series_label: 'Damas do Poker',
+      fotos: GALERIA_FOTOS_GERAL,
+    },
+  },
+  {
+    id: 808,
+    type: 'imagem' as const,
+    ordem: 8,
+    status: 'publicado' as const,
+    data: {
+      imagem: '/img/galeria/eventos.png',
+      titulo: 'Ladies Weekend',
+      series: 'ladies-weekend',
+      series_label: 'Ladies Weekend',
+      fotos: [
+        { imagem: '/img/galeria/eventos.png' },
+        { imagem: '/img/galeria/damas-do-poker.png' },
+        { imagem: '/img/galeria/comunidade.png' },
+        { imagem: '/img/galeria/eventos-corporativos.png' },
+        { imagem: '/img/cph/history-5.png' },
+        { imagem: '/img/cph/history-6.jpg' },
+      ],
+    },
+  },
+  {
+    id: 809,
+    type: 'imagem' as const,
+    ordem: 9,
+    status: 'publicado' as const,
+    data: {
+      imagem: '/img/galeria/comunidade.png',
+      titulo: 'Xadrez',
+      series: 'xadrez',
+      series_label: 'Xadrez',
+      fotos: [
+        { imagem: '/img/galeria/comunidade.png' },
+        { imagem: '/img/galeria/poker-esporte-da-mente.png' },
+        { imagem: '/img/galeria/franqueado.png' },
+        { imagem: '/img/galeria/eventos-corporativos.png' },
+        { imagem: '/img/galeria/eventos.png' },
+        { imagem: '/img/galeria/damas-do-poker.png' },
+      ],
+    },
+  },
+]
 
 const SERIES_MENU_ITEMS = [
   { id: 'cph', kind: 'link', label: 'CPH', to: 'series/cph' },
@@ -261,6 +524,7 @@ export default defineEventHandler((event) => {
       menu: [
         { id: 'h2bet', kind: 'link', label: 'H2Bet', to: 'https://www.h2.bet.br/', external: true },
         { id: 'agenda', kind: 'link', label: 'Agenda', pagina: 'agenda' },
+        { id: 'galeria', kind: 'link', label: 'Galeria', pagina: 'galeria' },
         { id: 'faq', kind: 'link', label: 'FAQ', pagina: 'faq' },
         {
           id: 'conteudo',
@@ -303,7 +567,7 @@ export default defineEventHandler((event) => {
                 links: [
                   { id: 'quem-somos', label: 'Quem somos', to: '/sobre' },
                   { id: 'social', label: 'Social', to: '/social' },
-                  { id: 'galeria', label: 'Galeria de fotos', to: '/galeria' },
+                  { id: 'galeria', label: 'Galeria de fotos', to: 'galeria' },
                 ],
               },
               {
@@ -746,7 +1010,7 @@ export default defineEventHandler((event) => {
               margin_top: 40,
               margin_bottom: 40,
               metadados: {
-                margin_lateral: 40,
+                margin_lateral: 100,
               },
               components: [
                 {
@@ -877,6 +1141,7 @@ export default defineEventHandler((event) => {
                 ),
               ]
             },
+            createAgendaFaqModulo(11, 1100),
           ],
         },
 
@@ -931,6 +1196,7 @@ export default defineEventHandler((event) => {
                 ),
               ],
             },
+            createAgendaFaqModulo(62, 6200),
           ],
         },
 
@@ -983,6 +1249,7 @@ export default defineEventHandler((event) => {
                 ),
               ],
             },
+            createAgendaFaqModulo(63, 6300),
           ],
         },
 
@@ -1043,7 +1310,7 @@ export default defineEventHandler((event) => {
               status: 'publicado',
               margin_top: 100,
               margin_bottom: 40,
-              metadados: { margin_lateral: 24 },
+              metadados: { margin_lateral: HOME_FAQ_MARGIN_LATERAL },
               components: [
                 {
                   id: 710,
@@ -1251,6 +1518,106 @@ export default defineEventHandler((event) => {
             },
           ],
         },
+
+        // Página Galeria de fotos
+        {
+          slug: 'galeria',
+          titulo: 'Galeria de fotos',
+          ordem: 4,
+          status: 'publicado',
+          modulos: [
+            {
+              id: 80,
+              tipo: 'galeria',
+              ordem: 1,
+              status: 'publicado',
+              margin_top: 40,
+              margin_bottom: 40,
+              metadados: {
+                layout: 'grid',
+                colunas: 3,
+                itens_por_linha: 2,
+                gap: 'md',
+                card_variant: 'album',
+                filtro_series: true,
+              },
+              components: [
+                {
+                  id: 800,
+                  type: 'section_cta',
+                  ordem: 0,
+                  status: 'publicado',
+                  data: {
+                    titulo: 'Suas fotos aqui!',
+                    align: 'center',
+                    size: 'md',
+                  },
+                },
+                ...GALERIA_ALBUNS,
+              ],
+            },
+            {
+              id: 81,
+              tipo: 'faq',
+              ordem: 2,
+              status: 'publicado',
+              margin_top: 40,
+              margin_bottom: 40,
+              metadados: {
+                margin_lateral: 112,
+              },
+              components: [
+                {
+                  id: 810,
+                  type: 'section_cta',
+                  ordem: 0,
+                  status: 'publicado',
+                  data: {
+                    titulo: 'Perguntas frequentes',
+                    descricao: 'Aqui estão algumas das perguntas mais frequentes sobre a agenda',
+                    cta: 'Saiba mais',
+                    cta_link: 'faq',
+                    cta_cor: 'verde',
+                    align: 'left',
+                    size: 'md',
+                    width: 'md',
+                  },
+                },
+                {
+                  id: 811,
+                  type: 'faq',
+                  ordem: 1,
+                  status: 'publicado',
+                  data: {
+                    pergunta: 'Onde encontro as fotos dos torneios?',
+                    resposta: 'Na galeria você encontra álbuns por série e etapa. Use o filtro no topo para navegar entre CPH, Fun Festival e demais séries.',
+                  },
+                },
+                {
+                  id: 812,
+                  type: 'faq',
+                  ordem: 2,
+                  status: 'publicado',
+                  data: {
+                    pergunta: 'Quando as fotos são publicadas?',
+                    resposta: 'As fotos de cada etapa costumam ser publicadas em até 48 horas após o evento. Em séries especiais o prazo pode variar.',
+                  },
+                },
+                {
+                  id: 813,
+                  type: 'faq',
+                  ordem: 3,
+                  status: 'publicado',
+                  data: {
+                    pergunta: 'Posso solicitar uma foto específica?',
+                    resposta: 'Sim. Entre em contato pelo atendimento do clube informando a série, a etapa e uma descrição do momento — vamos te ajudar a localizar.',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+
         // Página Série — CPH (topo fixo: Banner + Próximas etapas)
         {
           slug: 'series/cph',
@@ -1414,9 +1781,9 @@ export default defineEventHandler((event) => {
                   status: 'publicado',
                   data: {
                     titulo: 'Quem jogou, marcou. Encontre seu momento.',
-                    titulo_size: '24px',
+                    titulo_size: '20px',
                     cta: 'Suas fotos aqui',
-                    cta_link: 'galeria/cph',
+                    cta_link: 'galeria?series=cph',
                     backgroundColor: 'rgba(214, 61, 29, 0.6)',
                     textColor: '#e7e7e7',
                     cta_backgroundColor: '#e7e7e7',
@@ -1742,9 +2109,179 @@ export default defineEventHandler((event) => {
                     link: 'agenda/fun-festival?etapa=3',
                   },
                 },
+                {
+                  id: 514,
+                  type: 'card',
+                  ordem: 4,
+                  status: 'publicado',
+                  data: {
+                    ativo: false,
+                    titulo: '4ª Etapa',
+                    subtitulo: 'Fun Festival',
+                    faixa_info: '22 a 31 de Maio',
+                    link: 'agenda/fun-festival?etapa=4',
+                  },
+                },
               ],
             },
-            // daqui pra baixo a gente vai montar juntos, módulo por módulo
+            {
+              id: 52,
+              tipo: 'banner',
+              ordem: 3,
+              status: 'publicado',
+              margin_top: 40,
+              margin_bottom: 40,
+              components: [
+                {
+                  id: 520,
+                  type: 'banner',
+                  ordem: 1,
+                  status: 'publicado',
+                  data: {
+                    layout: 'two_column',
+                    size: 'lg',
+                    cta_column: 'right',
+                    reverse_columns: false,
+                    imagem_size: 'md',
+                    border_radius: 'sm',
+                    imagem: '/img/fun-festival/jogue-com-a-diversao.png',
+                    decoracao: {
+                      imagem: '/img/fun-festival/estrela.png',
+                      position: 'bottom-right',
+                      width: '52px',
+                      offset_x: '-16px',
+                      offset_y: '-8px',
+                    },
+                    section_cta: {
+                      titulo: 'Jogue com a diversão',
+                      descricao: 'O Fun Festival é uma experiência completa que conecta jogo, entretenimento e comunidade em um único ambiente.',
+                      descricao_2: 'Criado em 2024, a série nasce com um propósito claro: equilibrar a emoção da competitividade com o prazer de viver o jogo.',
+                      align: 'left',
+                      size: 'md',
+                      width: 'lg',
+                    },
+                  },
+                },
+              ],
+            },
+            {
+              id: 53,
+              tipo: 'faixa_cta',
+              ordem: 4,
+              status: 'publicado',
+              margin_top: 0,
+              margin_bottom: 40,
+              components: [
+                {
+                  id: 530,
+                  type: 'faixa_cta',
+                  ordem: 1,
+                  status: 'publicado',
+                  data: {
+                    titulo: 'Fez parte do jogo? Então fez história.',
+                    titulo_size: '20px',
+                    cta: 'Veja as fotos',
+                    cta_link: 'galeria?series=fun-festival',
+                    backgroundColor: '#B41E92',
+                    textColor: '#e7e7e7',
+                    cta_backgroundColor: '#e7e7e7',
+                    cta_textColor: 'rgba(0, 0, 0, 0.88)',
+                    fullWidth: true,
+                    gap: 40,
+                    align_horizontal: 'center',
+                    align_vertical: 'center',
+                    padding_x: 16,
+                    padding_y: 26,
+                    stack_mobile: true,
+                  },
+                },
+              ],
+            },
+            {
+              id: 54,
+              tipo: 'banner',
+              ordem: 5,
+              status: 'publicado',
+              margin_top: 0,
+              margin_bottom: 40,
+              metadados: {
+                use_same_faq_margin: true,
+              },
+              components: [
+                {
+                  id: 540,
+                  type: 'banner',
+                  ordem: 1,
+                  status: 'publicado',
+                  data: {
+                    imagem: '/img/fun-festival/features-collage.png',
+                    size: 'lg',
+                    height: 'strip',
+                    overlay: 'none',
+                    rounded: false,
+                  },
+                },
+              ],
+            },
+            {
+              id: 55,
+              tipo: 'faq',
+              ordem: 6,
+              status: 'publicado',
+              margin_top: 40,
+              margin_bottom: 40,
+              metadados: {
+                margin_lateral: 112,
+              },
+              components: [
+                {
+                  id: 550,
+                  type: 'section_cta',
+                  ordem: 0,
+                  status: 'publicado',
+                  data: {
+                    titulo: 'Precisa de ajuda?',
+                    descricao: 'Aqui estão algumas das perguntas mais frequentes sobre o H2.',
+                    cta: 'Saiba mais',
+                    cta_link: 'faq',
+                    cta_cor: 'verde',
+                    align: 'left',
+                    size: 'md',
+                    width: 'md',
+                  },
+                },
+                {
+                  id: 551,
+                  type: 'faq',
+                  ordem: 1,
+                  status: 'publicado',
+                  data: {
+                    pergunta: 'Que horas o clube abre?',
+                    resposta: 'O clube abre todos os dias às 12h. Os torneios e cash games seguem a agenda do dia — confira os horários na página de agenda.',
+                  },
+                },
+                {
+                  id: 552,
+                  type: 'faq',
+                  ordem: 2,
+                  status: 'publicado',
+                  data: {
+                    pergunta: 'Pode entrar menor de idade no clube?',
+                    resposta: 'Não. O acesso ao clube é permitido apenas para maiores de 18 anos, conforme a legislação vigente.',
+                  },
+                },
+                {
+                  id: 553,
+                  type: 'faq',
+                  ordem: 3,
+                  status: 'publicado',
+                  data: {
+                    pergunta: 'Quais as modalidades do Cash Game',
+                    resposta: 'Oferecemos mesas de Texas Hold\'em No Limit com blinds a partir de R$ 2/4. A disponibilidade varia conforme a demanda — consulte a agenda para ver as mesas abertas hoje.',
+                  },
+                },
+              ],
+            },
           ],
         },
       ],
@@ -1785,6 +2322,7 @@ export default defineEventHandler((event) => {
       menu: [
         { id: 'h2bet', kind: 'link', label: 'H2Bet', to: 'https://www.h2.bet.br/', external: true },
         { id: 'agenda', kind: 'link', label: 'Agenda', pagina: 'agenda' },
+        { id: 'galeria', kind: 'link', label: 'Galeria', pagina: 'galeria' },
         { id: 'faq', kind: 'link', label: 'FAQ', pagina: 'faq' },
         {
           id: 'conteudo',
@@ -1839,7 +2377,7 @@ export default defineEventHandler((event) => {
                 links: [
                   { id: 'quem-somos', label: 'Quem somos', to: '/sobre' },
                   { id: 'social', label: 'Social', to: '/social' },
-                  { id: 'galeria', label: 'Galeria de fotos', to: '/galeria' },
+                  { id: 'galeria', label: 'Galeria de fotos', to: 'galeria' },
                 ],
               },
               {
@@ -2050,6 +2588,7 @@ export default defineEventHandler((event) => {
                 }
               ]
             },
+            createAgendaFaqModulo(22, 2200),
           ],
         },
         {

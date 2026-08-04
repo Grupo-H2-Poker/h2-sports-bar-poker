@@ -6,6 +6,16 @@ export type GaleriaGridColunas = 1 | 2 | 3 | 4
 
 export type GaleriaGridGap = 'sm' | 'md' | 'lg'
 
+/** Variante visual do card de imagem da galeria. */
+export type GaleriaCardVariant = 'default' | 'album'
+
+export const GALERIA_FILTER_TODAS_ID = 'todas' as const
+
+export interface GaleriaSeriesFiltroOption {
+  id: string
+  label: string
+}
+
 export interface ModuloMetadadosGaleria extends ModuloMetadadosCarousel {
   /**
    * `grid` — grade de imagens com colunas configuráveis.
@@ -18,9 +28,20 @@ export interface ModuloMetadadosGaleria extends ModuloMetadadosCarousel {
   itens_por_linha?: GaleriaGridColunas
   /** Espaçamento entre itens no modo grid. Padrão: `md` */
   gap?: GaleriaGridGap
+  /**
+   * `default` — card com título/descrição na base (home).
+   * `album` — overlay centralizado estilo página Galeria de Fotos (Figma).
+   */
+  card_variant?: GaleriaCardVariant
+  /**
+   * Quando `true`, exibe filtro de séries derivado dos itens com `series`.
+   * Tabs: Todas + cada série presente nos dados.
+   */
+  filtro_series?: boolean
 }
 
 export const GALERIA_DEFAULT_LAYOUT: GaleriaLayout = 'drag_carousel'
+export const GALERIA_DEFAULT_CARD_VARIANT: GaleriaCardVariant = 'default'
 
 export const GALERIA_GRID_GAP_CLASS: Record<GaleriaGridGap, string> = {
   sm: 'gap-4',

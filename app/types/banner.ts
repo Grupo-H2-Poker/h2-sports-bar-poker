@@ -103,10 +103,33 @@ export interface BannerData {
   border_radius?: BannerBorderRadius
   /** Como a imagem preenche o banner no layout overlay. Padrão: `cover` */
   object_fit?: 'cover' | 'contain'
+  /**
+   * Decoração sobreposta à imagem no layout `two_column`
+   * (ex.: estrela no canto da foto).
+   */
+  decoracao?: BannerDecoracao
   /** @deprecated Preferir `section_cta.titulo` */
   titulo?: string
   /** @deprecated Preferir `section_cta.descricao` */
   subtitulo?: string
   /** @deprecated Preferir `section_cta.cta` */
   cta?: string
+}
+
+export type BannerDecoracaoPosition =
+  | 'bottom-right'
+  | 'bottom-left'
+  | 'top-right'
+  | 'top-left'
+
+export interface BannerDecoracao {
+  imagem: string
+  /** Posição relativa à foto. Padrão: `bottom-right` */
+  position?: BannerDecoracaoPosition
+  /** Largura em CSS (ex.: `52px`). Padrão: `52px` */
+  width?: string
+  /** Offset horizontal a partir da borda. Padrão: `-12px` */
+  offset_x?: string
+  /** Offset vertical a partir da borda. Padrão: `-12px` */
+  offset_y?: string
 }

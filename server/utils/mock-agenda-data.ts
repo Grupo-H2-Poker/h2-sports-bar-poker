@@ -5,6 +5,7 @@ import {
   formatDataBadge,
   formatDataLabel,
 } from '../../app/utils/agenda-dias'
+import type { TorneioBlindsRow } from '../../app/types/torneio-blinds'
 
 export interface TorneioMock {
   slug: string
@@ -27,8 +28,40 @@ export interface TorneioMock {
   nota?: string
   regulamento_link?: string
   blinds_link?: string
+  /** Estrutura de blinds do torneio (tabela completa) */
+  blinds?: TorneioBlindsRow[]
   faixa_cta?: { titulo: string, cta: string, cta_link?: string }
 }
+
+/** Tabela de blinds padrão (Figma Agenda_Blinds — níveis 1–9 + breaks; progressão após late) */
+export const DEFAULT_BLINDS_ROWS: TorneioBlindsRow[] = [
+  { type: 'level', nivel: 1, duracao: '30 minutos', small: '100', big: '200', ante: '100' },
+  { type: 'level', nivel: 2, duracao: '30 minutos', small: '200', big: '400', ante: '200' },
+  { type: 'level', nivel: 3, duracao: '30 minutos', small: '200', big: '500', ante: '200' },
+  { type: 'level', nivel: 4, duracao: '30 minutos', small: '300', big: '600', ante: '300' },
+  { type: 'separator', label: 'BREAK - 10 MINUTOS' },
+  { type: 'level', nivel: 5, duracao: '30 minutos', small: '400', big: '800', ante: '400' },
+  { type: 'level', nivel: 6, duracao: '30 minutos', small: '500', big: '1000', ante: '500' },
+  { type: 'level', nivel: 7, duracao: '30 minutos', small: '600', big: '1200', ante: '600' },
+  { type: 'level', nivel: 8, duracao: '30 minutos', small: '800', big: '1600', ante: '800' },
+  { type: 'level', nivel: 9, duracao: '30 minutos', small: '1000', big: '2000', ante: '1000' },
+  { type: 'separator', label: 'LATE - 20 MINUTOS' },
+  { type: 'level', nivel: 10, duracao: '25 minutos', small: '1500', big: '3000', ante: '1500' },
+  { type: 'level', nivel: 11, duracao: '25 minutos', small: '2000', big: '4000', ante: '2000' },
+  { type: 'level', nivel: 12, duracao: '25 minutos', small: '2500', big: '5000', ante: '2500' },
+  { type: 'level', nivel: 13, duracao: '25 minutos', small: '3000', big: '6000', ante: '3000' },
+  { type: 'level', nivel: 14, duracao: '25 minutos', small: '4000', big: '8000', ante: '4000' },
+  { type: 'level', nivel: 15, duracao: '25 minutos', small: '5000', big: '10000', ante: '5000' },
+  { type: 'level', nivel: 16, duracao: '25 minutos', small: '6000', big: '12000', ante: '6000' },
+  { type: 'level', nivel: 17, duracao: '25 minutos', small: '8000', big: '16000', ante: '8000' },
+  { type: 'level', nivel: 18, duracao: '25 minutos', small: '10000', big: '20000', ante: '10000' },
+  { type: 'level', nivel: 19, duracao: '25 minutos', small: '15000', big: '30000', ante: '15000' },
+  { type: 'level', nivel: 20, duracao: '40 minutos', small: '20000', big: '40000', ante: '--' },
+  { type: 'level', nivel: 21, duracao: '40 minutos', small: '25000', big: '50000', ante: '--' },
+  { type: 'level', nivel: 22, duracao: '40 minutos', small: '30000', big: '60000', ante: '--' },
+  { type: 'level', nivel: 23, duracao: '40 minutos', small: '40000', big: '80000', ante: '--' },
+  { type: 'level', nivel: 24, duracao: '40 minutos', small: '50000', big: '100000', ante: '--' },
+]
 
 export interface CashGameMesaMock {
   slug: string
@@ -70,9 +103,13 @@ function badgeCorDia(t: Pick<TorneioMock, 'cor' | 'categoria' | 'filtros'>): str
   return t.cor ?? 'purple'
 }
 
+function blindsLink(slug: string) {
+  return `torneios/${slug}/blinds`
+}
+
 function torneioDetalheDefaults(
-  t: Omit<TorneioMock, 'specs' | 'nota' | 'data_label' | 'regulamento_link' | 'blinds_link' | 'faixa_cta' | 'badge'>
-    & Partial<Pick<TorneioMock, 'specs' | 'nota' | 'data_label' | 'regulamento_link' | 'blinds_link' | 'faixa_cta' | 'badge'>>,
+  t: Omit<TorneioMock, 'specs' | 'nota' | 'data_label' | 'regulamento_link' | 'blinds_link' | 'blinds' | 'faixa_cta' | 'badge'>
+    & Partial<Pick<TorneioMock, 'specs' | 'nota' | 'data_label' | 'regulamento_link' | 'blinds_link' | 'blinds' | 'faixa_cta' | 'badge'>>,
 ): TorneioMock {
   return {
     ...t,
@@ -93,7 +130,8 @@ function torneioDetalheDefaults(
     specs: t.specs ?? DETALHE_SPECS_DEFAULT,
     nota: t.nota ?? 'O ante passa a ser o valor do small blind a partir do nível 17 (até o 16 valor igual do Big Blind)',
     regulamento_link: t.regulamento_link ?? '#',
-    blinds_link: t.blinds_link ?? '#',
+    blinds_link: t.blinds_link ?? blindsLink(t.slug),
+    blinds: t.blinds ?? DEFAULT_BLINDS_ROWS,
     faixa_cta: t.faixa_cta ?? {
       titulo: 'Sabia que você pode trocar seus pontos H2rewards por buy-in?',
       cta: 'Saiba mais',

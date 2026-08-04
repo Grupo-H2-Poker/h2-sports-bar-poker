@@ -1,4 +1,5 @@
 import type { Unidade, UnidadeModulos } from '~/types/modules'
+import type { TorneioBlindsData } from '~/types/torneio-blinds'
 import type { TorneioDetalheData } from '~/types/torneio-detalhe'
 
 export const useH2Api = () => {
@@ -82,10 +83,27 @@ export const useH2Api = () => {
     }
   }
 
+  const getTorneioBlinds = async (unidadeSlug: string, torneioSlug: string) => {
+    try {
+      return await $fetch<TorneioBlindsData>(
+        `${apiBase}/unidade/${unidadeSlug}/torneios/${torneioSlug}/blinds`,
+      )
+    }
+    catch (err: unknown) {
+      console.error('Erro ao buscar tabela de blinds:', err)
+      const statusCode = (err as { statusCode?: number })?.statusCode || 404
+      throw createError({
+        statusCode,
+        message: 'Tabela de blinds não encontrada',
+      })
+    }
+  }
+
   return {
     getUnidade,
     getUnidadeModulos,
     getUnidades,
     getTorneioDetalhe,
+    getTorneioBlinds,
   }
 }

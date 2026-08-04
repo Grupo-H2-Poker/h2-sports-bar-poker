@@ -124,6 +124,12 @@ export type ModuloMetadadosEmpty = Record<string, never>
 /** Card da agenda e demais telas — layout via `variant` no JSON */
 export type CardAgendaData = CardGenericData
 
+/** Foto individual dentro de um álbum da galeria. */
+export interface GaleriaFotoData {
+  imagem: string
+  titulo?: string
+}
+
 export interface GaleriaImagemData {
   imagem: string
   titulo?: string
@@ -133,6 +139,17 @@ export interface GaleriaImagemData {
    * Relativo à unidade (`agenda`, `series/cph`, `faq`) ou URL absoluta (`https://...`).
    */
   link?: string
+  /** ID da série para filtro (ex.: `cph`, `fun-festival`). */
+  series?: string
+  /** Label exibida no filtro (ex.: `CPH`). Se omitida, usa `series`. */
+  series_label?: string
+  /** ID da etapa para filtro (ex.: `1`, `2`). */
+  etapa?: string
+  /**
+   * Fotos do álbum (capa = `imagem`).
+   * Ao clicar na capa, o módulo abre o grid dessas fotos.
+   */
+  fotos?: GaleriaFotoData[]
 }
 
 export interface EventoData {

@@ -4,7 +4,10 @@
     :class="outerClass"
     :style="outerStyle"
   >
-    <div :class="innerClass">
+    <div
+      :class="innerClass"
+      :style="innerStyle"
+    >
       <div
         class="flex w-full"
         :class="outerLayoutClasses"
@@ -98,20 +101,24 @@ const isFullWidth = computed(() => props.data.fullWidth ?? false)
 
 const outerClass = computed(() => ({
   'w-full': isFullWidth.value,
-  'container mx-auto px-4': !isFullWidth.value,
+  'container mx-auto': !isFullWidth.value,
 }))
 
 const innerClass = computed(() =>
-  isFullWidth.value ? 'container mx-auto px-4' : 'w-full',
+  isFullWidth.value ? 'container mx-auto' : 'w-full',
 )
 
 const outerStyle = computed(() => {
-  if (isFullWidth.value) {
-    return {
-      ...resolveFaixaCtaBackgroundStyle(props.data),
-      ...resolveFaixaCtaBorderStyle(props.data),
-    }
+  if (!isFullWidth.value) return undefined
+
+  return {
+    ...resolveFaixaCtaBackgroundStyle(props.data),
+    ...resolveFaixaCtaBorderStyle(props.data),
   }
+})
+
+const innerStyle = computed(() => {
+  if (isFullWidth.value) return undefined
 
   return {
     ...resolveFaixaCtaBackgroundStyle(props.data),

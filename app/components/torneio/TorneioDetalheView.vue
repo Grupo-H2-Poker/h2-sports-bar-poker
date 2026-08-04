@@ -45,14 +45,12 @@
             {{ detalhe.nota }}
           </p>
 
-          <button
-            v-if="detalhe.blinds_link"
-            type="button"
+          <NuxtLink
+            :to="blindsHref"
             class="mt-8 flex h-14 w-full max-w-[589px] items-center justify-center rounded bg-white/10 px-6 text-center text-base text-[#e7e7e7] underline underline-offset-2 hover:bg-white/15 cursor-pointer"
-            @click="onBlinds"
           >
             Acesse aqui a tabela de blinds
-          </button>
+          </NuxtLink>
         </div>
 
         <!-- Coluna direita: CTA card -->
@@ -82,7 +80,6 @@ const props = defineProps<{
 }>()
 
 const route = useRoute()
-const { navigateLink } = useCardLink()
 
 /** Separa "R$350,00 ou 17.000 pontos…" para o trecho após "ou" em itálico (Figma). */
 function formatValor(valor: string): { main: string, rest: string | null } {
@@ -91,14 +88,11 @@ function formatValor(valor: string): { main: string, rest: string | null } {
   return { main: match[1], rest: ` ${match[2]}` }
 }
 
-function onBlinds() {
-  const link = props.detalhe.blinds_link
-  if (!link || link === '#') return
+const blindsHref = computed(() => {
   const unidadeSlug = route.params.unidade as string | undefined
-  if (unidadeSlug) {
-    navigateTo(resolveUnidadeHref(unidadeSlug, link))
-    return
-  }
-  navigateLink(link)
-}
+  const link = props.detalhe.blinds_link
+    ?? `torneios/${props.detalhe.slug}/blinds`
+  if (!unidadeSlug) return `/${link}`
+  return resolveUnidadeHref(unidadeSlug, link)
+})
 </script>
