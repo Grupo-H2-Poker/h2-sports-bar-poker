@@ -2,7 +2,7 @@
   <Button
     type="button"
     variant="plain"
-    class="inline-flex h-auto min-h-8 min-w-0 max-w-full shrink items-center justify-center rounded-full px-4 py-1.5 text-sm whitespace-normal text-center outline-smooth-muted"
+    class="inline-flex h-auto min-h-8 min-w-0 max-w-full shrink items-center justify-center overflow-hidden rounded-full px-4 py-1.5 text-center text-sm !whitespace-normal outline-smooth-muted"
     :class="[
       fullWidth ? 'w-full' : '',
       selected
@@ -11,7 +11,9 @@
     ]"
     @click="emit('click')"
   >
-    {{ label }}
+    <span class="min-w-0 max-w-full break-words">
+      {{ label }}
+    </span>
   </Button>
 </template>
 

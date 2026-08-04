@@ -1,9 +1,9 @@
 <template>
-  <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
+  <div class="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center">
     <Button
       v-if="config?.filtro?.label"
       variant="brand"
-      class="rounded-full px-6"
+      class="w-full rounded-full px-6 sm:w-auto"
       @click="onFiltroClick"
     >
       {{ config.filtro.label }}
@@ -11,19 +11,19 @@
 
     <div
       v-if="buscaHabilitada"
-      class="relative flex w-full sm:w-[283px] sm:max-w-[283px] items-center"
+      class="flex h-[46px] w-full items-center gap-2 rounded-full bg-[#373737] py-1.5 pl-5 pr-1.5 sm:w-[283px] sm:max-w-[283px]"
     >
       <Input
         :model-value="search"
         :placeholder="config?.busca?.placeholder ?? 'Pesquisar torneios'"
-        class="h-[46px] w-full rounded-full border-0 !bg-[#373737] dark:!bg-[#373737] pl-5 pr-12 text-sm text-[#e7e7e7] shadow-none placeholder:text-sm placeholder:italic placeholder:text-[#e7e7e7]/70 focus-visible:border-0 focus-visible:ring-0"
+        class="h-full min-w-0 flex-1 rounded-none border-0 !bg-transparent px-0 py-0 text-sm text-[#e7e7e7] shadow-none placeholder:text-sm placeholder:italic placeholder:text-[#e7e7e7]/70 focus-visible:border-0 focus-visible:ring-0 dark:!bg-transparent"
         @update:model-value="emit('update:search', String($event ?? ''))"
       />
       <Button
         type="button"
         variant="brand"
         size="icon-sm"
-        class="absolute right-[7px] size-8 rounded-full shadow-[0_2px_0_rgba(5,145,255,0.1)]"
+        class="size-8 shrink-0 rounded-full shadow-none"
         aria-label="Pesquisar"
       >
         <Search class="size-4" />
