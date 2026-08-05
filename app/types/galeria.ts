@@ -40,8 +40,18 @@ export interface ModuloMetadadosGaleria extends ModuloMetadadosCarousel {
   filtro_series?: boolean
 }
 
+/**
+ * Carrossel de preview (só imagem) — Figma Poker Esporte da Mente.
+ * Bleed L/R via `carousel_bleed_left` / `carousel_bleed_right`.
+ */
+export type ModuloMetadadosGaleriaPreview = ModuloMetadadosCarousel
+
 export const GALERIA_DEFAULT_LAYOUT: GaleriaLayout = 'drag_carousel'
 export const GALERIA_DEFAULT_CARD_VARIANT: GaleriaCardVariant = 'default'
+
+/** Slide do `galeria_preview` — sempre mais largo que a viewport (peek L+R). */
+export const GALERIA_PREVIEW_SLIDE_CLASS =
+  'shrink-0 w-[calc((100vw+12rem)/5)]' as const
 
 export const GALERIA_GRID_GAP_CLASS: Record<GaleriaGridGap, string> = {
   sm: 'gap-4',

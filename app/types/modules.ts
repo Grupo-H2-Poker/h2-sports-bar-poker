@@ -10,7 +10,7 @@ import type { GridConfigData, GridToolbarData } from '~/types/grid'
 import type { RankingConfigData, RankingPlayerData } from '~/types/ranking'
 import type { FaixaCtaData } from '~/types/faixa-cta'
 import type { RankingTabelaConfigData, RankingTabelaLinhaData } from '~/types/ranking-tabela'
-import type { ModuloMetadadosGaleria } from '~/types/galeria'
+import type { ModuloMetadadosGaleria, ModuloMetadadosGaleriaPreview } from '~/types/galeria'
 
 export type { BannerCtaPosition, BannerData, BannerHeight, BannerImagemSize, BannerLayout, BannerSize, ModuloMetadadosBanner } from '~/types/banner'
 export type { CardGenericData, SectionCTAData } from '~/types/cards'
@@ -186,6 +186,7 @@ export type ModuloTipo =
   | 'grid'
   | 'banner'
   | 'galeria'
+  | 'galeria_preview'
   | 'texto'
   | 'ranking'
   | 'ranking_tabela'
@@ -209,6 +210,7 @@ export const MODULO_COMPONENT_TYPE = {
   grid: 'card',
   banner: 'banner',
   galeria: 'imagem',
+  galeria_preview: 'imagem',
   texto: 'texto',
   ranking: 'ranking',
   ranking_tabela: 'ranking_linha',
@@ -226,6 +228,7 @@ export interface ModuloDataMap {
   grid: CardAgendaData | GaleriaImagemData | SectionCTAData | GridConfigData | GridToolbarData
   banner: BannerData
   galeria: GaleriaImagemData | SectionCTAData
+  galeria_preview: GaleriaImagemData
   texto: TextoData
   ranking: RankingPlayerData | RankingConfigData
   ranking_tabela: RankingTabelaLinhaData | RankingTabelaConfigData | SectionCTAData
@@ -244,6 +247,7 @@ export interface ModuloContentDataMap {
   grid: CardAgendaData | GaleriaImagemData
   banner: BannerData
   galeria: GaleriaImagemData
+  galeria_preview: GaleriaImagemData
   texto: TextoData
   ranking: RankingPlayerData
   ranking_tabela: RankingTabelaLinhaData
@@ -261,6 +265,7 @@ export interface ModuloMetadadosMap {
   grid: ModuloMetadadosEmpty
   banner: ModuloMetadadosBanner
   galeria: ModuloMetadadosGaleria
+  galeria_preview: ModuloMetadadosGaleriaPreview
   texto: ModuloMetadadosTexto
   ranking: ModuloMetadadosEmpty
   ranking_tabela: ModuloMetadadosEmpty

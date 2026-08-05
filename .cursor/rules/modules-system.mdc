@@ -42,6 +42,7 @@ const { ctaConfig, items } = useModuloComponents(() => props.modulo)
 |--------|-----|-------|
 | `agenda_preview` | Widget na home (carrossel reduzido) | 1º: `cash_game` (fixo) + demais: `card` (torneio preview) |
 | `grid` | Página `/agenda` (cards completos) | `variant: torneio` \| `cash_game` no JSON |
+| `galeria_preview` | Carrossel só imagem (bleed L/R) | `imagem` — metadados `carousel_bleed_left` / `carousel_bleed_right` |
 
 ## Páginas documentais (mesmo layout do FAQ)
 

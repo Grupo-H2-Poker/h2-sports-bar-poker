@@ -20,6 +20,7 @@ import AgendaModule from '~/components/modules/AgendaPreviewModule.vue'
 import GridModule from '~/components/modules/GridModule.vue'
 import BannerModule from '~/components/modules/BannerModule.vue'
 import GaleriaModule from '~/components/modules/GaleriaModule.vue'
+import GaleriaPreviewModule from '~/components/modules/GaleriaPreviewModule.vue'
 import TextoModule from '~/components/modules/TextoModule.vue'
 import RankingModule from '~/components/modules/RankingModule.vue'
 import RankingTabelaModule from '~/components/modules/RankingTabelaModule.vue'
@@ -42,6 +43,7 @@ const moduloMapa: Partial<Record<ModuloTipo, Component>> = {
   grid: GridModule,
   banner: BannerModule,
   galeria: GaleriaModule,
+  galeria_preview: GaleriaPreviewModule,
   texto: TextoModule,
   ranking: RankingModule,
   ranking_tabela: RankingTabelaModule,

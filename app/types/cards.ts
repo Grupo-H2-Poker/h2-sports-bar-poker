@@ -13,8 +13,8 @@ export interface SectionCTAData {
   align?: 'left' | 'center' | 'right'
   /** Tamanho da tipografia (título, descrição, botão) */
   size?: 'sm' | 'md' | 'lg'
-  /** Largura máxima do bloco de descrições — `sm` deixa o texto mais junto e força quebra de linha */
-  width?: 'sm' | 'md' | 'lg'
+  /** Largura máxima do bloco de descrições — `sm` deixa o texto mais junto; `full` preenche o container do módulo */
+  width?: 'sm' | 'md' | 'lg' | 'full'
   /** Preset ou classe Tailwind do botão CTA (ex.: `branco`, `verde`, `vermelho`) */
   cta_cor?: CardCorPreset | string
   /** Variante visual do botão CTA — padrão: `solid` */

@@ -98,6 +98,13 @@ export interface BannerData {
   section_cta?: SectionCTAData
   /** Gradiente escuro para legibilidade do texto sobre a imagem */
   overlay?: 'none' | 'gradient' | 'gradient-bottom'
+  /** Exibe ícone de play central (thumbnail de vídeo) */
+  play_overlay?: boolean
+  /**
+   * URL do embed (ex.: `https://www.youtube.com/embed/...`).
+   * Com `play_overlay`, o clique troca o thumbnail pelo iframe no próprio site.
+   */
+  video_embed?: string
   rounded?: boolean
   /** Raio das bordas: `sm` 8px, `md` 16px, `lg` 24px. Sobrescreve `rounded` quando definido. */
   border_radius?: BannerBorderRadius

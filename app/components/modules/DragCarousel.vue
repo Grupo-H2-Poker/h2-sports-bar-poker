@@ -26,12 +26,18 @@ interface Props {
   contentClass?: string
   bleedRight?: boolean
   bleedLeft?: boolean
+  /**
+   * Com bleed L+R: cards começam na borda da viewport (sem padding de alinhamento).
+   * Ideal para peeks dos dois lados (galeria_preview).
+   */
+  bleedFlush?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   contentClass: '',
   bleedRight: false,
   bleedLeft: false,
+  bleedFlush: false,
 })
 
 const sizingRef = ref<HTMLElement | null>(null)
@@ -61,18 +67,35 @@ const carouselStyle = computed(() => {
 
   // paddingLeft = bleed: em scrollLeft=0 o conteúdo fica na margem do container;
   // ao rolar, os cards avançam sobre a área de bleed até a borda da viewport.
+  // bleedFlush: sem padding de alinhamento — peeks L+R; só gap mínimo no fim.
   if (left > 0) {
     style.marginLeft = `-${left}px`
-    style.paddingLeft = `${left}px`
+    if (!props.bleedFlush) style.paddingLeft = `${left}px`
   }
 
   if (right > 0) {
     style.marginRight = `-${right}px`
-    style.paddingRight = `${right + SCROLL_END_GAP_PX}px`
+    style.paddingRight = props.bleedFlush
+      ? `${SCROLL_END_GAP_PX}px`
+      : `${right + SCROLL_END_GAP_PX}px`
   }
 
   return style
 })
+
+/** Centraliza o scroll para peek simétrico L+R (galeria_preview). */
+const flushScrollApplied = ref(false)
+
+function applyFlushScroll() {
+  if (!props.bleedFlush || !carousel.value) return
+
+  const el = carousel.value
+  const maxScroll = el.scrollWidth - el.clientWidth
+  if (maxScroll <= 0) return
+
+  el.scrollLeft = Math.round(maxScroll / 2)
+  flushScrollApplied.value = true
+}
 
 function updateLayout() {
   if (!sizingRef.value) return
@@ -92,16 +115,31 @@ function updateLayout() {
   bleedLeftPx.value = props.bleedLeft
     ? Math.max(0, rect.left)
     : 0
+
+  if (props.bleedFlush && !flushScrollApplied.value) {
+    nextTick(() => requestAnimationFrame(applyFlushScroll))
+  }
 }
 
 useResizeObserver(sizingRef, updateLayout)
 
 const { width: windowWidth } = useWindowSize()
-watch(() => [props.bleedRight, props.bleedLeft], updateLayout)
-watch(windowWidth, updateLayout)
+watch(() => [props.bleedRight, props.bleedLeft, props.bleedFlush], updateLayout)
+watch(windowWidth, () => {
+  flushScrollApplied.value = false
+  updateLayout()
+})
 
 onMounted(() => {
-  nextTick(updateLayout)
+  nextTick(() => {
+    updateLayout()
+    requestAnimationFrame(() => {
+      applyFlushScroll()
+      // Recalcula após imagens/layout estabilizarem
+      setTimeout(applyFlushScroll, 50)
+      setTimeout(applyFlushScroll, 200)
+    })
+  })
 })
 
 const isDragging = ref(false)

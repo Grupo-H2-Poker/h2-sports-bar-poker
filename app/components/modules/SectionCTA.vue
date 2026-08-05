@@ -11,7 +11,7 @@
     <div class="flex flex-col gap-3">
       <h2
         v-if="config.titulo"
-        class="font-bold leading-tight"
+        class="whitespace-pre-line font-bold leading-tight"
         :class="[titleClass, config.titulo_nowrap && 'whitespace-nowrap']"
       >
         {{ config.titulo }}
@@ -25,11 +25,10 @@
         <p
           v-for="(texto, index) in descricoes"
           :key="index"
-          class="opacity-80"
+          class="opacity-80 whitespace-pre-line"
           :class="[descriptionClass, index > 0 && 'mt-3']"
-        >
-          {{ texto }}
-        </p>
+          v-html="texto"
+        />
       </div>
     </div>
 
@@ -112,7 +111,7 @@ const contentWidthClass = computed(() => {
     case 'sm':
       return 'max-w-[200px]'
     case 'lg':
-      return 'max-w-[560px]'
+      return 'max-w-[840px]'
     default:
       return 'max-w-[360px]'
   }

@@ -55,56 +55,82 @@
     </template>
   </TwoColumnLayout>
 
-  <!-- Layout overlay (imagem + CTA posicionável) -->
+  <!-- Layout overlay (imagem + CTA posicionável) / vídeo embed -->
   <div
     v-else
     :class="[
       'relative overflow-hidden',
-      (isStripBanner || isContainFit) ? 'bg-black' : 'bg-muted',
-      isContainFit ? sizeClasses.widthOnly : sizeClasses.wrapper,
+      hasVideoEmbed
+        ? [sizeClasses.widthOnly, 'aspect-video bg-black']
+        : [
+            (isStripBanner || isContainFit) ? 'bg-black' : 'bg-muted',
+            isContainFit ? sizeClasses.widthOnly : sizeClasses.wrapper,
+          ],
       !isStripBanner && rounded && 'rounded-2xl',
       isClickable && 'cursor-pointer',
     ]"
     :style="borderRadiusStyle"
     @click="handleImageClick"
   >
-    <img
-      v-if="dados.imagem"
-      :src="dados.imagem"
-      :alt="imageAlt"
-      draggable="false"
-      :class="[
-        isStripBanner || isContainFit
-          ? 'block w-full h-auto'
-          : 'absolute inset-0 w-full h-full object-cover pointer-events-none',
-      ]"
+    <!-- Player embedado -->
+    <iframe
+      v-if="isPlaying && embedSrc"
+      class="absolute inset-0 h-full w-full border-0"
+      :src="embedSrc"
+      :title="imageAlt"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
     />
 
-    <div
-      v-if="hasCta && overlayGradient"
-      class="absolute inset-0 pointer-events-none"
-      :class="overlayGradient"
-    />
+    <template v-else>
+      <img
+        v-if="dados.imagem"
+        :src="dados.imagem"
+        :alt="imageAlt"
+        draggable="false"
+        :class="[
+          isStripBanner || isContainFit
+            ? 'block w-full h-auto'
+            : 'absolute inset-0 w-full h-full object-cover pointer-events-none',
+        ]"
+      />
 
-    <div
-      v-if="hasCta"
-      class="absolute inset-0 flex p-6 md:p-10 lg:p-12 text-white pointer-events-none"
-      :class="ctaPositionClasses"
-    >
       <div
-        class="w-fit max-w-xl pointer-events-auto"
-        @click.stop
+        v-if="hasCta && overlayGradient"
+        class="absolute inset-0 pointer-events-none"
+        :class="overlayGradient"
+      />
+
+      <div
+        v-if="dados.play_overlay"
+        class="absolute inset-0 flex items-center justify-center bg-black/60 pointer-events-none"
+        aria-hidden="true"
       >
-        <SectionCTA
-          :config="ctaConfig"
-          inverted
-        />
+        <Play class="size-14 fill-white text-white" />
       </div>
-    </div>
+
+      <div
+        v-if="hasCta"
+        class="absolute inset-0 flex p-6 md:p-10 lg:p-12 text-white pointer-events-none"
+        :class="ctaPositionClasses"
+      >
+        <div
+          class="w-fit max-w-xl pointer-events-auto"
+          @click.stop
+        >
+          <SectionCTA
+            :config="ctaConfig"
+            inverted
+          />
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
+import { Play } from 'lucide-vue-next'
 import TwoColumnLayout from '~/components/layout/TwoColumnLayout.vue'
 import SectionCTA from '~/components/modules/SectionCTA.vue'
 import BannerTwoColumnImageColumn from '~/components/banner/BannerTwoColumnImageColumn.vue'
@@ -139,12 +165,26 @@ const imageAlt = computed(
   () => props.dados.section_cta?.titulo ?? props.dados.titulo ?? 'Banner',
 )
 
+const videoEmbed = computed(() => props.dados.video_embed?.trim() || undefined)
+const hasVideoEmbed = computed(() => !!videoEmbed.value)
+
+const isPlaying = ref(false)
+
+const embedSrc = computed(() => {
+  if (!videoEmbed.value || !isPlaying.value) return undefined
+  const url = new URL(videoEmbed.value)
+  if (!url.searchParams.has('autoplay')) url.searchParams.set('autoplay', '1')
+  return url.toString()
+})
+
 const imageLink = computed(() => {
-  if (hasCta.value) return undefined
+  if (hasCta.value || hasVideoEmbed.value) return undefined
   return props.dados.link
 })
 
-const isClickable = computed(() => !hasCta.value && !!props.dados.link)
+const isClickable = computed(
+  () => (!hasCta.value && !!props.dados.link) || (hasVideoEmbed.value && !isPlaying.value),
+)
 
 const carouselBleedRight = computed(() => {
   if (!props.dados.drag_carousel) return false
@@ -165,12 +205,21 @@ const hasDecoracao = computed(() => !!props.dados.decoracao?.imagem)
 const route = useRoute()
 
 function handleImageClick() {
-  if (!isClickable.value || !props.dados.link) return
-  const unidadeSlug = route.params.unidade as string | undefined
-  if (unidadeSlug) {
-    navigateTo(resolveUnidadeHref(unidadeSlug, props.dados.link))
+  if (hasVideoEmbed.value && !isPlaying.value) {
+    isPlaying.value = true
     return
   }
-  navigateTo(props.dados.link)
+  if (!isClickable.value || !props.dados.link) return
+  const link = props.dados.link
+  if (/^https?:\/\//i.test(link)) {
+    navigateTo(link, { external: true })
+    return
+  }
+  const unidadeSlug = route.params.unidade as string | undefined
+  if (unidadeSlug) {
+    navigateTo(resolveUnidadeHref(unidadeSlug, link))
+    return
+  }
+  navigateTo(link)
 }
 </script>

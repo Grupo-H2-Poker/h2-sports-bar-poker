@@ -1,52 +1,34 @@
 <template>
-  <section
-    :class="sectionClass"
-  >
+  <section :class="sectionClass">
     <div
-      class="container mx-auto px-4"
-      :class="containerClass"
+      class="container mx-auto px-4 flex flex-col"
+      :class="contentAlignClass"
     >
       <div
-        v-for="component in sortedComponents"
-        :key="component.id"
-        class="flex flex-col gap-4"
-        :class="contentAlignClass"
+        class="w-full"
+        :class="maxWidthClass"
       >
-        <h2
-          v-if="component.data.titulo"
-          class="text-[40px] font-bold leading-tight text-[#e7e7e7]"
-        >
-          {{ component.data.titulo }}
-        </h2>
-        <div
-          v-if="component.data.conteudo"
-          class="text-lg font-medium leading-7 text-[#e7e7e7]"
-          v-html="component.data.conteudo"
+        <SectionCTA
+          v-if="ctaConfig"
+          :config="ctaConfig"
+          inverted
         />
-        <Button
-          v-if="component.data.cta"
-          variant="outline"
-          class="mt-2 w-fit rounded-full"
-          @click="handleCtaClick(component.data.cta_link)"
-        >
-          {{ component.data.cta }}
-        </Button>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { Button } from '~/components/ui/button'
+import SectionCTA from '~/components/modules/SectionCTA.vue'
 import type { ModuloOf } from '~/types/modules'
 
 const props = defineProps<{
   modulo: ModuloOf<'texto'>
 }>()
 
-const sortedComponents = useSortedComponents(() => props.modulo)
+const ctaConfig = useModuleSectionCTA(() => props.modulo)
 
-const align = computed(() => props.modulo.metadados?.align ?? 'center')
+const align = computed(() => props.modulo.metadados?.align ?? ctaConfig.value?.align ?? 'center')
 const maxWidth = computed(() => props.modulo.metadados?.max_width ?? 'md')
 const background = computed(() => props.modulo.metadados?.background ?? 'default')
 
@@ -54,7 +36,7 @@ const sectionClass = computed(() => ({
   'bg-muted/40': background.value === 'default',
 }))
 
-const containerClass = computed(() => ({
+const maxWidthClass = computed(() => ({
   'max-w-2xl': maxWidth.value === 'sm',
   'max-w-3xl': maxWidth.value === 'md',
   'max-w-5xl': maxWidth.value === 'lg',
@@ -62,21 +44,8 @@ const containerClass = computed(() => ({
 }))
 
 const contentAlignClass = computed(() => ({
-  'items-start text-left': align.value === 'left',
-  'items-center text-center': align.value === 'center',
+  'items-start': align.value === 'left',
+  'items-center': align.value === 'center',
+  'items-end': align.value === 'right',
 }))
-
-const route = useRoute()
-
-function handleCtaClick(link?: string) {
-  if (!link) return
-
-  const unidadeSlug = route.params.unidade as string | undefined
-  if (unidadeSlug) {
-    navigateTo(resolveUnidadeHref(unidadeSlug, link))
-    return
-  }
-
-  navigateTo(link)
-}
 </script>

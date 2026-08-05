@@ -14,6 +14,7 @@ import {
   createRegulamentosPagina,
   createSegurancaPrivacidadePagina,
 } from '../../../../utils/mock-documento-pages'
+import { createPokerEsporteDaMentePagina } from '../../../../utils/mock-poker-esporte-da-mente'
 
 const AGENDA_GRID_TOOLBAR_BASE = {
   filtro: {
@@ -572,6 +573,7 @@ export default defineEventHandler((event) => {
                   { id: 'quem-somos', label: 'Quem somos', to: '/sobre' },
                   { id: 'social', label: 'Social', to: '/social' },
                   { id: 'galeria', label: 'Galeria de fotos', to: 'galeria' },
+                  { id: 'poker-mente-footer', label: 'Poker Esporte da Mente', pagina: 'poker-esporte-da-mente' },
                 ],
               },
               {
@@ -854,7 +856,7 @@ export default defineEventHandler((event) => {
                     imagem: '/img/galeria/poker-esporte-da-mente.png',
                     titulo: 'Poker Esporte da Mente',
                     descricao: 'Mais que um clube: comunidade, gastronomia e poker em alto nível.',
-                    link: 'series/cph',
+                    link: 'poker-esporte-da-mente',
                   },
                 },
               ],
@@ -997,6 +999,7 @@ export default defineEventHandler((event) => {
                       titulo: 'Poker é esporte da mente.',
                       descricao: 'No H2, estratégia é poder, leitura é vantagem e dominar a mesa é o único caminho.',
                       cta: 'Saiba mais',
+                      cta_link: 'poker-esporte-da-mente',
                       cta_cor: 'verde',
                       align: 'left',
                       size: 'md',
@@ -1523,6 +1526,7 @@ export default defineEventHandler((event) => {
           ],
         },
 
+        createPokerEsporteDaMentePagina(5, 9500),
         createRegulamentosPagina(90, 9000),
         createSegurancaPrivacidadePagina(91, 9100),
 
