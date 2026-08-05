@@ -13,7 +13,8 @@
     <template #start>
       <div
         v-if="ctaColumn === 'left'"
-        class="flex flex-col justify-center h-full p-8 md:p-12 lg:p-16 text-white"
+        class="flex h-full flex-col justify-center text-white"
+        :class="ctaColumnPaddingClass"
       >
         <SectionCTA
           v-if="hasCta"
@@ -35,7 +36,8 @@
     <template #end>
       <div
         v-if="ctaColumn === 'right'"
-        class="flex flex-col justify-center h-full p-8 md:p-12 lg:p-16 text-white"
+        class="flex h-full flex-col justify-center text-white"
+        :class="ctaColumnPaddingClass"
       >
         <SectionCTA
           v-if="hasCta"
@@ -160,6 +162,17 @@ const isStripBanner = computed(() => height.value === 'strip')
 const isContainFit = computed(() => props.dados.object_fit === 'contain')
 
 const { ctaConfig, hasCta } = useBannerCta(() => props.dados)
+
+/** Padding da coluna CTA — `flush` alinha à margem externa do container. */
+const ctaColumnPaddingClass = computed(() => {
+  if (props.dados.cta_padding !== 'flush') {
+    return 'p-8 md:p-12 lg:p-16'
+  }
+
+  return ctaColumn.value === 'right'
+    ? 'py-8 pr-0 pl-8 md:py-12 md:pl-12 lg:py-16 lg:pl-16'
+    : 'py-8 pl-0 pr-8 md:py-12 md:pr-12 lg:py-16 lg:pr-16'
+})
 
 const imageAlt = computed(
   () => props.dados.section_cta?.titulo ?? props.dados.titulo ?? 'Banner',

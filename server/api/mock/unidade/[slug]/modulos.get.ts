@@ -15,6 +15,7 @@ import {
   createSegurancaPrivacidadePagina,
 } from '../../../../utils/mock-documento-pages'
 import { createPokerEsporteDaMentePagina } from '../../../../utils/mock-poker-esporte-da-mente'
+import { createSportsBarPagina } from '../../../../utils/mock-sports-bar'
 
 const AGENDA_GRID_TOOLBAR_BASE = {
   filtro: {
@@ -574,6 +575,7 @@ export default defineEventHandler((event) => {
                   { id: 'social', label: 'Social', to: '/social' },
                   { id: 'galeria', label: 'Galeria de fotos', to: 'galeria' },
                   { id: 'poker-mente-footer', label: 'Poker Esporte da Mente', pagina: 'poker-esporte-da-mente' },
+                  { id: 'sports-bar-footer', label: 'Sports Bar', pagina: 'sports-bar' },
                 ],
               },
               {
@@ -885,6 +887,7 @@ export default defineEventHandler((event) => {
                       titulo: 'Sports Bar',
                       descricao: 'Os maiores jogos do esporte ao vivo.\nTorcida, menu especial e bebidas para acompanhar cada lance.',
                       cta: 'Conheça nosso sports bar',
+                      cta_link: 'sports-bar',
                       cta_cor: 'verde',
                       align: 'left',
                       size: 'md',
@@ -1527,6 +1530,7 @@ export default defineEventHandler((event) => {
         },
 
         createPokerEsporteDaMentePagina(5, 9500),
+        createSportsBarPagina(6, 9600),
         createRegulamentosPagina(90, 9000),
         createSegurancaPrivacidadePagina(91, 9100),
 

@@ -12,7 +12,11 @@
         <div
           v-for="component in items"
           :key="component.id"
-          :class="GALERIA_PREVIEW_SLIDE_CLASS"
+          :class="[
+            GALERIA_PREVIEW_SLIDE_CLASS,
+            previewLink && 'cursor-pointer',
+          ]"
+          @click="onPreviewClick"
         >
           <GaleriaPreviewCard :dados="component.data" />
         </div>
@@ -31,5 +35,17 @@ const props = defineProps<{
   modulo: ModuloOf<'galeria_preview'>
 }>()
 
-const { items, carouselBleedLeft, carouselBleedRight } = useGaleriaPreviewModule(() => props.modulo)
+const {
+  items,
+  carouselBleedLeft,
+  carouselBleedRight,
+  previewLink,
+} = useGaleriaPreviewModule(() => props.modulo)
+
+const { navigateCta } = useModuloCtaNavigate()
+
+function onPreviewClick() {
+  if (!previewLink.value) return
+  navigateCta(previewLink.value)
+}
 </script>

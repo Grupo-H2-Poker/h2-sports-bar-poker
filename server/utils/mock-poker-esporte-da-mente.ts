@@ -25,6 +25,7 @@ export function createPokerEsporteDaMentePagina(ordem = 5, idBase = 9500) {
         tipo: 'banner' as const,
         ordem: 1,
         status: 'publicado' as const,
+        margin_top: 0,
         margin_bottom: 40,
         metadados: { full_width: true },
         components: [
@@ -50,8 +51,8 @@ export function createPokerEsporteDaMentePagina(ordem = 5, idBase = 9500) {
         tipo: 'texto' as const,
         ordem: 2,
         status: 'publicado' as const,
-        margin_top: 40,
-        margin_bottom: 40,
+        margin_top: 0,
+        margin_bottom: 80,
         metadados: {
           align: 'center' as const,
           max_width: 'lg' as const,
@@ -86,6 +87,7 @@ export function createPokerEsporteDaMentePagina(ordem = 5, idBase = 9500) {
         metadados: {
           carousel_bleed_left: true,
           carousel_bleed_right: true,
+          link: 'galeria',
         },
         components: PREVIEW_IMGS.map((imagem, i) => ({
           id: nextId(),
@@ -114,6 +116,7 @@ export function createPokerEsporteDaMentePagina(ordem = 5, idBase = 9500) {
               layout: 'two_column',
               size: 'md',
               cta_column: 'left',
+              cta_padding: 'flush',
               imagem_size: 'lg',
               border_radius: 'lg',
               imagem: '/img/poker-mente/poker-brasil.png',
@@ -192,8 +195,8 @@ export function createPokerEsporteDaMentePagina(ordem = 5, idBase = 9500) {
         tipo: 'texto' as const,
         ordem: 7,
         status: 'publicado' as const,
-        margin_top: 40,
-        margin_bottom: 40,
+        margin_top: 80,
+        margin_bottom: 80,
         metadados: {
           align: 'center' as const,
           max_width: 'lg' as const,
@@ -259,8 +262,8 @@ export function createPokerEsporteDaMentePagina(ordem = 5, idBase = 9500) {
         tipo: 'texto' as const,
         ordem: 9,
         status: 'publicado' as const,
-        margin_top: 40,
-        margin_bottom: 40,
+        margin_top: 80,
+        margin_bottom: 80,
         metadados: {
           align: 'center' as const,
           max_width: 'lg' as const,

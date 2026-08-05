@@ -80,6 +80,12 @@ export interface BannerData {
   cta_position?: BannerCtaPosition
   /** Lado da coluna do CTA no layout two_column */
   cta_column?: 'left' | 'right'
+  /**
+   * Padding da coluna do CTA (`two_column`).
+   * `flush` — remove o padding da borda externa (alinha o texto à margem do container).
+   * Padrão: `default` (`p-8 md:p-12 lg:p-16`).
+   */
+  cta_padding?: 'default' | 'flush'
   /** Inverte a ordem das colunas no desktop (two_column) */
   reverse_columns?: boolean
   /** Inverte a ordem das colunas no mobile (two_column). Padrão: imagem em cima quando CTA está à esquerda */

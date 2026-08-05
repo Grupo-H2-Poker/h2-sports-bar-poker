@@ -44,7 +44,10 @@ export interface ModuloMetadadosGaleria extends ModuloMetadadosCarousel {
  * Carrossel de preview (só imagem) — Figma Poker Esporte da Mente.
  * Bleed L/R via `carousel_bleed_left` / `carousel_bleed_right`.
  */
-export type ModuloMetadadosGaleriaPreview = ModuloMetadadosCarousel
+export interface ModuloMetadadosGaleriaPreview extends ModuloMetadadosCarousel {
+  /** Clique no preview navega para esta página (ex.: `galeria`) */
+  link?: string
+}
 
 export const GALERIA_DEFAULT_LAYOUT: GaleriaLayout = 'drag_carousel'
 export const GALERIA_DEFAULT_CARD_VARIANT: GaleriaCardVariant = 'default'
