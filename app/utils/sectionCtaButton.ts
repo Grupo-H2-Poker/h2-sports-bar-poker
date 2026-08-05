@@ -25,11 +25,11 @@ const PRESET_SOLID: Record<CardCorPreset, string> = {
 }
 
 const PRESET_OUTLINE: Record<CardCorPreset, string> = {
-  purple: `outline-smooth-purple text-brand-purple bg-transparent ${HOVER.purple}`,
-  vermelho: `outline-smooth-vermelho text-[#d63d1d] bg-transparent ${HOVER.vermelho}`,
-  amarelo: `outline-smooth-amarelo text-[#e6a23a] bg-transparent ${HOVER.amarelo}`,
-  verde: `outline-smooth-green text-brand-green bg-transparent ${HOVER.verde}`,
-  branco: `outline-smooth-white text-white bg-transparent ${HOVER.branco}`,
+  purple: `smooth-border text-brand-purple bg-transparent ${HOVER.purple}`,
+  vermelho: `smooth-border text-[#d63d1d] bg-transparent ${HOVER.vermelho}`,
+  amarelo: `smooth-border text-[#e6a23a] bg-transparent ${HOVER.amarelo}`,
+  verde: `smooth-border text-brand-green bg-transparent ${HOVER.verde}`,
+  branco: `smooth-border text-white bg-transparent ${HOVER.branco}`,
 }
 
 function isPreset(cor: string | undefined): cor is CardCorPreset {

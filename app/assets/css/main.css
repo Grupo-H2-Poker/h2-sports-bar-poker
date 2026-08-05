@@ -106,82 +106,51 @@
 }
 
 /**
- * Outline em elementos arredondados.
- * - `border` / `box-shadow: inset` + `rounded-full` (9999px) achatam a curva
- * - `box-shadow` externo é clipado por parents com overflow (drawer/scroll)
- * `outline` + offset negativo desenha por dentro, segue o radius e não é clipado.
+ * Utilitária única: borda visual ~1px suave em curvas (`rounded-full`).
+ *
+ * Uso:
+ *   class="smooth-border"
+ *   class="smooth-border [--smooth-border-color:var(--brand-green)]"
+ *
+ * Cor padrão: `currentColor`. Override com `--smooth-border-color`.
  */
-.outline-smooth,
-.outline-smooth-green,
-.outline-smooth-white,
-.outline-smooth-muted,
-.outline-smooth-purple,
-.outline-smooth-vermelho,
-.outline-smooth-amarelo,
-.outline-smooth-white-25,
-.outline-smooth-border {
-  border-width: 0 !important;
-  border-color: transparent !important;
-  box-shadow: none !important;
-  overflow: visible !important;
-  outline-offset: -1px !important;
+.smooth-border,
+.btn-green-solid:hover:not(:disabled):not([aria-disabled='true']):not(.cursor-default) {
+  border: 0 !important;
+  outline: 1px solid transparent !important;
+  background-clip: padding-box;
+  transform: translateZ(0);
+  box-shadow:
+    0 0 0 1px var(--smooth-border-color, currentColor),
+    0 0 1px 0 var(--smooth-border-color, currentColor) inset,
+    0 0 1px 0 var(--smooth-border-color, currentColor) !important;
 }
 
-.outline-smooth {
-  outline: 1px solid currentColor !important;
-}
-
-.outline-smooth-green {
-  outline: 1px solid var(--brand-green) !important;
-}
-
-.outline-smooth-white {
-  outline: 1px solid #ffffff !important;
-}
-
-.outline-smooth-muted {
-  outline: 1px solid #e7e7e7 !important;
-}
-
-.outline-smooth-purple {
-  outline: 1px solid var(--brand-purple) !important;
-}
-
-.outline-smooth-vermelho {
-  outline: 1px solid #d63d1d !important;
-}
-
-.outline-smooth-amarelo {
-  outline: 1px solid #e6a23a !important;
-}
-
-.outline-smooth-white-25 {
-  outline: 1px solid rgb(255 255 255 / 0.25) !important;
-}
-
-.outline-smooth-border {
-  outline: 1px solid var(--input) !important;
+.smooth-border {
+  --smooth-border-color: currentColor;
 }
 
 /**
- * Botão verde sólido → no hover vira outline (evita hover preto do variant ghost).
+ * Botão verde sólido → no hover usa a mesma utilitária de borda suave.
  */
 .btn-green-solid {
   background-color: var(--brand-green) !important;
   color: #000000 !important;
-  border-width: 0 !important;
+  border: 0 !important;
   box-shadow: none !important;
-  outline: none;
-  overflow: visible !important;
-  transition: background-color 0.2s ease, color 0.2s ease, outline-color 0.2s ease;
+  outline: 1px solid transparent !important;
+  background-clip: padding-box;
+  transform: translateZ(0);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.btn-green-solid:hover {
+.btn-green-solid:hover:not(:disabled):not([aria-disabled='true']):not(.cursor-default) {
+  --smooth-border-color: var(--brand-green);
   background-color: transparent !important;
   color: var(--brand-green) !important;
-  box-shadow: none !important;
-  outline: 1px solid var(--brand-green) !important;
-  outline-offset: -1px !important;
 }
 
 .btn-green-solid:disabled,
@@ -190,7 +159,7 @@
   background-color: var(--brand-green) !important;
   color: #000000 !important;
   box-shadow: none !important;
-  outline: none;
+  outline: 1px solid transparent !important;
 }
 
 .container {

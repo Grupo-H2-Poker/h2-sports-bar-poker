@@ -19,7 +19,7 @@
           </span>
           <span
             v-if="etapaLabel"
-            class="inline-flex h-7 shrink-0 items-center rounded-full outline-smooth-green bg-transparent px-3 text-xs font-semibold text-brand-green"
+            class="inline-flex h-7 shrink-0 items-center rounded-full smooth-border bg-transparent px-3 text-xs font-semibold text-brand-green"
           >
             {{ etapaLabel }}
           </span>

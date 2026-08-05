@@ -2,7 +2,7 @@
   <Button
     type="button"
     variant="plain"
-    class="inline-flex h-auto min-h-8 min-w-0 max-w-full shrink items-center justify-center rounded-full px-4 py-1.5 text-center text-sm !overflow-visible !whitespace-normal outline-smooth-muted"
+    class="inline-flex h-auto min-h-8 min-w-0 max-w-full shrink items-center justify-center rounded-full px-4 py-1.5 text-center text-sm !overflow-visible !whitespace-normal smooth-border [--smooth-border-color:#e7e7e7]"
     :class="[
       fullWidth ? 'w-full' : '',
       selected

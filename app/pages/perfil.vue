@@ -17,7 +17,7 @@
           :class="[
             'disabled:opacity-100 transition-[box-shadow] duration-300 ease-out',
             refreshState === 'success'
-              ? 'bg-transparent outline-smooth-green hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent'
+              ? 'bg-transparent smooth-border [--smooth-border-color:var(--brand-green)] hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent'
               : '',
           ]"
           @click="refresh"
