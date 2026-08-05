@@ -10,13 +10,6 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![i18n](https://img.shields.io/badge/i18n-PT%20·%20EN%20·%20ES%20·%20ZH%20·%20JA-8B5CF6?style=flat-square)](#-internacionalização)
 
-<br />
-
-<img src="public/img/sports-bar/hero.png" alt="H2 Sports Bar — preview" width="720" />
-
-<br />
-
-[Começar](#-quick-start) · [Arquitetura](#-arquitetura) · [Módulos CMS](#-sistema-de-módulos) · [Contribuir](#-contribuindo)
 
 </div>
 
