@@ -42,7 +42,7 @@
       <div v-if="pending" class="flex min-h-[40vh] items-center justify-center">
         <div class="text-center">
           <div class="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-white" />
-          <p class="text-muted-foreground">Carregando perfil...</p>
+          <p class="text-muted-foreground">{{ t('perfil.loading') }}</p>
         </div>
       </div>
 
@@ -242,6 +242,7 @@ useHead({
 
 type PerfilTabId = 'dados' | 'favoritos'
 
+const { t } = useI18n()
 const { user, token, isAuthenticated, fetchError, fetchUserData, initAuth } = useAuth()
 const { favoritos } = useFavoritosTorneios()
 

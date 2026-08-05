@@ -1,0 +1,115 @@
+{
+  "header": {
+    "openMenu": "打开菜单",
+    "menu": "菜单",
+    "menuDescription": "浏览页面和选项",
+    "pages": "页面",
+    "units": "门店",
+    "login": "登录"
+  },
+  "auth": {
+    "login": "登录",
+    "loginTitle": "登录账户",
+    "loginDescription": "请输入您的凭据以访问账户。",
+    "emailOrCpf": "邮箱或 CPF",
+    "emailOrCpfPlaceholder": "you{'@'}email.com 或 CPF",
+    "password": "密码",
+    "forgotPassword": "忘记密码",
+    "cancel": "取消",
+    "enter": "登录",
+    "entering": "登录中...",
+    "passwordRecoveryTitle": "找回密码",
+    "passwordRecoveryDescription": "此功能正在开发中。请联系客服找回密码。",
+    "close": "关闭",
+    "contactSupport": "联系客服",
+    "profile": "个人资料",
+    "logout": "退出",
+    "confirmLogoutTitle": "确认退出",
+    "confirmLogoutDescription": "确定要退出账户吗？您需要重新登录才能访问系统。",
+    "loggingOut": "正在退出...",
+    "activeClient": "活跃客户",
+    "inactiveClient": "非活跃客户",
+    "user": "用户",
+    "accountMenu": "{name} 的账户菜单"
+  },
+  "page": {
+    "loading": "正在加载内容...",
+    "loadingShort": "加载中...",
+    "loadErrorTitle": "加载内容失败",
+    "retry": "重试",
+    "notFoundTitle": "页面未找到",
+    "notFoundDescription": "该门店不存在此页面。",
+    "backHome": "返回首页",
+    "emptyContent": "此页面暂无可用内容。",
+    "unitNotFound": "门店未找到"
+  },
+  "grid": {
+    "searchTournaments": "搜索锦标赛",
+    "searchTables": "搜索牌桌",
+    "search": "搜索",
+    "day": "日期",
+    "noResultsFor": "没有与 \"{query}\" 匹配的结果。",
+    "noTournamentsFiltered": "没有符合所选筛选条件的锦标赛。"
+  },
+  "faq": {
+    "emptyCategory": "此分类暂无问题。"
+  },
+  "documento": {
+    "emptySection": "此部分暂无内容。"
+  },
+  "galeria": {
+    "backToAlbums": "返回相册",
+    "filterAll": "全部",
+    "filterSeriesAria": "按系列筛选图库",
+    "lightboxTitle": "查看照片",
+    "lightboxDescription": "使用箭头或按钮浏览照片。按 Escape 关闭。",
+    "close": "关闭",
+    "photoAlt": "照片 {n}",
+    "openAlbumAria": "打开相册",
+    "openAlbumAriaNamed": "打开相册 {title}",
+    "enlargePhotoAria": "放大照片",
+    "enlargePhotoAriaNamed": "放大 {title}",
+    "imageAltFallback": "图库图片"
+  },
+  "torneio": {
+    "loading": "正在加载锦标赛…",
+    "notFound": "未找到锦标赛。",
+    "blindsLoading": "正在加载盲注表…",
+    "blindsNotFound": "未找到盲注表。",
+    "blindsTableTitle": "盲注表",
+    "blindsTableLink": "点击查看盲注表",
+    "level": "级别",
+    "duration": "时长"
+  },
+  "card": {
+    "joinQueue": "加入排队",
+    "favorite": "收藏",
+    "unfavorite": "取消收藏",
+    "start": "开始",
+    "late": "迟到报名",
+    "registrationUntil": "报名截止 {time}",
+    "buyIn": "买入：",
+    "stageBadge": "第{n}阶段"
+  },
+  "perfil": {
+    "loading": "正在加载个人资料..."
+  },
+  "footer": {
+    "responsibleGamingAlt": "适用条款与条件。请负责任地游戏。仅限18岁以上。"
+  },
+  "common": {
+    "h2": "H2"
+  },
+  "language": {
+    "changedTitle": "语言已更改",
+    "changedDescription": "界面现已切换为{language}。"
+  },
+  "cashGame": {
+    "queueTitle": "现金桌排队位置",
+    "queueDescription": "您已加入现金桌等候队列。",
+    "hi": "你好，{name}！",
+    "youAreIn": "您当前排在",
+    "waitingQueue": "等候队列中",
+    "place": "第{n}位"
+  }
+}

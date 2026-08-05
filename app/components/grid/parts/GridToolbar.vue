@@ -15,7 +15,7 @@
     >
       <Input
         :model-value="search"
-        :placeholder="config?.busca?.placeholder ?? 'Pesquisar torneios'"
+        :placeholder="config?.busca?.placeholder ?? t('grid.searchTournaments')"
         class="h-full min-w-0 flex-1 rounded-none border-0 !bg-transparent px-0 py-0 text-sm text-[#e7e7e7] shadow-none placeholder:text-sm placeholder:italic placeholder:text-[#e7e7e7]/70 focus-visible:border-0 focus-visible:ring-0 dark:!bg-transparent"
         @update:model-value="emit('update:search', String($event ?? ''))"
       />
@@ -24,7 +24,7 @@
         variant="brand"
         size="icon-sm"
         class="size-8 shrink-0 rounded-full shadow-none"
-        aria-label="Pesquisar"
+        :aria-label="t('grid.search')"
       >
         <Search class="size-4" />
       </Button>
@@ -42,6 +42,8 @@ const props = defineProps<{
   config?: GridToolbarData
   search?: string
 }>()
+
+const { t } = useI18n()
 
 const emit = defineEmits<{
   'update:search': [value: string]

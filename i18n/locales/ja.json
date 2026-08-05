@@ -1,0 +1,115 @@
+{
+  "header": {
+    "openMenu": "メニューを開く",
+    "menu": "メニュー",
+    "menuDescription": "ページとオプションを見る",
+    "pages": "ページ",
+    "units": "店舗",
+    "login": "ログイン"
+  },
+  "auth": {
+    "login": "ログイン",
+    "loginTitle": "ログイン",
+    "loginDescription": "アカウントにアクセスするには認証情報を入力してください。",
+    "emailOrCpf": "メールまたは CPF",
+    "emailOrCpfPlaceholder": "you{'@'}email.com または CPF",
+    "password": "パスワード",
+    "forgotPassword": "パスワードを忘れた",
+    "cancel": "キャンセル",
+    "enter": "ログイン",
+    "entering": "ログイン中...",
+    "passwordRecoveryTitle": "パスワードの回復",
+    "passwordRecoveryDescription": "この機能は開発中です。パスワードの回復はサポートにお問い合わせください。",
+    "close": "閉じる",
+    "contactSupport": "サポートに連絡",
+    "profile": "プロフィール",
+    "logout": "ログアウト",
+    "confirmLogoutTitle": "ログアウトの確認",
+    "confirmLogoutDescription": "アカウントからログアウトしますか？システムにアクセスするには再度ログインが必要です。",
+    "loggingOut": "ログアウト中...",
+    "activeClient": "有効な顧客",
+    "inactiveClient": "無効な顧客",
+    "user": "ユーザー",
+    "accountMenu": "{name} のアカウントメニュー"
+  },
+  "page": {
+    "loading": "コンテンツを読み込み中...",
+    "loadingShort": "読み込み中...",
+    "loadErrorTitle": "コンテンツの読み込みエラー",
+    "retry": "再試行",
+    "notFoundTitle": "ページが見つかりません",
+    "notFoundDescription": "この店舗にはこのページがありません。",
+    "backHome": "ホームに戻る",
+    "emptyContent": "現在、このページに表示できるコンテンツはありません。",
+    "unitNotFound": "店舗が見つかりません"
+  },
+  "grid": {
+    "searchTournaments": "トーナメントを検索",
+    "searchTables": "テーブルを検索",
+    "search": "検索",
+    "day": "日",
+    "noResultsFor": "「{query}」に一致する結果はありません。",
+    "noTournamentsFiltered": "選択したフィルターに一致するトーナメントはありません。"
+  },
+  "faq": {
+    "emptyCategory": "このカテゴリに質問はありません。"
+  },
+  "documento": {
+    "emptySection": "このセクションにコンテンツはありません。"
+  },
+  "galeria": {
+    "backToAlbums": "アルバムに戻る",
+    "filterAll": "すべて",
+    "filterSeriesAria": "シリーズでギャラリーを絞り込む",
+    "lightboxTitle": "写真を表示",
+    "lightboxDescription": "矢印またはボタンで写真を移動できます。Escapeで閉じます。",
+    "close": "閉じる",
+    "photoAlt": "写真 {n}",
+    "openAlbumAria": "アルバムを開く",
+    "openAlbumAriaNamed": "アルバム {title} を開く",
+    "enlargePhotoAria": "写真を拡大",
+    "enlargePhotoAriaNamed": "{title} を拡大",
+    "imageAltFallback": "ギャラリー画像"
+  },
+  "torneio": {
+    "loading": "トーナメントを読み込み中…",
+    "notFound": "トーナメントが見つかりません。",
+    "blindsLoading": "ブラインド表を読み込み中…",
+    "blindsNotFound": "ブラインド表が見つかりません。",
+    "blindsTableTitle": "ブラインド表",
+    "blindsTableLink": "ブラインド表はこちら",
+    "level": "レベル",
+    "duration": "時間"
+  },
+  "card": {
+    "joinQueue": "待機列に参加",
+    "favorite": "お気に入りに追加",
+    "unfavorite": "お気に入りから削除",
+    "start": "開始",
+    "late": "レイト",
+    "registrationUntil": "登録締切 {time}",
+    "buyIn": "バイイン:",
+    "stageBadge": "第{n}ステージ"
+  },
+  "perfil": {
+    "loading": "プロフィールを読み込み中..."
+  },
+  "footer": {
+    "responsibleGamingAlt": "利用規約が適用されます。責任あるプレイを。18歳以上限定。"
+  },
+  "common": {
+    "h2": "H2"
+  },
+  "language": {
+    "changedTitle": "言語が変更されました",
+    "changedDescription": "インターフェースは{language}になりました。"
+  },
+  "cashGame": {
+    "queueTitle": "キャッシュゲーム待機位置",
+    "queueDescription": "キャッシュゲームの待機列に入りました。",
+    "hi": "こんにちは、{name}さん！",
+    "youAreIn": "あなたは",
+    "waitingQueue": "の待機列です",
+    "place": "{n}位"
+  }
+}

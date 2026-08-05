@@ -1,0 +1,237 @@
+{
+  "header": {
+    "openMenu": "Abrir menu",
+    "menu": "Menu",
+    "menuDescription": "Navegue pelas páginas e opções",
+    "pages": "Páginas",
+    "units": "Unidades",
+    "login": "Login"
+  },
+  "auth": {
+    "login": "Login",
+    "loginTitle": "Fazer Login",
+    "loginDescription": "Entre com suas credenciais para acessar sua conta.",
+    "emailOrCpf": "Email ou CPF",
+    "emailOrCpfPlaceholder": "seu{'@'}email.com ou CPF",
+    "password": "Senha",
+    "forgotPassword": "Esqueci minha senha",
+    "cancel": "Cancelar",
+    "enter": "Entrar",
+    "entering": "Entrando...",
+    "passwordRecoveryTitle": "Recuperação de Senha",
+    "passwordRecoveryDescription": "Esta funcionalidade está em desenvolvimento. Entre em contato com o suporte para recuperar sua senha.",
+    "close": "Fechar",
+    "contactSupport": "Contatar Suporte",
+    "profile": "Perfil",
+    "logout": "Sair",
+    "confirmLogoutTitle": "Confirmar saída",
+    "confirmLogoutDescription": "Tem certeza que deseja sair da sua conta? Você precisará fazer login novamente para acessar o sistema.",
+    "loggingOut": "Saindo...",
+    "activeClient": "Cliente ativo",
+    "inactiveClient": "Cliente inativo",
+    "user": "usuário",
+    "accountMenu": "Menu da conta de {name}",
+    "validation": {
+      "emailOrCpfRequired": "Email ou CPF é obrigatório",
+      "emailOrCpfInvalid": "Email inválido ou CPF deve ter 11 dígitos",
+      "passwordMin": "Senha deve ter pelo menos 6 caracteres"
+    },
+    "toast": {
+      "loginSuccessTitle": "Login realizado com sucesso!",
+      "loginSuccessHello": "Olá, {name}!",
+      "logoutTitle": "Você saiu da conta",
+      "logoutDescription": "Faça login novamente para acessar o sistema."
+    },
+    "errors": {
+      "invalidCredentials": "Credenciais inválidas. Tente novamente."
+    },
+    "passwordRecoveryMailtoSubject": "Recuperação de Senha"
+  },
+  "page": {
+    "loading": "Carregando conteúdo...",
+    "loadingShort": "Carregando...",
+    "loadErrorTitle": "Erro ao carregar conteúdo",
+    "retry": "Tentar novamente",
+    "notFoundTitle": "Página não encontrada",
+    "notFoundDescription": "Esta página não existe nesta unidade.",
+    "backHome": "Voltar para home",
+    "emptyContent": "Nenhum conteúdo disponível para esta página no momento.",
+    "unitNotFound": "Unidade não encontrada"
+  },
+  "grid": {
+    "searchTournaments": "Pesquisar torneios",
+    "searchTables": "Pesquisar mesas",
+    "search": "Pesquisar",
+    "day": "Dia",
+    "noResultsFor": "Nenhum resultado para \"{query}\".",
+    "noTournamentsFiltered": "Nenhum torneio encontrado com os filtros selecionados.",
+    "filtersTitle": "Filtros",
+    "closeFiltersAria": "Fechar filtros",
+    "clearFilters": "Limpar filtros",
+    "applyFilters": "Filtrar",
+    "removeFilterAria": "Remover filtro {label}"
+  },
+  "faq": {
+    "emptyCategory": "Nenhuma pergunta nesta categoria.",
+    "categoriesAria": "Categorias do FAQ"
+  },
+  "documento": {
+    "emptySection": "Nenhum conteúdo nesta seção.",
+    "sectionsAria": "Seções do documento"
+  },
+  "galeria": {
+    "backToAlbums": "Voltar aos álbuns",
+    "filterAll": "Todas",
+    "filterSeriesAria": "Filtrar galeria por série",
+    "lightboxTitle": "Visualizar foto",
+    "lightboxDescription": "Use as setas ou os botões para navegar entre as fotos. Pressione Escape para fechar.",
+    "close": "Fechar",
+    "photoAlt": "Foto {n}",
+    "openAlbumAria": "Abrir álbum",
+    "openAlbumAriaNamed": "Abrir álbum {title}",
+    "enlargePhotoAria": "Ampliar foto",
+    "enlargePhotoAriaNamed": "Ampliar {title}",
+    "imageAltFallback": "Imagem da galeria"
+  },
+  "ranking": {
+    "defaultTitle": "Ranking",
+    "defaultCta": "Confira o ranking",
+    "tabGeral": "Geral",
+    "colPlacement": "Colocação",
+    "colName": "Nome Sobrenome",
+    "colPoints": "Pontos",
+    "filterAria": "Filtrar ranking",
+    "placeOrdinal": "{n}º"
+  },
+  "torneio": {
+    "loading": "Carregando torneio…",
+    "notFound": "Torneio não encontrado.",
+    "blindsLoading": "Carregando tabela de blinds…",
+    "blindsNotFound": "Tabela de blinds não encontrada.",
+    "blindsTableTitle": "Tabela de Blinds",
+    "blindsTableLink": "Acesse aqui a tabela de blinds",
+    "level": "Nível",
+    "duration": "Duração",
+    "seoTitleFallback": "Torneio",
+    "blindsSeoTitle": "Tabela de Blinds — {title}",
+    "blinds": {
+      "small": "Small",
+      "big": "Big",
+      "ante": "Ante"
+    }
+  },
+  "card": {
+    "joinQueue": "Entrar na fila",
+    "favorite": "Favoritar",
+    "unfavorite": "Remover dos favoritos",
+    "start": "Início",
+    "late": "Late",
+    "registrationUntil": "Inscrições até {time}",
+    "buyIn": "Buy-in:",
+    "buyInLabel": "Buy-in",
+    "stageBadge": "{ordinal} Etapa"
+  },
+  "perfil": {
+    "loading": "Carregando perfil...",
+    "title": "Meu perfil",
+    "subtitle": "Dados da sua conta H2",
+    "refresh": "Atualizar dados",
+    "loadErrorTitle": "Erro ao carregar perfil",
+    "retry": "Tentar novamente",
+    "sectionsAria": "Seções do perfil",
+    "favoritesCount": "{n} favorito | {n} favoritos",
+    "loadError": "Não foi possível carregar os dados do perfil.",
+    "unexpectedError": "Erro inesperado ao carregar o perfil.",
+    "tabs": {
+      "dados": "Meus dados",
+      "favoritos": "Favoritos"
+    },
+    "sections": {
+      "personal": "Dados pessoais",
+      "contact": "Contato e endereço",
+      "payments": "Pagamentos",
+      "notifications": "Preferências de notificação"
+    },
+    "fields": {
+      "fullName": "Nome completo",
+      "nickname": "Apelido",
+      "email": "E-mail",
+      "cpf": "CPF",
+      "gender": "Gênero",
+      "birthDate": "Data de nascimento",
+      "status": "Status",
+      "h2Rewards": "Pontua H2 Rewards",
+      "phone": "Telefone",
+      "cep": "CEP",
+      "number": "Número",
+      "complement": "Complemento",
+      "pixKey": "Chave Pix",
+      "pixValidated": "Pix validada",
+      "bank": "Banco"
+    },
+    "status": {
+      "active": "Ativo",
+      "inactive": "Inativo"
+    },
+    "notifications": {
+      "score": "Pontuação",
+      "redeem": "Resgate",
+      "promo": "Promoção",
+      "category": "Categoria"
+    },
+    "favorites": {
+      "title": "Torneios favoritos",
+      "subtitleEmpty": "Seus torneios salvos aparecem nesta aba",
+      "subtitleOne": "1 torneio salvo — clique no card para ver os detalhes",
+      "subtitleMany": "{n} torneios salvos — clique no card para ver os detalhes",
+      "emptyTitle": "Nenhum torneio favoritado",
+      "emptyDescription": "Na agenda, toque na estrela de um card para salvá-lo aqui e abrir o detalhe quando quiser.",
+      "viewAgenda": "Ver agenda"
+    }
+  },
+  "footer": {
+    "responsibleGamingAlt": "Aplica-se T&C. Jogue com responsabilidade. Maiores de 18 anos."
+  },
+  "common": {
+    "h2": "H2",
+    "yes": "Sim",
+    "no": "Não",
+    "close": "Fechar",
+    "loading": "Carregando...",
+    "logoAlt": "Logo H2 Club"
+  },
+  "language": {
+    "changedTitle": "Idioma alterado",
+    "changedDescription": "A interface agora está em {language}."
+  },
+  "cashGame": {
+    "queueTitle": "Posição na fila de cash game",
+    "queueDescription": "Você entrou na fila de espera do cash game.",
+    "hi": "Oi, {name}!",
+    "youAreIn": "Você está em",
+    "waitingQueue": "na fila de espera",
+    "place": "{n}º lugar"
+  },
+  "favorites": {
+    "toast": {
+      "removedTitle": "Removido dos favoritos",
+      "removedDescription": "Torneio removido da sua lista.",
+      "addedTitle": "Torneio favoritado!"
+    }
+  },
+  "downloadApp": {
+    "defaultTitle": "Baixe o app H2",
+    "googlePlay": "Google Play",
+    "appStore": "App Store"
+  },
+  "modules": {
+    "notImplemented": "Módulo tipo \"{tipo}\" não implementado"
+  },
+  "banner": {
+    "altFallback": "Banner"
+  },
+  "carousel": {
+    "previous": "Slide anterior",
+    "next": "Próximo slide"
+  }
+}

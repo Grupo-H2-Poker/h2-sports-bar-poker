@@ -17,7 +17,7 @@
           @click="closeAlbum"
         >
           <ArrowLeft class="size-4" aria-hidden="true" />
-          Voltar aos álbuns
+          {{ t('galeria.backToAlbums') }}
         </button>
 
         <h2
@@ -123,6 +123,7 @@ const props = defineProps<{
   modulo: ModuloOf<'galeria'>
 }>()
 
+const { t } = useI18n()
 const {
   ctaConfig,
   imagens,

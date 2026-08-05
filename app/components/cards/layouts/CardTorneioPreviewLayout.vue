@@ -30,10 +30,10 @@
           :class="['flex flex-wrap items-center gap-x-6 gap-y-0', CARD_PREVIEW_HORARIOS]"
         >
           <span v-if="dados.inicio">
-            Início {{ dados.inicio }}
+            {{ t('card.start') }} {{ dados.inicio }}
           </span>
           <span v-if="dados.late">
-            Late {{ dados.late }}
+            {{ t('card.late') }} {{ dados.late }}
           </span>
         </div>
       </div>
@@ -70,6 +70,8 @@ import {
   CARD_PREVIEW_TORNEIO_TITULO,
   CARD_PREVIEW_TORNEIO_TITULO_SLOT,
 } from '~/components/cards/layouts/cardPreviewShared'
+
+const { t } = useI18n()
 
 const TORNEIO_PREVIEW_BG_ATIVO = 'rgba(119, 21, 142, 0.50)'
 const TORNEIO_PREVIEW_BG_INATIVO = '#77158E4D'

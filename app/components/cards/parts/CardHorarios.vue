@@ -6,13 +6,15 @@
       </span>
     </div>
     <span v-if="dados.inscricoes" class="text-sm opacity-70">
-      Inscrições até {{ dados.inscricoes }}
+      {{ t('card.registrationUntil', { time: dados.inscricoes }) }}
     </span>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { CardGenericData, CardHorario } from '~/types/cards'
+
+const { t } = useI18n()
 
 const props = defineProps<{
   dados: Pick<CardGenericData, 'inicio' | 'late' | 'inscricoes' | 'horarios'>
@@ -21,8 +23,8 @@ const props = defineProps<{
 const slots = computed<CardHorario[]>(() => {
   if (props.dados.horarios?.length) return props.dados.horarios
   const list: CardHorario[] = []
-  if (props.dados.inicio) list.push({ label: 'Início', valor: props.dados.inicio })
-  if (props.dados.late) list.push({ label: 'Late', valor: props.dados.late })
+  if (props.dados.inicio) list.push({ label: t('card.start'), valor: props.dados.inicio })
+  if (props.dados.late) list.push({ label: t('card.late'), valor: props.dados.late })
   return list
 })
 </script>

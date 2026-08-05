@@ -18,6 +18,7 @@ import type {
  */
 export function buildGaleriaSeriesFiltros(
   itens: ReadonlyArray<ComponentData<GaleriaImagemData>>,
+  todasLabel = 'Todas',
 ): GaleriaSeriesFiltroOption[] {
   const seen = new Map<string, string>()
 
@@ -30,7 +31,7 @@ export function buildGaleriaSeriesFiltros(
   if (!seen.size) return []
 
   return [
-    { id: GALERIA_FILTER_TODAS_ID, label: 'Todas' },
+    { id: GALERIA_FILTER_TODAS_ID, label: todasLabel },
     ...Array.from(seen.entries()).map(([id, label]) => ({ id, label })),
   ]
 }
@@ -44,6 +45,7 @@ function parseAlbumQuery(raw: unknown): number | null {
 
 export function useGaleriaModule(modulo: MaybeRefOrGetter<ModuloOf<'galeria'>>) {
   const { ctaConfig, items } = useModuloComponents(modulo)
+  const { t } = useI18n()
   const route = useRoute()
   const router = useRouter()
 
@@ -62,7 +64,9 @@ export function useGaleriaModule(modulo: MaybeRefOrGetter<ModuloOf<'galeria'>>) 
   const gridClass = computed(() => resolveGaleriaGridClasses(toValue(modulo).metadados))
 
   const seriesFiltros = computed(() =>
-    filtroEnabled.value ? buildGaleriaSeriesFiltros(items.value) : [],
+    filtroEnabled.value
+      ? buildGaleriaSeriesFiltros(items.value, t('galeria.filterAll'))
+      : [],
   )
 
   const showFiltro = computed(() => seriesFiltros.value.length > 1)

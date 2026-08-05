@@ -92,7 +92,7 @@
               :key="`empty-${activeCategoria}`"
               class="py-10 text-base text-card-preview-text/50"
             >
-              Nenhuma pergunta nesta categoria.
+              {{ t('faq.emptyCategory') }}
             </p>
           </Transition>
         </div>
@@ -112,6 +112,7 @@ const props = defineProps<{
   modulo: ModuloOf<'faq_page'>
 }>()
 
+const { t } = useI18n()
 const { ctaConfig, categorias } = useFaqPageModule(() => props.modulo)
 
 const pagePaddingStyle = useModuloMarginLateral(() => props.modulo.metadados)

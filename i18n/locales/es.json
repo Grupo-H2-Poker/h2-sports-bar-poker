@@ -1,0 +1,115 @@
+{
+  "header": {
+    "openMenu": "Abrir menú",
+    "menu": "Menú",
+    "menuDescription": "Navega por las páginas y opciones",
+    "pages": "Páginas",
+    "units": "Unidades",
+    "login": "Login"
+  },
+  "auth": {
+    "login": "Login",
+    "loginTitle": "Iniciar sesión",
+    "loginDescription": "Introduce tus credenciales para acceder a tu cuenta.",
+    "emailOrCpf": "Email o CPF",
+    "emailOrCpfPlaceholder": "tu{'@'}email.com o CPF",
+    "password": "Contraseña",
+    "forgotPassword": "Olvidé mi contraseña",
+    "cancel": "Cancelar",
+    "enter": "Entrar",
+    "entering": "Entrando...",
+    "passwordRecoveryTitle": "Recuperación de contraseña",
+    "passwordRecoveryDescription": "Esta función está en desarrollo. Contacta con soporte para recuperar tu contraseña.",
+    "close": "Cerrar",
+    "contactSupport": "Contactar soporte",
+    "profile": "Perfil",
+    "logout": "Salir",
+    "confirmLogoutTitle": "Confirmar salida",
+    "confirmLogoutDescription": "¿Seguro que deseas salir de tu cuenta? Tendrás que iniciar sesión de nuevo para acceder al sistema.",
+    "loggingOut": "Saliendo...",
+    "activeClient": "Cliente activo",
+    "inactiveClient": "Cliente inactivo",
+    "user": "usuario",
+    "accountMenu": "Menú de la cuenta de {name}"
+  },
+  "page": {
+    "loading": "Cargando contenido...",
+    "loadingShort": "Cargando...",
+    "loadErrorTitle": "Error al cargar el contenido",
+    "retry": "Intentar de nuevo",
+    "notFoundTitle": "Página no encontrada",
+    "notFoundDescription": "Esta página no existe en esta unidad.",
+    "backHome": "Volver al inicio",
+    "emptyContent": "No hay contenido disponible para esta página en este momento.",
+    "unitNotFound": "Unidad no encontrada"
+  },
+  "grid": {
+    "searchTournaments": "Buscar torneos",
+    "searchTables": "Buscar mesas",
+    "search": "Buscar",
+    "day": "Día",
+    "noResultsFor": "Ningún resultado para \"{query}\".",
+    "noTournamentsFiltered": "No se encontraron torneos con los filtros seleccionados."
+  },
+  "faq": {
+    "emptyCategory": "No hay preguntas en esta categoría."
+  },
+  "documento": {
+    "emptySection": "No hay contenido en esta sección."
+  },
+  "galeria": {
+    "backToAlbums": "Volver a los álbumes",
+    "filterAll": "Todas",
+    "filterSeriesAria": "Filtrar galería por serie",
+    "lightboxTitle": "Ver foto",
+    "lightboxDescription": "Usa las flechas o los botones para navegar entre las fotos. Pulsa Escape para cerrar.",
+    "close": "Cerrar",
+    "photoAlt": "Foto {n}",
+    "openAlbumAria": "Abrir álbum",
+    "openAlbumAriaNamed": "Abrir álbum {title}",
+    "enlargePhotoAria": "Ampliar foto",
+    "enlargePhotoAriaNamed": "Ampliar {title}",
+    "imageAltFallback": "Imagen de la galería"
+  },
+  "torneio": {
+    "loading": "Cargando torneo…",
+    "notFound": "Torneo no encontrado.",
+    "blindsLoading": "Cargando tabla de blinds…",
+    "blindsNotFound": "Tabla de blinds no encontrada.",
+    "blindsTableTitle": "Tabla de Blinds",
+    "blindsTableLink": "Accede aquí a la tabla de blinds",
+    "level": "Nivel",
+    "duration": "Duración"
+  },
+  "card": {
+    "joinQueue": "Entrar en la cola",
+    "favorite": "Favorito",
+    "unfavorite": "Quitar de favoritos",
+    "start": "Inicio",
+    "late": "Late",
+    "registrationUntil": "Inscripciones hasta {time}",
+    "buyIn": "Buy-in:",
+    "stageBadge": "{ordinal} Etapa"
+  },
+  "perfil": {
+    "loading": "Cargando perfil..."
+  },
+  "footer": {
+    "responsibleGamingAlt": "Se aplican T&C. Juega con responsabilidad. Mayores de 18 años."
+  },
+  "common": {
+    "h2": "H2"
+  },
+  "language": {
+    "changedTitle": "Idioma cambiado",
+    "changedDescription": "La interfaz ahora está en {language}."
+  },
+  "cashGame": {
+    "queueTitle": "Posición en la cola de cash game",
+    "queueDescription": "Entraste en la cola de espera del cash game.",
+    "hi": "¡Hola, {name}!",
+    "youAreIn": "Estás en",
+    "waitingQueue": "en la cola de espera",
+    "place": "{n}.º lugar"
+  }
+}

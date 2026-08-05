@@ -22,10 +22,10 @@
       <div :class="CARD_PREVIEW_INFO_SLOT">
         <div :class="CARD_PREVIEW_CASH_DETALHES">
           <p v-if="dados.inicio" class="m-0">
-            Início {{ dados.inicio }}
+            {{ t('card.start') }} {{ dados.inicio }}
           </p>
           <p v-if="dados.inscricoes" class="m-0">
-            Inscrições até {{ dados.inscricoes }}
+            {{ t('card.registrationUntil', { time: dados.inscricoes }) }}
           </p>
         </div>
       </div>
@@ -60,6 +60,8 @@ import {
   CARD_PREVIEW_SHELL,
   CARD_PREVIEW_TEXT,
 } from '~/components/cards/layouts/cardPreviewShared'
+
+const { t } = useI18n()
 
 const props = defineProps<{
   dados: CardGenericData

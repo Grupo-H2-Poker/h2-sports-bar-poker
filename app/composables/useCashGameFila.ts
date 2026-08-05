@@ -3,6 +3,7 @@ export function useCashGameFila() {
   const nome = useState('cash-game-fila-nome', () => '')
   const posicao = useState('cash-game-fila-posicao', () => 5)
   const mesa = useState<string | null>('cash-game-fila-mesa', () => null)
+  const { t } = useI18n()
 
   function entrarNaFila(mesaTitulo?: string) {
     const { isAuthenticated, user } = useAuth()
@@ -12,7 +13,7 @@ export function useCashGameFila() {
       return
     }
 
-    nome.value = user.value?.apelido || user.value?.nome || 'Usuário'
+    nome.value = user.value?.apelido || user.value?.nome || t('auth.user')
     mesa.value = mesaTitulo ?? null
     // Mock: posição aleatória entre 2 e 12 — substituir quando a API existir
     posicao.value = Math.floor(Math.random() * 11) + 2
@@ -23,7 +24,7 @@ export function useCashGameFila() {
     isOpen.value = false
   }
 
-  const posicaoLabel = computed(() => `${posicao.value}º lugar`)
+  const posicaoLabel = computed(() => t('cashGame.place', { n: posicao.value }))
 
   return {
     isOpen,

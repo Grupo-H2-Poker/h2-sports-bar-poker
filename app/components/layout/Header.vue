@@ -4,7 +4,6 @@ import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuL
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from '~/components/ui/drawer'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '~/components/ui/dropdown-menu'
 import { ChevronDown, Menu } from 'lucide-vue-next'
-import { useLanguage } from '~/composables/useLanguage'
 import Logo from '~/components/layout/Logo.vue'
 import Login from '~/components/auth/Login.vue'
 import LoginModal from '~/components/auth/LoginModal.vue'
@@ -13,11 +12,30 @@ import type { HeaderMenuItem } from '~/types/modules'
 
 const route = useRoute()
 const router = useRouter()
-const { language, setLanguage } = useLanguage()
+const { locale, locales, t } = useI18n()
+const { changeLocale } = useLocaleSwitch()
 
 const { isAuthenticated } = useAuth()
 const { unidades, defaultUnityName, selectedUnityName, getSlugFromName, getNameFromSlug, fetchUnidades } = useUnidades()
 const api = useH2Api()
+
+const localeCode = computed(() => String(locale.value))
+
+const LOCALE_FLAGS: Record<string, string> = {
+  pt: '🇧🇷',
+  en: '🇺🇸',
+  es: '🇪🇸',
+  zh: '🇨🇳',
+  ja: '🇯🇵',
+}
+
+const languageOptions = computed(() =>
+  (locales.value as Array<{ code: string; name?: string }>).map(l => ({
+    code: l.code,
+    flag: LOCALE_FLAGS[l.code] ?? '🌐',
+    name: l.name ?? l.code,
+  })),
+)
 
 onMounted(async () => {
     await fetchUnidades()
@@ -35,12 +53,12 @@ const effectiveUnidadeSlug = computed(() => {
 })
 
 const { data: unidadeModulosData } = await useAsyncData(
-    () => `header-unidade-modulos-${effectiveUnidadeSlug.value}`,
-    async () => {
-        if (!effectiveUnidadeSlug.value) return null
-        return await api.getUnidadeModulos(effectiveUnidadeSlug.value)
-    },
-    { server: true, watch: [effectiveUnidadeSlug] },
+  () => `header-unidade-modulos-${effectiveUnidadeSlug.value}`,
+  async () => {
+    if (!effectiveUnidadeSlug.value) return null
+    return await api.getUnidadeModulos(effectiveUnidadeSlug.value, String(locale.value))
+  },
+  { server: true, watch: [effectiveUnidadeSlug, locale] },
 )
 
 function menuHref(item: { pagina?: string; to?: string; external?: boolean }) {
@@ -185,25 +203,21 @@ const openLoginAndCloseDrawer = () => {
                     <DropdownMenuTrigger as-child>
                         <Button variant="plain" class="nav-menu-link group inline-flex h-9 items-center justify-center rounded-md px-3 text-sm font-medium ml-4 transition-colors hover:bg-transparent focus:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 dark:hover:bg-transparent data-[state=open]:bg-transparent">
                             <span class="nav-menu-link-label">
-                                {{ language.toUpperCase() }}
+                                {{ localeCode.toUpperCase() }}
                                 <ChevronDown class="ml-2 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                             </span>
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent side="bottom" align="end" class="w-28">
+                    <DropdownMenuContent side="bottom" align="end" class="min-w-44">
                         <DropdownMenuItem
-                            class="cursor-pointer"
-                            :class="{ 'bg-accent text-accent-foreground': language === 'pt' }"
-                            @click="setLanguage('pt')"
+                            v-for="option in languageOptions"
+                            :key="option.code"
+                            class="cursor-pointer gap-2"
+                            :class="{ 'bg-accent text-accent-foreground': localeCode === option.code }"
+                            @click="changeLocale(option.code)"
                         >
-                            PT
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                            class="cursor-pointer"
-                            :class="{ 'bg-accent text-accent-foreground': language === 'en' }"
-                            @click="setLanguage('en')"
-                        >
-                            EN
+                            <span aria-hidden="true" class="text-base leading-none">{{ option.flag }}</span>
+                            {{ option.name }}
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
@@ -216,46 +230,42 @@ const openLoginAndCloseDrawer = () => {
                     <DropdownMenuTrigger as-child>
                         <Button variant="plain" class="nav-menu-link group inline-flex h-9 items-center justify-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-transparent focus:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 dark:hover:bg-transparent data-[state=open]:bg-transparent">
                             <span class="nav-menu-link-label">
-                                {{ language.toUpperCase() }}
+                                {{ localeCode.toUpperCase() }}
                                 <ChevronDown class="ml-2 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                             </span>
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent side="bottom" align="end" class="w-28">
+                    <DropdownMenuContent side="bottom" align="end" class="min-w-44">
                         <DropdownMenuItem
-                            class="cursor-pointer"
-                            :class="{ 'bg-accent text-accent-foreground': language === 'pt' }"
-                            @click="setLanguage('pt')"
+                            v-for="option in languageOptions"
+                            :key="option.code"
+                            class="cursor-pointer gap-2"
+                            :class="{ 'bg-accent text-accent-foreground': localeCode === option.code }"
+                            @click="changeLocale(option.code)"
                         >
-                            PT
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                            class="cursor-pointer"
-                            :class="{ 'bg-accent text-accent-foreground': language === 'en' }"
-                            @click="setLanguage('en')"
-                        >
-                            EN
+                            <span aria-hidden="true" class="text-base leading-none">{{ option.flag }}</span>
+                            {{ option.name }}
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
 
                 <Drawer v-model:open="isMobileDrawerOpen">
                     <DrawerTrigger as-child>
-                        <Button variant="ghost" size="sm" class="h-9 w-9 px-0" aria-label="Abrir menu">
+                        <Button variant="ghost" size="sm" class="h-9 w-9 px-0" :aria-label="t('header.openMenu')">
                             <Menu class="h-5 w-5" />
                         </Button>
                     </DrawerTrigger>
                     <DrawerContent>
                         <DrawerHeader class="text-left">
-                            <DrawerTitle>Menu</DrawerTitle>
+                            <DrawerTitle>{{ t('header.menu') }}</DrawerTitle>
                             <DrawerDescription>
-                                Navegue pelas páginas e opções
+                                {{ t('header.menuDescription') }}
                             </DrawerDescription>
                         </DrawerHeader>
 
                         <div class="p-4 space-y-6 overflow-y-auto">
                             <nav class="space-y-1">
-                                <h3 class="text-sm font-medium text-muted-foreground mb-3">Páginas</h3>
+                                <h3 class="text-sm font-medium text-muted-foreground mb-3">{{ t('header.pages') }}</h3>
                                 <div v-for="item in menuItems" :key="item.id">
                                     <NuxtLink
                                         v-if="item.kind === 'link'"
@@ -290,7 +300,7 @@ const openLoginAndCloseDrawer = () => {
 
                             <div class="border-t border-border pt-4">
                                 <div class="space-y-3">
-                                    <h3 class="text-sm font-medium text-muted-foreground">Unidades</h3>
+                                    <h3 class="text-sm font-medium text-muted-foreground">{{ t('header.units') }}</h3>
                                     <div class="space-y-1">
                                         <div v-for="unity in itemsUnity" :key="unity"
                                             class="cursor-pointer rounded-md px-3 py-3 text-sm transition-colors hover:bg-accent hover:text-accent-foreground"
@@ -305,7 +315,7 @@ const openLoginAndCloseDrawer = () => {
                             <div class="border-t border-border pt-4">
                                 <div v-if="!isAuthenticated">
                                     <Button @click="openLoginAndCloseDrawer" variant="default" size="sm" class="w-full">
-                                        Login
+                                        {{ t('header.login') }}
                                     </Button>
                                 </div>
                                 <div v-else class="px-3 py-3">

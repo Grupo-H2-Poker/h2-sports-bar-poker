@@ -1,13 +1,13 @@
 <template>
-  <div v-if="pending" class="container mx-auto px-4 py-20 text-center text-muted-foreground">
-    Carregando tabela de blinds…
+  <div v-if="pending && !blinds" class="container mx-auto px-4 py-20 text-center text-muted-foreground">
+    {{ t('torneio.blindsLoading') }}
   </div>
 
-  <div v-else-if="error || !blinds" class="container mx-auto px-4 py-20 text-center">
-    <p class="text-lg text-muted-foreground">Tabela de blinds não encontrada.</p>
+  <div v-else-if="(error || !blinds) && !pending" class="container mx-auto px-4 py-20 text-center">
+    <p class="text-lg text-muted-foreground">{{ t('torneio.blindsNotFound') }}</p>
   </div>
 
-  <TorneioBlindsView v-else :blinds="blinds" />
+  <TorneioBlindsView v-else-if="blinds" :blinds="blinds" />
 </template>
 
 <script setup lang="ts">
@@ -16,6 +16,7 @@ import TorneioBlindsView from '~/components/torneio/TorneioBlindsView.vue'
 
 const route = useRoute()
 const api = useH2Api()
+const { t, locale } = useI18n()
 
 const unidadeSlug = computed(() => route.params.unidade as string)
 const torneioSlug = computed(() => route.params.slug as string)
@@ -23,10 +24,14 @@ const torneioSlug = computed(() => route.params.slug as string)
 const { data: blinds, pending, error } = await useAsyncData<TorneioBlindsData | null>(
   () => `torneio-blinds-${unidadeSlug.value}-${torneioSlug.value}`,
   async () => {
-    const result = await api.getTorneioBlinds(unidadeSlug.value, torneioSlug.value)
+    const result = await api.getTorneioBlinds(
+      unidadeSlug.value,
+      torneioSlug.value,
+      String(locale.value),
+    )
     return result ?? null
   },
-  { watch: [unidadeSlug, torneioSlug] },
+  { watch: [unidadeSlug, torneioSlug, locale] },
 )
 
 useSeoMeta({

@@ -2,7 +2,7 @@
   <div class="pb-16 pt-10">
     <div class="container mx-auto flex flex-col px-4">
       <h1 class="text-center text-[30px] font-bold leading-[50px] text-[#e7e7e7]">
-        Tabela de Blinds
+        {{ t('torneio.blindsTableTitle') }}
       </h1>
 
       <div class="mt-14 w-full overflow-x-auto">
@@ -88,13 +88,15 @@ defineProps<{
   blinds: TorneioBlindsData
 }>()
 
-const colunas = [
-  { id: 'nivel', label: 'Nível' },
-  { id: 'duracao', label: 'Duração' },
+const { t } = useI18n()
+
+const colunas = computed(() => [
+  { id: 'nivel', label: t('torneio.level') },
+  { id: 'duracao', label: t('torneio.duration') },
   { id: 'small', label: 'Small' },
   { id: 'big', label: 'Big' },
   { id: 'ante', label: 'Ante' },
-] as const
+])
 
 function rowKey(row: TorneioBlindsRow, index: number) {
   return row.type === 'separator' ? `sep-${row.label}-${index}` : `lvl-${row.nivel}`

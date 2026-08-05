@@ -1,6 +1,6 @@
 <template>
   <div v-if="buyIn" class="flex flex-col gap-1">
-    <span class="text-base opacity-80">{{ buyIn.label ?? 'Buy-in:' }}</span>
+    <span class="text-base opacity-80">{{ buyIn.label ?? t('card.buyIn') }}</span>
     <div class="flex flex-nowrap items-baseline gap-2">
       <span class="shrink-0 text-2xl font-bold">{{ buyIn.preco }}</span>
       <span
@@ -15,6 +15,8 @@
 
 <script setup lang="ts">
 import type { CardBuyIn } from '~/types/cards'
+
+const { t } = useI18n()
 
 defineProps<{
   buyIn?: CardBuyIn

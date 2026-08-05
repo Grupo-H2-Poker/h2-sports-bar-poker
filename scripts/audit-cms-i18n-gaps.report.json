@@ -1,0 +1,753 @@
+{
+  "source": "handler",
+  "dictKeyCounts": {
+    "en": 260,
+    "es": 261,
+    "zh": 260,
+    "ja": 260
+  },
+  "remainingAfterEn": {
+    "totalOccurrences": 35,
+    "unique": 34,
+    "longHtmlBlocks": 18,
+    "shortUiLabels": 16,
+    "top": [
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.1.data.conteudo",
+        "value": "<ol>\n  <li>\n    <strong>Equipe de supervisão/floor</strong><br>\n    A equipe de supervisão deverá considerar o melhor interesse da disputa e a justiça como maiores prioridades no processo de tomada de decisão. Circunstân…",
+        "chars": 1993
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.1.data.conteudo",
+        "value": "<p>Nós disponibilizamos o FORMULÁRIO DE PETIÇÕES para que você titular consiga exercer seus direitos de privacidade de forma autônoma e sempre que julgar necessário.</p>\n<p>Caso você não consiga acessar o formulário, voc…",
+        "chars": 1432
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.2.data.conteudo",
+        "value": "<p>Os procedimentos de torneio visam garantir fluidez, equidade e segurança em todas as mesas. A direção do evento pode ajustar ritmos e protocolos conforme a fase do torneio, sempre priorizando o melhor interesse da dis…",
+        "chars": 705
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.3.data.conteudo",
+        "value": "<p>O torneio inicia no horário publicado na agenda, sujeito à confirmação da direção do evento. A presença mínima de jogadores, a liberação das mesas e a conclusão do check-in podem condicionar o início efetivo.</p>\n<p>L…",
+        "chars": 647
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.5.data.conteudo",
+        "value": "<p>Coletamos dados pessoais fornecidos diretamente por você (cadastro, inscrição em torneios, atendimento), dados gerados pelo uso de nossos serviços (frequência, preferências, histórico de participação) e, quando aplicá…",
+        "chars": 601
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.4.data.conteudo",
+        "value": "<p>Na modalidade All-in Fold, o jogador está limitado às ações previstas no formato do evento — tipicamente all-in ou fold — sem opções intermediárias de call parcial ou raise padrão, salvo regra específica do torneio.</…",
+        "chars": 597
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.3.data.conteudo",
+        "value": "<p>Esta Diretiva e os Avisos de Privacidade descrevem como o Grupo H2 coleta, utiliza, armazena e protege dados pessoais no âmbito de suas atividades de entretenimento, torneios, cash game, produtos digitais e atendiment…",
+        "chars": 572
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.9.data.conteudo",
+        "value": "<p>Podemos compartilhar dados com prestadores de serviço que nos auxiliam (tecnologia, pagamento, marketing operacional, segurança), sempre mediante contrato e instruções que limitem o uso à finalidade contratada.</p>\n<p…",
+        "chars": 569
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.5.data.conteudo",
+        "value": "<p>O buy-in de cash game corresponde ao valor mínimo e máximo permitido para sentar em cada mesa, expresso em múltiplos de big blind ou valor fixo publicado no quadro do clube.</p>\n<p>O jogador deve adquirir chips apenas…",
+        "chars": 566
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.2.data.conteudo",
+        "value": "<p>O Encarregado pelo Tratamento de Dados Pessoais (DPO) do Grupo H2 é o canal oficial para dúvidas, solicitações e comunicações relacionadas à privacidade.</p>\n<p>Você pode entrar em contato pelo e-mail <strong>dpo@grup…",
+        "chars": 539
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.6.data.conteudo",
+        "value": "<p>A promoção Bonus Chip concede chips adicionais conforme as condições publicadas no período promocional (valor de buy-in, modalidade elegível e limite por jogador).</p>\n<p>O benefício não é cumulativo além do previsto …",
+        "chars": 532
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.8.data.conteudo",
+        "value": "<p>Tratamos dados pessoais para viabilizar cadastros, inscrição e operação de torneios, cash game, programas de relacionamento, atendimento ao cliente, segurança das unidades e cumprimento de obrigações legais e regulató…",
+        "chars": 528
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.4.data.conteudo",
+        "value": "<p>O Grupo H2 reúne marcas e unidades de sports bar e poker no Brasil, oferecendo experiências presenciais e serviços digitais aos seus clientes e visitantes.</p>\n<p>Para efeitos desta política, “empresa controladora” e …",
+        "chars": 524
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.6.data.conteudo",
+        "value": "<p>Nossos serviços são destinados a maiores de 18 anos. Não coletamos intencionalmente dados pessoais de crianças ou adolescentes para participação em atividades de poker ou produtos correlatos.</p>\n<p>Dados sensíveis, q…",
+        "chars": 512
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.7.data.conteudo",
+        "value": "<p>Utilizamos cookies e tecnologias semelhantes para funcionamento do site, preferências, métricas de audiência e, quando autorizado, personalização de conteúdo.</p>\n<p>Você pode gerenciar cookies pelo navegador ou pelos…",
+        "chars": 473
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.12.data.conteudo",
+        "value": "<p>Mantemos dados pessoais pelo tempo necessário para cumprir as finalidades informadas, obrigações legais, exercício regular de direitos e defesa em processos.</p>\n<p>Após o encerramento da necessidade, os dados são eli…",
+        "chars": 446
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.11.data.conteudo",
+        "value": "<p>Adotamos medidas técnicas e administrativas para proteger dados pessoais contra acessos não autorizados, perda, alteração ou divulgação indevida, incluindo controles de acesso, monitoramento e boas práticas de seguran…",
+        "chars": 408
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.10.data.conteudo",
+        "value": "<p>Alguns fornecedores ou sistemas podem armazenar ou processar dados fora do Brasil. Nesses casos, adotamos salvaguardas compatíveis com a LGPD, como cláusulas contratuais e avaliação do nível de proteção do destino.</p…",
+        "chars": 352
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.3.data.titulo",
+        "value": "Critérios para início\ndo torneio",
+        "chars": 32
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.3.data.titulo",
+        "value": "Diretiva e Avisos\nde Privacidade",
+        "chars": 32
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.12.data.faixa_info",
+        "value": "610 ranking points Omaha do CPH",
+        "chars": 31
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.9.data.titulo",
+        "value": "Compartilhamento\npara terceiros",
+        "chars": 31
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.6.data.titulo",
+        "value": "Dados de Menores\ne Sensíveis",
+        "chars": 28
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.8.data.titulo",
+        "value": "Tratamento de\ndados pessoais",
+        "chars": 28
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.2.data.titulo",
+        "value": "Encarregado\npelo tratamento",
+        "chars": 27
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.10.data.titulo",
+        "value": "Transferência\ninternacional",
+        "chars": 27
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.1.data.titulo",
+        "value": "Formulário\nde Privacidade",
+        "chars": 25
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.5.data.titulo",
+        "value": "Coleta de\ndados pessoais",
+        "chars": 24
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.7.data.titulo",
+        "value": "Tratamento de Cookies",
+        "chars": 21
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.6.data.titulo",
+        "value": "Promoção Bonus Chip",
+        "chars": 19
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.11.data.titulo",
+        "value": "Segurança de dados",
+        "chars": 18
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.12.data.titulo",
+        "value": "Retenção de dados",
+        "chars": 17
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.1.data.titulo",
+        "value": "Conceitos gerais",
+        "chars": 16
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.2.data.titulo",
+        "value": "Procedimentos",
+        "chars": 13
+      }
+    ],
+    "allShortUi": [
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.3.data.titulo",
+        "value": "Critérios para início\ndo torneio"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.3.data.titulo",
+        "value": "Diretiva e Avisos\nde Privacidade"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.12.data.faixa_info",
+        "value": "610 ranking points Omaha do CPH"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.9.data.titulo",
+        "value": "Compartilhamento\npara terceiros"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.6.data.titulo",
+        "value": "Dados de Menores\ne Sensíveis"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.8.data.titulo",
+        "value": "Tratamento de\ndados pessoais"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.2.data.titulo",
+        "value": "Encarregado\npelo tratamento"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.10.data.titulo",
+        "value": "Transferência\ninternacional"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.1.data.titulo",
+        "value": "Formulário\nde Privacidade"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.5.data.titulo",
+        "value": "Coleta de\ndados pessoais"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.7.data.titulo",
+        "value": "Tratamento de Cookies"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.6.data.titulo",
+        "value": "Promoção Bonus Chip"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.11.data.titulo",
+        "value": "Segurança de dados"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.12.data.titulo",
+        "value": "Retenção de dados"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.1.data.titulo",
+        "value": "Conceitos gerais"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.2.data.titulo",
+        "value": "Procedimentos"
+      }
+    ]
+  },
+  "missingExactDictKeys": {
+    "unique": 66,
+    "top": [
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.1.data.conteudo",
+        "value": "<ol>\n  <li>\n    <strong>Equipe de supervisão/floor</strong><br>\n    A equipe de supervisão deverá considerar o melhor interesse da disputa e a justiça como maiores prioridades no processo de tomada de decisão. Circunstân…",
+        "chars": 1995
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.1.data.conteudo",
+        "value": "<p>Nós disponibilizamos o FORMULÁRIO DE PETIÇÕES para que você titular consiga exercer seus direitos de privacidade de forma autônoma e sempre que julgar necessário.</p>\n<p>Caso você não consiga acessar o formulário, voc…",
+        "chars": 1432
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.2.data.conteudo",
+        "value": "<p>Os procedimentos de torneio visam garantir fluidez, equidade e segurança em todas as mesas. A direção do evento pode ajustar ritmos e protocolos conforme a fase do torneio, sempre priorizando o melhor interesse da dis…",
+        "chars": 705
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.3.data.conteudo",
+        "value": "<p>O torneio inicia no horário publicado na agenda, sujeito à confirmação da direção do evento. A presença mínima de jogadores, a liberação das mesas e a conclusão do check-in podem condicionar o início efetivo.</p>\n<p>L…",
+        "chars": 647
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.5.data.conteudo",
+        "value": "<p>Coletamos dados pessoais fornecidos diretamente por você (cadastro, inscrição em torneios, atendimento), dados gerados pelo uso de nossos serviços (frequência, preferências, histórico de participação) e, quando aplicá…",
+        "chars": 601
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.4.data.conteudo",
+        "value": "<p>Na modalidade All-in Fold, o jogador está limitado às ações previstas no formato do evento — tipicamente all-in ou fold — sem opções intermediárias de call parcial ou raise padrão, salvo regra específica do torneio.</…",
+        "chars": 598
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.3.data.conteudo",
+        "value": "<p>Esta Diretiva e os Avisos de Privacidade descrevem como o Grupo H2 coleta, utiliza, armazena e protege dados pessoais no âmbito de suas atividades de entretenimento, torneios, cash game, produtos digitais e atendiment…",
+        "chars": 572
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.9.data.conteudo",
+        "value": "<p>Podemos compartilhar dados com prestadores de serviço que nos auxiliam (tecnologia, pagamento, marketing operacional, segurança), sempre mediante contrato e instruções que limitem o uso à finalidade contratada.</p>\n<p…",
+        "chars": 569
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.5.data.conteudo",
+        "value": "<p>O buy-in de cash game corresponde ao valor mínimo e máximo permitido para sentar em cada mesa, expresso em múltiplos de big blind ou valor fixo publicado no quadro do clube.</p>\n<p>O jogador deve adquirir fichas apena…",
+        "chars": 568
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.2.data.conteudo",
+        "value": "<p>O Encarregado pelo Tratamento de Dados Pessoais (DPO) do Grupo H2 é o canal oficial para dúvidas, solicitações e comunicações relacionadas à privacidade.</p>\n<p>Você pode entrar em contato pelo e-mail <strong>dpo@grup…",
+        "chars": 539
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.6.data.conteudo",
+        "value": "<p>A promoção Bonus Chip concede fichas adicionais conforme as condições publicadas no período promocional (valor de buy-in, modalidade elegível e limite por jogador).</p>\n<p>O benefício não é cumulativo além do previsto…",
+        "chars": 533
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.8.data.conteudo",
+        "value": "<p>Tratamos dados pessoais para viabilizar cadastros, inscrição e operação de torneios, cash game, programas de relacionamento, atendimento ao cliente, segurança das unidades e cumprimento de obrigações legais e regulató…",
+        "chars": 528
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.4.data.conteudo",
+        "value": "<p>O Grupo H2 reúne marcas e unidades de sports bar e poker no Brasil, oferecendo experiências presenciais e serviços digitais aos seus clientes e visitantes.</p>\n<p>Para efeitos desta política, “empresa controladora” e …",
+        "chars": 524
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.6.data.conteudo",
+        "value": "<p>Nossos serviços são destinados a maiores de 18 anos. Não coletamos intencionalmente dados pessoais de crianças ou adolescentes para participação em atividades de poker ou produtos correlatos.</p>\n<p>Dados sensíveis, q…",
+        "chars": 512
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.7.data.conteudo",
+        "value": "<p>Utilizamos cookies e tecnologias semelhantes para funcionamento do site, preferências, métricas de audiência e, quando autorizado, personalização de conteúdo.</p>\n<p>Você pode gerenciar cookies pelo navegador ou pelos…",
+        "chars": 473
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.12.data.conteudo",
+        "value": "<p>Mantemos dados pessoais pelo tempo necessário para cumprir as finalidades informadas, obrigações legais, exercício regular de direitos e defesa em processos.</p>\n<p>Após o encerramento da necessidade, os dados são eli…",
+        "chars": 446
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.11.data.conteudo",
+        "value": "<p>Adotamos medidas técnicas e administrativas para proteger dados pessoais contra acessos não autorizados, perda, alteração ou divulgação indevida, incluindo controles de acesso, monitoramento e boas práticas de seguran…",
+        "chars": 408
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.10.data.conteudo",
+        "value": "<p>Alguns fornecedores ou sistemas podem armazenar ou processar dados fora do Brasil. Nesses casos, adotamos salvaguardas compatíveis com a LGPD, como cláusulas contratuais e avaliação do nível de proteção do destino.</p…",
+        "chars": 352
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.14.data.faixa_info",
+        "value": "1.000 pontos no ranking do Fun Festival",
+        "chars": 39
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.7.data.faixa_info",
+        "value": "180 pontos no ranking do Fun Festival",
+        "chars": 37
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.16.data.faixa_info",
+        "value": "290 pontos no ranking do Fun Festival",
+        "chars": 37
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.3.data.faixa_info",
+        "value": "320 pontos no ranking do Fun Festival",
+        "chars": 37
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.18.data.faixa_info",
+        "value": "380 pontos no ranking do Fun Festival",
+        "chars": 37
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.4.data.faixa_info",
+        "value": "410 pontos no ranking do Fun Festival",
+        "chars": 37
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.15.data.faixa_info",
+        "value": "850 pontos no ranking do Fun Festival",
+        "chars": 37
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.12.data.faixa_info",
+        "value": "610 pontos no ranking Omaha do CPH",
+        "chars": 34
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.3.data.titulo",
+        "value": "Critérios para início\ndo torneio",
+        "chars": 32
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.3.data.titulo",
+        "value": "Diretiva e Avisos\nde Privacidade",
+        "chars": 32
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.9.data.titulo",
+        "value": "Compartilhamento\npara terceiros",
+        "chars": 31
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.9.data.faixa_info",
+        "value": "1.200 pontos no ranking do CPH",
+        "chars": 30
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.11.modulos.1.components.1.data.faixa_info",
+        "value": "22 de Fevereiro a 03 de Março",
+        "chars": 29
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.1.data.filtro.modal.secoes.0.opcoes.4.label",
+        "value": "Segunda-feira - 12 de outubro",
+        "chars": 29
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.5.data.faixa_info",
+        "value": "250 pontos no ranking do CPH",
+        "chars": 28
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.11.data.faixa_info",
+        "value": "340 pontos no ranking do CPH",
+        "chars": 28
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.17.data.faixa_info",
+        "value": "450 pontos no ranking Ladies",
+        "chars": 28
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.6.data.faixa_info",
+        "value": "478 pontos no ranking do CPH",
+        "chars": 28
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.8.data.faixa_info",
+        "value": "520 pontos no ranking do CPH",
+        "chars": 28
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.10.data.faixa_info",
+        "value": "900 pontos no ranking do CPH",
+        "chars": 28
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.6.data.titulo",
+        "value": "Dados de Menores\ne Sensíveis",
+        "chars": 28
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.8.data.titulo",
+        "value": "Tratamento de\ndados pessoais",
+        "chars": 28
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.2.data.titulo",
+        "value": "Encarregado\npelo tratamento",
+        "chars": 27
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.1.data.filtro.modal.secoes.0.opcoes.2.label",
+        "value": "Quarta-feira - 12 de agosto",
+        "chars": 27
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.1.data.filtro.modal.secoes.0.opcoes.3.label",
+        "value": "Quinta-feira - 8 de outubro",
+        "chars": 27
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.10.data.titulo",
+        "value": "Transferência\ninternacional",
+        "chars": 27
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.9.data.buy_in.pontos",
+        "value": "ou 75.000 pontos H2Rewards",
+        "chars": 26
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.1.data.titulo",
+        "value": "Formulário\nde Privacidade",
+        "chars": 25
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.3.data.buy_in.pontos",
+        "value": "ou 2.500 pontos H2Rewards",
+        "chars": 25
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.5.data.buy_in.pontos",
+        "value": "ou 4.000 pontos H2Rewards",
+        "chars": 25
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.8.data.buy_in.pontos",
+        "value": "ou 7.500 pontos H2Rewards",
+        "chars": 25
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.5.data.titulo",
+        "value": "Coleta de\ndados pessoais",
+        "chars": 24
+      },
+      {
+        "samplePath": "ALL_TORNEIOS.10.data_label",
+        "value": "12 de Outubro | Segunda",
+        "chars": 23
+      },
+      {
+        "samplePath": "ALL_TORNEIOS.0.data_label",
+        "value": "08 de Outubro | Quinta",
+        "chars": 22
+      },
+      {
+        "samplePath": "ALL_TORNEIOS.9.data_label",
+        "value": "05 de Agosto | Quarta",
+        "chars": 21
+      },
+      {
+        "samplePath": "ALL_TORNEIOS.14.data_label",
+        "value": "08 de Agosto | Sábado",
+        "chars": 21
+      },
+      {
+        "samplePath": "ALL_TORNEIOS.5.data_label",
+        "value": "12 de Agosto | Quarta",
+        "chars": 21
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.7.data.titulo",
+        "value": "Tratamento de Cookies",
+        "chars": 21
+      },
+      {
+        "samplePath": "ALL_TORNEIOS.1.data_label",
+        "value": "29 de Julho | Quarta",
+        "chars": 20
+      },
+      {
+        "samplePath": "ALL_TORNEIOS.3.data_label",
+        "value": "30 de Julho | Quinta",
+        "chars": 20
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.1.data.filtro.modal.secoes.0.opcoes.1.label",
+        "value": "Sábado - 8 de agosto",
+        "chars": 20
+      },
+      {
+        "samplePath": "ALL_TORNEIOS.4.data_label",
+        "value": "31 de Julho | Sexta",
+        "chars": 19
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.6.data.titulo",
+        "value": "Promoção Bonus Chip",
+        "chars": 19
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.11.data.titulo",
+        "value": "Segurança de dados",
+        "chars": 18
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.9.modulos.0.components.12.data.titulo",
+        "value": "Retenção de dados",
+        "chars": 17
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.1.data.titulo",
+        "value": "Conceitos gerais",
+        "chars": 16
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.8.modulos.0.components.2.data.titulo",
+        "value": "Procedimentos",
+        "chars": 13
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.1.data.filtro.modal.secoes.0.opcoes.0.label",
+        "value": "Hoje",
+        "chars": 4
+      }
+    ]
+  },
+  "patternGaps": {
+    "count": 7,
+    "parametricMissingFromDict": 29,
+    "items": [
+      {
+        "issue": "pontos no ranking: leaves modality/series connector (do/da) when not \"do X\" immediately after ranking",
+        "after": "610 ranking points Omaha do CPH",
+        "path": "sp-pinheiros.paginas.1.modulos.0.components.12.data.faixa_info"
+      },
+      {
+        "issue": "covered by pattern (OK) but missing exact dict key",
+        "before": "22 de Fevereiro a 03 de Março",
+        "after": "22 February a 03 March",
+        "path": "(probe)"
+      },
+      {
+        "issue": "covered by pattern (OK) but missing exact dict key",
+        "before": "Segunda-feira - 12 de outubro",
+        "after": "Monday - 12 october",
+        "path": "(probe)"
+      },
+      {
+        "issue": "covered by pattern (OK) but missing exact dict key",
+        "before": "Quarta-feira - 12 de agosto",
+        "after": "Wednesday - 12 august",
+        "path": "(probe)"
+      },
+      {
+        "issue": "partial pattern transform",
+        "before": "610 pontos no ranking Omaha do CPH",
+        "after": "610 ranking points Omaha do CPH",
+        "path": "(probe)"
+      },
+      {
+        "issue": "covered by pattern (OK) but missing exact dict key",
+        "before": "450 pontos no ranking Ladies",
+        "after": "450 ranking points Ladies",
+        "path": "(probe)"
+      },
+      {
+        "issue": "covered by pattern (OK) but missing exact dict key",
+        "before": "1.000 pontos no ranking do Fun Festival",
+        "after": "1.000 ranking points of Fun Festival",
+        "path": "(probe)"
+      }
+    ],
+    "parametricSamples": [
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.14.data.faixa_info",
+        "value": "1.000 pontos no ranking do Fun Festival"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.7.data.faixa_info",
+        "value": "180 pontos no ranking do Fun Festival"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.16.data.faixa_info",
+        "value": "290 pontos no ranking do Fun Festival"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.3.data.faixa_info",
+        "value": "320 pontos no ranking do Fun Festival"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.18.data.faixa_info",
+        "value": "380 pontos no ranking do Fun Festival"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.4.data.faixa_info",
+        "value": "410 pontos no ranking do Fun Festival"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.15.data.faixa_info",
+        "value": "850 pontos no ranking do Fun Festival"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.12.data.faixa_info",
+        "value": "610 pontos no ranking Omaha do CPH"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.9.data.faixa_info",
+        "value": "1.200 pontos no ranking do CPH"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.11.modulos.1.components.1.data.faixa_info",
+        "value": "22 de Fevereiro a 03 de Março"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.1.data.filtro.modal.secoes.0.opcoes.4.label",
+        "value": "Segunda-feira - 12 de outubro"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.5.data.faixa_info",
+        "value": "250 pontos no ranking do CPH"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.11.data.faixa_info",
+        "value": "340 pontos no ranking do CPH"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.17.data.faixa_info",
+        "value": "450 pontos no ranking Ladies"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.6.data.faixa_info",
+        "value": "478 pontos no ranking do CPH"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.8.data.faixa_info",
+        "value": "520 pontos no ranking do CPH"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.10.data.faixa_info",
+        "value": "900 pontos no ranking do CPH"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.1.data.filtro.modal.secoes.0.opcoes.2.label",
+        "value": "Quarta-feira - 12 de agosto"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.1.data.filtro.modal.secoes.0.opcoes.3.label",
+        "value": "Quinta-feira - 8 de outubro"
+      },
+      {
+        "samplePath": "ALL_TORNEIOS.10.data_label",
+        "value": "12 de Outubro | Segunda"
+      },
+      {
+        "samplePath": "ALL_TORNEIOS.0.data_label",
+        "value": "08 de Outubro | Quinta"
+      },
+      {
+        "samplePath": "ALL_TORNEIOS.9.data_label",
+        "value": "05 de Agosto | Quarta"
+      },
+      {
+        "samplePath": "ALL_TORNEIOS.14.data_label",
+        "value": "08 de Agosto | Sábado"
+      },
+      {
+        "samplePath": "ALL_TORNEIOS.5.data_label",
+        "value": "12 de Agosto | Quarta"
+      },
+      {
+        "samplePath": "ALL_TORNEIOS.1.data_label",
+        "value": "29 de Julho | Quarta"
+      },
+      {
+        "samplePath": "ALL_TORNEIOS.3.data_label",
+        "value": "30 de Julho | Quinta"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.1.data.filtro.modal.secoes.0.opcoes.1.label",
+        "value": "Sábado - 8 de agosto"
+      },
+      {
+        "samplePath": "ALL_TORNEIOS.4.data_label",
+        "value": "31 de Julho | Sexta"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.1.data.filtro.modal.secoes.0.opcoes.0.label",
+        "value": "Hoje"
+      }
+    ]
+  }
+}

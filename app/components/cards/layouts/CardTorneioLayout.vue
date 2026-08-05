@@ -73,6 +73,8 @@ const props = defineProps<{
   fill?: boolean
 }>()
 
+const { t, locale } = useI18n()
+
 const active = computed(() => props.active ?? true)
 const { fundoClass, badgeClass, estrelaClass } = useCardTheme(
   () => props.dados,
@@ -81,10 +83,20 @@ const { fundoClass, badgeClass, estrelaClass } = useCardTheme(
 
 const headerLabel = computed(() => props.dados.categoria ?? props.dados.garantido)
 
+function stageOrdinal(n: string): string {
+  const code = String(locale.value).toLowerCase().split('-')[0]
+  if (code === 'en') {
+    const map: Record<string, string> = { '1': '1st', '2': '2nd', '3': '3rd', '4': '4th', '5': '5th', '6': '6th' }
+    return map[n] ?? `${n}th`
+  }
+  if (code === 'es') return `${n}.ª`
+  return `${n}ª`
+}
+
 const etapaLabel = computed(() => {
   const etapa = props.dados.filtros?.etapa
   if (!etapa) return undefined
-  return `${etapa}ª Etapa`
+  return t('card.stageBadge', { n: etapa, ordinal: stageOrdinal(etapa) })
 })
 
 const largura = computed(() => {

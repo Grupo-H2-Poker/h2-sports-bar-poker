@@ -31,21 +31,11 @@ export const useH2Api = () => {
     }
   }
 
-  const getUnidadeModulos = async (slug: string) => {
+  const getUnidadeModulos = async (slug: string, lang = 'pt') => {
     try {
-      const { data, error } = await useFetch<UnidadeModulos>(`${apiBase}/unidade/${slug}/modulos`, {
-        key: `modulos-${slug}`,
-        retry: false,
+      return await $fetch<UnidadeModulos>(`${apiBase}/unidade/${slug}/modulos`, {
+        query: { lang },
       })
-
-      if (error.value) {
-        throw createError({
-          statusCode: error.value.statusCode || 500,
-          message: `Erro ao buscar módulos: ${error.value.message}`,
-        })
-      }
-
-      return data.value
     }
     catch (err) {
       console.error('Erro ao buscar módulos:', err)
@@ -67,10 +57,11 @@ export const useH2Api = () => {
     }
   }
 
-  const getTorneioDetalhe = async (unidadeSlug: string, torneioSlug: string) => {
+  const getTorneioDetalhe = async (unidadeSlug: string, torneioSlug: string, lang = 'pt') => {
     try {
       return await $fetch<TorneioDetalheData>(
         `${apiBase}/unidade/${unidadeSlug}/torneios/${torneioSlug}`,
+        { query: { lang } },
       )
     }
     catch (err: unknown) {
@@ -83,10 +74,11 @@ export const useH2Api = () => {
     }
   }
 
-  const getTorneioBlinds = async (unidadeSlug: string, torneioSlug: string) => {
+  const getTorneioBlinds = async (unidadeSlug: string, torneioSlug: string, lang = 'pt') => {
     try {
       return await $fetch<TorneioBlindsData>(
         `${apiBase}/unidade/${unidadeSlug}/torneios/${torneioSlug}/blinds`,
+        { query: { lang } },
       )
     }
     catch (err: unknown) {

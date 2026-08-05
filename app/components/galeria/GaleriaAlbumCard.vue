@@ -3,7 +3,7 @@
     class="relative w-full h-full min-h-[380px] overflow-hidden rounded-[10px] bg-muted group cursor-pointer"
     role="button"
     tabindex="0"
-    :aria-label="dados.titulo ? `Abrir álbum ${dados.titulo}` : 'Abrir álbum'"
+    :aria-label="dados.titulo ? t('galeria.openAlbumAriaNamed', { title: dados.titulo }) : t('galeria.openAlbumAria')"
     @click="onClick"
     @keydown.enter.prevent="onClick"
     @keydown.space.prevent="onClick"
@@ -42,6 +42,7 @@ const emit = defineEmits<{
   select: []
 }>()
 
+const { t } = useI18n()
 const { navigateLink } = useCardLink()
 
 function onClick() {

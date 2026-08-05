@@ -5,10 +5,10 @@
         variant="ghost"
         size="icon"
         class="relative rounded-full cursor-pointer"
-        :aria-label="`Menu da conta de ${user?.nome || 'usuário'}`"
+        :aria-label="t('auth.accountMenu', { name: user?.nome || t('auth.user') })"
       >
         <Avatar :class="size">
-          <AvatarImage :src="user?.avatar || ''" :alt="user?.nome || 'Usuário'" />
+          <AvatarImage :src="user?.avatar || ''" :alt="user?.nome || t('auth.user')" />
           <AvatarFallback :class="textSize" class="text-white" :style="{ backgroundColor: bgColor }">
             {{ getInitials(user?.nome || 'U') }}
           </AvatarFallback>
@@ -48,7 +48,7 @@
                   class="size-1.5 rounded-full"
                   :class="user.status === 1 ? 'bg-emerald-500' : 'bg-red-500'"
                 />
-                {{ user.status === 1 ? 'Cliente ativo' : 'Cliente inativo' }}
+                {{ user.status === 1 ? t('auth.activeClient') : t('auth.inactiveClient') }}
               </span>
               <span
                 v-if="user.pontua_h2rewards === 1"
@@ -68,7 +68,7 @@
         <DropdownMenuItem as-child class="cursor-pointer rounded-md px-2 py-2">
           <NuxtLink to="/perfil">
             <User class="size-4" />
-            <span>Perfil</span>
+            <span>{{ t('auth.profile') }}</span>
           </NuxtLink>
         </DropdownMenuItem>
       </DropdownMenuGroup>
@@ -82,14 +82,14 @@
           @click="showLogoutDialog = true"
         >
           <LogOut class="size-4" />
-          <span>Sair</span>
+          <span>{{ t('auth.logout') }}</span>
         </DropdownMenuItem>
       </DropdownMenuGroup>
     </DropdownMenuContent>
   </DropdownMenu>
 
   <Avatar v-else :class="size" @click="handleClick">
-    <AvatarImage :src="user?.avatar || ''" :alt="user?.nome || 'Usuário'" />
+    <AvatarImage :src="user?.avatar || ''" :alt="user?.nome || t('auth.user')" />
     <AvatarFallback :class="textSize" class="text-white" :style="{ backgroundColor: bgColor }">
       {{ getInitials(user?.nome || 'U') }}
     </AvatarFallback>
@@ -98,21 +98,21 @@
   <Dialog v-model:open="showLogoutDialog">
     <DialogContent class="sm:max-w-md">
       <DialogHeader>
-        <DialogTitle>Confirmar saída</DialogTitle>
+        <DialogTitle>{{ t('auth.confirmLogoutTitle') }}</DialogTitle>
         <DialogDescription>
-          Tem certeza que deseja sair da sua conta? Você precisará fazer login novamente para acessar o sistema.
+          {{ t('auth.confirmLogoutDescription') }}
         </DialogDescription>
       </DialogHeader>
       <DialogFooter class="flex gap-2">
         <Button variant="outline" :disabled="isLoggingOut" @click="showLogoutDialog = false">
-          Cancelar
+          {{ t('auth.cancel') }}
         </Button>
         <Button variant="destructive" :disabled="isLoggingOut" @click="handleLogout">
           <div v-if="isLoggingOut" class="flex items-center gap-2">
             <div class="size-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-            Saindo...
+            {{ t('auth.loggingOut') }}
           </div>
-          <span v-else>Sair</span>
+          <span v-else>{{ t('auth.logout') }}</span>
         </Button>
       </DialogFooter>
     </DialogContent>
@@ -161,6 +161,8 @@ const props = withDefaults(defineProps<Props>(), {
   withDropdown: true,
   onClick: undefined,
 })
+
+const { t } = useI18n()
 
 const { user, logout } = useAuth()
 const { warning: toastWarning } = useAppToast()

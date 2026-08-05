@@ -2,9 +2,9 @@
     <Dialog v-model:open="isOpen">
         <DialogContent class="sm:max-w-md">
             <DialogHeader>
-                <DialogTitle>Fazer Login</DialogTitle>
+                <DialogTitle>{{ t('auth.loginTitle') }}</DialogTitle>
                 <DialogDescription>
-                    Entre com suas credenciais para acessar sua conta.
+                    {{ t('auth.loginDescription') }}
                 </DialogDescription>
             </DialogHeader>
 
@@ -18,11 +18,11 @@
                     <form @submit.prevent="onSubmit" class="space-y-4">
                         <FormField v-slot="{ componentField }" name="email">
                             <FormItem>
-                                <FormLabel>Email ou CPF</FormLabel>
+                                <FormLabel>{{ t('auth.emailOrCpf') }}</FormLabel>
                                 <FormControl>
                                     <Input 
                                         type="text" 
-                                        placeholder="seu@email.com ou CPF"
+                                        :placeholder="t('auth.emailOrCpfPlaceholder')"
                                         :model-value="componentField.modelValue"
                                         @input="handleEmailOrCpfInput($event, componentField)"
                                         :disabled="isLoading" 
@@ -35,7 +35,7 @@
                         <FormField v-slot="{ componentField }" name="password">
                             <FormItem>
                                 <div class="flex items-center justify-between">
-                                    <FormLabel>Senha</FormLabel>
+                                    <FormLabel>{{ t('auth.password') }}</FormLabel>
                                     <Button 
                                         type="button" 
                                         variant="link" 
@@ -43,7 +43,7 @@
                                         class="px-0 font-normal text-xs"
                                         @click="showForgotPasswordDialog = true"
                                     >
-                                        Esqueci minha senha
+                                        {{ t('auth.forgotPassword') }}
                                     </Button>
                                 </div>
                                 <FormControl>
@@ -80,7 +80,7 @@
                                 class="w-full sm:w-auto" 
                                 :disabled="isLoading"
                             >
-                                Cancelar
+                                {{ t('auth.cancel') }}
                             </Button>
                             <Button 
                                 type="submit" 
@@ -88,7 +88,7 @@
                                 :disabled="isLoading"
                             >
                                 <Spinner v-if="isLoading" class="mr-2 h-4 w-4" />
-                                {{ isLoading ? 'Entrando...' : 'Entrar' }}
+                                {{ isLoading ? t('auth.entering') : t('auth.enter') }}
                             </Button>
                         </CardFooter>
                     </form>
@@ -101,15 +101,15 @@
     <AlertDialog v-model:open="showForgotPasswordDialog">
         <AlertDialogContent>
             <AlertDialogHeader>
-                <AlertDialogTitle>Recuperação de Senha</AlertDialogTitle>
+                <AlertDialogTitle>{{ t('auth.passwordRecoveryTitle') }}</AlertDialogTitle>
                 <AlertDialogDescription>
-                    Esta funcionalidade está em desenvolvimento. Entre em contato com o suporte para recuperar sua senha.
+                    {{ t('auth.passwordRecoveryDescription') }}
                 </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-                <AlertDialogCancel>Fechar</AlertDialogCancel>
+                <AlertDialogCancel>{{ t('auth.close') }}</AlertDialogCancel>
                 <AlertDialogAction @click="contactSupport">
-                    Contatar Suporte
+                    {{ t('auth.contactSupport') }}
                 </AlertDialogAction>
             </AlertDialogFooter>
         </AlertDialogContent>
@@ -131,6 +131,7 @@ import { Alert, AlertTitle } from '@/components/ui/alert'
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
 import { Spinner } from '@/components/ui/spinner'
 
+const { t } = useI18n()
 const { isOpen, close } = useLoginModal()
 const { success: toastSuccess } = useAppToast()
 

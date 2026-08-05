@@ -16,6 +16,7 @@ import {
 } from '../../../../utils/mock-documento-pages'
 import { createPokerEsporteDaMentePagina } from '../../../../utils/mock-poker-esporte-da-mente'
 import { createSportsBarPagina } from '../../../../utils/mock-sports-bar'
+import { localizeUnidadeModulos } from '../../../../utils/mock-i18n'
 
 const AGENDA_GRID_TOOLBAR_BASE = {
   filtro: {
@@ -142,7 +143,7 @@ const CASH_GAME_GRID_TOOLBAR = {
       ],
     },
   },
-  busca: { placeholder: 'Pesquisar torneios', habilitado: true },
+  busca: { placeholder: 'Pesquisar mesas', habilitado: true },
   badges: { limpar: { label: 'Limpar todos os filtros' } },
 }
 
@@ -511,7 +512,7 @@ const CPH_SERIES_RANKING_SECTION_CTAS = [
 ]
 
 
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
   const slug = getRouterParam(event, 'slug')
 
   const mockData: Record<string, any> = {
@@ -2753,5 +2754,6 @@ export default defineEventHandler((event) => {
     })
   }
 
-  return data
+  const query = getQuery(event)
+  return await localizeUnidadeModulos(data, query.lang)
 })

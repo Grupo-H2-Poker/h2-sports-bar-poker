@@ -3,7 +3,7 @@
     v-if="tabs.length"
     class="flex w-full max-w-full flex-wrap items-center justify-center gap-2 font-[family-name:var(--font-red-hat-display)]"
     role="tablist"
-    aria-label="Filtrar galeria por série"
+    :aria-label="t('galeria.filterSeriesAria')"
   >
     <button
       v-for="tab in tabs"
@@ -33,4 +33,6 @@ defineProps<{
 defineEmits<{
   'update:activeTab': [tabId: string]
 }>()
+
+const { t } = useI18n()
 </script>

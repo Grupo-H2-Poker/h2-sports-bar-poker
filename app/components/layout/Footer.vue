@@ -17,6 +17,7 @@ const SOCIAL_ICON_SIZE: Record<FooterSocialTipo, { class: string; width: number;
 }
 
 const route = useRoute()
+const { t, locale } = useI18n()
 const { getSlugFromName, selectedUnityName, defaultUnityName } = useUnidades()
 const api = useH2Api()
 
@@ -36,9 +37,9 @@ const { data: unidadeModulosData } = await useAsyncData(
   () => `footer-unidade-modulos-${effectiveUnidadeSlug.value}`,
   async () => {
     if (!effectiveUnidadeSlug.value) return null
-    return await api.getUnidadeModulos(effectiveUnidadeSlug.value)
+    return await api.getUnidadeModulos(effectiveUnidadeSlug.value, String(locale.value))
   },
-  { server: true, watch: [effectiveUnidadeSlug] },
+  { server: true, watch: [effectiveUnidadeSlug, locale] },
 )
 
 const footer = computed<FooterData | null>(() => unidadeModulosData.value?.footer ?? null)
@@ -157,7 +158,7 @@ function linkClass(item: FooterLinkItem) {
         <div class="flex items-center justify-center">
           <img
             :src="jogoResponsavel"
-            alt="Aplica-se T&C. Jogue com responsabilidade. Maiores de 18 anos."
+            :alt="t('footer.responsibleGamingAlt')"
             class="h-10 w-auto max-w-full object-contain object-center mix-blend-screen sm:h-12"
             width="331"
             height="57"

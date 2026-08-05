@@ -86,7 +86,7 @@
               :key="`empty-${activeSecao}`"
               class="py-10 text-base text-card-preview-text/50"
             >
-              Nenhum conteúdo nesta seção.
+              {{ t('documento.emptySection') }}
             </p>
           </Transition>
         </div>
@@ -104,6 +104,7 @@ const props = defineProps<{
   modulo: ModuloOf<'documento_page'>
 }>()
 
+const { t } = useI18n()
 const { ctaConfig, secoes } = useDocumentoPageModule(() => props.modulo)
 
 const pagePaddingStyle = useModuloMarginLateral(() => props.modulo.metadados)

@@ -5,7 +5,7 @@
     variant="ghost"
     size="icon"
     class="mt-1.5 shrink-0 hover:bg-transparent hover:opacity-80"
-    :aria-label="ativo ? 'Remover dos favoritos' : 'Favoritar'"
+    :aria-label="ativo ? t('card.unfavorite') : t('card.favorite')"
     @click.stop="onToggle"
   >
     <Star
@@ -36,6 +36,7 @@ const props = defineProps<{
 }>()
 
 const route = useRoute()
+const { t } = useI18n()
 const { defaultUnity } = useUnidades()
 const { isFavorito, toggleFavorito } = useFavoritosTorneios()
 

@@ -82,6 +82,7 @@ export function filterGridItemsBySearch(
  */
 export function groupGridItemsByDia(
   items: GridModuleItem[],
+  locale?: string,
 ): GridDiaGroup<GridModuleItem>[] | null {
   const hasDia = items.some((item) => Boolean((item.data as CardGenericData).data))
   if (!hasDia) return null
@@ -93,7 +94,7 @@ export function groupGridItemsByDia(
     const d = item.data as CardGenericData
     if (!d.data || !isDataHojeOuFutura(d.data)) continue
 
-    const grupo = resolveDiaGrupo(d.data)
+    const grupo = resolveDiaGrupo(d.data, new Date(), locale)
     const existing = map.get(grupo.id)
     if (existing) {
       existing.items.push(item)

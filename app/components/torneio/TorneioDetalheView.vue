@@ -49,7 +49,7 @@
             :to="blindsHref"
             class="mt-8 flex h-14 w-full max-w-[589px] items-center justify-center rounded bg-white/10 px-6 text-center text-base text-[#e7e7e7] underline underline-offset-2 hover:bg-white/15 cursor-pointer"
           >
-            Acesse aqui a tabela de blinds
+            {{ t('torneio.blindsTableLink') }}
           </NuxtLink>
         </div>
 
@@ -79,13 +79,14 @@ const props = defineProps<{
   detalhe: TorneioDetalheData
 }>()
 
+const { t } = useI18n()
 const route = useRoute()
 
-/** Separa "R$350,00 ou 17.000 pontos…" para o trecho após "ou" em itálico (Figma). */
+/** Separa buy-in / pontos — trecho após "ou|or|o|或|または" em itálico (Figma). */
 function formatValor(valor: string): { main: string, rest: string | null } {
-  const match = valor.match(/^(.*?)\s+(ou\s+.+)$/i)
+  const match = valor.match(/^(.*?)\s+((?:ou|or|または|或|\bo)\s+.+)$/i)
   if (!match) return { main: valor, rest: null }
-  return { main: match[1], rest: ` ${match[2]}` }
+  return { main: match[1]!, rest: ` ${match[2]}` }
 }
 
 const blindsHref = computed(() => {

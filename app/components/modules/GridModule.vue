@@ -63,6 +63,7 @@ const props = defineProps<{
 }>()
 
 const route = useRoute()
+const { t, locale } = useI18n()
 
 const { ctaConfig, toolbarConfig, gridConfig, items } = useGridModule(() => props.modulo)
 
@@ -124,9 +125,9 @@ const filterModalConfig = computed((): GridFilterModal | undefined => {
 
   const diaSection = {
     id: 'dia',
-    titulo: 'Dia',
+    titulo: t('grid.day'),
     colunas: 2 as const,
-    opcoes: buildDiaFilterOptions(datas),
+    opcoes: buildDiaFilterOptions(datas, new Date(), String(locale.value)),
   }
 
   return {
@@ -174,13 +175,13 @@ const filteredItems = computed((): GridItem[] => {
 
 const diaGroups = computed(() => {
   if (gridConfig.value.agrupar_por_dia === false) return null
-  return groupGridItemsByDia(filteredItems.value)
+  return groupGridItemsByDia(filteredItems.value, String(locale.value))
 })
 
 const emptyStateMessage = computed(() => {
   if (searchQuery.value.trim()) {
-    return `Nenhum resultado para "${searchQuery.value}".`
+    return t('grid.noResultsFor', { query: searchQuery.value })
   }
-  return 'Nenhum torneio encontrado com os filtros selecionados.'
+  return t('grid.noTournamentsFiltered')
 })
 </script>

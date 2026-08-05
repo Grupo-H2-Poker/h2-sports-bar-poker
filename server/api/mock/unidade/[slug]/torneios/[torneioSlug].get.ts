@@ -1,8 +1,10 @@
 import { findTorneioBySlug, torneioLink } from '../../../../../utils/mock-agenda-data'
+import { localizeCmsPayload } from '../../../../../utils/mock-i18n'
 
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
   const unidadeSlug = getRouterParam(event, 'slug')
   const torneioSlug = getRouterParam(event, 'torneioSlug')
+  const query = getQuery(event)
 
   if (!unidadeSlug || !torneioSlug) {
     throw createError({ statusCode: 400, message: 'slug e torneioSlug são obrigatórios' })
@@ -14,9 +16,8 @@ export default defineEventHandler((event) => {
   }
 
   const link = torneioLink(torneio.slug)
-  const btnCor = torneio.cor === 'vermelho' ? 'branco' : 'verde'
 
-  return {
+  const payload = {
     slug: torneio.slug,
     titulo: torneio.titulo,
     data_label: torneio.data_label,
@@ -66,4 +67,6 @@ export default defineEventHandler((event) => {
         }
       : undefined,
   }
+
+  return await localizeCmsPayload(payload, query.lang)
 })

@@ -1,0 +1,237 @@
+{
+  "header": {
+    "openMenu": "Open menu",
+    "menu": "Menu",
+    "menuDescription": "Browse pages and options",
+    "pages": "Pages",
+    "units": "Locations",
+    "login": "Login"
+  },
+  "auth": {
+    "login": "Login",
+    "loginTitle": "Sign in",
+    "loginDescription": "Enter your credentials to access your account.",
+    "emailOrCpf": "Email or CPF",
+    "emailOrCpfPlaceholder": "you{'@'}email.com or CPF",
+    "password": "Password",
+    "forgotPassword": "Forgot my password",
+    "cancel": "Cancel",
+    "enter": "Sign in",
+    "entering": "Signing in...",
+    "passwordRecoveryTitle": "Password recovery",
+    "passwordRecoveryDescription": "This feature is under development. Contact support to recover your password.",
+    "close": "Close",
+    "contactSupport": "Contact support",
+    "profile": "Profile",
+    "logout": "Log out",
+    "confirmLogoutTitle": "Confirm log out",
+    "confirmLogoutDescription": "Are you sure you want to log out of your account? You will need to sign in again to access the system.",
+    "loggingOut": "Logging out...",
+    "activeClient": "Active client",
+    "inactiveClient": "Inactive client",
+    "user": "user",
+    "accountMenu": "Account menu for {name}",
+    "validation": {
+      "emailOrCpfRequired": "Email or CPF is required",
+      "emailOrCpfInvalid": "Invalid email or CPF must have 11 digits",
+      "passwordMin": "Password must be at least 6 characters"
+    },
+    "toast": {
+      "loginSuccessTitle": "Login successful!",
+      "loginSuccessHello": "Hi, {name}!",
+      "logoutTitle": "You logged out",
+      "logoutDescription": "Sign in again to access the system."
+    },
+    "errors": {
+      "invalidCredentials": "Invalid credentials. Please try again."
+    },
+    "passwordRecoveryMailtoSubject": "Password Recovery"
+  },
+  "page": {
+    "loading": "Loading content...",
+    "loadingShort": "Loading...",
+    "loadErrorTitle": "Error loading content",
+    "retry": "Try again",
+    "notFoundTitle": "Page not found",
+    "notFoundDescription": "This page does not exist for this location.",
+    "backHome": "Back to home",
+    "emptyContent": "No content available for this page at the moment.",
+    "unitNotFound": "Location not found"
+  },
+  "grid": {
+    "searchTournaments": "Search tournaments",
+    "searchTables": "Search tables",
+    "search": "Search",
+    "day": "Day",
+    "noResultsFor": "No results for \"{query}\".",
+    "noTournamentsFiltered": "No tournaments found with the selected filters.",
+    "filtersTitle": "Filters",
+    "closeFiltersAria": "Close filters",
+    "clearFilters": "Clear filters",
+    "applyFilters": "Filter",
+    "removeFilterAria": "Remove {label} filter"
+  },
+  "faq": {
+    "emptyCategory": "No questions in this category.",
+    "categoriesAria": "FAQ categories"
+  },
+  "documento": {
+    "emptySection": "No content in this section.",
+    "sectionsAria": "Document sections"
+  },
+  "galeria": {
+    "backToAlbums": "Back to albums",
+    "filterAll": "All",
+    "filterSeriesAria": "Filter gallery by series",
+    "lightboxTitle": "View photo",
+    "lightboxDescription": "Use the arrows or buttons to navigate between photos. Press Escape to close.",
+    "close": "Close",
+    "photoAlt": "Photo {n}",
+    "openAlbumAria": "Open album",
+    "openAlbumAriaNamed": "Open {title} album",
+    "enlargePhotoAria": "Enlarge photo",
+    "enlargePhotoAriaNamed": "Enlarge {title}",
+    "imageAltFallback": "Gallery image"
+  },
+  "ranking": {
+    "defaultTitle": "Ranking",
+    "defaultCta": "Check out the ranking",
+    "tabGeral": "Overall",
+    "colPlacement": "Placement",
+    "colName": "Full Name",
+    "colPoints": "Points",
+    "filterAria": "Filter ranking",
+    "placeOrdinal": "{n}th"
+  },
+  "torneio": {
+    "loading": "Loading tournament…",
+    "notFound": "Tournament not found.",
+    "blindsLoading": "Loading blinds table…",
+    "blindsNotFound": "Blinds table not found.",
+    "blindsTableTitle": "Blinds Table",
+    "blindsTableLink": "Access the blinds table here",
+    "level": "Level",
+    "duration": "Duration",
+    "seoTitleFallback": "Tournament",
+    "blindsSeoTitle": "Blinds Table — {title}",
+    "blinds": {
+      "small": "Small",
+      "big": "Big",
+      "ante": "Ante"
+    }
+  },
+  "card": {
+    "joinQueue": "Join the queue",
+    "favorite": "Add to favorites",
+    "unfavorite": "Remove from favorites",
+    "start": "Start",
+    "late": "Late",
+    "registrationUntil": "Registration until {time}",
+    "buyIn": "Buy-in:",
+    "buyInLabel": "Buy-in",
+    "stageBadge": "{ordinal} Stage"
+  },
+  "perfil": {
+    "loading": "Loading profile...",
+    "title": "My profile",
+    "subtitle": "Your H2 account data",
+    "refresh": "Refresh data",
+    "loadErrorTitle": "Error loading profile",
+    "retry": "Try again",
+    "sectionsAria": "Profile sections",
+    "favoritesCount": "{n} favorite | {n} favorites",
+    "loadError": "Could not load profile data.",
+    "unexpectedError": "Unexpected error loading the profile.",
+    "tabs": {
+      "dados": "My data",
+      "favoritos": "Favorites"
+    },
+    "sections": {
+      "personal": "Personal data",
+      "contact": "Contact and address",
+      "payments": "Payments",
+      "notifications": "Notification preferences"
+    },
+    "fields": {
+      "fullName": "Full name",
+      "nickname": "Nickname",
+      "email": "Email",
+      "cpf": "CPF",
+      "gender": "Gender",
+      "birthDate": "Date of birth",
+      "status": "Status",
+      "h2Rewards": "H2 Rewards points",
+      "phone": "Phone",
+      "cep": "ZIP code",
+      "number": "Number",
+      "complement": "Complement",
+      "pixKey": "Pix key",
+      "pixValidated": "Pix validated",
+      "bank": "Bank"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "notifications": {
+      "score": "Score",
+      "redeem": "Redemption",
+      "promo": "Promotion",
+      "category": "Category"
+    },
+    "favorites": {
+      "title": "Favorite tournaments",
+      "subtitleEmpty": "Your saved tournaments show up in this tab",
+      "subtitleOne": "1 saved tournament — click the card to see details",
+      "subtitleMany": "{n} saved tournaments — click a card to see details",
+      "emptyTitle": "No favorite tournaments",
+      "emptyDescription": "In the schedule, tap the star on a card to save it here and open its details anytime.",
+      "viewAgenda": "View schedule"
+    }
+  },
+  "footer": {
+    "responsibleGamingAlt": "T&Cs apply. Play responsibly. 18+ only."
+  },
+  "common": {
+    "h2": "H2",
+    "yes": "Yes",
+    "no": "No",
+    "close": "Close",
+    "loading": "Loading...",
+    "logoAlt": "H2 Club Logo"
+  },
+  "language": {
+    "changedTitle": "Language changed",
+    "changedDescription": "The interface is now in {language}."
+  },
+  "cashGame": {
+    "queueTitle": "Cash game queue position",
+    "queueDescription": "You joined the cash game waiting queue.",
+    "hi": "Hi, {name}!",
+    "youAreIn": "You are in",
+    "waitingQueue": "in the waiting queue",
+    "place": "{n}th place"
+  },
+  "favorites": {
+    "toast": {
+      "removedTitle": "Removed from favorites",
+      "removedDescription": "Tournament removed from your list.",
+      "addedTitle": "Tournament favorited!"
+    }
+  },
+  "downloadApp": {
+    "defaultTitle": "Download the H2 app",
+    "googlePlay": "Google Play",
+    "appStore": "App Store"
+  },
+  "modules": {
+    "notImplemented": "Module type \"{tipo}\" not implemented"
+  },
+  "banner": {
+    "altFallback": "Banner"
+  },
+  "carousel": {
+    "previous": "Previous slide",
+    "next": "Next slide"
+  }
+}

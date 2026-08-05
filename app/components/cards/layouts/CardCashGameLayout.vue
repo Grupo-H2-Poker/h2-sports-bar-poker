@@ -46,6 +46,7 @@ const props = defineProps<{
   largura?: string
 }>()
 
+const { t } = useI18n()
 const isActive = computed(() => props.dados.ativo ?? props.active ?? true)
 const { fundoClass, badgeClass } = useCardTheme(
   () => props.dados,
@@ -55,7 +56,7 @@ const { entrarNaFila } = useCashGameFila()
 
 const largura = computed(() => props.dados.largura ?? props.largura ?? 'w-full')
 const altura = computed(() => props.dados.altura ?? 'min-h-[320px]')
-const ctaLabel = computed(() => props.dados.botoes?.[0]?.label ?? 'Entrar na fila')
+const ctaLabel = computed(() => props.dados.botoes?.[0]?.label ?? t('card.joinQueue'))
 
 function onEntrar() {
   if (!isActive.value) return
