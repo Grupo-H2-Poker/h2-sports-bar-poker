@@ -175,8 +175,8 @@
 }
 
 /**
- * Menu: underline roxo com “attack scan” (linha + brilho se deslocando).
- * A linha fica no `.nav-menu-link-label` (= texto, ou texto + seta no dropdown).
+ * Menu: underline roxo com pontas afiladas (hover moderno).
+ * Expande do centro; brilho leve passa uma vez.
  */
 .nav-menu-link {
   position: relative;
@@ -195,30 +195,27 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -0.4rem;
-  height: 3px;
-  background-color: var(--brand-purple);
-  background-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    transparent 35%,
-    color-mix(in srgb, var(--brand-purple) 35%, white) 48%,
-    #ffffff 50%,
-    color-mix(in srgb, var(--brand-purple) 35%, white) 52%,
-    transparent 65%,
-    transparent 100%
-  );
-  background-size: 220% 100%;
-  background-position: 120% 0;
-  background-repeat: no-repeat;
-  clip-path: polygon(0 50%, 4% 0, 96% 0, 100% 50%, 96% 100%, 4% 100%);
+  bottom: -0.35rem;
+  height: 2px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      color-mix(in srgb, var(--brand-purple) 40%, white) 50%,
+      transparent 100%
+    )
+    no-repeat,
+    var(--brand-purple);
+  background-size: 40% 100%, 100% 100%;
+  background-position: -40% 0, 0 0;
+  clip-path: polygon(0 50%, 8% 0, 92% 0, 100% 50%, 92% 100%, 8% 100%);
   transform: scaleX(0);
-  transform-origin: left center;
+  transform-origin: center;
   opacity: 0;
   pointer-events: none;
   transition:
     transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.2s ease;
+    opacity 0.25s ease;
 }
 
 .nav-menu-link:hover .nav-menu-link-label::after,
@@ -226,27 +223,27 @@
 .nav-menu-link.is-active .nav-menu-link-label::after,
 .nav-menu-link[data-state="open"] .nav-menu-link-label::after {
   transform: scaleX(1);
-  opacity: 1;
-  animation: nav-menu-attack-scan 1.1s linear infinite;
+  opacity: 0.9;
+  animation: nav-menu-underline-sheen 1.4s ease-in-out infinite;
 }
 
 .nav-menu-link-mobile .nav-menu-link-label::after {
-  bottom: -0.45rem;
+  bottom: -0.4rem;
 }
 
-@keyframes nav-menu-attack-scan {
+@keyframes nav-menu-underline-sheen {
   0% {
-    background-position: 120% 0;
+    background-position: -40% 0, 0 0;
   }
   100% {
-    background-position: -120% 0;
+    background-position: 140% 0, 0 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .nav-menu-link-label::after {
     transition: none;
-    background-image: none;
+    background: var(--brand-purple);
   }
 
   .nav-menu-link:hover .nav-menu-link-label::after,
