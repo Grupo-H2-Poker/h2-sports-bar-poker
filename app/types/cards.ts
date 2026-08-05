@@ -40,6 +40,10 @@ export interface CardBadge {
 
 export interface CardFavorito {
   visivel?: boolean
+  /**
+   * Ignorado no front — o estado ativo vem de `useFavoritosTorneios`
+   * (perfil do usuário / localStorage). Mantido por compatibilidade com CMS.
+   */
   ativo?: boolean
   cor?: 'verde' | 'branco'
 }

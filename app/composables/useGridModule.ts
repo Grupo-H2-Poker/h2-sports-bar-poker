@@ -15,7 +15,7 @@ import { SECTION_CTA_COMPONENT_TYPE } from '~/types/modules'
 import { isDataHojeOuFutura, resolveDiaGrupo, sortDiaGrupos } from '~/utils/agenda-dias'
 
 const DEFAULT_GRID_CONFIG: GridConfigData = {
-  colunas: 3,
+  colunas: 4,
   gap: 'md',
   item_types: ['card'],
 }

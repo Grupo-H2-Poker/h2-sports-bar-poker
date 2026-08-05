@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative aspect-[3/4] h-full overflow-hidden rounded-xl bg-muted group"
+    class="relative aspect-[3/4] h-full overflow-hidden rounded-[10px] bg-muted group"
     :class="hasLink ? 'cursor-pointer' : undefined"
     :role="hasLink ? 'link' : undefined"
     :tabindex="hasLink ? 0 : undefined"

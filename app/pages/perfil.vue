@@ -9,7 +9,7 @@
           </p>
         </div>
         <Button
-          v-if="user && !pending"
+          v-if="user && !pending && activeTab === 'dados'"
           size="sm"
           variant="outline"
           :disabled="refreshState === 'loading'"
@@ -88,89 +88,134 @@
                     <span class="size-1.5 rounded-full bg-sky-500" />
                     H2 Rewards
                   </span>
+                  <span
+                    v-if="favoritos.length"
+                    class="inline-flex items-center gap-1.5 rounded-md border border-border/60 bg-muted/40 px-2 py-1 text-xs font-medium text-muted-foreground"
+                  >
+                    <Star class="size-3 text-brand-green" fill="currentColor" :stroke-width="0" />
+                    {{ favoritos.length }} favorito{{ favoritos.length === 1 ? '' : 's' }}
+                  </span>
                 </div>
               </div>
             </div>
           </CardHeader>
-
-          <CardContent class="pt-6">
-            <section class="space-y-5">
-              <h2 class="text-sm font-semibold uppercase tracking-wide text-zinc-400">
-                Dados pessoais
-              </h2>
-              <dl class="grid grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] gap-x-6 gap-y-4">
-                <div v-for="field in personalFields" :key="field.label" class="min-w-0 space-y-1">
-                  <dt class="text-xs font-medium uppercase tracking-wide text-muted-foreground/70">
-                    {{ field.label }}
-                  </dt>
-                  <dd class="text-sm break-words text-[#e7e7e7]">{{ field.value }}</dd>
-                </div>
-              </dl>
-            </section>
-
-            <Separator class="my-6" />
-
-            <section class="space-y-5">
-              <h2 class="text-sm font-semibold uppercase tracking-wide text-zinc-400">
-                Contato e endereço
-              </h2>
-              <dl class="grid grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] gap-x-6 gap-y-4">
-                <div v-for="field in contactFields" :key="field.label" class="min-w-0 space-y-1">
-                  <dt class="text-xs font-medium uppercase tracking-wide text-muted-foreground/70">
-                    {{ field.label }}
-                  </dt>
-                  <dd class="text-sm break-words text-[#e7e7e7]">{{ field.value }}</dd>
-                </div>
-              </dl>
-            </section>
-
-            <Separator class="my-6" />
-
-            <section class="space-y-5">
-              <h2 class="text-sm font-semibold uppercase tracking-wide text-zinc-400">
-                Pagamentos
-              </h2>
-              <dl class="grid grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] gap-x-6 gap-y-4">
-                <div v-for="field in paymentFields" :key="field.label" class="min-w-0 space-y-1">
-                  <dt class="text-xs font-medium uppercase tracking-wide text-muted-foreground/70">
-                    {{ field.label }}
-                  </dt>
-                  <dd class="text-sm break-words text-[#e7e7e7]">{{ field.value }}</dd>
-                </div>
-              </dl>
-            </section>
-
-            <Separator class="my-6" />
-
-            <section class="space-y-5">
-              <h2 class="text-sm font-semibold uppercase tracking-wide text-zinc-400">
-                Preferências de notificação
-              </h2>
-              <div class="grid grid-cols-[repeat(auto-fill,minmax(14rem,1fr))] gap-3">
-                <label
-                  v-for="field in notificationFields"
-                  :key="field.key"
-                  class="flex items-center justify-between gap-3 rounded-lg border border-border/60 bg-muted/20 px-3 py-2.5"
-                >
-                  <span class="text-sm">{{ field.label }}</span>
-                  <Switch
-                    :model-value="field.enabled"
-                    disabled
-                    :aria-label="field.label"
-                    class="disabled:opacity-90 data-[state=checked]:bg-zinc-200 data-[state=unchecked]:bg-zinc-400 dark:data-[state=checked]:bg-zinc-200 dark:data-[state=unchecked]:bg-zinc-400"
-                  />
-                </label>
-              </div>
-            </section>
-          </CardContent>
         </Card>
+
+        <div
+          class="flex w-full max-w-full flex-wrap items-center gap-2 font-[family-name:var(--font-red-hat-display)]"
+          role="tablist"
+          aria-label="Seções do perfil"
+        >
+          <button
+            v-for="tab in tabs"
+            :key="tab.id"
+            type="button"
+            role="tab"
+            class="inline-flex h-10 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full px-5 text-sm leading-none transition-all duration-200 ease-out"
+            :class="activeTab === tab.id
+              ? 'bg-brand-green font-bold text-black shadow-[0_3px_10px_rgba(36,207,164,0.28)]'
+              : 'bg-[#373737] font-medium text-[#e7e7e7] hover:bg-[#454545] hover:text-white'"
+            :aria-selected="activeTab === tab.id"
+            @click="activeTab = tab.id"
+          >
+            <component :is="tab.icon" class="size-4 shrink-0" :stroke-width="2" />
+            {{ tab.label }}
+            <span
+              v-if="tab.id === 'favoritos' && favoritos.length"
+              class="inline-flex min-w-5 items-center justify-center rounded-full px-1.5 text-xs font-bold"
+              :class="activeTab === 'favoritos' ? 'bg-black/15 text-black' : 'bg-white/10 text-[#e7e7e7]'"
+            >
+              {{ favoritos.length }}
+            </span>
+          </button>
+        </div>
+
+        <div v-show="activeTab === 'dados'">
+          <Card class="border-border/60 bg-card/80 overflow-hidden shadow-sm">
+            <CardContent class="pt-6">
+              <section class="space-y-5">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-zinc-400">
+                  Dados pessoais
+                </h2>
+                <dl class="grid grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] gap-x-6 gap-y-4">
+                  <div v-for="field in personalFields" :key="field.label" class="min-w-0 space-y-1">
+                    <dt class="text-xs font-medium uppercase tracking-wide text-muted-foreground/70">
+                      {{ field.label }}
+                    </dt>
+                    <dd class="text-sm break-words text-[#e7e7e7]">{{ field.value }}</dd>
+                  </div>
+                </dl>
+              </section>
+
+              <Separator class="my-6" />
+
+              <section class="space-y-5">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-zinc-400">
+                  Contato e endereço
+                </h2>
+                <dl class="grid grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] gap-x-6 gap-y-4">
+                  <div v-for="field in contactFields" :key="field.label" class="min-w-0 space-y-1">
+                    <dt class="text-xs font-medium uppercase tracking-wide text-muted-foreground/70">
+                      {{ field.label }}
+                    </dt>
+                    <dd class="text-sm break-words text-[#e7e7e7]">{{ field.value }}</dd>
+                  </div>
+                </dl>
+              </section>
+
+              <Separator class="my-6" />
+
+              <section class="space-y-5">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-zinc-400">
+                  Pagamentos
+                </h2>
+                <dl class="grid grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] gap-x-6 gap-y-4">
+                  <div v-for="field in paymentFields" :key="field.label" class="min-w-0 space-y-1">
+                    <dt class="text-xs font-medium uppercase tracking-wide text-muted-foreground/70">
+                      {{ field.label }}
+                    </dt>
+                    <dd class="text-sm break-words text-[#e7e7e7]">{{ field.value }}</dd>
+                  </div>
+                </dl>
+              </section>
+
+              <Separator class="my-6" />
+
+              <section class="space-y-5">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-zinc-400">
+                  Preferências de notificação
+                </h2>
+                <div class="grid grid-cols-[repeat(auto-fill,minmax(14rem,1fr))] gap-3">
+                  <label
+                    v-for="field in notificationFields"
+                    :key="field.key"
+                    class="flex items-center justify-between gap-3 rounded-lg border border-border/60 bg-muted/20 px-3 py-2.5"
+                  >
+                    <span class="text-sm">{{ field.label }}</span>
+                    <Switch
+                      :model-value="field.enabled"
+                      disabled
+                      :aria-label="field.label"
+                      class="disabled:opacity-90 data-[state=checked]:bg-zinc-200 data-[state=unchecked]:bg-zinc-400 dark:data-[state=checked]:bg-zinc-200 dark:data-[state=unchecked]:bg-zinc-400"
+                    />
+                  </label>
+                </div>
+              </section>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div v-show="activeTab === 'favoritos'">
+          <PerfilFavoritosTab />
+        </div>
       </div>
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Check, RefreshCw } from 'lucide-vue-next'
+import { Check, RefreshCw, Star, UserRound } from 'lucide-vue-next'
+import PerfilFavoritosTab from '~/components/perfil/PerfilFavoritosTab.vue'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -195,7 +240,25 @@ useHead({
   title: 'Meu perfil',
 })
 
+type PerfilTabId = 'dados' | 'favoritos'
+
 const { user, token, isAuthenticated, fetchError, fetchUserData, initAuth } = useAuth()
+const { favoritos } = useFavoritosTorneios()
+
+const route = useRoute()
+const activeTab = ref<PerfilTabId>(
+  route.query.tab === 'favoritos' ? 'favoritos' : 'dados',
+)
+
+const tabs = [
+  { id: 'dados' as const, label: 'Meus dados', icon: UserRound },
+  { id: 'favoritos' as const, label: 'Favoritos', icon: Star },
+]
+
+watch(activeTab, (tab) => {
+  const query = tab === 'favoritos' ? { tab: 'favoritos' } : {}
+  navigateTo({ path: '/perfil', query }, { replace: true })
+})
 
 const pending = ref(true)
 const localError = ref<string | null>(null)

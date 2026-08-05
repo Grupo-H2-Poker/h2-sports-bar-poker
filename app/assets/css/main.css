@@ -107,8 +107,9 @@
 
 /**
  * Outline em elementos arredondados.
- * `border` e `inset` + radius “achatam” o pixel na ponta da curva.
- * `box-shadow` externo (spread 1px) acompanha o radius sem clip.
+ * - `border` / `box-shadow: inset` + `rounded-full` (9999px) achatam a curva
+ * - `box-shadow` externo é clipado por parents com overflow (drawer/scroll)
+ * `outline` + offset negativo desenha por dentro, segue o radius e não é clipado.
  */
 .outline-smooth,
 .outline-smooth-green,
@@ -121,44 +122,45 @@
 .outline-smooth-border {
   border-width: 0 !important;
   border-color: transparent !important;
+  box-shadow: none !important;
   overflow: visible !important;
-  background-clip: padding-box;
+  outline-offset: -1px !important;
 }
 
 .outline-smooth {
-  box-shadow: 0 0 0 1px currentColor !important;
+  outline: 1px solid currentColor !important;
 }
 
 .outline-smooth-green {
-  box-shadow: 0 0 0 1px var(--brand-green) !important;
+  outline: 1px solid var(--brand-green) !important;
 }
 
 .outline-smooth-white {
-  box-shadow: 0 0 0 1px #ffffff !important;
+  outline: 1px solid #ffffff !important;
 }
 
 .outline-smooth-muted {
-  box-shadow: 0 0 0 1px #e7e7e7 !important;
+  outline: 1px solid #e7e7e7 !important;
 }
 
 .outline-smooth-purple {
-  box-shadow: 0 0 0 1px var(--brand-purple) !important;
+  outline: 1px solid var(--brand-purple) !important;
 }
 
 .outline-smooth-vermelho {
-  box-shadow: 0 0 0 1px #d63d1d !important;
+  outline: 1px solid #d63d1d !important;
 }
 
 .outline-smooth-amarelo {
-  box-shadow: 0 0 0 1px #e6a23a !important;
+  outline: 1px solid #e6a23a !important;
 }
 
 .outline-smooth-white-25 {
-  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.25) !important;
+  outline: 1px solid rgb(255 255 255 / 0.25) !important;
 }
 
 .outline-smooth-border {
-  box-shadow: 0 0 0 1px var(--input) !important;
+  outline: 1px solid var(--input) !important;
 }
 
 /**
@@ -169,14 +171,17 @@
   color: #000000 !important;
   border-width: 0 !important;
   box-shadow: none !important;
+  outline: none;
   overflow: visible !important;
-  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, outline-color 0.2s ease;
 }
 
 .btn-green-solid:hover {
   background-color: transparent !important;
   color: var(--brand-green) !important;
-  box-shadow: 0 0 0 1px var(--brand-green) !important;
+  box-shadow: none !important;
+  outline: 1px solid var(--brand-green) !important;
+  outline-offset: -1px !important;
 }
 
 .btn-green-solid:disabled,
@@ -185,6 +190,7 @@
   background-color: var(--brand-green) !important;
   color: #000000 !important;
   box-shadow: none !important;
+  outline: none;
 }
 
 .container {

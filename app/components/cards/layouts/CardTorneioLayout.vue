@@ -1,8 +1,8 @@
 <template>
   <div
     :class="[
-      'relative overflow-hidden rounded-3xl px-8 pt-14 pb-8 text-white flex flex-col gap-6',
-      fill ? 'w-full h-full min-h-[400px]' : 'flex-shrink-0',
+      'relative overflow-hidden rounded-[10px] px-6 pt-12 pb-6 text-white flex flex-col gap-5',
+      fill ? 'w-full h-full min-h-[380px]' : 'flex-shrink-0',
       largura,
       fundoClass,
       isClickable && CARD_INTERACTIVE,
@@ -11,10 +11,10 @@
   >
     <CardBadge :badge="dados.badge" :badge-class="badgeClass(dados.badge?.cor)" />
 
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-3">
       <div class="flex min-h-7 items-start justify-between gap-3">
         <div class="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-2">
-          <span v-if="headerLabel" class="text-lg font-bold leading-tight">
+          <span v-if="headerLabel" class="text-base font-bold leading-tight sm:text-lg">
             {{ headerLabel }}
           </span>
           <span
@@ -28,12 +28,15 @@
           v-if="dados.favorito"
           :favorito="dados.favorito"
           :estrela-class="estrelaClass"
+          :slug="dados.slug"
+          :titulo="dados.titulo"
+          :card="dados"
         />
       </div>
 
       <!-- Altura fixa de 2 linhas — títulos curtos não encolhem o bloco (igual agenda_preview) -->
-      <div class="flex min-h-[4.4rem] w-full items-center">
-        <h3 class="w-full text-[2rem] font-bold leading-[1.1] line-clamp-2">
+      <div class="flex min-h-[4rem] w-full items-center">
+        <h3 class="w-full text-[1.75rem] font-bold leading-[1.1] line-clamp-2 xl:text-[1.625rem]">
           {{ dados.titulo }}
         </h3>
       </div>

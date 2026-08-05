@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative w-full h-full min-h-[400px] overflow-hidden rounded-3xl bg-muted group cursor-pointer"
+    class="relative w-full h-full min-h-[380px] overflow-hidden rounded-[10px] bg-muted group cursor-pointer"
     role="button"
     tabindex="0"
     :aria-label="dados.titulo ? `Ampliar ${dados.titulo}` : 'Ampliar foto'"

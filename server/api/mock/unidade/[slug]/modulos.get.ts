@@ -1134,7 +1134,7 @@ export default defineEventHandler((event) => {
                   ordem: 2,
                   status: 'publicado',
                   data: {
-                    colunas: 3,
+                    colunas: 4,
                     gap: 'md',
                     item_types: ['card'],
                     agrupar_por_dia: true,
@@ -1189,7 +1189,7 @@ export default defineEventHandler((event) => {
                   ordem: 2,
                   status: 'publicado',
                   data: {
-                    colunas: 3,
+                    colunas: 4,
                     gap: 'md',
                     item_types: ['card'],
                     agrupar_por_dia: true,
@@ -1242,7 +1242,7 @@ export default defineEventHandler((event) => {
                   ordem: 2,
                   status: 'publicado',
                   data: {
-                    colunas: 3,
+                    colunas: 4,
                     gap: 'md',
                     item_types: ['card'],
                     agrupar_por_dia: true,
@@ -1297,7 +1297,7 @@ export default defineEventHandler((event) => {
                   ordem: 2,
                   status: 'publicado',
                   data: {
-                    colunas: 3,
+                    colunas: 4,
                     gap: 'md',
                     item_types: ['card'],
                   },
@@ -1542,7 +1542,7 @@ export default defineEventHandler((event) => {
               margin_bottom: 40,
               metadados: {
                 layout: 'grid',
-                colunas: 3,
+                colunas: 4,
                 itens_por_linha: 2,
                 gap: 'md',
                 card_variant: 'album',
@@ -2434,7 +2434,7 @@ export default defineEventHandler((event) => {
               status: "publicado",
               metadados: {
                 layout: 'grid',
-                colunas: 3,
+                colunas: 4,
                 itens_por_linha: 2,
                 gap: 'md',
               },
@@ -2518,7 +2518,7 @@ export default defineEventHandler((event) => {
                   ordem: 2,
                   status: 'publicado',
                   data: {
-                    colunas: 3,
+                    colunas: 4,
                     gap: 'md',
                     item_types: ['card']
                   }

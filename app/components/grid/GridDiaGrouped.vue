@@ -61,7 +61,7 @@ const props = defineProps<{
   groups: GridDiaGroup<GridItem>[]
 }>()
 
-const columns = computed(() => props.config.colunas ?? 3)
+const columns = computed(() => props.config.colunas ?? 4)
 
 /**
  * Empacota cards em linhas de N colunas.
@@ -95,9 +95,9 @@ const colsClass = computed(() => {
     1: 'grid-cols-1',
     2: 'grid-cols-1 md:grid-cols-2',
     3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
-    4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
+    4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4',
   }
-  return map[cols] ?? map[3]
+  return map[cols] ?? map[4]
 })
 
 const cardsGapClass = computed(() => {

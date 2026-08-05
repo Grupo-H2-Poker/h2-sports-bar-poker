@@ -163,7 +163,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const { user, logout } = useAuth()
-const { error: toastError } = useAppToast()
+const { warning: toastWarning } = useAppToast()
 
 const showLogoutDialog = ref(false)
 const isLoggingOut = ref(false)
@@ -185,9 +185,9 @@ const handleLogout = async () => {
     logout()
     showLogoutDialog.value = false
     await navigateTo('/')
-    toastError(
-      'Logout realizado com sucesso!',
-      'Faça o login para acessar novamente!',
+    toastWarning(
+      'Você saiu da conta',
+      'Faça login novamente para acessar o sistema.',
     )
   } finally {
     isLoggingOut.value = false

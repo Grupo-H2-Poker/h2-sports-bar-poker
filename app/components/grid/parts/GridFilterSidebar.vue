@@ -26,9 +26,9 @@
         </div>
 
         <ContainerScrollbar
-          :content-padding-left="4"
+          :content-padding-left="8"
           :content-padding-right="20"
-          class="min-w-0 overflow-visible pb-2"
+          class="min-w-0 pb-2"
         >
           <div
             v-for="(section, index) in config?.secoes ?? []"

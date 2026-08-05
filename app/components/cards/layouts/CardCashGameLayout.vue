@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[
-      'relative overflow-hidden rounded-3xl px-8 pt-14 pb-8 text-white flex-shrink-0 flex flex-col transition-colors',
+      'relative overflow-hidden rounded-[10px] px-8 pt-14 pb-8 text-white flex-shrink-0 flex flex-col transition-colors',
       altura,
       largura,
       fundoClass,

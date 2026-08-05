@@ -22,9 +22,9 @@ export interface ModuloMetadadosGaleria extends ModuloMetadadosCarousel {
    * `drag_carousel` — carrossel horizontal com drag (padrão).
    */
   layout?: GaleriaLayout
-  /** Colunas no desktop (lg+). Padrão: 3 */
+  /** Colunas no desktop (xl+). Padrão: 4 — mesmo grid da agenda */
   colunas?: GaleriaGridColunas
-  /** Itens por linha no tablet (md). Padrão: 2 */
+  /** Itens por linha no tablet (sm/md). Padrão: 2 */
   itens_por_linha?: GaleriaGridColunas
   /** Espaçamento entre itens no modo grid. Padrão: `md` */
   gap?: GaleriaGridGap
@@ -49,28 +49,17 @@ export const GALERIA_GRID_GAP_CLASS: Record<GaleriaGridGap, string> = {
   lg: 'gap-8',
 }
 
-const GALERIA_GRID_MD_CLASS: Record<GaleriaGridColunas, string> = {
+/** Mesmo breakpoint do grid da agenda. */
+const GALERIA_GRID_COLS_CLASS: Record<GaleriaGridColunas, string> = {
   1: 'grid grid-cols-1',
-  2: 'grid grid-cols-1 md:grid-cols-2',
-  3: 'grid grid-cols-1 md:grid-cols-3',
-  4: 'grid grid-cols-1 md:grid-cols-4',
-}
-
-const GALERIA_GRID_LG_CLASS: Record<GaleriaGridColunas, string> = {
-  1: 'lg:grid-cols-1',
-  2: 'lg:grid-cols-2',
-  3: 'lg:grid-cols-3',
-  4: 'lg:grid-cols-4',
+  2: 'grid grid-cols-1 sm:grid-cols-2',
+  3: 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+  4: 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4',
 }
 
 export function resolveGaleriaGridClasses(metadados?: ModuloMetadadosGaleria) {
-  const colunas = metadados?.colunas ?? 3
-  const itensPorLinha = metadados?.itens_por_linha ?? 2
+  const colunas = metadados?.colunas ?? 4
   const gap = GALERIA_GRID_GAP_CLASS[metadados?.gap ?? 'md']
 
-  return [
-    GALERIA_GRID_MD_CLASS[itensPorLinha],
-    GALERIA_GRID_LG_CLASS[colunas],
-    gap,
-  ].join(' ')
+  return [GALERIA_GRID_COLS_CLASS[colunas], gap].join(' ')
 }

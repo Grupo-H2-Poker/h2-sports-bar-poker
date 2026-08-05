@@ -147,7 +147,10 @@ defineExpose({ update: scheduleUpdate })
         paddingLeft: `${contentPaddingLeft}px`,
       }"
     >
-      <slot />
+      <!-- Wrapper interno: sombra/outline das badges não encosta no clip do scroll -->
+      <div class="min-w-0 py-0.5">
+        <slot />
+      </div>
     </div>
 
     <div

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative w-full h-full min-h-[400px] overflow-hidden rounded-3xl bg-muted group cursor-pointer"
+    class="relative w-full h-full min-h-[380px] overflow-hidden rounded-[10px] bg-muted group cursor-pointer"
     role="button"
     tabindex="0"
     :aria-label="dados.titulo ? `Abrir álbum ${dados.titulo}` : 'Abrir álbum'"
@@ -24,7 +24,7 @@
       v-if="dados.titulo"
       class="absolute inset-0 z-10 flex items-center justify-center px-6 font-[family-name:var(--font-red-hat-display)]"
     >
-      <h3 class="text-center text-3xl font-bold leading-tight text-[#e7e7e7]">
+      <h3 class="text-center text-2xl font-bold leading-tight text-[#e7e7e7] xl:text-[1.625rem]">
         {{ dados.titulo }}
       </h3>
     </div>
