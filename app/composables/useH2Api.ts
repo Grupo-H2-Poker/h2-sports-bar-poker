@@ -5,9 +5,11 @@ import type { TorneioDetalheData } from '~/types/torneio-detalhe'
 export const useH2Api = () => {
   const config = useRuntimeConfig()
 
-  const apiBase = config.public.dev
+  const useMockApi = Boolean(config.public.useMockApi)
+  const externalBase = String(config.public.externalApiBaseRw || '').replace(/\/$/, '')
+  const apiBase = useMockApi || !externalBase
     ? '/api/mock'
-    : config.externalApiBaseRw
+    : externalBase
 
   const getUnidade = async (slug: string) => {
     try {

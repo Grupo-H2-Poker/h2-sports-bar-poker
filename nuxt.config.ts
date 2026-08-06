@@ -71,10 +71,21 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    /** Login Rewards — só server (login.post.ts) */
     externalApiBaseRw: process.env.NUXT_EXTERNAL_API_BASE_RW,
+    /** Perfil / cliente — só server (users.get.ts) */
     externalApiBasePlu: process.env.NUXT_EXTERNAL_API_BASE_PLU,
     public: {
-      dev: process.env.NODE_ENV !== 'production'
-    }
+      /**
+       * Conteúdo (unidades/módulos/torneios) via `/api/mock` por padrão.
+       * Defina `NUXT_PUBLIC_USE_MOCK_API=false` só quando a API CMS real estiver liberada
+       * (hoje `rewards.h2club.com.br/unidades` responde 403 no Worker da Cloudflare).
+       */
+      useMockApi: process.env.NUXT_PUBLIC_USE_MOCK_API !== 'false',
+      /** Base da API de conteúdo quando `useMockApi` é false */
+      externalApiBaseRw: process.env.NUXT_PUBLIC_EXTERNAL_API_BASE_RW
+        || process.env.NUXT_EXTERNAL_API_BASE_RW
+        || '',
+    },
   },
 })
