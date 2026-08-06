@@ -162,8 +162,19 @@
   outline: 1px solid transparent !important;
 }
 
+/**
+ * Gutter lateral do layout.
+ * Antes: max-w 90rem (1440px) só criava margem em telas > ~1400px.
+ * Agora: em qualquer desktop o conteúdo fica inset por --page-gutter
+ * (escala com a viewport, teto ~100px — alinhado ao margin_lateral do design).
+ */
+:root {
+  --page-gutter: clamp(1.25rem, 6.25vw, 6.25rem);
+}
+
 .container {
-  @apply mx-auto w-full max-w-[90rem] px-3 sm:px-4 lg:px-5;
+  @apply mx-auto w-full px-3 sm:px-4 lg:px-5;
+  max-width: min(90rem, calc(100% - (2 * var(--page-gutter))));
 }
 
 .mobile-menu-overlay {
