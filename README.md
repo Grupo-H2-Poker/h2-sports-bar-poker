@@ -8,7 +8,7 @@
 [![Vue](https://img.shields.io/badge/Vue-3-4FC08D?style=flat-square&logo=vue.js&logoColor=white)](https://vuejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
-[![i18n](https://img.shields.io/badge/i18n-PT%20·%20EN%20·%20ES%20·%20ZH%20·%20JA-8B5CF6?style=flat-square)](#-internacionalização)
+[![i18n](https://img.shields.io/badge/i18n-PT%20·%20EN%20·%20ES%20·%20ZH%20·%20JA-8B5CF6?style=flat-square)](#internacionalização)
 
 
 </div>
@@ -17,19 +17,19 @@
 
 ## Sumário
 
-- [Sobre](#-sobre)
-- [Features](#-features)
-- [Stack](#-stack)
-- [Quick Start](#-quick-start)
-- [Variáveis de ambiente](#-variáveis-de-ambiente)
-- [Arquitetura](#-arquitetura)
-- [Sistema de módulos](#-sistema-de-módulos)
-- [Estrutura do projeto](#-estrutura-do-projeto)
-- [Autenticação](#-autenticação)
-- [Internacionalização](#-internacionalização)
-- [Scripts](#-scripts)
-- [Contribuindo](#-contribuindo)
-- [FAQ](#-faq)
+- [Sobre](#sobre)
+- [Features](#features)
+- [Stack](#stack)
+- [Quick Start](#quick-start)
+- [Variáveis de ambiente](#variáveis-de-ambiente)
+- [Arquitetura](#arquitetura)
+- [Sistema de módulos](#sistema-de-módulos)
+- [Estrutura do projeto](#estrutura-do-projeto)
+- [Autenticação](#autenticação)
+- [Internacionalização](#internacionalização)
+- [Scripts](#scripts)
+- [Contribuindo](#contribuindo)
+- [FAQ](#faq)
 
 ---
 
