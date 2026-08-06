@@ -90,6 +90,7 @@ function snapshotCard(
  * Substituir por API quando existir endpoint de perfil.
  */
 export function useFavoritosTorneios() {
+  const { t } = useI18n()
   const { user, isAuthenticated } = useAuth()
   const { defaultUnity } = useUnidades()
   const favoritos = useState<FavoritoTorneioEntry[]>('favoritos-torneios', () => [])
@@ -159,8 +160,8 @@ export function useFavoritosTorneios() {
       favoritos.value = next
       writeFavoritos(email, next)
       useAppToast().success(
-        'Removido dos favoritos',
-        opts.titulo || 'Torneio removido da sua lista.',
+        t('favorites.toast.removedTitle'),
+        opts.titulo || t('favorites.toast.removedDescription'),
       )
       return false
     }
@@ -188,7 +189,7 @@ export function useFavoritosTorneios() {
     favoritos.value = next
     writeFavoritos(email, next)
     useAppToast().success(
-      'Torneio favoritado!',
+      t('favorites.toast.addedTitle'),
       entry.titulo,
     )
     return true

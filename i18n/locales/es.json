@@ -92,13 +92,73 @@
     "stageBadge": "{ordinal} Etapa"
   },
   "perfil": {
-    "loading": "Cargando perfil..."
+    "loading": "Cargando perfil...",
+    "title": "Mi perfil",
+    "subtitle": "Datos de tu cuenta H2",
+    "refresh": "Actualizar datos",
+    "loadErrorTitle": "Error al cargar el perfil",
+    "retry": "Intentar de nuevo",
+    "sectionsAria": "Secciones del perfil",
+    "favoritesCount": "{n} favorito | {n} favoritos",
+    "loadError": "No se pudieron cargar los datos del perfil.",
+    "unexpectedError": "Error inesperado al cargar el perfil.",
+    "tabs": {
+      "dados": "Mis datos",
+      "favoritos": "Favoritos"
+    },
+    "sections": {
+      "personal": "Datos personales",
+      "contact": "Contacto y dirección",
+      "payments": "Pagos",
+      "notifications": "Preferencias de notificación"
+    },
+    "fields": {
+      "fullName": "Nombre completo",
+      "nickname": "Apodo",
+      "email": "E-mail",
+      "cpf": "CPF",
+      "gender": "Género",
+      "birthDate": "Fecha de nacimiento",
+      "status": "Estado",
+      "h2Rewards": "Puntúa H2 Rewards",
+      "phone": "Teléfono",
+      "cep": "Código postal",
+      "number": "Número",
+      "complement": "Complemento",
+      "pixKey": "Clave Pix",
+      "pixValidated": "Pix validada",
+      "bank": "Banco"
+    },
+    "status": {
+      "active": "Activo",
+      "inactive": "Inactivo"
+    },
+    "notifications": {
+      "score": "Puntuación",
+      "redeem": "Canje",
+      "promo": "Promoción",
+      "category": "Categoría"
+    },
+    "favorites": {
+      "title": "Torneos favoritos",
+      "subtitleEmpty": "Tus torneos guardados aparecen en esta pestaña",
+      "subtitleOne": "1 torneo guardado — haz clic en la tarjeta para ver los detalles",
+      "subtitleMany": "{n} torneos guardados — haz clic en la tarjeta para ver los detalles",
+      "emptyTitle": "Ningún torneo favorito",
+      "emptyDescription": "En la agenda, toca la estrella de una tarjeta para guardarla aquí y abrir el detalle cuando quieras.",
+      "viewAgenda": "Ver agenda"
+    }
   },
   "footer": {
     "responsibleGamingAlt": "Se aplican T&C. Juega con responsabilidad. Mayores de 18 años."
   },
   "common": {
-    "h2": "H2"
+    "h2": "H2",
+    "yes": "Sí",
+    "no": "No",
+    "close": "Cerrar",
+    "loading": "Cargando...",
+    "logoAlt": "Logo H2 Club"
   },
   "language": {
     "changedTitle": "Idioma cambiado",
@@ -111,5 +171,12 @@
     "youAreIn": "Estás en",
     "waitingQueue": "en la cola de espera",
     "place": "{n}.º lugar"
+  },
+  "favorites": {
+    "toast": {
+      "removedTitle": "Eliminado de favoritos",
+      "removedDescription": "Torneo eliminado de tu lista.",
+      "addedTitle": "¡Torneo favorito!"
+    }
   }
 }

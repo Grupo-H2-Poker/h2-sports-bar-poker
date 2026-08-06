@@ -3,9 +3,9 @@
     <main class="container mx-auto px-4 py-8 md:py-12">
       <div class="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 class="text-2xl font-bold tracking-tight md:text-3xl">Meu perfil</h1>
+          <h1 class="text-2xl font-bold tracking-tight md:text-3xl">{{ t('perfil.title') }}</h1>
           <p class="mt-1 text-sm text-muted-foreground">
-            Dados da sua conta H2
+            {{ t('perfil.subtitle') }}
           </p>
         </div>
         <Button
@@ -35,7 +35,7 @@
               :class="refreshState === 'success' ? 'opacity-100 text-brand-green' : 'opacity-0'"
             />
           </span>
-          <span>Atualizar dados</span>
+          <span>{{ t('perfil.refresh') }}</span>
         </Button>
       </div>
 
@@ -49,11 +49,11 @@
       <div v-else-if="errorMessage" class="mx-auto max-w-lg">
         <div class="rounded-lg border border-red-200 bg-red-50 p-6 text-center dark:border-red-800 dark:bg-red-900/20">
           <h2 class="mb-2 text-2xl font-bold text-red-800 dark:text-red-200">
-            Erro ao carregar perfil
+            {{ t('perfil.loadErrorTitle') }}
           </h2>
           <p class="mb-4 text-red-600 dark:text-red-300">{{ errorMessage }}</p>
           <Button variant="destructive" @click="refresh">
-            Tentar novamente
+            {{ t('perfil.retry') }}
           </Button>
         </div>
       </div>
@@ -79,7 +79,7 @@
                       class="size-1.5 rounded-full"
                       :class="user.status === 1 ? 'bg-emerald-500' : 'bg-red-500'"
                     />
-                    {{ user.status === 1 ? 'Cliente ativo' : 'Cliente inativo' }}
+                    {{ user.status === 1 ? t('auth.activeClient') : t('auth.inactiveClient') }}
                   </span>
                   <span
                     v-if="user.pontua_h2rewards === 1"
@@ -93,7 +93,7 @@
                     class="inline-flex items-center gap-1.5 rounded-md border border-border/60 bg-muted/40 px-2 py-1 text-xs font-medium text-muted-foreground"
                   >
                     <Star class="size-3 text-brand-green" fill="currentColor" :stroke-width="0" />
-                    {{ favoritos.length }} favorito{{ favoritos.length === 1 ? '' : 's' }}
+                    {{ favoritesCountLabel }}
                   </span>
                 </div>
               </div>
@@ -104,7 +104,7 @@
         <div
           class="flex w-full max-w-full flex-wrap items-center gap-2 font-[family-name:var(--font-red-hat-display)]"
           role="tablist"
-          aria-label="Seções do perfil"
+          :aria-label="t('perfil.sectionsAria')"
         >
           <button
             v-for="tab in tabs"
@@ -135,7 +135,7 @@
             <CardContent class="pt-6">
               <section class="space-y-5">
                 <h2 class="text-sm font-semibold uppercase tracking-wide text-zinc-400">
-                  Dados pessoais
+                  {{ t('perfil.sections.personal') }}
                 </h2>
                 <dl class="grid grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] gap-x-6 gap-y-4">
                   <div v-for="field in personalFields" :key="field.label" class="min-w-0 space-y-1">
@@ -151,7 +151,7 @@
 
               <section class="space-y-5">
                 <h2 class="text-sm font-semibold uppercase tracking-wide text-zinc-400">
-                  Contato e endereço
+                  {{ t('perfil.sections.contact') }}
                 </h2>
                 <dl class="grid grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] gap-x-6 gap-y-4">
                   <div v-for="field in contactFields" :key="field.label" class="min-w-0 space-y-1">
@@ -167,7 +167,7 @@
 
               <section class="space-y-5">
                 <h2 class="text-sm font-semibold uppercase tracking-wide text-zinc-400">
-                  Pagamentos
+                  {{ t('perfil.sections.payments') }}
                 </h2>
                 <dl class="grid grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] gap-x-6 gap-y-4">
                   <div v-for="field in paymentFields" :key="field.label" class="min-w-0 space-y-1">
@@ -183,7 +183,7 @@
 
               <section class="space-y-5">
                 <h2 class="text-sm font-semibold uppercase tracking-wide text-zinc-400">
-                  Preferências de notificação
+                  {{ t('perfil.sections.notifications') }}
                 </h2>
                 <div class="grid grid-cols-[repeat(auto-fill,minmax(14rem,1fr))] gap-3">
                   <label
@@ -236,13 +236,14 @@ definePageMeta({
   middleware: 'auth',
 })
 
+const { t, locale } = useI18n()
+
 useHead({
-  title: 'Meu perfil',
+  title: () => t('perfil.title'),
 })
 
 type PerfilTabId = 'dados' | 'favoritos'
 
-const { t } = useI18n()
 const { user, token, isAuthenticated, fetchError, fetchUserData, initAuth } = useAuth()
 const { favoritos } = useFavoritosTorneios()
 
@@ -251,10 +252,14 @@ const activeTab = ref<PerfilTabId>(
   route.query.tab === 'favoritos' ? 'favoritos' : 'dados',
 )
 
-const tabs = [
-  { id: 'dados' as const, label: 'Meus dados', icon: UserRound },
-  { id: 'favoritos' as const, label: 'Favoritos', icon: Star },
-]
+const tabs = computed(() => [
+  { id: 'dados' as const, label: t('perfil.tabs.dados'), icon: UserRound },
+  { id: 'favoritos' as const, label: t('perfil.tabs.favoritos'), icon: Star },
+])
+
+const favoritesCountLabel = computed(() =>
+  t('perfil.favoritesCount', { n: favoritos.value.length }, favoritos.value.length),
+)
 
 watch(activeTab, (tab) => {
   const query = tab === 'favoritos' ? { tab: 'favoritos' } : {}
@@ -278,34 +283,45 @@ const initials = computed(() => {
     .slice(0, 2)
 })
 
+const dateLocale = computed(() => {
+  const map: Record<string, string> = {
+    pt: 'pt-BR',
+    en: 'en-US',
+    es: 'es-ES',
+    zh: 'zh-CN',
+    ja: 'ja-JP',
+  }
+  return map[String(locale.value)] ?? 'pt-BR'
+})
+
 function displayValue(value: string | number | null | undefined): string {
   if (value === null || value === undefined || value === '') return '—'
   return String(value)
 }
 
 function yesNo(value: number | null | undefined): string {
-  return value === 1 ? 'Sim' : 'Não'
+  return value === 1 ? t('common.yes') : t('common.no')
 }
 
 function formatDate(value?: string | null): string {
   if (!value) return '—'
   const date = new Date(value)
   if (Number.isNaN(date.getTime())) return value
-  return new Intl.DateTimeFormat('pt-BR').format(date)
+  return new Intl.DateTimeFormat(dateLocale.value).format(date)
 }
 
 const personalFields = computed(() => {
   const u = user.value
   if (!u) return []
   return [
-    { label: 'Nome completo', value: displayValue(u.nome) },
-    { label: 'Apelido', value: displayValue(u.apelido) },
-    { label: 'E-mail', value: displayValue(u.email) },
-    { label: 'CPF', value: displayValue(u.cpf) },
-    { label: 'Gênero', value: displayValue(u.genero) },
-    { label: 'Data de nascimento', value: formatDate(u.data_nascimento) },
-    { label: 'Status', value: u.status === 1 ? 'Ativo' : 'Inativo' },
-    { label: 'Pontua H2 Rewards', value: yesNo(u.pontua_h2rewards) },
+    { label: t('perfil.fields.fullName'), value: displayValue(u.nome) },
+    { label: t('perfil.fields.nickname'), value: displayValue(u.apelido) },
+    { label: t('perfil.fields.email'), value: displayValue(u.email) },
+    { label: t('perfil.fields.cpf'), value: displayValue(u.cpf) },
+    { label: t('perfil.fields.gender'), value: displayValue(u.genero) },
+    { label: t('perfil.fields.birthDate'), value: formatDate(u.data_nascimento) },
+    { label: t('perfil.fields.status'), value: u.status === 1 ? t('perfil.status.active') : t('perfil.status.inactive') },
+    { label: t('perfil.fields.h2Rewards'), value: yesNo(u.pontua_h2rewards) },
   ]
 })
 
@@ -313,10 +329,10 @@ const contactFields = computed(() => {
   const u = user.value
   if (!u) return []
   return [
-    { label: 'Telefone', value: displayValue(u.telefone) },
-    { label: 'CEP', value: displayValue(u.cep) },
-    { label: 'Número', value: displayValue(u.numero) },
-    { label: 'Complemento', value: displayValue(u.complemento) },
+    { label: t('perfil.fields.phone'), value: displayValue(u.telefone) },
+    { label: t('perfil.fields.cep'), value: displayValue(u.cep) },
+    { label: t('perfil.fields.number'), value: displayValue(u.numero) },
+    { label: t('perfil.fields.complement'), value: displayValue(u.complemento) },
   ]
 })
 
@@ -324,9 +340,9 @@ const paymentFields = computed(() => {
   const u = user.value
   if (!u) return []
   return [
-    { label: 'Chave Pix', value: displayValue(u.chave_pix) },
-    { label: 'Pix validada', value: yesNo(u.chave_pix_validada) },
-    { label: 'Banco', value: displayValue(u.banco) },
+    { label: t('perfil.fields.pixKey'), value: displayValue(u.chave_pix) },
+    { label: t('perfil.fields.pixValidated'), value: yesNo(u.chave_pix_validada) },
+    { label: t('perfil.fields.bank'), value: displayValue(u.banco) },
   ]
 })
 
@@ -334,10 +350,10 @@ const notificationFields = computed(() => {
   const u = user.value
   if (!u) return []
   return [
-    { key: 'notifica_pontuacao', label: 'Pontuação', enabled: u.notifica_pontuacao === 1 },
-    { key: 'notifica_resgate', label: 'Resgate', enabled: u.notifica_resgate === 1 },
-    { key: 'notifica_promocao', label: 'Promoção', enabled: u.notifica_promocao === 1 },
-    { key: 'notifica_categoria', label: 'Categoria', enabled: u.notifica_categoria === 1 },
+    { key: 'notifica_pontuacao', label: t('perfil.notifications.score'), enabled: u.notifica_pontuacao === 1 },
+    { key: 'notifica_resgate', label: t('perfil.notifications.redeem'), enabled: u.notifica_resgate === 1 },
+    { key: 'notifica_promocao', label: t('perfil.notifications.promo'), enabled: u.notifica_promocao === 1 },
+    { key: 'notifica_categoria', label: t('perfil.notifications.category'), enabled: u.notifica_categoria === 1 },
   ]
 })
 
@@ -354,12 +370,12 @@ async function loadProfile(options: { silent?: boolean } = {}) {
     }
 
     if (!user.value) {
-      localError.value = fetchError.value || 'Não foi possível carregar os dados do perfil.'
+      localError.value = fetchError.value || t('perfil.loadError')
       return false
     }
     return true
   } catch (error: any) {
-    localError.value = error?.message || 'Erro inesperado ao carregar o perfil.'
+    localError.value = error?.message || t('perfil.unexpectedError')
     return false
   } finally {
     if (!silent) pending.value = false

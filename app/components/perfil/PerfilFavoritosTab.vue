@@ -3,7 +3,7 @@
     <div class="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
       <div>
         <h2 class="text-lg font-semibold tracking-tight sm:text-xl">
-          Torneios favoritos
+          {{ t('perfil.favorites.title') }}
         </h2>
         <p class="mt-1 text-sm text-muted-foreground">
           {{ subtitle }}
@@ -20,10 +20,10 @@
       </div>
       <div class="max-w-sm space-y-2">
         <p class="text-base font-medium text-[#e7e7e7]">
-          Nenhum torneio favoritado
+          {{ t('perfil.favorites.emptyTitle') }}
         </p>
         <p class="text-sm text-muted-foreground">
-          Na agenda, toque na estrela de um card para salvá-lo aqui e abrir o detalhe quando quiser.
+          {{ t('perfil.favorites.emptyDescription') }}
         </p>
       </div>
       <Button
@@ -33,7 +33,7 @@
         class="mt-1"
         @click="navigateTo(agendaHref)"
       >
-        Ver agenda
+        {{ t('perfil.favorites.viewAgenda') }}
       </Button>
     </div>
 
@@ -56,14 +56,15 @@ import { Star } from 'lucide-vue-next'
 import CardGeneric from '~/components/cards/CardGeneric.vue'
 import { Button } from '~/components/ui/button'
 
+const { t } = useI18n()
 const { favoritos, toDisplayCard } = useFavoritosTorneios()
 const { defaultUnity } = useUnidades()
 
 const subtitle = computed(() => {
   const n = favoritos.value.length
-  if (n === 0) return 'Seus torneios salvos aparecem nesta aba'
-  if (n === 1) return '1 torneio salvo — clique no card para ver os detalhes'
-  return `${n} torneios salvos — clique no card para ver os detalhes`
+  if (n === 0) return t('perfil.favorites.subtitleEmpty')
+  if (n === 1) return t('perfil.favorites.subtitleOne')
+  return t('perfil.favorites.subtitleMany', { n })
 })
 
 const agendaHref = computed(() => {

@@ -92,13 +92,73 @@
     "stageBadge": "第{n}阶段"
   },
   "perfil": {
-    "loading": "正在加载个人资料..."
+    "loading": "正在加载个人资料...",
+    "title": "我的资料",
+    "subtitle": "您的 H2 账户信息",
+    "refresh": "刷新数据",
+    "loadErrorTitle": "加载资料失败",
+    "retry": "重试",
+    "sectionsAria": "资料分区",
+    "favoritesCount": "{n} 个收藏 | {n} 个收藏",
+    "loadError": "无法加载资料数据。",
+    "unexpectedError": "加载资料时发生意外错误。",
+    "tabs": {
+      "dados": "我的资料",
+      "favoritos": "收藏"
+    },
+    "sections": {
+      "personal": "个人信息",
+      "contact": "联系方式与地址",
+      "payments": "支付",
+      "notifications": "通知偏好"
+    },
+    "fields": {
+      "fullName": "全名",
+      "nickname": "昵称",
+      "email": "电子邮箱",
+      "cpf": "CPF",
+      "gender": "性别",
+      "birthDate": "出生日期",
+      "status": "状态",
+      "h2Rewards": "H2 Rewards 积分",
+      "phone": "电话",
+      "cep": "邮编",
+      "number": "门牌号",
+      "complement": "补充地址",
+      "pixKey": "Pix 密钥",
+      "pixValidated": "Pix 已验证",
+      "bank": "银行"
+    },
+    "status": {
+      "active": "有效",
+      "inactive": "无效"
+    },
+    "notifications": {
+      "score": "积分",
+      "redeem": "兑换",
+      "promo": "促销",
+      "category": "类别"
+    },
+    "favorites": {
+      "title": "收藏的锦标赛",
+      "subtitleEmpty": "您保存的锦标赛会显示在此页签",
+      "subtitleOne": "已保存 1 场锦标赛 — 点击卡片查看详情",
+      "subtitleMany": "已保存 {n} 场锦标赛 — 点击卡片查看详情",
+      "emptyTitle": "暂无收藏的锦标赛",
+      "emptyDescription": "在赛程中点击卡片上的星星即可收藏到此处，随时打开详情。",
+      "viewAgenda": "查看赛程"
+    }
   },
   "footer": {
     "responsibleGamingAlt": "适用条款与条件。请负责任地游戏。仅限18岁以上。"
   },
   "common": {
-    "h2": "H2"
+    "h2": "H2",
+    "yes": "是",
+    "no": "否",
+    "close": "关闭",
+    "loading": "加载中...",
+    "logoAlt": "H2 Club 标志"
   },
   "language": {
     "changedTitle": "语言已更改",
@@ -111,5 +171,12 @@
     "youAreIn": "您当前排在",
     "waitingQueue": "等候队列中",
     "place": "第{n}位"
+  },
+  "favorites": {
+    "toast": {
+      "removedTitle": "已取消收藏",
+      "removedDescription": "锦标赛已从列表中移除。",
+      "addedTitle": "已收藏锦标赛！"
+    }
   }
 }
