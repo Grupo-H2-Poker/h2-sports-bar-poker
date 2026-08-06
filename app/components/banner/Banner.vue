@@ -57,6 +57,60 @@
     </template>
   </TwoColumnLayout>
 
+  <!-- Layout panel: fundo colorido + título acima + mídia (Figma Eventos) -->
+  <div
+    v-else-if="layout === 'panel'"
+    class="w-full overflow-hidden px-6 pb-10 pt-8 md:px-[8%] md:pb-14 md:pt-10"
+    :style="panelStyle"
+  >
+    <div
+      v-if="hasCta"
+      class="mb-8 flex justify-center text-center md:mb-10"
+    >
+      <SectionCTA
+        :config="ctaConfig"
+        inverted
+      />
+    </div>
+
+    <div
+      :class="[
+        'relative mx-auto w-full max-w-[907px] overflow-hidden bg-black',
+        hasVideoEmbed ? 'aspect-video' : 'aspect-[907/513]',
+        isClickable && 'cursor-pointer',
+      ]"
+      :style="mediaRadiusStyle"
+      @click="handleImageClick"
+    >
+      <iframe
+        v-if="isPlaying && embedSrc"
+        class="absolute inset-0 h-full w-full border-0"
+        :src="embedSrc"
+        :title="imageAlt"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      />
+
+      <template v-else>
+        <img
+          v-if="dados.imagem"
+          :src="dados.imagem"
+          :alt="imageAlt"
+          draggable="false"
+          class="pointer-events-none absolute inset-0 size-full object-cover"
+        >
+        <div
+          v-if="dados.play_overlay"
+          class="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/40"
+          aria-hidden="true"
+        >
+          <Play class="size-14 fill-white text-white drop-shadow-lg" />
+        </div>
+      </template>
+    </div>
+  </div>
+
   <!-- Layout overlay (imagem + CTA posicionável) / vídeo embed -->
   <div
     v-else
@@ -74,7 +128,6 @@
     :style="borderRadiusStyle"
     @click="handleImageClick"
   >
-    <!-- Player embedado -->
     <iframe
       v-if="isPlaying && embedSrc"
       class="absolute inset-0 h-full w-full border-0"
@@ -96,17 +149,17 @@
             ? 'block w-full h-auto'
             : 'absolute inset-0 w-full h-full object-cover pointer-events-none',
         ]"
-      />
+      >
 
       <div
         v-if="hasCta && overlayGradient"
-        class="absolute inset-0 pointer-events-none"
+        class="pointer-events-none absolute inset-0"
         :class="overlayGradient"
       />
 
       <div
         v-if="dados.play_overlay"
-        class="absolute inset-0 flex items-center justify-center bg-black/60 pointer-events-none"
+        class="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/60"
         aria-hidden="true"
       >
         <Play class="size-14 fill-white text-white" />
@@ -114,11 +167,11 @@
 
       <div
         v-if="hasCta"
-        class="absolute inset-0 flex p-6 md:p-10 lg:p-12 text-white pointer-events-none"
+        class="pointer-events-none absolute inset-0 flex p-6 text-white md:p-10 lg:p-12"
         :class="ctaPositionClasses"
       >
         <div
-          class="w-fit max-w-xl pointer-events-auto"
+          class="pointer-events-auto w-fit max-w-xl"
           @click.stop
         >
           <SectionCTA
@@ -137,6 +190,7 @@ import TwoColumnLayout from '~/components/layout/TwoColumnLayout.vue'
 import SectionCTA from '~/components/modules/SectionCTA.vue'
 import BannerTwoColumnImageColumn from '~/components/banner/BannerTwoColumnImageColumn.vue'
 import type { BannerData } from '~/types/banner'
+import { resolveBannerBorderRadius } from '~/types/banner'
 
 const props = defineProps<{
   dados: BannerData
@@ -163,7 +217,6 @@ const isContainFit = computed(() => props.dados.object_fit === 'contain')
 
 const { ctaConfig, hasCta } = useBannerCta(() => props.dados)
 
-/** Padding da coluna CTA — `flush` alinha à margem externa do container. */
 const ctaColumnPaddingClass = computed(() => {
   if (props.dados.cta_padding !== 'flush') {
     return 'p-8 md:p-12 lg:p-16'
@@ -198,6 +251,16 @@ const imageLink = computed(() => {
 const isClickable = computed(
   () => (!hasCta.value && !!props.dados.link) || (hasVideoEmbed.value && !isPlaying.value),
 )
+
+const panelStyle = computed(() => ({
+  background: props.dados.panel_background ?? '#77158e',
+  borderRadius: resolveBannerBorderRadius(props.dados.border_radius) ?? '8px',
+}))
+
+const mediaRadiusStyle = computed(() => {
+  const value = resolveBannerBorderRadius(props.dados.border_radius)
+  return value ? { borderRadius: value } : undefined
+})
 
 const carouselBleedRight = computed(() => {
   if (!props.dados.drag_carousel) return false

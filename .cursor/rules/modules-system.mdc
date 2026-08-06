@@ -44,6 +44,8 @@ const { ctaConfig, items } = useModuloComponents(() => props.modulo)
 | `grid` | Página `/agenda` (cards completos) | `variant: torneio` \| `cash_game` no JSON |
 | `galeria_preview` | Carrossel só imagem (bleed L/R) | `imagem` — metadados `carousel_bleed_left` / `carousel_bleed_right` |
 
+`agenda_preview` também reutiliza `metadados.card_variant` em outras páginas (ex.: Eventos: `numero`, `imagem`, `depoimento`; Séries: `etapa_preview`).
+
 ## Páginas documentais (mesmo layout do FAQ)
 
 | `tipo` | Uso | Components |

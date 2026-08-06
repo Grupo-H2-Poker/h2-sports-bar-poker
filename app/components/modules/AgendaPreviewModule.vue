@@ -1,8 +1,28 @@
 <template>
   <section class="overflow-x-clip">
     <div class="container mx-auto px-4">
-      <div class="flex min-w-0 gap-12 items-center">
-        <div v-if="ctaConfig" class="shrink-0">
+      <!-- Grid full-width (ex.: depoimentos Eventos) -->
+      <div
+        v-if="isGrid"
+        class="grid grid-cols-1 gap-10 pt-[65px] md:grid-cols-3 md:gap-10"
+      >
+        <CardGeneric
+          v-for="card in previewCards"
+          :key="card.id"
+          :dados="card.data"
+          fill
+        />
+      </div>
+
+      <!-- Carousel padrão (CTA + DragCarousel) -->
+      <div
+        v-else
+        class="flex min-w-0 items-center gap-12"
+      >
+        <div
+          v-if="ctaConfig"
+          class="shrink-0"
+        >
           <SectionCTA :config="ctaConfig" />
         </div>
 
@@ -40,6 +60,8 @@ const props = defineProps<{
 }>()
 
 const { ctaConfig, cashGameCard, previewCards } = useAgendaPreviewModule(() => props.modulo)
+
+const isGrid = computed(() => props.modulo.metadados?.layout === 'grid')
 
 const carouselBleedRight = computed(
   () => props.modulo.metadados?.carousel_bleed_right ?? false,

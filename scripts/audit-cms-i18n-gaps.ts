@@ -209,6 +209,9 @@ async function loadFallbackPayload(): Promise<unknown> {
   const poker = jiti(path.join(ROOT, 'server/utils/mock-poker-esporte-da-mente.ts')) as {
     createPokerEsporteDaMentePagina: () => unknown
   }
+  const eventos = jiti(path.join(ROOT, 'server/utils/mock-eventos.ts')) as {
+    createEventosPagina: () => unknown
+  }
 
   // Also scrape string literals from modulos.get.ts for inline content not in builders
   const modulosSrc = fs.readFileSync(
@@ -237,6 +240,7 @@ async function loadFallbackPayload(): Promise<unknown> {
       seguranca: docs.createSegurancaPrivacidadePagina(93, 9300),
       sportsBar: sports.createSportsBarPagina(),
       pokerMente: poker.createPokerEsporteDaMentePagina(),
+      eventos: eventos.createEventosPagina(),
     },
     modulosStringLiterals: stringLits,
   }

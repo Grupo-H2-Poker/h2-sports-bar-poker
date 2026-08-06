@@ -21,7 +21,7 @@ export type BannerSize = 'lg' | 'md' | 'sm'
 export type BannerHeight = 'sm' | 'md' | 'lg' | 'strip'
 
 /** Layout do banner */
-export type BannerLayout = 'overlay' | 'two_column'
+export type BannerLayout = 'overlay' | 'two_column' | 'panel'
 
 /** Tamanho da imagem na coluna do layout `two_column` */
 export type BannerImagemSize = 'sm' | 'md' | 'lg'
@@ -102,6 +102,11 @@ export interface BannerData {
   carousel_bleed_left?: boolean
   /** SectionCTA embutido — omitir para banner só imagem */
   section_cta?: SectionCTAData
+  /**
+   * Fundo do layout `panel` (ex.: `#77158e`).
+   * Título fica acima da mídia, ambos dentro do painel arredondado.
+   */
+  panel_background?: string
   /** Gradiente escuro para legibilidade do texto sobre a imagem */
   overlay?: 'none' | 'gradient' | 'gradient-bottom'
   /** Exibe ícone de play central (thumbnail de vídeo) */

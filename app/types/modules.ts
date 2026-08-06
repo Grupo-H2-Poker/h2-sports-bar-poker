@@ -5,6 +5,16 @@ import type { ModuloMetadadosAgendaPreview } from '~/types/agenda-preview'
 import type { BannerData, ModuloMetadadosBanner } from '~/types/banner'
 import type { CardGenericData, SectionCTAData } from '~/types/cards'
 import type { DocumentoSecaoData, ModuloMetadadosDocumentoPage } from '~/types/documento-page'
+import type {
+  FormularioCampoData,
+  FormularioConfigData,
+  ModuloMetadadosEventos,
+  ModuloMetadadosFormulario,
+  ModuloMetadadosMosaico,
+  ModuloMetadadosParceiros,
+  MosaicoCelulaData,
+  ParceiroLogoData,
+} from '~/types/eventos-page'
 import type { FaqCategoriaData, ModuloMetadadosFaq, ModuloMetadadosFaqPage } from '~/types/faq-page'
 import type { GridConfigData, GridToolbarData } from '~/types/grid'
 import type { RankingConfigData, RankingPlayerData } from '~/types/ranking'
@@ -197,6 +207,9 @@ export type ModuloTipo =
   | 'download_app'
   | 'eventos'
   | 'faixa_cta'
+  | 'parceiros'
+  | 'mosaico'
+  | 'formulario'
 
 /**
  * Tipo de component transversal — pode aparecer no `components[]` de qualquer
@@ -221,6 +234,9 @@ export const MODULO_COMPONENT_TYPE = {
   download_app: null,
   eventos: 'evento',
   faixa_cta: 'faixa_cta',
+  parceiros: 'parceiro_logo',
+  mosaico: 'mosaico_celula',
+  formulario: 'formulario_campo',
 } as const satisfies Record<ModuloTipo, string | null>
 
 export interface ModuloDataMap {
@@ -239,6 +255,9 @@ export interface ModuloDataMap {
   download_app: Record<string, never>
   eventos: EventoData | SectionCTAData
   faixa_cta: FaixaCtaData
+  parceiros: ParceiroLogoData
+  mosaico: MosaicoCelulaData
+  formulario: FormularioCampoData | FormularioConfigData
 }
 
 /** `components[].data` excluindo `section_cta` — tipo inferido por módulo */
@@ -258,6 +277,9 @@ export interface ModuloContentDataMap {
   download_app: Record<string, never>
   eventos: EventoData
   faixa_cta: FaixaCtaData
+  parceiros: ParceiroLogoData
+  mosaico: MosaicoCelulaData
+  formulario: FormularioCampoData
 }
 
 export interface ModuloMetadadosMap {
@@ -274,8 +296,11 @@ export interface ModuloMetadadosMap {
   documento_page: ModuloMetadadosDocumentoPage
   embaixadores: ModuloMetadadosTitulo
   download_app: ModuloMetadadosDownloadApp
-  eventos: ModuloMetadadosEmpty
+  eventos: ModuloMetadadosEventos
   faixa_cta: ModuloMetadadosEmpty
+  parceiros: ModuloMetadadosParceiros
+  mosaico: ModuloMetadadosMosaico
+  formulario: ModuloMetadadosFormulario
 }
 
 /** Módulo tipado pelo `tipo` — usar em todo `*Module.vue`: `modulo: ModuloOf<'agenda_preview'>` */

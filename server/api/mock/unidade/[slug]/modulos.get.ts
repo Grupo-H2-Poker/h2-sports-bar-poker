@@ -16,6 +16,7 @@ import {
 } from '../../../../utils/mock-documento-pages'
 import { createPokerEsporteDaMentePagina } from '../../../../utils/mock-poker-esporte-da-mente'
 import { createSportsBarPagina } from '../../../../utils/mock-sports-bar'
+import { createEventosPagina } from '../../../../utils/mock-eventos'
 import { localizeUnidadeModulos } from '../../../../utils/mock-i18n'
 
 const AGENDA_GRID_TOOLBAR_BASE = {
@@ -531,6 +532,7 @@ export default defineEventHandler(async (event) => {
       menu: [
         { id: 'h2bet', kind: 'link', label: 'H2Bet', to: 'https://www.h2.bet.br/', external: true },
         { id: 'agenda', kind: 'link', label: 'Agenda', pagina: 'agenda' },
+        { id: 'eventos', kind: 'link', label: 'Eventos', pagina: 'eventos' },
         { id: 'galeria', kind: 'link', label: 'Galeria', pagina: 'galeria' },
         { id: 'faq', kind: 'link', label: 'FAQ', pagina: 'faq' },
         {
@@ -577,6 +579,7 @@ export default defineEventHandler(async (event) => {
                   { id: 'galeria', label: 'Galeria de fotos', to: 'galeria' },
                   { id: 'poker-mente-footer', label: 'Poker Esporte da Mente', pagina: 'poker-esporte-da-mente' },
                   { id: 'sports-bar-footer', label: 'Sports Bar', pagina: 'sports-bar' },
+                  { id: 'eventos-footer', label: 'Eventos', pagina: 'eventos' },
                 ],
               },
               {
@@ -1532,6 +1535,7 @@ export default defineEventHandler(async (event) => {
 
         createPokerEsporteDaMentePagina(5, 9500),
         createSportsBarPagina(6, 9600),
+        createEventosPagina(7, 9700),
         createRegulamentosPagina(90, 9000),
         createSegurancaPrivacidadePagina(91, 9100),
 
@@ -2352,7 +2356,7 @@ export default defineEventHandler(async (event) => {
           label: 'Mais',
           items: [
             { id: 'unique', kind: 'link', label: 'H2unique', to: '/unique' },
-            { id: 'eventos', kind: 'link', label: 'Eventos', to: '/eventos' },
+            { id: 'eventos', kind: 'link', label: 'Eventos', pagina: 'eventos' },
             { id: 'unidades', kind: 'link', label: 'Unidades', to: '/unidades' },
             { id: 'h2news', kind: 'link', label: 'H2news', to: '/blognews' },
           ]
@@ -2737,6 +2741,7 @@ export default defineEventHandler(async (event) => {
             },
           ],
         },
+        createEventosPagina(7, 9800),
         createRegulamentosPagina(92, 9200),
         createSegurancaPrivacidadePagina(93, 9300),
       ],

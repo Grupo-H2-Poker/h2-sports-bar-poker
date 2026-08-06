@@ -6,6 +6,11 @@ export type ModuloMetadadosAgendaPreview = ModuloMetadadosCarousel & {
   card_variant?: CardVariant
   /** Oculta o card fixo de cash game */
   hide_cash_game?: boolean
+  /**
+   * `carousel` — DragCarousel (padrão).
+   * `grid` — grade fixa na largura do container (ex.: depoimentos Eventos).
+   */
+  layout?: 'carousel' | 'grid'
 }
 
 export const AGENDA_PREVIEW_CASH_GAME_COMPONENT_TYPE = 'cash_game' as const

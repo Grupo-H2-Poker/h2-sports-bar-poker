@@ -31,6 +31,9 @@ import EmbaixadoresModule from '~/components/modules/EmbaixadoresModule.vue'
 import DownloadAppModule from '~/components/modules/DownloadAppModule.vue'
 import EventosCarouselModule from '~/components/modules/EventosCarouselModule.vue'
 import FaixaCtaModule from '~/components/modules/FaixaCtaModule.vue'
+import FormularioModule from '~/components/modules/FormularioModule.vue'
+import MosaicoModule from '~/components/modules/MosaicoModule.vue'
+import ParceirosModule from '~/components/modules/ParceirosModule.vue'
 
 interface Props {
   modulos: Modulo[]
@@ -54,6 +57,9 @@ const moduloMapa: Partial<Record<ModuloTipo, Component>> = {
   download_app: DownloadAppModule,
   eventos: EventosCarouselModule,
   faixa_cta: FaixaCtaModule,
+  parceiros: ParceirosModule,
+  mosaico: MosaicoModule,
+  formulario: FormularioModule,
 }
 
 const sortedModulos = computed(() => {

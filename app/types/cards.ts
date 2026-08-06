@@ -30,6 +30,12 @@ export type CardVariant =
   | 'torneio_preview'
   | 'cash_game_preview'
   | 'etapa_preview'
+  /** Agenda preview: valor + label centralizados (ex.: números de eventos) */
+  | 'numero'
+  /** Agenda preview: só imagem (ex.: equipe) */
+  | 'imagem'
+  /** Agenda preview / grid: depoimento com foto, título, texto e autor */
+  | 'depoimento'
 
 export type CardCorPreset = 'purple' | 'vermelho' | 'amarelo' | 'verde' | 'branco'
 
@@ -130,4 +136,10 @@ export interface CardGenericData {
 
   /** Navegação ao clicar no card (quando não há botões com link) */
   link?: string
+
+  /** Imagem de fundo / capa (`imagem`, `depoimento`, capas de evento) */
+  imagem?: string
+
+  /** Autor / assinatura — usado em `depoimento` (fallback: `subtitulo`) */
+  autor?: string
 }
