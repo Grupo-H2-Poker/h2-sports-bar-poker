@@ -3,12 +3,11 @@ import { applyCmsDictionary } from './apply'
 import { loadCmsDictionary } from './load'
 import { resolveCmsLocale } from './types'
 
-export { applyCmsDictionary } from './apply'
-export { loadCmsDictionary } from './load'
-export type { CmsLocale, CmsPack, CmsDictLocale } from './types'
-export { CMS_LOCALES, CMS_DICT_LOCALES, resolveCmsLocale } from './types'
-export { CMS_SKIP_KEYS } from './skip-keys'
-export { CMS_PACKS, mergeCmsPacks } from './packs'
+/**
+ * API pública do CMS i18n.
+ * Não reexportar apply/load/types/packs aqui — o Nitro auto-importa
+ * `server/utils/**` e reexports duplicam os símbolos (WARN Duplicated imports).
+ */
 
 export async function localizeCmsPayload<T>(
   data: T,

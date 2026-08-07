@@ -20,13 +20,17 @@ Object.assign(globalThis, {
   createError,
 })
 
-const {
-  applyCmsDictionary,
-  loadCmsDictionary,
-  CMS_SKIP_KEYS,
-} = jiti(
-  path.join(ROOT, 'server/utils/mock-i18n/index.ts'),
-) as typeof import('../server/utils/mock-i18n')
+const { applyCmsDictionary } = jiti(
+  path.join(ROOT, 'server/utils/mock-i18n/apply.ts'),
+) as typeof import('../server/utils/mock-i18n/apply')
+
+const { loadCmsDictionary } = jiti(
+  path.join(ROOT, 'server/utils/mock-i18n/load.ts'),
+) as typeof import('../server/utils/mock-i18n/load')
+
+const { CMS_SKIP_KEYS } = jiti(
+  path.join(ROOT, 'server/utils/mock-i18n/skip-keys.ts'),
+) as typeof import('../server/utils/mock-i18n/skip-keys')
 
 const enDict = (await loadCmsDictionary('en')) ?? {}
 const esDict = (await loadCmsDictionary('es')) ?? {}

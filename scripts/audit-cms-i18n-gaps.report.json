@@ -189,20 +189,20 @@
         "chars": 20
       },
       {
-        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.1.data.filtro.modal.secoes.0.opcoes.0.label",
-        "value": "Sábado - 8 de agosto",
-        "chars": 20
-      },
-      {
         "samplePath": "ALL_TORNEIOS.4.data_label",
         "value": "31 de Julho | Sexta",
         "chars": 19
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.1.data.filtro.modal.secoes.0.opcoes.0.label",
+        "value": "Amanhã",
+        "chars": 6
       }
     ]
   },
   "patternGaps": {
     "count": 7,
-    "parametricMissingFromDict": 28,
+    "parametricMissingFromDict": 27,
     "items": [
       {
         "issue": "pontos no ranking: leaves modality/series connector (do/da) when not \"do X\" immediately after ranking",
@@ -350,10 +350,6 @@
       {
         "samplePath": "ALL_TORNEIOS.3.data_label",
         "value": "30 de Julho | Quinta"
-      },
-      {
-        "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.1.data.filtro.modal.secoes.0.opcoes.0.label",
-        "value": "Sábado - 8 de agosto"
       },
       {
         "samplePath": "ALL_TORNEIOS.4.data_label",
