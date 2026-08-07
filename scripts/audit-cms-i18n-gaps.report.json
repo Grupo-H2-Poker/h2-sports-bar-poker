@@ -1,10 +1,10 @@
 {
   "source": "handler",
   "dictKeyCounts": {
-    "en": 334,
-    "es": 335,
-    "zh": 334,
-    "ja": 334
+    "en": 363,
+    "es": 364,
+    "zh": 363,
+    "ja": 363
   },
   "remainingAfterEn": {
     "totalOccurrences": 5,
@@ -84,7 +84,7 @@
         "chars": 30
       },
       {
-        "samplePath": "sp-pinheiros.paginas.12.modulos.1.components.1.data.faixa_info",
+        "samplePath": "sp-pinheiros.paginas.13.modulos.1.components.1.data.faixa_info",
         "value": "22 de Fevereiro a 03 de Março",
         "chars": 29
       },
@@ -284,7 +284,7 @@
         "value": "1.200 pontos no ranking do CPH"
       },
       {
-        "samplePath": "sp-pinheiros.paginas.12.modulos.1.components.1.data.faixa_info",
+        "samplePath": "sp-pinheiros.paginas.13.modulos.1.components.1.data.faixa_info",
         "value": "22 de Fevereiro a 03 de Março"
       },
       {

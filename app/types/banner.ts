@@ -23,8 +23,14 @@ export type BannerHeight = 'sm' | 'md' | 'lg' | 'strip'
 /** Layout do banner */
 export type BannerLayout = 'overlay' | 'two_column' | 'panel'
 
-/** Tamanho da imagem na coluna do layout `two_column` */
-export type BannerImagemSize = 'sm' | 'md' | 'lg'
+/**
+ * Tamanho da imagem na coluna do layout `two_column`.
+ * `fill` — preenche a coluna (flush, object-cover), sem padding interno.
+ */
+export type BannerImagemSize = 'sm' | 'md' | 'lg' | 'fill'
+
+/** Proporção das colunas no layout `two_column` (desktop). Padrão: `1/1`. */
+export type BannerColumnRatio = '1/1' | '2/3'
 
 /** Raio das bordas do banner — `sm` 8px, `md` 16px, `lg` 24px */
 export type BannerBorderRadius = 'sm' | 'md' | 'lg'
@@ -39,7 +45,7 @@ export const BANNER_BORDER_RADIUS_PX: Record<BannerBorderRadius, string> = {
  * Largura de cada card no DragCarousel da coluna de imagens (`two_column`).
  * Mesma largura e altura da imagem padrão em cada breakpoint.
  */
-export const BANNER_TWO_COLUMN_CAROUSEL_CARD_CLASS: Record<BannerImagemSize, string> = {
+export const BANNER_TWO_COLUMN_CAROUSEL_CARD_CLASS: Record<Exclude<BannerImagemSize, 'fill'>, string> = {
   sm: 'shrink-0 h-[220px] w-[300px] overflow-hidden md:h-[260px] md:w-[360px]',
   md: 'shrink-0 h-[320px] w-[420px] overflow-hidden md:h-[380px] md:w-[500px]',
   lg: 'shrink-0 h-[400px] w-[400px] overflow-hidden md:h-[480px] md:w-[480px]',
@@ -92,6 +98,11 @@ export interface BannerData {
   reverse_columns_mobile?: boolean
   /** Tamanho do quadrado da foto na coluna de imagem (`two_column`). Padrão: `lg` */
   imagem_size?: BannerImagemSize
+  /**
+   * Proporção imagem:texto no desktop (`two_column`).
+   * `2/3` — ~40% imagem / ~60% texto (Figma Jackpot Progressivos).
+   */
+  column_ratio?: BannerColumnRatio
   /** Substitui a imagem única por DragCarousel na coluna de imagens (`two_column`) */
   drag_carousel?: boolean
   /** URLs das imagens do carousel — usado quando `drag_carousel: true` */
@@ -121,6 +132,11 @@ export interface BannerData {
   border_radius?: BannerBorderRadius
   /** Como a imagem preenche o banner no layout overlay. Padrão: `cover` */
   object_fit?: 'cover' | 'contain'
+  /**
+   * Layout `two_column`: imagem sangra para fora do painel
+   * (ex.: Roda da Fortuna — overflow top/left sem caixa arredondada).
+   */
+  imagem_overflow?: boolean
   /**
    * Decoração sobreposta à imagem no layout `two_column`
    * (ex.: estrela no canto da foto).

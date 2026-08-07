@@ -2,8 +2,9 @@
   <component
     :is="link ? 'button' : 'div'"
     type="button"
-    class="block bg-muted overflow-hidden"
+    class="block overflow-hidden"
     :class="[
+      muted ? 'bg-muted' : 'bg-transparent',
       fill ? 'h-full w-full' : 'h-auto w-full max-w-full',
       link && 'cursor-pointer',
     ]"
@@ -14,9 +15,9 @@
       :src="src"
       :alt="alt"
       draggable="false"
-      class="pointer-events-none object-cover"
+      class="pointer-events-none"
       :class="[
-        fill ? 'h-full w-full' : 'h-auto w-full',
+        fill ? 'h-full w-full object-cover' : 'h-auto w-full',
         imageClass,
       ]"
     />
@@ -31,8 +32,11 @@ const props = withDefaults(defineProps<{
   imageClass?: string | string[]
   /** Preenche o container pai (padrão). `false` respeita dimensões do `imageClass` */
   fill?: boolean
+  /** Fundo muted atrás da imagem. Desligar para overflow transparente. */
+  muted?: boolean
 }>(), {
   fill: true,
+  muted: true,
 })
 
 const route = useRoute()

@@ -34,6 +34,7 @@ import FaixaCtaModule from '~/components/modules/FaixaCtaModule.vue'
 import FormularioModule from '~/components/modules/FormularioModule.vue'
 import MosaicoModule from '~/components/modules/MosaicoModule.vue'
 import ParceirosModule from '~/components/modules/ParceirosModule.vue'
+import TabelaModule from '~/components/modules/TabelaModule.vue'
 
 interface Props {
   modulos: Modulo[]
@@ -60,6 +61,7 @@ const moduloMapa: Partial<Record<ModuloTipo, Component>> = {
   parceiros: ParceirosModule,
   mosaico: MosaicoModule,
   formulario: FormularioModule,
+  tabela: TabelaModule,
 }
 
 const sortedModulos = computed(() => {

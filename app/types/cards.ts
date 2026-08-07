@@ -140,6 +140,12 @@ export interface CardGenericData {
   /** Imagem de fundo / capa (`imagem`, `depoimento`, capas de evento) */
   imagem?: string
 
+  /**
+   * Variante `imagem`: exibe `titulo` em barra abaixo da foto
+   * (ex.: mãos premiadas do Jackpot).
+   */
+  legenda?: boolean
+
   /** Autor / assinatura — usado em `depoimento` (fallback: `subtitulo`) */
   autor?: string
 }

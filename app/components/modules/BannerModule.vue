@@ -1,6 +1,7 @@
 <template>
   <section
-    class="banner-module overflow-x-clip"
+    class="banner-module"
+    :class="hasImagemOverflow ? 'overflow-visible' : 'overflow-x-clip'"
   >
     <div
       class="flex flex-col gap-6"
@@ -65,6 +66,9 @@ const sortedComponents = useSortedComponents(() => props.modulo)
 const dragCarousel = computed(() => props.modulo.metadados?.drag_carousel ?? false)
 const fullWidth = computed(() => props.modulo.metadados?.full_width ?? false)
 const useSameFaqMargin = computed(() => props.modulo.metadados?.use_same_faq_margin ?? false)
+const hasImagemOverflow = computed(() =>
+  sortedComponents.value.some(c => c.data.imagem_overflow === true),
+)
 const carouselBleedRight = computed(
   () => dragCarousel.value && (props.modulo.metadados?.carousel_bleed_right ?? false),
 )

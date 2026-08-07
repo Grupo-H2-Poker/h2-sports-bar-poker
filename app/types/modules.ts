@@ -21,6 +21,7 @@ import type { RankingConfigData, RankingPlayerData } from '~/types/ranking'
 import type { FaixaCtaData } from '~/types/faixa-cta'
 import type { RankingTabelaConfigData, RankingTabelaLinhaData } from '~/types/ranking-tabela'
 import type { ModuloMetadadosGaleria, ModuloMetadadosGaleriaPreview } from '~/types/galeria'
+import type { TabelaConfigData, TabelaLinhaData, ModuloMetadadosTabela } from '~/types/tabela'
 
 export type { BannerCtaPosition, BannerData, BannerHeight, BannerImagemSize, BannerLayout, BannerSize, ModuloMetadadosBanner } from '~/types/banner'
 export type { CardGenericData, SectionCTAData } from '~/types/cards'
@@ -210,6 +211,7 @@ export type ModuloTipo =
   | 'parceiros'
   | 'mosaico'
   | 'formulario'
+  | 'tabela'
 
 /**
  * Tipo de component transversal — pode aparecer no `components[]` de qualquer
@@ -237,6 +239,7 @@ export const MODULO_COMPONENT_TYPE = {
   parceiros: 'parceiro_logo',
   mosaico: 'mosaico_celula',
   formulario: 'formulario_campo',
+  tabela: 'tabela_linha',
 } as const satisfies Record<ModuloTipo, string | null>
 
 export interface ModuloDataMap {
@@ -258,6 +261,7 @@ export interface ModuloDataMap {
   parceiros: ParceiroLogoData
   mosaico: MosaicoCelulaData
   formulario: FormularioCampoData | FormularioConfigData | SectionCTAData
+  tabela: TabelaLinhaData | TabelaConfigData | SectionCTAData
 }
 
 /** `components[].data` excluindo `section_cta` — tipo inferido por módulo */
@@ -280,6 +284,7 @@ export interface ModuloContentDataMap {
   parceiros: ParceiroLogoData
   mosaico: MosaicoCelulaData
   formulario: FormularioCampoData
+  tabela: TabelaLinhaData | TabelaConfigData
 }
 
 export interface ModuloMetadadosMap {
@@ -301,6 +306,7 @@ export interface ModuloMetadadosMap {
   parceiros: ModuloMetadadosParceiros
   mosaico: ModuloMetadadosMosaico
   formulario: ModuloMetadadosFormulario
+  tabela: ModuloMetadadosTabela
 }
 
 /** Módulo tipado pelo `tipo` — usar em todo `*Module.vue`: `modulo: ModuloOf<'agenda_preview'>` */

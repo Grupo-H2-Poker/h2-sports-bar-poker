@@ -25,8 +25,14 @@
         <p
           v-for="(texto, index) in descricoes"
           :key="index"
-          class="opacity-80 whitespace-pre-line"
-          :class="[descriptionClass, index > 0 && 'mt-3']"
+          class="opacity-80 [&_strong]:font-bold [&_strong]:opacity-100"
+          :class="[
+            descriptionClass,
+            index > 0 && 'mt-6',
+            hasForcedBreaks(texto)
+              ? 'max-md:whitespace-pre-line md:whitespace-nowrap'
+              : 'whitespace-pre-line',
+          ]"
           v-html="texto"
         />
       </div>
@@ -76,6 +82,11 @@ const descricoes = computed(() =>
     props.config.descricao_4,
   ].filter((texto): texto is string => !!texto),
 )
+
+/** `<br>` / quebras explícitas: no desktop evita soft-wrap além das linhas do CMS/Figma. */
+function hasForcedBreaks(texto: string) {
+  return /<br\s*\/?>/i.test(texto) || texto.includes('\n')
+}
 
 const hasContent = computed(
   () => !!(props.config.titulo || descricoes.value.length || (!props.compact && props.config.cta)),

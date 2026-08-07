@@ -10,7 +10,8 @@ export type ModuloMetadadosAgendaPreview = ModuloMetadadosCarousel & {
    * `carousel` — DragCarousel (padrão).
    * `grid` — grade fixa na largura do container (ex.: depoimentos Eventos).
    */
-  layout?: 'carousel' | 'grid'
+  /** `wrap` — grade centralizada (ex.: mãos Jackpot) */
+  layout?: 'carousel' | 'grid' | 'wrap'
 }
 
 export const AGENDA_PREVIEW_CASH_GAME_COMPONENT_TYPE = 'cash_game' as const

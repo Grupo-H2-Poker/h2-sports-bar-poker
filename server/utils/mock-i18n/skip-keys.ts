@@ -30,6 +30,7 @@ export const CMS_SKIP_KEYS = new Set([
   'cta_column',
   'cta_padding',
   'imagem_size',
+  'column_ratio',
   'max_width',
   'url',
   'estilo',

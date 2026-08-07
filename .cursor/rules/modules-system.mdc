@@ -43,6 +43,7 @@ const { ctaConfig, items } = useModuloComponents(() => props.modulo)
 | `agenda_preview` | Widget na home (carrossel reduzido) | 1º: `cash_game` (fixo) + demais: `card` (torneio preview) |
 | `grid` | Página `/agenda` (cards completos) | `variant: torneio` \| `cash_game` no JSON |
 | `galeria_preview` | Carrossel só imagem (bleed L/R) | `imagem` — metadados `carousel_bleed_left` / `carousel_bleed_right` |
+| `tabela` | Tabelas genéricas (ex.: prêmios Jackpot) | `tabela_config` + `tabela_linha` (+ `section_cta`); `metadados.notas` |
 
 `agenda_preview` também reutiliza `metadados.card_variant` em outras páginas (ex.: Eventos: `numero`, `imagem`, `depoimento`; Séries: `etapa_preview`).
 

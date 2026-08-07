@@ -1,7 +1,8 @@
 <template>
   <div
-    class="grid grid-cols-1 md:grid-cols-2"
+    class="grid grid-cols-1"
     :class="[
+      columnsClass,
       gapClass,
       alignClass,
       shouldClipOverflow && 'overflow-hidden',
@@ -37,6 +38,12 @@ const props = withDefaults(defineProps<{
   align?: 'stretch' | 'center'
   rounded?: boolean
   borderRadius?: string
+  /**
+   * Proporção das colunas no desktop.
+   * `2/3` — start 2fr / end 3fr (imagem estreita à esquerda).
+   * Com `reverse`, inverte automaticamente (3fr / 2fr).
+   */
+  columns?: '1/1' | '2/3'
   /** Inverte ordem das colunas no mobile (slot end fica em cima) */
   reverseOnMobile?: boolean
   /** Inverte ordem das colunas no desktop (troca start ↔ end) */
@@ -49,6 +56,7 @@ const props = withDefaults(defineProps<{
   gap: 'none',
   align: 'stretch',
   rounded: false,
+  columns: '1/1',
   reverseOnMobile: false,
   reverse: false,
   inverted: false,
@@ -72,6 +80,13 @@ const gapClass = computed(() => ({
   'gap-4': props.gap === 'sm',
   'gap-6': props.gap === 'md',
 }))
+
+const columnsClass = computed(() => {
+  if (props.columns === '2/3') {
+    return isReversed.value ? 'md:grid-cols-[3fr_2fr]' : 'md:grid-cols-[2fr_3fr]'
+  }
+  return 'md:grid-cols-2'
+})
 
 const alignClass = computed(() =>
   props.align === 'center' ? 'items-center' : 'items-stretch',

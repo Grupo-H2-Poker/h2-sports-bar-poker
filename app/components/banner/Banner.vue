@@ -1,14 +1,40 @@
 <template>
+  <!-- Layout overflow: imagem sangra esquerda/topo, base flush no painel (ex.: Roda da Fortuna) -->
+  <div
+    v-if="layout === 'two_column' && hasImagemOverflow"
+    class="relative mx-auto w-full max-w-5xl overflow-visible"
+    :style="panelStyle"
+  >
+    <img
+      v-if="dados.imagem"
+      :src="dados.imagem"
+      :alt="imageAlt"
+      draggable="false"
+      class="pointer-events-none absolute bottom-0 left-0 z-10 h-auto w-[min(92%,540px)] max-w-none -translate-x-[20%] select-none md:w-[580px] md:-translate-x-[24%] lg:w-[620px] lg:-translate-x-[26%]"
+    >
+
+    <div
+      class="relative z-20 ml-auto flex min-h-[200px] w-[min(100%,560px)] flex-col justify-center py-10 pr-6 pl-4 text-white md:min-h-[220px] md:py-12 md:pr-10 md:pl-6 lg:pr-14"
+    >
+      <SectionCTA
+        v-if="hasCta"
+        :config="ctaConfig"
+        inverted
+      />
+    </div>
+  </div>
+
   <!-- Layout duas colunas -->
   <TwoColumnLayout
-    v-if="layout === 'two_column'"
+    v-else-if="layout === 'two_column'"
     :rounded="rounded"
     :border-radius="borderRadiusPx"
     :reverse="reverseColumns"
     :reverse-on-mobile="reverseColumnsMobile"
+    :columns="columnRatio"
     :clip-overflow="!hasCarouselBleed && !hasDecoracao"
-    class="bg-black"
-    :class="sizeClasses.wrapper"
+    :class="[sizeClasses.wrapper, !twoColumnBackground && 'bg-black']"
+    :style="twoColumnBackground ? { background: twoColumnBackground } : undefined"
   >
     <template #start>
       <div
@@ -214,10 +240,20 @@ const {
 
 const isStripBanner = computed(() => height.value === 'strip')
 const isContainFit = computed(() => props.dados.object_fit === 'contain')
+/** Fundo do `two_column` (ex.: painel roxo Jackpot). Padrão: preto via classe. */
+const twoColumnBackground = computed(() => props.dados.panel_background)
+const hasImagemOverflow = computed(() => props.dados.imagem_overflow === true)
+const columnRatio = computed(() => props.dados.column_ratio ?? '1/1')
 
 const { ctaConfig, hasCta } = useBannerCta(() => props.dados)
 
 const ctaColumnPaddingClass = computed(() => {
+  if (hasImagemOverflow.value) {
+    return ctaColumn.value === 'right'
+      ? 'relative z-20 ml-auto w-full max-w-lg py-8 pr-8 pl-16 md:py-10 md:pr-16 md:pl-28 lg:pr-24 lg:pl-36'
+      : 'relative z-20 mr-auto w-full max-w-lg py-8 pl-8 pr-16 md:py-10 md:pl-16 md:pr-28 lg:pl-24 lg:pr-36'
+  }
+
   if (props.dados.cta_padding !== 'flush') {
     return 'p-8 md:p-12 lg:p-16'
   }

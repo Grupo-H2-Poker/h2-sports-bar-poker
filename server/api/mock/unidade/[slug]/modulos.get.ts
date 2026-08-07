@@ -17,6 +17,7 @@ import {
 import { createPokerEsporteDaMentePagina } from '../../../../utils/mock-poker-esporte-da-mente'
 import { createSportsBarPagina } from '../../../../utils/mock-sports-bar'
 import { createEventosPagina } from '../../../../utils/mock-eventos'
+import { createJackpotPagina } from '../../../../utils/mock-jackpot'
 import { localizeUnidadeModulos } from '../../../../utils/mock-i18n'
 
 const AGENDA_GRID_TOOLBAR_BASE = {
@@ -585,7 +586,7 @@ export default defineEventHandler(async (event) => {
               {
                 id: 'destaques',
                 links: [
-                  { id: 'jackpot', label: 'Jackpot', to: '/jackpot', estilo: 'destaque' },
+                  { id: 'jackpot', label: 'Jackpot', pagina: 'jackpot', estilo: 'destaque' },
                   { id: 'h2bet', label: 'H2bet', to: 'https://www.h2.bet.br/', external: true, estilo: 'destaque' },
                 ],
               },
@@ -1536,6 +1537,7 @@ export default defineEventHandler(async (event) => {
         createPokerEsporteDaMentePagina(5, 9500),
         createSportsBarPagina(6, 9600),
         createEventosPagina(7, 9700),
+        createJackpotPagina(8, 9900),
         createRegulamentosPagina(90, 9000),
         createSegurancaPrivacidadePagina(91, 9100),
 
@@ -2403,7 +2405,7 @@ export default defineEventHandler(async (event) => {
               {
                 id: 'destaques',
                 links: [
-                  { id: 'jackpot', label: 'Jackpot', to: '/jackpot', estilo: 'destaque' },
+                  { id: 'jackpot', label: 'Jackpot', pagina: 'jackpot', estilo: 'destaque' },
                   { id: 'h2bet', label: 'H2bet', to: 'https://www.h2.bet.br/', external: true, estilo: 'destaque' },
                 ],
               },
@@ -2742,6 +2744,7 @@ export default defineEventHandler(async (event) => {
           ],
         },
         createEventosPagina(7, 9800),
+        createJackpotPagina(8, 10000),
         createRegulamentosPagina(92, 9200),
         createSegurancaPrivacidadePagina(93, 9300),
       ],

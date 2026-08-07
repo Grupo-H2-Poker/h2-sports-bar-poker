@@ -7,6 +7,7 @@
 import type { CmsDictLocale, CmsPack } from '../types'
 import documento from './documento'
 import eventos from './eventos'
+import jackpot from './jackpot'
 import shared from './shared'
 
 /**
@@ -17,6 +18,7 @@ export const CMS_PACKS: readonly CmsPack[] = [
   shared,
   documento,
   eventos,
+  jackpot,
 ]
 
 export function mergeCmsPacks(locale: CmsDictLocale): Record<string, string> {

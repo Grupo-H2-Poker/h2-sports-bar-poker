@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex h-full w-full items-center overflow-visible"
+    class="flex h-full w-full overflow-visible"
     :class="wrapperClass"
   >
     <DragCarousel
@@ -29,17 +29,18 @@
       v-else
       class="relative"
       :class="imageShellClass"
-      :style="borderRadiusStyle"
+      :style="overflowMode || fillMode ? undefined : borderRadiusStyle"
     >
       <BannerImage
         v-if="dados.imagem"
         :src="dados.imagem"
         :alt="imageAlt"
-        :fill="false"
-        :class="imagemSize !== 'lg' ? 'h-full w-full' : 'w-full'"
+        :fill="fillMode"
+        :class="imagemSize !== 'lg' || overflowMode || fillMode ? 'h-full w-full' : 'w-full'"
         :image-class="imageClass"
         :link="imageLink"
-        :style="borderRadiusStyle"
+        :muted="!overflowMode && !fillMode"
+        :style="overflowMode || fillMode ? undefined : borderRadiusStyle"
       />
       <img
         v-if="dados.decoracao?.imagem"
@@ -82,6 +83,8 @@ const props = defineProps<{
 }>()
 
 const imagemSize = computed((): BannerImagemSize => props.dados.imagem_size ?? 'lg')
+const overflowMode = computed(() => props.dados.imagem_overflow === true)
+const fillMode = computed(() => imagemSize.value === 'fill')
 
 const useCarousel = computed(
   () => (props.dados.drag_carousel ?? false) && carouselImagens.value.length > 0,
@@ -90,12 +93,26 @@ const useCarousel = computed(
 const carouselImagens = computed(() => props.dados.imagens ?? [])
 
 const wrapperAlignClass = computed(() => {
-  if (props.bleedRight) return 'justify-start'
-  if (props.bleedLeft) return 'justify-end'
-  return 'justify-center'
+  if (overflowMode.value) return 'items-end justify-start'
+  if (props.bleedRight) return 'items-center justify-start'
+  if (props.bleedLeft) return 'items-center justify-end'
+  return 'items-center justify-center'
 })
 
 const wrapperClass = computed(() => {
+  if (overflowMode.value) {
+    // Sangra só um pouco à esquerda — a roda fica majoritariamente dentro do painel
+    return [
+      'relative z-10 overflow-visible p-0',
+      'md:-ms-16 md:-mt-14 lg:-ms-24 lg:-mt-16',
+      wrapperAlignClass.value,
+    ]
+  }
+
+  if (fillMode.value) {
+    return ['h-full p-0 items-stretch justify-stretch']
+  }
+
   const padding = props.bleedRight
     ? 'py-6 ps-6 pe-0 md:py-10 md:ps-10 md:pe-0'
     : props.bleedLeft
@@ -108,6 +125,16 @@ const wrapperClass = computed(() => {
 const roundedShell = computed(() => (props.borderRadiusStyle ? 'overflow-hidden' : ''))
 
 const imageShellClass = computed(() => {
+  if (overflowMode.value) {
+    // Largura controlada para sangrar à esquerda sem invadir o texto
+    return 'w-[min(100%,500px)] shrink-0 overflow-visible md:w-[560px] lg:w-[600px]'
+  }
+
+  if (fillMode.value) {
+    // Flush na coluna — o raio fica no TwoColumnLayout pai (overflow clip)
+    return 'relative h-full min-h-[280px] w-full overflow-hidden md:min-h-[360px]'
+  }
+
   const overflow = props.dados.decoracao ? 'overflow-visible' : roundedShell.value
 
   switch (imagemSize.value) {
@@ -121,15 +148,25 @@ const imageShellClass = computed(() => {
 })
 
 const carouselCardClass = computed(
-  () => `${BANNER_TWO_COLUMN_CAROUSEL_CARD_CLASS[imagemSize.value]} ${roundedShell.value}`,
+  () => `${BANNER_TWO_COLUMN_CAROUSEL_CARD_CLASS[imagemSize.value === 'fill' ? 'lg' : imagemSize.value]} ${roundedShell.value}`,
 )
 
 const imageClass = computed(() => {
-  if (imagemSize.value === 'lg') {
-    return 'aspect-square w-full'
+  if (overflowMode.value) {
+    return 'h-auto w-full object-contain'
   }
 
-  return 'h-full w-full object-cover'
+  if (fillMode.value) {
+    return 'h-full w-full object-cover'
+  }
+
+  const fit = props.dados.object_fit === 'contain' ? 'object-contain' : 'object-cover'
+
+  if (imagemSize.value === 'lg') {
+    return `aspect-square w-full ${fit}`
+  }
+
+  return `h-full w-full ${fit}`
 })
 
 const decoracaoPositionClass = computed(() => {
