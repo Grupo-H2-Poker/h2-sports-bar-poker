@@ -215,8 +215,8 @@ export function createSobrePagina(ordem = 9, idBase = 10100) {
         tipo: 'texto' as const,
         ordem: 5,
         status: 'publicado' as const,
-        margin_top: 40,
-        margin_bottom: 40,
+        margin_top: 80,
+        margin_bottom: 80,
         metadados: {
           align: 'center' as const,
           max_width: 'lg' as const,
@@ -246,7 +246,7 @@ export function createSobrePagina(ordem = 9, idBase = 10100) {
         ordem: 6,
         status: 'publicado' as const,
         margin_top: 0,
-        margin_bottom: 100,
+        margin_bottom: 80,
         metadados: {
           hide_cash_game: true,
           card_variant: 'unidade' as const,
