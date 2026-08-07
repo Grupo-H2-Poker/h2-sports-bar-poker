@@ -1,12 +1,12 @@
 /**
- * Traduções das páginas documentais (regulamentos / segurança e privacidade).
+ * Pack CMS — páginas documentais (regulamentos / segurança e privacidade).
  *
  * As chaves de título e CTA são o texto PT exato do mock (incluindo `\n` nos
  * títulos). As chaves de HTML usam os próprios identificadores exportados por
  * `mock-documento-pages.ts` como computed keys, garantindo que o valor
  * usado como chave seja idêntico (trim incluído) ao conteúdo renderizado.
  */
-import type { CmsLocale } from '../types'
+import type { CmsPack } from '../types'
 import {
   REGULAMENTOS_CONCEITOS,
   REGULAMENTOS_PROCEDIMENTOS,
@@ -28,8 +28,8 @@ import {
   PRIVACIDADE_RETENCAO,
 } from '../../mock-documento-pages'
 
-type DocLocale = Exclude<CmsLocale, 'pt'>
 type DocDict = Record<string, string>
+type DocLocale = keyof CmsPack
 
 const titles: Record<DocLocale, DocDict> = {
   en: {
@@ -487,11 +487,11 @@ const privacidadeHtml: Record<DocLocale, DocDict> = {
   },
 }
 
-export function getDocumentoDictionary(locale: DocLocale): Record<string, string> {
-  return {
-    ...titles[locale],
-    ...cta[locale],
-    ...regulamentosHtml[locale],
-    ...privacidadeHtml[locale],
-  }
-}
+const pack = {
+  en: { ...titles.en, ...cta.en, ...regulamentosHtml.en, ...privacidadeHtml.en },
+  es: { ...titles.es, ...cta.es, ...regulamentosHtml.es, ...privacidadeHtml.es },
+  zh: { ...titles.zh, ...cta.zh, ...regulamentosHtml.zh, ...privacidadeHtml.zh },
+  ja: { ...titles.ja, ...cta.ja, ...regulamentosHtml.ja, ...privacidadeHtml.ja },
+} satisfies CmsPack
+
+export default pack

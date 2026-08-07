@@ -257,7 +257,7 @@ export interface ModuloDataMap {
   faixa_cta: FaixaCtaData
   parceiros: ParceiroLogoData
   mosaico: MosaicoCelulaData
-  formulario: FormularioCampoData | FormularioConfigData
+  formulario: FormularioCampoData | FormularioConfigData | SectionCTAData
 }
 
 /** `components[].data` excluindo `section_cta` — tipo inferido por módulo */

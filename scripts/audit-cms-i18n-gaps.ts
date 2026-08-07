@@ -2,7 +2,7 @@
  * Audit CMS mock localization gaps (PT → EN).
  *
  * Usage (from repo root):
- *   ./node_modules/.bin/jiti scripts/audit-cms-i18n-gaps.ts
+ *   npm run audit:cms-i18n
  */
 import fs from 'node:fs'
 import path from 'node:path'
@@ -20,22 +20,20 @@ Object.assign(globalThis, {
   createError,
 })
 
-const { applyCmsDictionary, loadCmsDictionary } = jiti(
-  path.join(ROOT, 'server/utils/mock-i18n/apply.ts'),
-) as typeof import('../server/utils/mock-i18n/apply')
+const {
+  applyCmsDictionary,
+  loadCmsDictionary,
+  CMS_SKIP_KEYS,
+} = jiti(
+  path.join(ROOT, 'server/utils/mock-i18n/index.ts'),
+) as typeof import('../server/utils/mock-i18n')
 
 const enDict = (await loadCmsDictionary('en')) ?? {}
 const esDict = (await loadCmsDictionary('es')) ?? {}
 const zhDict = (await loadCmsDictionary('zh')) ?? {}
 const jaDict = (await loadCmsDictionary('ja')) ?? {}
 
-const SKIP_KEYS = new Set([
-  'id', 'slug', 'tipo', 'type', 'status', 'imagem', 'imagens', 'logo', 'to', 'link',
-  'cta_link', 'pagina', 'video_embed', 'variant', 'layout', 'kind', 'external', 'cor',
-  'cta_cor', 'size', 'height', 'align', 'width', 'background', 'object_fit',
-  'border_radius', 'overlay', 'cta_column', 'cta_padding', 'imagem_size', 'max_width',
-  'url', 'estilo', 'inicio', 'late', 'sortKey', 'filtros',
-])
+const SKIP_KEYS = CMS_SKIP_KEYS
 
 const ISO_DATE_RE = /^\d{4}-\d{2}-\d{2}$/
 const TIME_RE = /^\d{1,2}:\d{2}$/

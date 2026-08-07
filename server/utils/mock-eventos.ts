@@ -1,5 +1,45 @@
 /** Página Eventos — mock CMS (Figma 496:2204). */
 
+export const EVENTOS_HERO_TITLE = 'Referência em Eventos.\nAutoridade em Poker.'
+export const EVENTOS_HERO_DESC =
+  'Transforme seu evento corporativo em um ambiente que conecta pessoas, fortalece relações e entrega entretenimento com propósito.'
+export const EVENTOS_CTA_CONSULTORES = 'Fale com nossos consultores'
+export const EVENTOS_TIPO_CORPORATIVOS = 'Eventos\nCorporativos'
+export const EVENTOS_NUMEROS_TITLE = 'Eventos em\nforma de números'
+export const EVENTOS_NUMEROS_SUB = 'eventos'
+export const EVENTOS_ESPECIALISTAS_TITLE = 'Especialistas em fazer acontecer'
+export const EVENTOS_TAGLINE = 'Onde tem jogo, tem H2 Sports Bar & Poker.'
+export const EVENTOS_SETOR_DESC =
+  'O setor de eventos do H2 Sports Bar & Poker é onde o jogo ganha vida dentro e fora das mesas. Com mais de 20 anos de credibilidade, o H2 se consolidou como uma das maiores referências do poker brasileiro, levando não apenas torneios, mas experiências completas para diferentes públicos, formatos e ambientes.'
+export const EVENTOS_DIVERSIDADE_DESC =
+  'A diversidade é um dos pilares dessa atuação. Eventos corporativos, ações de marca, ativações especiais, encontros sociais e experiências exclusivas: o H2 entende o objetivo de cada cliente e transforma ideias em projetos sob medida, sempre com um padrão de entrega que se tornou referência no setor.'
+export const EVENTOS_HOME_GAME_DESC =
+  'E quando o assunto é levar a experiência além do clube, o H2 eleva o nível. Com produção completa de home game (eventos particulares), o poker vai até você, seja na sua empresa, na sua casa ou em qualquer lugar que você escolher.\nEstrutura profissional, equipe especializada e execução impecável garantem que cada detalhe funcione como um grande evento de poker.'
+export const EVENTOS_PAIXAO_DESC =
+  'Mais do que organizar, o H2 faz o poker acontecer.\nCom consistência, qualidade e paixão pelo jogo, transforma cada mesa em uma oportunidade única de viver o melhor do universo do esporte da mente.'
+export const EVENTOS_ESTRUTURA_DESC =
+  'Uma estrutura que acompanha o ritmo do país e a paixão pelo poker.'
+export const EVENTOS_DEALERS = 'Dealers\nprofissionais'
+export const EVENTOS_DRINKS = 'Drinks\nExclusivos'
+export const EVENTOS_MENU = 'Menu\nGastronômico'
+export const EVENTOS_DEPOIMENTO_TITLE = 'Título bonito!'
+export const EVENTOS_DEPOIMENTO_AUTOR = 'Nome e Sobrenome'
+export const EVENTOS_EQUIPE_TITLE = 'Nossa equipe'
+export const EVENTOS_EQUIPE_DESC =
+  'Um time de profissionais qualificados que vive o poker 24 horas por dia, garantindo padrão, ritmo e excelência em cada detalhe.'
+export const EVENTOS_CTA_FALE = 'Fale com a gente'
+export const EVENTOS_FORM_TITLE = 'Entre em contato com\nnossos consultores'
+export const EVENTOS_FORM_DESC = 'Transforme seu evento corporativo ou pessoal em'
+export const EVENTOS_FORM_SUBMIT = 'Enviar'
+export const EVENTOS_FORM_NOTA = '*Todos os campos são obrigatórios'
+export const EVENTOS_FIELD_NOME = 'Nome'
+export const EVENTOS_FIELD_TELEFONE = 'Telefone'
+export const EVENTOS_FIELD_EMAIL = 'E-mail'
+export const EVENTOS_FIELD_TIPO = 'Tipo de evento'
+export const EVENTOS_OPT_CORPORATIVO = 'Evento corporativo'
+export const EVENTOS_OPT_ATIVACAO = 'Ativação de marca'
+export const EVENTOS_OPT_OUTRO = 'Outro'
+
 const PREVIEW_IMGS = [
   '/img/eventos/preview-1.jpg',
   '/img/eventos/preview-2.jpg',
@@ -41,10 +81,9 @@ export function createEventosPagina(ordem = 7, idBase = 9700) {
             ordem: 1,
             status: 'publicado' as const,
             data: {
-              titulo: 'Referência em Eventos.\nAutoridade em Poker.',
-              descricao:
-                'Transforme seu evento corporativo em um ambiente que conecta pessoas, fortalece relações e entrega entretenimento com propósito.',
-              cta: 'Fale com nossos consultores',
+              titulo: EVENTOS_HERO_TITLE,
+              descricao: EVENTOS_HERO_DESC,
+              cta: EVENTOS_CTA_CONSULTORES,
               cta_link: '#contato',
               cta_cor: 'verde',
               align: 'center',
@@ -71,7 +110,7 @@ export function createEventosPagina(ordem = 7, idBase = 9700) {
             ordem: 1,
             status: 'publicado' as const,
             data: {
-              titulo: 'Eventos\nCorporativos',
+              titulo: EVENTOS_TIPO_CORPORATIVOS,
               imagem: '/img/eventos/hero-1.png',
             },
           },
@@ -91,7 +130,7 @@ export function createEventosPagina(ordem = 7, idBase = 9700) {
             ordem: 3,
             status: 'publicado' as const,
             data: {
-              titulo: 'Eventos\nCorporativos',
+              titulo: EVENTOS_TIPO_CORPORATIVOS,
               imagem: '/img/eventos/hero-3.png',
             },
           },
@@ -126,6 +165,7 @@ export function createEventosPagina(ordem = 7, idBase = 9700) {
         metadados: {
           card_variant: 'numero' as const,
           hide_cash_game: true,
+          carousel_bleed_right: true,
         },
         components: [
           {
@@ -134,8 +174,8 @@ export function createEventosPagina(ordem = 7, idBase = 9700) {
             ordem: 0,
             status: 'publicado' as const,
             data: {
-              titulo: 'Eventos em\nforma de números',
-              cta: 'Fale com nossos consultores',
+              titulo: EVENTOS_NUMEROS_TITLE,
+              cta: EVENTOS_CTA_CONSULTORES,
               cta_link: '#contato',
               cta_cor: 'verde',
               align: 'left',
@@ -148,21 +188,28 @@ export function createEventosPagina(ordem = 7, idBase = 9700) {
             type: 'card',
             ordem: 1,
             status: 'publicado' as const,
-            data: { titulo: 'R$XXXXXX', subtitulo: 'eventos' },
+            data: { titulo: 'R$XXXXXX', subtitulo: EVENTOS_NUMEROS_SUB },
           },
           {
             id: nextId(),
             type: 'card',
             ordem: 2,
             status: 'publicado' as const,
-            data: { titulo: 'R$XXXXXX', subtitulo: 'eventos' },
+            data: { titulo: 'R$XXXXXX', subtitulo: EVENTOS_NUMEROS_SUB },
           },
           {
             id: nextId(),
             type: 'card',
             ordem: 3,
             status: 'publicado' as const,
-            data: { titulo: 'R$XXXXXX', subtitulo: 'eventos' },
+            data: { titulo: 'R$XXXXXX', subtitulo: EVENTOS_NUMEROS_SUB },
+          },
+          {
+            id: nextId(),
+            type: 'card',
+            ordem: 4,
+            status: 'publicado' as const,
+            data: { titulo: 'R$XXXXXX', subtitulo: EVENTOS_NUMEROS_SUB },
           },
         ],
       },
@@ -190,7 +237,7 @@ export function createEventosPagina(ordem = 7, idBase = 9700) {
               play_overlay: true,
               overlay: 'none',
               section_cta: {
-                titulo: 'Especialistas em fazer acontecer',
+                titulo: EVENTOS_ESPECIALISTAS_TITLE,
                 align: 'center',
                 size: 'md',
               },
@@ -219,9 +266,8 @@ export function createEventosPagina(ordem = 7, idBase = 9700) {
             ordem: 1,
             status: 'publicado' as const,
             data: {
-              titulo: 'Onde tem jogo, tem H2 Sports Bar & Poker.',
-              descricao:
-                'O setor de eventos do H2 Sports Bar & Poker é onde o jogo ganha vida dentro e fora das mesas. Com mais de 20 anos de credibilidade, o H2 se consolidou como uma das maiores referências do poker brasileiro, levando não apenas torneios, mas experiências completas para diferentes públicos, formatos e ambientes.',
+              titulo: EVENTOS_TAGLINE,
+              descricao: EVENTOS_SETOR_DESC,
               align: 'center',
               size: 'md',
               width: 'lg',
@@ -272,12 +318,9 @@ export function createEventosPagina(ordem = 7, idBase = 9700) {
               border_radius: 'lg',
               imagem: '/img/eventos/split.jpg',
               section_cta: {
-                descricao:
-                  'A diversidade é um dos pilares dessa atuação. Eventos corporativos, ações de marca, ativações especiais, encontros sociais e experiências exclusivas: o H2 entende o objetivo de cada cliente e transforma ideias em projetos sob medida, sempre com um padrão de entrega que se tornou referência no setor.',
-                descricao_2:
-                  'E quando o assunto é levar a experiência além do clube, o H2 eleva o nível. Com produção completa de home game (eventos particulares), o poker vai até você, seja na sua empresa, na sua casa ou em qualquer lugar que você escolher.\nEstrutura profissional, equipe especializada e execução impecável garantem que cada detalhe funcione como um grande evento de poker.',
-                descricao_3:
-                  'Mais do que organizar, o H2 faz o poker acontecer.\nCom consistência, qualidade e paixão pelo jogo, transforma cada mesa em uma oportunidade única de viver o melhor do universo do esporte da mente.',
+                descricao: EVENTOS_DIVERSIDADE_DESC,
+                descricao_2: EVENTOS_HOME_GAME_DESC,
+                descricao_3: EVENTOS_PAIXAO_DESC,
                 align: 'left',
                 size: 'md',
               },
@@ -306,8 +349,8 @@ export function createEventosPagina(ordem = 7, idBase = 9700) {
             ordem: 1,
             status: 'publicado' as const,
             data: {
-              titulo: 'Onde tem jogo, tem H2 Sports Bar & Poker.',
-              descricao: 'Uma estrutura que acompanha o ritmo do país e a paixão pelo poker.',
+              titulo: EVENTOS_TAGLINE,
+              descricao: EVENTOS_ESTRUTURA_DESC,
               align: 'center',
               size: 'md',
               width: 'lg',
@@ -336,7 +379,7 @@ export function createEventosPagina(ordem = 7, idBase = 9700) {
             type: 'mosaico_celula',
             ordem: 2,
             status: 'publicado' as const,
-            data: { titulo: 'Dealers\nprofissionais', background: MOSAICO_PURPLE },
+            data: { titulo: EVENTOS_DEALERS, background: MOSAICO_PURPLE },
           },
           {
             id: nextId(),
@@ -357,7 +400,7 @@ export function createEventosPagina(ordem = 7, idBase = 9700) {
             type: 'mosaico_celula',
             ordem: 5,
             status: 'publicado' as const,
-            data: { titulo: 'Drinks\nExclusivos', background: MOSAICO_PURPLE },
+            data: { titulo: EVENTOS_DRINKS, background: MOSAICO_PURPLE },
           },
           {
             id: nextId(),
@@ -378,7 +421,7 @@ export function createEventosPagina(ordem = 7, idBase = 9700) {
             type: 'mosaico_celula',
             ordem: 8,
             status: 'publicado' as const,
-            data: { titulo: 'Menu\nGastronômico', background: MOSAICO_PURPLE },
+            data: { titulo: EVENTOS_MENU, background: MOSAICO_PURPLE },
           },
         ],
       },
@@ -403,10 +446,10 @@ export function createEventosPagina(ordem = 7, idBase = 9700) {
             ordem: 1,
             status: 'publicado' as const,
             data: {
-              titulo: 'Título bonito!',
+              titulo: EVENTOS_DEPOIMENTO_TITLE,
               descricao:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-              autor: 'Nome e Sobrenome',
+              autor: EVENTOS_DEPOIMENTO_AUTOR,
               imagem: '/img/eventos/depoimento.jpg',
             },
           },
@@ -416,10 +459,10 @@ export function createEventosPagina(ordem = 7, idBase = 9700) {
             ordem: 2,
             status: 'publicado' as const,
             data: {
-              titulo: 'Título bonito!',
+              titulo: EVENTOS_DEPOIMENTO_TITLE,
               descricao:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-              autor: 'Nome e Sobrenome',
+              autor: EVENTOS_DEPOIMENTO_AUTOR,
               imagem: '/img/eventos/depoimento.jpg',
             },
           },
@@ -429,10 +472,10 @@ export function createEventosPagina(ordem = 7, idBase = 9700) {
             ordem: 3,
             status: 'publicado' as const,
             data: {
-              titulo: 'Título bonito!',
+              titulo: EVENTOS_DEPOIMENTO_TITLE,
               descricao:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-              autor: 'Nome e Sobrenome',
+              autor: EVENTOS_DEPOIMENTO_AUTOR,
               imagem: '/img/eventos/depoimento.jpg',
             },
           },
@@ -459,10 +502,9 @@ export function createEventosPagina(ordem = 7, idBase = 9700) {
             ordem: 0,
             status: 'publicado' as const,
             data: {
-              titulo: 'Nossa equipe',
-              descricao:
-                'Um time de profissionais qualificados que vive o poker 24 horas por dia, garantindo padrão, ritmo e excelência em cada detalhe.',
-              cta: 'Fale com a gente',
+              titulo: EVENTOS_EQUIPE_TITLE,
+              descricao: EVENTOS_EQUIPE_DESC,
+              cta: EVENTOS_CTA_FALE,
               cta_link: '#contato',
               cta_cor: 'verde',
               align: 'left',
@@ -520,10 +562,10 @@ export function createEventosPagina(ordem = 7, idBase = 9700) {
             ordem: 0,
             status: 'publicado' as const,
             data: {
-              titulo: 'Entre em contato com\nnossos consultores',
-              descricao: 'Transforme seu evento corporativo ou pessoal em',
-              submit_label: 'Enviar',
-              nota: '*Todos os campos são obrigatórios',
+              titulo: EVENTOS_FORM_TITLE,
+              descricao: EVENTOS_FORM_DESC,
+              submit_label: EVENTOS_FORM_SUBMIT,
+              nota: EVENTOS_FORM_NOTA,
             },
           },
           {
@@ -531,21 +573,31 @@ export function createEventosPagina(ordem = 7, idBase = 9700) {
             type: 'formulario_campo',
             ordem: 1,
             status: 'publicado' as const,
-            data: { name: 'nome', label: 'Nome', placeholder: 'Nome' },
+            data: { name: 'nome', label: EVENTOS_FIELD_NOME, placeholder: EVENTOS_FIELD_NOME },
           },
           {
             id: nextId(),
             type: 'formulario_campo',
             ordem: 2,
             status: 'publicado' as const,
-            data: { name: 'telefone', label: 'Telefone', type: 'tel', placeholder: 'Telefone' },
+            data: {
+              name: 'telefone',
+              label: EVENTOS_FIELD_TELEFONE,
+              type: 'tel',
+              placeholder: EVENTOS_FIELD_TELEFONE,
+            },
           },
           {
             id: nextId(),
             type: 'formulario_campo',
             ordem: 3,
             status: 'publicado' as const,
-            data: { name: 'email', label: 'E-mail', type: 'email', placeholder: 'E-mail' },
+            data: {
+              name: 'email',
+              label: EVENTOS_FIELD_EMAIL,
+              type: 'email',
+              placeholder: EVENTOS_FIELD_EMAIL,
+            },
           },
           {
             id: nextId(),
@@ -554,10 +606,15 @@ export function createEventosPagina(ordem = 7, idBase = 9700) {
             status: 'publicado' as const,
             data: {
               name: 'tipo_evento',
-              label: 'Tipo de evento',
+              label: EVENTOS_FIELD_TIPO,
               type: 'select',
-              placeholder: 'Tipo de evento',
-              options: ['Evento corporativo', 'Home Game', 'Ativação de marca', 'Outro'],
+              placeholder: EVENTOS_FIELD_TIPO,
+              options: [
+                EVENTOS_OPT_CORPORATIVO,
+                'Home Game',
+                EVENTOS_OPT_ATIVACAO,
+                EVENTOS_OPT_OUTRO,
+              ],
             },
           },
         ],

@@ -81,3 +81,13 @@ Componente: `UnidadePaginaView` + `ModuleRenderer`.
 2. `XxxModule.vue` + `useModuloComponents`
 3. `ModuleRenderer.vue`
 4. Mock: adicionar módulo dentro de `paginas[].modulos`
+
+## Nova página CMS + i18n (checklist)
+
+UI chrome usa `@nuxtjs/i18n` (`i18n/locales/*.json`). Conteúdo CMS é localizado na API (`?lang=`).
+
+1. Mock em PT (`server/utils/mock-foo.ts`) — **exportar constantes** de strings user-facing
+2. Pack `server/utils/mock-i18n/packs/foo.ts` com `en/es/zh/ja` (chaves = consts do mock)
+3. Registrar em `packs/index.ts` (`CMS_PACKS`)
+4. Incluir página em `modulos.get.ts`
+5. `npm run audit:cms-i18n` — sem gaps novos em títulos/UI

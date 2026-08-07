@@ -7,7 +7,8 @@
     "dev": "NODE_OPTIONS='--localstorage-file=/tmp/nuxt-localstorage.json' nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "audit:cms-i18n": "jiti scripts/audit-cms-i18n-gaps.ts"
   },
   "dependencies": {
     "@nuxt/ui": "^4.10.0",

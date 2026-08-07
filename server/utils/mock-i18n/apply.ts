@@ -1,4 +1,5 @@
 import type { CmsLocale } from './types'
+import { CMS_SKIP_KEYS } from './skip-keys'
 
 type Dictionary = Record<string, string>
 
@@ -43,7 +44,7 @@ function walk(value: unknown, dictionary: Dictionary, locale: CmsLocale): void {
   if (!value || typeof value !== 'object') return
 
   for (const [key, child] of Object.entries(value as Record<string, unknown>)) {
-    if (SKIP_KEYS.has(key)) continue
+    if (CMS_SKIP_KEYS.has(key)) continue
 
     // Campo `data` ISO no torneio vs. payload `data` do component CMS
     if (key === 'data' && typeof child === 'string' && ISO_DATE_RE.test(child)) {
@@ -70,49 +71,6 @@ function translateString(value: string, dictionary: Dictionary, locale: CmsLocal
   }
   return result
 }
-
-/** Não traduzir identificadores / assets / horários. */
-const SKIP_KEYS = new Set([
-  'id',
-  'slug',
-  'tipo',
-  'type',
-  'status',
-  'imagem',
-  'imagens',
-  'logo',
-  'to',
-  'link',
-  'cta_link',
-  'pagina',
-  'video_embed',
-  'variant',
-  'layout',
-  'kind',
-  'external',
-  'cor',
-  'cta_cor',
-  'size',
-  'height',
-  'align',
-  'width',
-  'background',
-  'object_fit',
-  'border_radius',
-  'overlay',
-  'cta_column',
-  'cta_padding',
-  'imagem_size',
-  'max_width',
-  'url',
-  'estilo',
-  'inicio',
-  'late',
-  'sortKey',
-  'filtros',
-  'series',
-  'etapa',
-])
 
 /** `data` ISO (YYYY-MM-DD) no card — não confundir com o objeto `data` do component CMS. */
 const ISO_DATE_RE = /^\d{4}-\d{2}-\d{2}$/
@@ -469,22 +427,3 @@ const PATTERN_RULES: PatternRule[] = [
     },
   },
 ]
-
-export async function loadCmsDictionary(locale: CmsLocale): Promise<Dictionary | undefined> {
-  if (locale === 'pt') return undefined
-
-  const { getDocumentoDictionary } = await import('./dictionaries/documento-content')
-
-  switch (locale) {
-    case 'en':
-      return { ...(await import('./dictionaries/en')).default, ...getDocumentoDictionary('en') }
-    case 'es':
-      return { ...(await import('./dictionaries/es')).default, ...getDocumentoDictionary('es') }
-    case 'zh':
-      return { ...(await import('./dictionaries/zh')).default, ...getDocumentoDictionary('zh') }
-    case 'ja':
-      return { ...(await import('./dictionaries/ja')).default, ...getDocumentoDictionary('ja') }
-    default:
-      return undefined
-  }
-}

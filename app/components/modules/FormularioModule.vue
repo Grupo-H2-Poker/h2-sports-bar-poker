@@ -6,20 +6,11 @@
   >
     <div class="container mx-auto px-4 py-16 md:py-20 lg:py-24">
       <div class="grid gap-12 md:grid-cols-2 md:items-center md:gap-16 lg:gap-24">
-        <div class="text-[#e7e7e7]">
-          <h2
-            v-if="config?.titulo"
-            class="whitespace-pre-line text-[32px] font-bold leading-[40px]"
-          >
-            {{ config.titulo }}
-          </h2>
-          <p
-            v-if="config?.descricao"
-            class="mt-4 text-lg font-medium leading-7"
-          >
-            {{ config.descricao }}
-          </p>
-        </div>
+        <SectionCTA
+          v-if="ctaConfig"
+          :config="ctaConfig"
+          inverted
+        />
 
         <form
           class="flex flex-col gap-3"
@@ -86,10 +77,10 @@
 
           <div class="mt-2 flex flex-wrap items-center justify-between gap-4">
             <p
-              v-if="config?.nota"
+              v-if="nota"
               class="text-sm italic leading-7 text-[#e7e7e7]"
             >
-              {{ config.nota }}
+              {{ nota }}
             </p>
             <Button
               type="submit"
@@ -97,7 +88,7 @@
               size="default"
               class="ml-auto rounded-full"
             >
-              {{ config?.submit_label || 'Enviar' }}
+              {{ submitLabel }}
             </Button>
           </div>
         </form>
@@ -108,29 +99,55 @@
 
 <script setup lang="ts">
 import { Button } from '~/components/ui/button'
+import SectionCTA from '~/components/modules/SectionCTA.vue'
 import {
   FORMULARIO_CAMPO_COMPONENT_TYPE,
   FORMULARIO_CONFIG_COMPONENT_TYPE,
   type FormularioConfigData,
 } from '~/types/eventos-page'
 import type { ModuloOf } from '~/types/modules'
+import type { SectionCTAData } from '~/types/cards'
 
 const props = defineProps<{
   modulo: ModuloOf<'formulario'>
 }>()
 
-const sorted = useSortedComponents(() => props.modulo)
+const { ctaConfig: sectionCta, items } = useModuloComponents(() => props.modulo)
 
-const config = computed<FormularioConfigData | undefined>(() => {
-  const item = sorted.value.find(c => c.type === FORMULARIO_CONFIG_COMPONENT_TYPE)
+const legacyConfig = computed<FormularioConfigData | undefined>(() => {
+  const item = items.value.find(c => c.type === FORMULARIO_CONFIG_COMPONENT_TYPE)
   return item?.data as FormularioConfigData | undefined
 })
 
+/** Preferir `section_cta`; fallback para `formulario_config` legado. */
+const ctaConfig = computed<SectionCTAData | undefined>(() => {
+  if (sectionCta.value) return sectionCta.value
+  const legacy = legacyConfig.value
+  if (!legacy?.titulo && !legacy?.descricao) return undefined
+  return {
+    titulo: legacy.titulo,
+    descricao: legacy.descricao,
+    align: 'left',
+    size: 'md',
+    width: 'md',
+  }
+})
+
 const campos = computed(() =>
-  sorted.value.filter(c => c.type === FORMULARIO_CAMPO_COMPONENT_TYPE),
+  items.value.filter(c => c.type === FORMULARIO_CAMPO_COMPONENT_TYPE),
 )
 
 const flushFooter = computed(() => props.modulo.metadados?.flush_footer === true)
+
+const submitLabel = computed(
+  () => props.modulo.metadados?.submit_label
+    ?? legacyConfig.value?.submit_label
+    ?? 'Enviar',
+)
+
+const nota = computed(
+  () => props.modulo.metadados?.nota ?? legacyConfig.value?.nota,
+)
 
 const fieldClass = 'h-[47px] w-full rounded-lg border border-solid border-[#e7e7e7] bg-transparent px-4 text-sm leading-7 text-[#e7e7e7] outline-none focus-visible:border-white'
 
@@ -150,7 +167,7 @@ watch(
 
 const panelStyle = computed(() => {
   const bg = props.modulo.metadados?.background
-    ?? config.value?.background
+    ?? legacyConfig.value?.background
     ?? '#2f185a'
 
   const style: Record<string, string> = { background: bg }

@@ -26,7 +26,10 @@ export interface FormularioCampoData {
   required?: boolean
 }
 
-/** Config do formulário — vem no `section_cta` + campos como components, ou tudo no config. */
+/**
+ * Config legado do formulário.
+ * Preferir `section_cta` (título/descrição) + `metadados.submit_label` / `metadados.nota`.
+ */
 export interface FormularioConfigData {
   titulo?: string
   descricao?: string
@@ -44,6 +47,8 @@ export type ModuloMetadadosFormulario = {
    * (cancela o `mt-16` do footer via margem negativa).
    */
   flush_footer?: boolean
+  submit_label?: string
+  nota?: string
 }
 
 export const FORMULARIO_CAMPO_COMPONENT_TYPE = 'formulario_campo' as const
