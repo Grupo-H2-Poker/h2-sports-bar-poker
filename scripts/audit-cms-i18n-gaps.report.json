@@ -1,16 +1,16 @@
 {
   "source": "handler",
   "dictKeyCounts": {
-    "en": 387,
-    "es": 388,
-    "zh": 387,
-    "ja": 387
+    "en": 405,
+    "es": 406,
+    "zh": 405,
+    "ja": 405
   },
   "remainingAfterEn": {
-    "totalOccurrences": 5,
-    "unique": 2,
+    "totalOccurrences": 7,
+    "unique": 4,
     "longHtmlBlocks": 0,
-    "shortUiLabels": 1,
+    "shortUiLabels": 3,
     "top": [
       {
         "samplePath": "sp-pinheiros.paginas.8.modulos.10.components.0.data.descricao",
@@ -21,12 +21,30 @@
         "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.12.data.faixa_info",
         "value": "610 ranking points Omaha do CPH",
         "chars": 31
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.11.modulos.5.components.1.data.titulo",
+        "value": "Rocas do Vouga",
+        "chars": 14
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.11.modulos.5.components.2.data.titulo",
+        "value": "La Leñas",
+        "chars": 8
       }
     ],
     "allShortUi": [
       {
         "samplePath": "sp-pinheiros.paginas.1.modulos.0.components.12.data.faixa_info",
         "value": "610 ranking points Omaha do CPH"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.11.modulos.5.components.1.data.titulo",
+        "value": "Rocas do Vouga"
+      },
+      {
+        "samplePath": "sp-pinheiros.paginas.11.modulos.5.components.2.data.titulo",
+        "value": "La Leñas"
       }
     ]
   },
@@ -84,7 +102,7 @@
         "chars": 30
       },
       {
-        "samplePath": "sp-pinheiros.paginas.14.modulos.1.components.1.data.faixa_info",
+        "samplePath": "sp-pinheiros.paginas.15.modulos.1.components.1.data.faixa_info",
         "value": "22 de Fevereiro a 03 de Março",
         "chars": 29
       },
@@ -284,7 +302,7 @@
         "value": "1.200 pontos no ranking do CPH"
       },
       {
-        "samplePath": "sp-pinheiros.paginas.14.modulos.1.components.1.data.faixa_info",
+        "samplePath": "sp-pinheiros.paginas.15.modulos.1.components.1.data.faixa_info",
         "value": "22 de Fevereiro a 03 de Março"
       },
       {

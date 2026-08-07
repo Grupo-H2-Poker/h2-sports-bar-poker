@@ -54,6 +54,10 @@ const { ctaConfig, items } = useModuloComponents(() => props.modulo)
 | `faq_page` | `/faq` — accordion pergunta/resposta | `faq_categoria` + `section_cta` |
 | `documento_page` | `/regulamentos`, `/seguranca-e-privacidade` — texto corrido | `documento_secao` (`slug`, `titulo`, `conteudo` HTML) + `section_cta` |
 
+## H2 Unique (`slug: unique`)
+
+Módulos: `agenda_preview` (home) → `banner` two_column (intro) → `texto` + `galeria_preview` (Majestic) → `eventos` grid 2 cols (Tour) → `mosaico` 3 cols (destinos).
+
 ## Menu
 
 - **Interno (página da unidade):** `{ kind: 'link', label: 'Agenda', pagina: 'agenda' }`

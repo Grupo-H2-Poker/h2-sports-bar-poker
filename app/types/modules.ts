@@ -127,7 +127,8 @@ export interface ModuloMetadadosDownloadApp {
 export interface ModuloMetadadosTexto {
   align?: 'left' | 'center'
   max_width?: 'sm' | 'md' | 'lg' | 'full'
-  background?: 'default' | 'none'
+  /** `fade_gray` — preto → #6e6e6e (Figma H2 Unique / Majestic) */
+  background?: 'default' | 'none' | 'fade_gray'
 }
 
 export type ModuloMetadadosEmpty = Record<string, never>
@@ -169,6 +170,8 @@ export interface EventoData {
   titulo: string
   descricao?: string
   imagem?: string
+  /** CSS object-position da imagem (ex.: `right center`, `50% 40%`) */
+  imagem_position?: string
   cta?: string
   link?: string
 }

@@ -1,5 +1,5 @@
 <template>
-  <section class="overflow-x-clip">
+  <section class="relative z-10 overflow-x-clip">
     <div class="container mx-auto px-4">
       <DragCarousel
         v-if="items.length"

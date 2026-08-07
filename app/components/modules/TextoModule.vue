@@ -34,6 +34,9 @@ const background = computed(() => props.modulo.metadados?.background ?? 'default
 
 const sectionClass = computed(() => ({
   'bg-muted/40': background.value === 'default',
+  // Figma 684:1840/1839 — texto no topo (~37px), não centralizado (galeria sobrepõe a base)
+  'min-h-[420px] flex items-start pt-10 bg-gradient-to-b from-black from-[25.076%] to-[#6e6e6e]':
+    background.value === 'fade_gray',
 }))
 
 const maxWidthClass = computed(() => ({

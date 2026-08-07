@@ -5,7 +5,9 @@ export interface MosaicoCelulaData {
   /** Imagem de fundo — se omitida, usa só `titulo` + `background` */
   imagem?: string
   titulo?: string
-  /** Cor de fundo (ex.: `#77158e`). Padrão: transparente / muted */
+  /** Texto de apoio sob o título (ex.: intro do mosaico Unique) */
+  descricao?: string
+  /** Cor de fundo (ex.: `#77158e`). `transparent` = sem fundo. Padrão: muted/purple */
   background?: string
   link?: string
 }
@@ -69,6 +71,8 @@ export const PARCEIRO_LOGO_COMPONENT_TYPE = 'parceiro_logo' as const
 export type ModuloMetadadosEventos = {
   /** `grid` — grade fixa (hero Eventos). `carousel` — shadcn carousel (padrão legado). */
   layout?: 'grid' | 'carousel'
+  /** Colunas no desktop quando `layout: 'grid'`. Padrão: 3 */
+  colunas?: 2 | 3
 }
 
 export type { SectionCTAData }

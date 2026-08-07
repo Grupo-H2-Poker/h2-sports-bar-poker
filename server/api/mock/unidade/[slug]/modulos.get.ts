@@ -19,6 +19,7 @@ import { createSportsBarPagina } from '../../../../utils/mock-sports-bar'
 import { createEventosPagina } from '../../../../utils/mock-eventos'
 import { createJackpotPagina } from '../../../../utils/mock-jackpot'
 import { createSobrePagina } from '../../../../utils/mock-sobre'
+import { createUniquePagina } from '../../../../utils/mock-unique'
 import { localizeUnidadeModulos } from '../../../../utils/mock-i18n'
 
 const AGENDA_GRID_TOOLBAR_BASE = {
@@ -535,6 +536,7 @@ export default defineEventHandler(async (event) => {
         { id: 'h2bet', kind: 'link', label: 'H2Bet', to: 'https://www.h2.bet.br/', external: true },
         { id: 'agenda', kind: 'link', label: 'Agenda', pagina: 'agenda' },
         { id: 'eventos', kind: 'link', label: 'Eventos', pagina: 'eventos' },
+        { id: 'unique', kind: 'link', label: 'H2unique', pagina: 'unique' },
         { id: 'galeria', kind: 'link', label: 'Galeria', pagina: 'galeria' },
         { id: 'faq', kind: 'link', label: 'FAQ', pagina: 'faq' },
         {
@@ -1540,6 +1542,7 @@ export default defineEventHandler(async (event) => {
         createEventosPagina(7, 9700),
         createJackpotPagina(8, 9900),
         createSobrePagina(9, 10100),
+        createUniquePagina(10, 10300),
         createRegulamentosPagina(90, 9000),
         createSegurancaPrivacidadePagina(91, 9100),
 
@@ -2359,7 +2362,7 @@ export default defineEventHandler(async (event) => {
           kind: 'dropdown',
           label: 'Mais',
           items: [
-            { id: 'unique', kind: 'link', label: 'H2unique', to: '/unique' },
+            { id: 'unique', kind: 'link', label: 'H2unique', pagina: 'unique' },
             { id: 'eventos', kind: 'link', label: 'Eventos', pagina: 'eventos' },
             { id: 'unidades', kind: 'link', label: 'Unidades', to: '/unidades' },
             { id: 'h2news', kind: 'link', label: 'H2news', to: '/blognews' },
@@ -2748,6 +2751,7 @@ export default defineEventHandler(async (event) => {
         createEventosPagina(7, 9800),
         createJackpotPagina(8, 10000),
         createSobrePagina(9, 10200),
+        createUniquePagina(10, 10400),
         createRegulamentosPagina(92, 9200),
         createSegurancaPrivacidadePagina(93, 9300),
       ],

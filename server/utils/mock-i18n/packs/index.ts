@@ -10,6 +10,7 @@ import eventos from './eventos'
 import jackpot from './jackpot'
 import shared from './shared'
 import sobre from './sobre'
+import unique from './unique'
 
 /**
  * Ordem: shared primeiro; packs de página sobrescrevem em colisão.
@@ -21,6 +22,7 @@ export const CMS_PACKS: readonly CmsPack[] = [
   eventos,
   jackpot,
   sobre,
+  unique,
 ]
 
 export function mergeCmsPacks(locale: CmsDictLocale): Record<string, string> {

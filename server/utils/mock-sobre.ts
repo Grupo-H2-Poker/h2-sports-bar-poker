@@ -301,7 +301,7 @@ export function createSobrePagina(ordem = 9, idBase = 10100) {
                 titulo: SOBRE_UNIQUE_TITLE,
                 descricao: SOBRE_UNIQUE_DESC,
                 cta: SOBRE_CTA_UNIQUE,
-                cta_link: '/unique',
+                cta_link: 'unique',
                 cta_cor: 'verde',
                 align: 'left',
                 size: 'md',
