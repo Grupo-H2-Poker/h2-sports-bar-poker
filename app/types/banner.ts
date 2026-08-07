@@ -105,7 +105,7 @@ export interface BannerData {
   column_ratio?: BannerColumnRatio
   /** Substitui a imagem única por DragCarousel na coluna de imagens (`two_column`) */
   drag_carousel?: boolean
-  /** URLs das imagens do carousel — usado quando `drag_carousel: true` */
+  /** URLs das imagens — com `drag_carousel` vira carousel; sem ele, grade estática (ex.: 2 retratos) */
   imagens?: string[]
   /** Estende o carousel além da margem direita do container até a borda da viewport */
   carousel_bleed_right?: boolean

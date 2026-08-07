@@ -19,6 +19,7 @@ import CardNumeroLayout from '~/components/cards/layouts/CardNumeroLayout.vue'
 import CardTorneioDetalheLayout from '~/components/cards/layouts/CardTorneioDetalheLayout.vue'
 import CardTorneioLayout from '~/components/cards/layouts/CardTorneioLayout.vue'
 import CardTorneioPreviewLayout from '~/components/cards/layouts/CardTorneioPreviewLayout.vue'
+import CardUnidadeLayout from '~/components/cards/layouts/CardUnidadeLayout.vue'
 
 const LAYOUTS: Record<CardVariant, Component> = {
   torneio: CardTorneioLayout,
@@ -30,6 +31,7 @@ const LAYOUTS: Record<CardVariant, Component> = {
   numero: CardNumeroLayout,
   imagem: CardImagemLayout,
   depoimento: CardDepoimentoLayout,
+  unidade: CardUnidadeLayout,
 }
 
 const props = withDefaults(defineProps<{

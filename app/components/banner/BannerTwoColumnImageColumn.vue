@@ -25,6 +25,26 @@
       </div>
     </DragCarousel>
 
+    <!-- Par estático side-by-side (ex.: Quem somos — Como começou / H2unique) -->
+    <div
+      v-else-if="useStaticPair"
+      class="flex w-full items-stretch gap-4"
+    >
+      <div
+        v-for="(src, index) in carouselImagens"
+        :key="index"
+        class="min-w-0 flex-1 overflow-hidden"
+        :style="borderRadiusStyle"
+      >
+        <img
+          :src="src"
+          :alt="imageAlt"
+          draggable="false"
+          class="pointer-events-none aspect-[346/480] h-full w-full select-none object-cover"
+        >
+      </div>
+    </div>
+
     <div
       v-else
       class="relative"
@@ -86,11 +106,16 @@ const imagemSize = computed((): BannerImagemSize => props.dados.imagem_size ?? '
 const overflowMode = computed(() => props.dados.imagem_overflow === true)
 const fillMode = computed(() => imagemSize.value === 'fill')
 
+const carouselImagens = computed(() => props.dados.imagens ?? [])
+
 const useCarousel = computed(
   () => (props.dados.drag_carousel ?? false) && carouselImagens.value.length > 0,
 )
 
-const carouselImagens = computed(() => props.dados.imagens ?? [])
+/** `imagens` sem `drag_carousel` → grade estática (2 retratos lado a lado). */
+const useStaticPair = computed(
+  () => !useCarousel.value && carouselImagens.value.length >= 2,
+)
 
 const wrapperAlignClass = computed(() => {
   if (overflowMode.value) return 'items-end justify-start'

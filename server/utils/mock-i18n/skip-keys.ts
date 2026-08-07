@@ -14,6 +14,7 @@ export const CMS_SKIP_KEYS = new Set([
   'pagina',
   'video_embed',
   'variant',
+  'card_variant',
   'layout',
   'kind',
   'external',

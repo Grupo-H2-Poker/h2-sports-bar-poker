@@ -18,6 +18,7 @@ import { createPokerEsporteDaMentePagina } from '../../../../utils/mock-poker-es
 import { createSportsBarPagina } from '../../../../utils/mock-sports-bar'
 import { createEventosPagina } from '../../../../utils/mock-eventos'
 import { createJackpotPagina } from '../../../../utils/mock-jackpot'
+import { createSobrePagina } from '../../../../utils/mock-sobre'
 import { localizeUnidadeModulos } from '../../../../utils/mock-i18n'
 
 const AGENDA_GRID_TOOLBAR_BASE = {
@@ -575,7 +576,7 @@ export default defineEventHandler(async (event) => {
                 id: 'o-clube',
                 titulo: 'O clube',
                 links: [
-                  { id: 'quem-somos', label: 'Quem somos', to: '/sobre' },
+                  { id: 'quem-somos', label: 'Quem somos', pagina: 'sobre' },
                   { id: 'social', label: 'Social', to: '/social' },
                   { id: 'galeria', label: 'Galeria de fotos', to: 'galeria' },
                   { id: 'poker-mente-footer', label: 'Poker Esporte da Mente', pagina: 'poker-esporte-da-mente' },
@@ -1538,6 +1539,7 @@ export default defineEventHandler(async (event) => {
         createSportsBarPagina(6, 9600),
         createEventosPagina(7, 9700),
         createJackpotPagina(8, 9900),
+        createSobrePagina(9, 10100),
         createRegulamentosPagina(90, 9000),
         createSegurancaPrivacidadePagina(91, 9100),
 
@@ -1935,7 +1937,7 @@ export default defineEventHandler(async (event) => {
                       '/img/cph/history-4.png',
                       '/img/cph/history-6.jpg',
                     ],
-                    carousel_bleed_right: false,
+                    carousel_bleed_right: true,
                     section_cta: {
                       titulo: 'Mais de 20 anos de história!',
                       titulo_nowrap: true,
@@ -2397,7 +2399,7 @@ export default defineEventHandler(async (event) => {
                 id: 'o-clube',
                 titulo: 'O clube',
                 links: [
-                  { id: 'quem-somos', label: 'Quem somos', to: '/sobre' },
+                  { id: 'quem-somos', label: 'Quem somos', pagina: 'sobre' },
                   { id: 'social', label: 'Social', to: '/social' },
                   { id: 'galeria', label: 'Galeria de fotos', to: 'galeria' },
                 ],
@@ -2745,6 +2747,7 @@ export default defineEventHandler(async (event) => {
         },
         createEventosPagina(7, 9800),
         createJackpotPagina(8, 10000),
+        createSobrePagina(9, 10200),
         createRegulamentosPagina(92, 9200),
         createSegurancaPrivacidadePagina(93, 9300),
       ],

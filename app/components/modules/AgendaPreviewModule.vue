@@ -14,16 +14,22 @@
         />
       </div>
 
-      <!-- Wrap: grade 3+2 centralizada (ex.: mãos Jackpot) -->
+      <!-- Wrap: grade 3+2 centralizada (ex.: mãos Jackpot / unidades Quem somos) -->
       <div
         v-else-if="isWrap"
-        class="mx-auto grid max-w-[1100px] grid-cols-1 justify-items-center gap-x-16 gap-y-20 pt-4 sm:grid-cols-2 md:grid-cols-6"
+        class="mx-auto grid grid-cols-1 justify-items-center sm:grid-cols-2 md:grid-cols-6"
+        :class="isUnidadeWrap
+          ? 'max-w-[1200px] gap-x-[60px] gap-y-20'
+          : 'max-w-[1100px] gap-x-16 gap-y-20 pt-4'"
       >
         <div
           v-for="(card, index) in previewCards"
           :key="card.id"
-          class="w-full max-w-[281px] md:col-span-2"
-          :class="wrapItemClass(index, previewCards.length)"
+          class="w-full md:col-span-2"
+          :class="[
+            isUnidadeWrap ? 'max-w-[371px]' : 'max-w-[281px]',
+            wrapItemClass(index, previewCards.length),
+          ]"
         >
           <CardGeneric :dados="card.data" />
         </div>
@@ -78,6 +84,9 @@ const { ctaConfig, cashGameCard, previewCards } = useAgendaPreviewModule(() => p
 
 const isGrid = computed(() => props.modulo.metadados?.layout === 'grid')
 const isWrap = computed(() => props.modulo.metadados?.layout === 'wrap')
+const isUnidadeWrap = computed(
+  () => isWrap.value && props.modulo.metadados?.card_variant === 'unidade',
+)
 
 const carouselBleedRight = computed(
   () => props.modulo.metadados?.carousel_bleed_right ?? false,

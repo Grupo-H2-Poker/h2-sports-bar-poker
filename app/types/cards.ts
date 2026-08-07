@@ -36,6 +36,8 @@ export type CardVariant =
   | 'imagem'
   /** Agenda preview / grid: depoimento com foto, título, texto e autor */
   | 'depoimento'
+  /** Quem somos: unidade com foto, título, descrição e CTA */
+  | 'unidade'
 
 export type CardCorPreset = 'purple' | 'vermelho' | 'amarelo' | 'verde' | 'branco'
 

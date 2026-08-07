@@ -45,7 +45,7 @@ const { ctaConfig, items } = useModuloComponents(() => props.modulo)
 | `galeria_preview` | Carrossel só imagem (bleed L/R) | `imagem` — metadados `carousel_bleed_left` / `carousel_bleed_right` |
 | `tabela` | Tabelas genéricas (ex.: prêmios Jackpot) | `tabela_config` + `tabela_linha` (+ `section_cta`); `metadados.notas` |
 
-`agenda_preview` também reutiliza `metadados.card_variant` em outras páginas (ex.: Eventos: `numero`, `imagem`, `depoimento`; Séries: `etapa_preview`).
+`agenda_preview` também reutiliza `metadados.card_variant` em outras páginas (ex.: Eventos: `numero`, `imagem`, `depoimento`; Séries: `etapa_preview`; Quem somos: `unidade`).
 
 ## Páginas documentais (mesmo layout do FAQ)
 
